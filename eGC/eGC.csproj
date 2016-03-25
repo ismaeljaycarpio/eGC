@@ -132,7 +132,10 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="guest\createguest.aspx" />
     <Content Include="guest\default.aspx" />
+    <Content Include="guest\editguest.aspx" />
+    <Content Include="IDPic\noImage.png" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -148,6 +151,9 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="ProfilePic\noImage.png" />
+    <Content Include="room\default.aspx" />
+    <Content Include="room\dining.aspx" />
     <Content Include="Scripts\ai.0.21.5-build00175.js" />
     <Content Include="Scripts\ai.0.21.5-build00175.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -227,6 +233,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="tran\gcform.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.sitemap" />
@@ -295,12 +302,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="guest\createguest.aspx.cs">
+      <DependentUpon>createguest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guest\createguest.aspx.designer.cs">
+      <DependentUpon>createguest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="guest\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="guest\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guest\editguest.aspx.cs">
+      <DependentUpon>editguest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guest\editguest.aspx.designer.cs">
+      <DependentUpon>editguest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -310,6 +331,20 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="room\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="room\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="room\dining.aspx.cs">
+      <DependentUpon>dining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="room\dining.aspx.designer.cs">
+      <DependentUpon>dining.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -323,6 +358,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="tran\gcform.aspx.cs">
+      <DependentUpon>gcform.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tran\gcform.aspx.designer.cs">
+      <DependentUpon>gcform.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
