@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GiftCheck">
+  <DataContextMoniker Name="/GiftCheckDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b3e5d6c5-34e6-40eb-a24c-47366782266a" absoluteBounds="1.375, 1, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/GiftCheckDataContext/Guest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1881a444-7395-430f-aa46-7d2ceb0f5d1b" absoluteBounds="1.3900000000000001, 1.46, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

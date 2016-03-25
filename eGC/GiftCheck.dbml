@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbGC" Class="GiftCheckDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=dbGC;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="connGC" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Guest" Member="Guests">
+    <Type Name="Guest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GuestId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ValidIDNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PicFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IDFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="EmergencyContactPerson" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmergencyContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmergencyContactAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
