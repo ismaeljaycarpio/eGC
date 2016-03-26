@@ -102,17 +102,23 @@
                                                         <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRecord" />
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
-                                                        <asp:BoundField DataField="Room" HeaderText="Leave" SortExpression="LeaveName" />
+                                                        <asp:BoundField DataField="Room" HeaderText="Room" />
 
                                                         <asp:TemplateField HeaderText="Regular/Peak">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("RegularPeak") %>'></asp:Label>
+                                                                <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
                                                         <asp:TemplateField HeaderText="Nights">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblNights" runat="server" Text='<%# Eval("Nights") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+
+                                                        <asp:TemplateField HeaderText="Value">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblValue" runat="server" Text='<%# Eval("Value") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
@@ -248,21 +254,21 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Text="Save" ValidationGroup="vgAddRoom" OnClick="btnSave_Click" />
+                            <asp:Button ID="btnAddRoom" runat="server" CssClass="btn btn-primary" Text="Save" ValidationGroup="vgAddRoom" OnClick="btnAddRoom_Click" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                     </ContentTemplate>
                     <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="btnAddRoom" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>
         </div>
     </div>
 
-    <div id="updateModal" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
-        <div class="modal-dialog">
-            <!-- Update Modal content-->
+    <!-- Update Modal content-->
+    <div id="updateRoom" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">  
             <div class="modal-content">
                 <asp:UpdatePanel ID="upEditRoom" runat="server">
                     <ContentTemplate>
@@ -283,7 +289,7 @@
                                     Display="Dynamic"
                                     ControlToValidate="ddlEditRoom"
                                     CssClass="label label-danger"
-                                    ValidationGroup="vgAddRoom"
+                                    ValidationGroup="vgEditRoom"
                                     ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                             </div>
                             <div class="form-group">
@@ -301,7 +307,7 @@
                                     Display="Dynamic"
                                     ControlToValidate="txtEditNight"
                                     CssClass="label label-danger"
-                                    ValidationGroup="vgAddRoom"
+                                    ValidationGroup="vgEditRoom"
                                     ErrorMessage="No of Nights is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>

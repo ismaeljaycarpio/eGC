@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbGC" Class="GiftCheckDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=dbGC;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="connGC" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Dining" Member="Dinings">
+    <Type Name="Dining">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Dining_GCDining" Member="GCDinings" ThisKey="Id" OtherKey="DiningId" Type="GCDining" />
+    </Type>
+  </Table>
   <Table Name="dbo.Room" Member="Rooms">
     <Type Name="Room">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -8,34 +15,6 @@
       <Column Name="Regular" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Peak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Room_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="RoomId" Type="GCRoom" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Dining" Member="Dinings">
-    <Type Name="Dining">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Dining_GCDining" Member="GCDinings" ThisKey="Id" OtherKey="DiningId" Type="GCDining" />
-    </Type>
-  </Table>
-  <Table Name="dbo.GCDining" Member="GCDinings">
-    <Type Name="GCDining">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="GCTransactionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DiningId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Dining_GCDining" Member="Dining" ThisKey="DiningId" OtherKey="Id" Type="Dining" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="GCTransaction_GCDining" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.GCRoom" Member="GCRooms">
-    <Type Name="GCRoom">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="GCTransactionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Nights" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Room_GCRoom" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="GCTransaction_GCRoom" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Guest" Member="Guests">
@@ -62,7 +41,7 @@
   </Table>
   <Table Name="dbo.GCTransaction" Member="GCTransactions">
     <Type Name="GCTransaction">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="GCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="GuestId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="RecommendingApproval" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
@@ -76,6 +55,40 @@
       <Association Name="GCTransaction_GCDining" Member="GCDinings" ThisKey="Id" OtherKey="GCTransactionId" Type="GCDining" />
       <Association Name="GCTransaction_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="GCTransactionId" Type="GCRoom" />
       <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="GuestId" Type="Guest" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GCDining" Member="GCDinings">
+    <Type Name="GCDining">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GCTransactionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiningId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Dining_GCDining" Member="Dining" ThisKey="DiningId" OtherKey="Id" Type="Dining" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="GCTransaction_GCDining" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GCRoom" Member="GCRooms">
+    <Type Name="GCRoom">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GCTransactionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Nights" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="GCTransaction_GCRoom" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Room_GCRoom" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tmpRoom" Member="tmpRooms">
+    <Type Name="tmpRoom">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Night" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

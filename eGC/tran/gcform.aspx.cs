@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace eGC.tran
 {
@@ -100,6 +101,7 @@ namespace eGC.tran
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            GCTransaction tran = new GCTransaction();
 
         }
 
@@ -125,6 +127,59 @@ namespace eGC.tran
                 lblAddRoomRegularRate.Text = roomSelected.Regular;
                 lblAddRoomPeakRate.Text = roomSelected.Peak;
             }
+        }
+
+        protected void btnAddRoom_Click(object sender, EventArgs e)
+        {
+            //add to temp table
+            tmpRoom tmp = new tmpRoom();
+            tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
+            tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
+            tmp.Status = ddlAddPeakRegular.SelectedValue;
+            tmp.Night = Convert.ToInt32(txtAddNight.Text);
+            
+            if(ddlAddPeakRegular.SelectedItem.Text == "Regular")
+            {
+                tmp.Value = Convert.ToDecimal(lblAddRoomRegularRate.Text);
+            }
+            else
+            {
+                tmp.Value = Convert.ToDecimal(lblAddRoomPeakRate.Text);
+            }
+
+            tmp.Total = tmp.Night * tmp.Value;
+
+            db.tmpRooms.InsertOnSubmit(tmp);
+            db.SubmitChanges();
+
+            bindRooms();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#addRoom').modal('hide');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+        }
+
+        private void bindRooms()
+        {
+            var q = from room in db.Rooms
+                    join gcroom in db.tmpRooms
+                    on room.Id equals gcroom.RoomId
+                    where gcroom.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
+                    select new
+                    {
+                        Id = gcroom.Id,
+                        Type = room.Type,
+                        Room = room.Room1,
+                        Status = gcroom.Status,
+                        Nights = gcroom.Night,
+                        Value = gcroom.Value,
+                        Total = gcroom.Total
+                    };
+
+            gvRoom.DataSource = q.ToList();
+            gvRoom.DataBind();
         }
     }
 }
