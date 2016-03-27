@@ -56,7 +56,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="">eGC |</a>
+                    <a class="navbar-brand" runat="server" href="">eGC (Test Site) </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <asp:LoginView ID="LoginView1"
@@ -76,6 +76,8 @@
                                         <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
                                     </ul>
                                 </li>
+                                <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
+                                <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
