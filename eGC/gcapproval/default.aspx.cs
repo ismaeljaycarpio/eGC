@@ -53,7 +53,7 @@ namespace eGC.gcapproval
 
         protected void gvGC_Sorting(object sender, GridViewSortEventArgs e)
         {
-
+            
         }
 
         protected void bindGridview()
@@ -79,7 +79,8 @@ namespace eGC.gcapproval
                         GCNumber = gctran.GCNumber,
                         ArrivalDate = gctran.ArrivalDate,
                         CheckoutDate = gctran.CheckOutDate,
-                        Status = gctran.ApprovalStatus
+                        Status = gctran.ApprovalStatus,
+                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                     };
 
             gvGC.DataSource = q.ToList();

@@ -155,7 +155,7 @@ namespace eGC.tran
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 //load dining
-                var q = (from r in db.tmpDinings
+                var q = (from r in db.tmpRooms
                          where r.Id.Equals((int)gvDining.DataKeys[index].Value)
                          select r).FirstOrDefault();
 
@@ -213,28 +213,13 @@ namespace eGC.tran
                 GCRoom room = new GCRoom();
                 room.GCTransactionId = id;
                 room.RoomId = r.RoomId;
+                room.DiningId = r.DiningId;
                 room.Status = r.Status;
                 room.Nights = r.Night;
                 room.Value = r.Value;
                 room.Total = r.Total;
 
                 db.GCRooms.InsertOnSubmit(room);
-            }
-
-            //insert dining
-            var tmpDining = (from tmp in db.tmpDinings
-                             where tmp.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
-                             select tmp).ToList();
-
-            foreach (var r in tmpDining)
-            {
-                //insert to tran
-                GCDining dining = new GCDining();
-                dining.GCTransactionId = id;
-                dining.DiningId = r.DiningId;
-                dining.Value = r.Value;
-
-                db.GCDinings.InsertOnSubmit(dining);
             }
 
             db.SubmitChanges();
@@ -348,7 +333,7 @@ namespace eGC.tran
         private void bindDinings()
         {
             var q = from dining in db.Dinings
-                    join gcdining in db.tmpDinings
+                    join gcdining in db.tmpRooms
                     on dining.Id equals gcdining.DiningId
                     where gcdining.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
                     select new
@@ -373,17 +358,6 @@ namespace eGC.tran
             {
                 db.tmpRooms.DeleteOnSubmit(room);
             }
-
-            //clear content of tmpDining
-            var d = (from tmp in db.tmpDinings
-                     where tmp.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
-                     select tmp).ToList();
-
-            foreach(var di in d)
-            {
-                db.tmpDinings.DeleteOnSubmit(di);
-            }
-
             db.SubmitChanges();
         }
 
@@ -422,12 +396,13 @@ namespace eGC.tran
         protected void btnAddDining_Click(object sender, EventArgs e)
         {
             //add to temp table
-            tmpDining tmp = new tmpDining();
+            tmpRoom tmp = new tmpRoom();
             tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
             tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
             tmp.Value = Convert.ToDecimal(txtAddValue.Text);
+            tmp.Total = tmp.Value;
 
-            db.tmpDinings.InsertOnSubmit(tmp);
+            db.tmpRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
 
             bindDinings();
@@ -441,13 +416,13 @@ namespace eGC.tran
 
         protected void btnEditDining_Click(object sender, EventArgs e)
         {
-            var d = (from dining in db.tmpDinings
+            var d = (from dining in db.tmpRooms
                      where dining.Id == Convert.ToInt32(lblEditDiningId.Text)
                      select dining).FirstOrDefault();
 
             d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
             d.Value = Convert.ToDecimal(txtEditValue.Text);
-
+            d.Total = d.Value;
             db.SubmitChanges();
 
             bindDinings();
@@ -461,11 +436,11 @@ namespace eGC.tran
 
         protected void btnDeleteDining_Click(object sender, EventArgs e)
         {
-            var q = (from r in db.tmpDinings
+            var q = (from r in db.tmpRooms
                      where r.Id == Convert.ToInt32(hfDeleteDiningId.Value)
                      select r).FirstOrDefault();
 
-            db.tmpDinings.DeleteOnSubmit(q);
+            db.tmpRooms.DeleteOnSubmit(q);
             db.SubmitChanges();
 
             bindDinings();

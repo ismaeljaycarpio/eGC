@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -37,11 +38,48 @@ namespace eGC.fo
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName.Equals("redirectGuest"))
+            if (e.CommandName.Equals("selectGuest"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lbtnGuestId")).Text;
-                Response.Redirect("~/guest/editguest.aspx?guestid=" + rowId);
+                string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
+                
+                //load guest profile
+                var gu = (from g in db.Guests
+                         join tran in db.GCTransactions
+                         on g.GuestId equals tran.GuestId
+                         where tran.Id == Convert.ToInt32(rowId)
+                         select new
+                         {
+                             FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
+                             GuestId = g.GuestId,
+                             ArrivalDate = tran.ArrivalDate.ToString(),
+                             CheckoutDate = tran.CheckOutDate.ToString()
+                         }).FirstOrDefault();
+
+                txtName.Text = gu.FullName;
+                txtGuestId.Text = gu.GuestId;
+                txtArrival.Text = gu.ArrivalDate;
+                txtCheckout.Text = gu.CheckoutDate;
+
+                //load pics
+                //load guest
+                if (!File.Exists(Server.MapPath("~/ProfilePic/") + gu.GuestId + "_Profile.png"))
+                {
+                    imgProfile.ImageUrl = "~/ProfilePic/noImage.png";
+                }
+                else
+                {
+                    imgProfile.ImageUrl = "~/ProfilePic/" + gu.GuestId + "_Profile.png";
+                }
+
+                if (!File.Exists(Server.MapPath("~/IDPic/") + gu.GuestId + "_IDPic.png"))
+                {
+                    IDPic.ImageUrl = "~/IDPic/noImage.png";
+                }
+                else
+                {
+                    IDPic.ImageUrl = "~/IDPic/" + gu.GuestId + "_IDPic.png";
+                }
             }
             else if (e.CommandName.Equals("redirectGC"))
             {
@@ -79,7 +117,8 @@ namespace eGC.fo
                         GCNumber = gctran.GCNumber,
                         ArrivalDate = gctran.ArrivalDate,
                         CheckoutDate = gctran.CheckOutDate,
-                        Status = gctran.ApprovalStatus
+                        Status = gctran.ApprovalStatus,
+                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                     };
 
             gvGC.DataSource = q.ToList();

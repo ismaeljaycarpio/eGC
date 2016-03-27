@@ -164,7 +164,7 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-                                                        <asp:BoundField DataField="TotalValue" HeaderText="Total Value" />
+                                                        
                                                         <asp:TemplateField HeaderText="Regular/Peak">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>

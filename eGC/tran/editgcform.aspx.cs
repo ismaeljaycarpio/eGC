@@ -118,7 +118,7 @@ namespace eGC.tran
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 //load dining
-                var q = (from r in db.GCDinings
+                var q = (from r in db.GCRooms
                          where r.Id.Equals((int)gvDining.DataKeys[index].Value)
                          select r).FirstOrDefault();
 
@@ -280,12 +280,13 @@ namespace eGC.tran
         protected void btnAddDining_Click(object sender, EventArgs e)
         {
             //add to temp table
-            GCDining tmp = new GCDining();
+            GCRoom tmp = new GCRoom();
             tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
             tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
             tmp.Value = Convert.ToDecimal(txtAddValue.Text);
+            tmp.Total = tmp.Value;
 
-            db.GCDinings.InsertOnSubmit(tmp);
+            db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
 
             bindDinings();
@@ -299,13 +300,13 @@ namespace eGC.tran
 
         protected void btnEditDining_Click(object sender, EventArgs e)
         {
-            var d = (from dining in db.GCDinings
+            var d = (from dining in db.GCRooms
                      where dining.Id == Convert.ToInt32(lblEditDiningId.Text)
                      select dining).FirstOrDefault();
 
             d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
             d.Value = Convert.ToDecimal(txtEditValue.Text);
-
+            d.Total = d.Value;
             db.SubmitChanges();
 
             bindDinings();
@@ -319,11 +320,11 @@ namespace eGC.tran
 
         protected void btnDeleteDining_Click(object sender, EventArgs e)
         {
-            var q = (from r in db.GCDinings
+            var q = (from r in db.GCRooms
                      where r.Id == Convert.ToInt32(hfDeleteDiningId.Value)
                      select r).FirstOrDefault();
 
-            db.GCDinings.DeleteOnSubmit(q);
+            db.GCRooms.DeleteOnSubmit(q);
             db.SubmitChanges();
 
             bindDinings();
@@ -404,8 +405,7 @@ namespace eGC.tran
                         Status = gcroom.Status,
                         Nights = gcroom.Nights,
                         Value = gcroom.Value,
-                        Total = gcroom.Total,
-                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == tr.Id).Sum(t => t.Total)
+                        Total = gcroom.Total
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -415,7 +415,7 @@ namespace eGC.tran
         private void bindDinings()
         {
             var q = from dining in db.Dinings
-                    join gcdining in db.GCDinings
+                    join gcdining in db.GCRooms
                     on dining.Id equals gcdining.DiningId
                     join tr in db.GCTransactions
                     on gcdining.GCTransactionId equals tr.Id

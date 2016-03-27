@@ -72,6 +72,7 @@
 
                                             <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" />
                                             <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
+                                            <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
                                             <asp:BoundField DataField="Status" HeaderText="Status" />
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
