@@ -11,6 +11,12 @@
 
       <siteMapNode url="~/room/dining.aspx" title="Dining"  description="">
       </siteMapNode>
+
+      <siteMapNode url="~/gcapproval/default.aspx" title="GC Approval List"  description="">
+      </siteMapNode>
+
+      <siteMapNode url="~/fo/frontoffice.aspx" title="Guest List"  description="">
+      </siteMapNode>
       
     </siteMapNode>
 </siteMap>

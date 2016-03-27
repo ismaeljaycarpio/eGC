@@ -10,7 +10,7 @@
 namespace eGC.tran {
     
     
-    public partial class gcform {
+    public partial class editgcform {
         
         /// <summary>
         /// txtName control.
@@ -236,6 +236,24 @@ namespace eGC.tran {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnApprove;
+        
+        /// <summary>
+        /// btnDisapprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDisapprove;
         
         /// <summary>
         /// btnCancel control.
@@ -605,5 +623,14 @@ namespace eGC.tran {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteDining;
+        
+        /// <summary>
+        /// hfTransactionId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTransactionId;
     }
 }

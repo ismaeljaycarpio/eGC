@@ -1,13 +1,14 @@
-﻿<%@ Page Title="Add Gift Check" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="gcform.aspx.cs" Inherits="eGC.tran.gcform" %>
+﻿<%@ Page Title="Edit GC Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editgcform.aspx.cs" Inherits="eGC.tran.editgcform" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h5>Add Gift Check</h5>
+                    <h5>Update Gift Check</h5>
                 </div>
                 <div class="panel-body">
                     <div role="form">
@@ -163,7 +164,7 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-
+                                                        <asp:BoundField DataField="TotalValue" HeaderText="Total Value" />
                                                         <asp:TemplateField HeaderText="Regular/Peak">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
@@ -258,6 +259,8 @@
                 </div>
                 <div class="panel-footer">
                     <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
+                    <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
+                    <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />
                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-default" />
                 </div>
             </div>
@@ -584,5 +587,5 @@
             });
         });
     </script>
-
+    <asp:HiddenField ID="hfTransactionId" runat="server" />
 </asp:Content>

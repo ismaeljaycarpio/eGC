@@ -103,7 +103,8 @@
                             <asp:RoleGroup Roles="General Manager">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
-                                        <li><a runat="server" href="~/Inventory/Default.aspx">Inventory</a></li>
+                                        <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
+                                        <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li class="dropdown">

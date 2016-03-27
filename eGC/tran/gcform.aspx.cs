@@ -177,7 +177,7 @@ namespace eGC.tran
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#deleteRoom').modal('show');");
+                sb.Append("$('#deleteDining').modal('show');");
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
@@ -188,14 +188,14 @@ namespace eGC.tran
             GCTransaction tran = new GCTransaction();
             tran.GCNumber = txtGCNumber.Text;
             tran.GuestId = txtGuestId.Text;
-            tran.RecommendingApproval = "";
-            tran.ApprovedBy = "";
-            tran.AccountNo = "";
-            tran.Remarks = "";
-            tran.Reason = "";
+            tran.RecommendingApproval = txtRecommendingApproval.Text;
+            tran.ApprovedBy = txtApprovedBy.Text;
+            tran.AccountNo = txtAccountNo.Text;
+            tran.Remarks = txtRemarks.Text;
+            tran.Reason = txtReason.Text;
             tran.ArrivalDate = Convert.ToDateTime(txtArrivalDate.Text);
             tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
-            tran.Status = "Pending";
+            tran.ApprovalStatus = "Pending";
 
             db.GCTransactions.InsertOnSubmit(tran);
             db.SubmitChanges();
@@ -462,7 +462,7 @@ namespace eGC.tran
         protected void btnDeleteDining_Click(object sender, EventArgs e)
         {
             var q = (from r in db.tmpDinings
-                     where r.Id == Convert.ToInt32(hfDeleteRoomId.Value)
+                     where r.Id == Convert.ToInt32(hfDeleteDiningId.Value)
                      select r).FirstOrDefault();
 
             db.tmpDinings.DeleteOnSubmit(q);

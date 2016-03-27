@@ -131,6 +131,8 @@
     <Content Include="Content\Site.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="fo\frontoffice.aspx" />
+    <Content Include="gcapproval\default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="guest\createguest.aspx" />
     <Content Include="guest\default.aspx" />
@@ -233,6 +235,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="tran\editgcform.aspx" />
     <Content Include="tran\gcform.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -293,6 +296,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fo\frontoffice.aspx.cs">
+      <DependentUpon>frontoffice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fo\frontoffice.aspx.designer.cs">
+      <DependentUpon>frontoffice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gcapproval\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gcapproval\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="GiftCheck.designer.cs">
       <AutoGen>True</AutoGen>
@@ -358,6 +375,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="tran\editgcform.aspx.cs">
+      <DependentUpon>editgcform.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tran\editgcform.aspx.designer.cs">
+      <DependentUpon>editgcform.aspx</DependentUpon>
     </Compile>
     <Compile Include="tran\gcform.aspx.cs">
       <DependentUpon>gcform.aspx</DependentUpon>
