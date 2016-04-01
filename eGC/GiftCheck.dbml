@@ -7,16 +7,6 @@
       <Association Name="Dining_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="DiningId" Type="GCRoom" />
     </Type>
   </Table>
-  <Table Name="dbo.Room" Member="Rooms">
-    <Type Name="Room">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Type" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Room" Member="Room1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Regular" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Peak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Room_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="RoomId" Type="GCRoom" />
-    </Type>
-  </Table>
   <Table Name="dbo.Guest" Member="Guests">
     <Type Name="Guest">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -82,6 +72,16 @@
       <Association Name="Dining_GCRoom" Member="Dining" ThisKey="DiningId" OtherKey="Id" Type="Dining" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="GCTransaction_GCRoom" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Room_GCRoom" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Room" Member="Rooms">
+    <Type Name="Room">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Room" Member="Room1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Regular" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Peak" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Room_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="RoomId" Type="GCRoom" />
     </Type>
   </Table>
 </Database>

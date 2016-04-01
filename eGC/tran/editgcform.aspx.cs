@@ -86,8 +86,8 @@ namespace eGC.tran
                                             select r).FirstOrDefault();
                         if (roomSelected != null)
                         {
-                            lblAddRoomRegularRate.Text = roomSelected.Regular;
-                            lblAddRoomPeakRate.Text = roomSelected.Peak;
+                            lblAddRoomRegularRate.Text = roomSelected.Regular.ToString();
+                            lblAddRoomPeakRate.Text = roomSelected.Peak.ToString();
                         }
                     }
 
@@ -176,8 +176,8 @@ namespace eGC.tran
                                 select r).FirstOrDefault();
             if (roomSelected != null)
             {
-                lblAddRoomRegularRate.Text = roomSelected.Regular;
-                lblAddRoomPeakRate.Text = roomSelected.Peak;
+                lblAddRoomRegularRate.Text = roomSelected.Regular.ToString();
+                lblAddRoomPeakRate.Text = roomSelected.Peak.ToString();
             }
         }
 
@@ -222,8 +222,8 @@ namespace eGC.tran
                                 select r).FirstOrDefault();
             if (roomSelected != null)
             {
-                lblEditRoomRegularRate.Text = roomSelected.Regular;
-                lblEditRoomPeakRate.Text = roomSelected.Peak;
+                lblEditRoomRegularRate.Text = roomSelected.Regular.ToString();
+                lblEditRoomPeakRate.Text = roomSelected.Peak.ToString();
             }
         }
 
@@ -360,8 +360,8 @@ namespace eGC.tran
                                     select r).FirstOrDefault();
                 if (roomSelected != null)
                 {
-                    lblEditRoomRegularRate.Text = roomSelected.Regular;
-                    lblEditRoomPeakRate.Text = roomSelected.Peak;
+                    lblEditRoomRegularRate.Text = roomSelected.Regular.ToString();
+                    lblEditRoomPeakRate.Text = roomSelected.Peak.ToString();
                 }
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();

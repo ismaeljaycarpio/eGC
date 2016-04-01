@@ -32,8 +32,8 @@ namespace eGC.room
                 lblRowId.Text = q.Id.ToString();
                 txtEditType.Text = q.Type;
                 txtEditRoom.Text = q.Room1;
-                txtEditRegular.Text = q.Regular;
-                txtEditPeak.Text = q.Peak;
+                txtEditRegular.Text = q.Regular.ToString();
+                txtEditPeak.Text = q.Peak.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -66,8 +66,8 @@ namespace eGC.room
             Room r = new Room();
             r.Type = txtAddType.Text;
             r.Room1 = txtAddRoom.Text;
-            r.Regular = txtAddRegular.Text;
-            r.Peak = txtAddPeak.Text;
+            r.Regular = Convert.ToDecimal(txtAddRegular.Text);
+            r.Peak = Convert.ToDecimal(txtAddPeak.Text);
 
             db.Rooms.InsertOnSubmit(r);
 
@@ -90,8 +90,8 @@ namespace eGC.room
 
             q.Type = txtEditType.Text;
             q.Room1 = txtEditRoom.Text;
-            q.Regular = txtEditRegular.Text;
-            q.Peak = txtEditPeak.Text;
+            q.Regular = Convert.ToDecimal(txtEditRegular.Text);
+            q.Peak = Convert.ToDecimal(txtEditPeak.Text);
 
             db.SubmitChanges();
 
