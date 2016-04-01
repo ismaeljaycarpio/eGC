@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
-    <siteMapNode url="#" title="Home"  description="">
-      <siteMapNode url="~/guest/default.aspx" title="Guest List"  description="">
+    <siteMapNode url="~/Default.aspx" title="Home"  description="">
+      <siteMapNode url="~/guest/default.aspx" title="Guest"  description="">
         <siteMapNode url="~/tran/gcform.aspx" title="Add GC"  description="" />
-        <siteMapNode url="~/guest/editguest.aspx" title="Guest"  description="" />
+        <siteMapNode url="~/guest/editguest.aspx" title="Update Guest Profile"  description="" />
+        <siteMapNode url="~/guest/createguest.aspx" title="Create Guest Profile"  description="" />
       </siteMapNode>
 
       <siteMapNode url="~/room/default.aspx" title="Room"  description="">
@@ -13,9 +14,11 @@
       </siteMapNode>
 
       <siteMapNode url="~/gcapproval/default.aspx" title="GC Approval List"  description="">
+        <siteMapNode url="~/tran/editgcform.aspx#" title="Update GC"></siteMapNode>
       </siteMapNode>
 
       <siteMapNode url="~/fo/frontoffice.aspx" title="Guest List"  description="">
+        <siteMapNode url="~/tran/editgcform.aspx" title="View GC"></siteMapNode>
       </siteMapNode>
       
     </siteMapNode>

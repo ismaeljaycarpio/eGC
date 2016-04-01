@@ -11,6 +11,8 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <asp:PlaceHolder runat="server">
@@ -19,6 +21,7 @@
         <script src="<%: ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/moment.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/bootstrap-datepicker.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker.js") %>"></script>
     </asp:PlaceHolder>
 
     <meta name="viewport" content="width=device-width" />
@@ -56,7 +59,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="">eGC (Test Site) </a>
+                    <a class="navbar-brand" runat="server" href="~/">eGC (Test) </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <asp:LoginView ID="LoginView1"

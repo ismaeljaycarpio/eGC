@@ -16,7 +16,7 @@
                             <strong>Success!</strong> Guest successfully created.
                         </asp:Panel>
                         <div class="form-group">
-                            <label for="imgProfile" class="col-sm-2 control-label">Profile Picture</label>
+                            <label for="imgProfile" class="col-sm-2 control-label">Profile Picture: </label>
                             <div class="col-sm-10">
                                 <asp:FileUpload ID="FileUpload1" runat="server" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="imgProfile" class="col-sm-2 control-label">Valid ID Picture</label>
+                            <label for="imgProfile" class="col-sm-2 control-label">Valid ID Picture: </label>
                             <div class="col-sm-10">
                                 <asp:FileUpload ID="FileUpload2" runat="server" />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtEmpId" class="col-sm-2 control-label">Guest ID</label>
+                            <label for="txtEmpId" class="col-sm-2 control-label">Guest ID: </label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtFirstName" class="col-sm-2 control-label">First Name</label>
+                            <label for="txtFirstName" class="col-sm-2 control-label">First Name :</label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" placeholder="First Name"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtMiddleName" class="col-sm-2 control-label">Middle Name</label>
+                            <label for="txtMiddleName" class="col-sm-2 control-label">Middle Name: </label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtMiddleName" runat="server" CssClass="form-control" placeholder="Middle Name"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtLastName" class="col-sm-2 control-label">Last Name</label>
+                            <label for="txtLastName" class="col-sm-2 control-label">Last Name: </label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" placeholder="Last Name"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtCompanyName" class="col-sm-2 control-label">Company Name</label>
+                            <label for="txtCompanyName" class="col-sm-2 control-label">Company Name: </label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtCompanyName" runat="server" CssClass="form-control" placeholder="Company Name"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtLastName" class="col-sm-2 control-label">Contact No</label>
+                            <label for="txtLastName" class="col-sm-2 control-label">Contact No: </label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" placeholder="Contact No"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
@@ -129,7 +129,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtLastName" class="col-sm-2 control-label">Email</label>
+                            <label for="txtLastName" class="col-sm-2 control-label">Email: </label>
                             <div class="col-sm-10">
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
@@ -142,54 +142,54 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtIdNumber" class="col-sm-2 control-label">Valid ID Number</label>
+                            <label for="txtIdNumber" class="col-sm-2 control-label">Valid ID Number: </label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtIdNumber" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
+                                <asp:TextBox ID="txtIdNumber" runat="server" CssClass="form-control" placeholder="Valid ID Number"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
                                     runat="server"
                                     Display="Dynamic"
                                     ControlToValidate="txtIdNumber"
                                     CssClass="label label-danger"
-                                    ErrorMessage="Email is required"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Valid ID Number is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="txtContactPerson" class="col-sm-2 control-label">Contact Person</label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
+                                <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control" placeholder="Contact Person"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                     runat="server"
                                     Display="Dynamic"
                                     ControlToValidate="txtContactPerson"
                                     CssClass="label label-danger"
-                                    ErrorMessage="Email is required"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Contact Person is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="txtContactPersonNumber" class="col-sm-2 control-label">Contact Person Number</label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtContactPersonNumber" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
+                                <asp:TextBox ID="txtContactPersonNumber" runat="server" CssClass="form-control" placeholder="Contact Person Number"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
                                     runat="server"
                                     Display="Dynamic"
                                     ControlToValidate="txtContactPersonNumber"
                                     CssClass="label label-danger"
-                                    ErrorMessage="Email is required"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Contact Person Number is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="txtContactPersonAddress" class="col-sm-2 control-label">Contact Person Address</label>
                             <div class="col-sm-10">
-                                <asp:TextBox ID="txtContactPersonAddress" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
+                                <asp:TextBox ID="txtContactPersonAddress" runat="server" CssClass="form-control" placeholder="Contact Person Address"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
                                     runat="server"
                                     Display="Dynamic"
                                     ControlToValidate="txtContactPersonAddress"
                                     CssClass="label label-danger"
-                                    ErrorMessage="Email is required"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Contact Person Address is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 

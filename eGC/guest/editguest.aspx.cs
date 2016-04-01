@@ -55,6 +55,7 @@ namespace eGC.guest
                         }
 
                         var guest = gu.FirstOrDefault();
+
                         txtGuestId.Text = guest.GuestId;
                         txtFirstName.Text = guest.FirstName;
                         txtMiddleName.Text = guest.MiddleName;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -68,7 +69,9 @@ namespace eGC.gcapproval
                     guest.LastName.Contains(strSearch) ||
                     guest.FirstName.Contains(strSearch) ||
                     guest.MiddleName.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch))
+                    guest.CompanyName.Contains(strSearch) ||
+                    gctran.ApprovalStatus.Contains(strSearch) ||
+                    gctran.GCNumber.Contains(strSearch))
                     select new
                     {
                         Id = gctran.Id,
@@ -80,13 +83,18 @@ namespace eGC.gcapproval
                         ArrivalDate = gctran.ArrivalDate,
                         CheckoutDate = gctran.CheckOutDate,
                         Status = gctran.ApprovalStatus,
-                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                        TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)) 
                     };
 
             gvGC.DataSource = q.ToList();
             gvGC.DataBind();
 
             txtSearch.Focus();
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
