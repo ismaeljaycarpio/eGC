@@ -102,7 +102,9 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtName">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate" runat="server" CssClass="form-control" data-provide="datepicker"></asp:TextBox>
+                            <asp:TextBox ID="txtArrivalDate" 
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                 runat="server"
                                 Display="Dynamic"
@@ -113,7 +115,9 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtName">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate" runat="server" CssClass="form-control" data-provide="datepicker"></asp:TextBox>
+                            <asp:TextBox ID="txtCheckoutDate" 
+                                runat="server" 
+                                CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"
                                 Display="Dynamic"
@@ -575,6 +579,7 @@
             </div>
         </div>
     </div>
+
     <script type="text/javascript">
         $(function () {
             var tabName = $("[id*=TabName]").val() != "" ? $("[id*=TabName]").val() : "roomTab";
@@ -582,6 +587,13 @@
             $("#myTab a").click(function () {
                 $("[id*=TabName]").val($(this).attr("href").replace("#", ""));
             });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#<%=txtArrivalDate.ClientID%>').datetimepicker();
+            $('#<%=txtCheckoutDate.ClientID%>').datetimepicker();
         });
     </script>
 

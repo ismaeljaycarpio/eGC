@@ -107,6 +107,14 @@ namespace eGC.tran
                         ddlEditDining.DataValueField = "Id";
                         ddlEditDining.DataBind();
                     }
+
+                    //show/hide buttons
+                    if(!User.IsInRole("Admin") &&
+                        !User.IsInRole("General Manager"))
+                    {
+                        btnApprove.Visible = false;
+                        btnDisapprove.Visible = false;
+                    }
                 }
             }
         }

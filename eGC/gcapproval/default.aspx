@@ -12,26 +12,28 @@
                     </div>
 
                     <div class="panel-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <asp:Button ID="btnSearch"
-                                                runat="server"
-                                                CssClass="btn btn-primary"
-                                                Text="Go"
-                                                OnClick="btnSearch_Click" />
-                                        </span>
-                                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                        <asp:UpdatePanel ID="upApproval" runat="server">
+                            <ContentTemplate>
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <asp:Button ID="btnSearch"
+                                                        runat="server"
+                                                        CssClass="btn btn-primary"
+                                                        Text="Go"
+                                                        OnClick="btnSearch_Click" />
+                                                </span>
+                                                <asp:TextBox ID="txtSearch"
+                                                    runat="server"
+                                                    CssClass="form-control"
+                                                    placeholder="Search..."></asp:TextBox>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="table-responsive">
-                            <asp:UpdatePanel ID="upApproval" runat="server">
-                                <ContentTemplate>
+                                <div class="table-responsive">
                                     <asp:GridView ID="gvGC"
                                         runat="server"
                                         CssClass="table table-striped table-hover dataTable"
@@ -67,21 +69,19 @@
                                             </asp:TemplateField>
 
                                             <asp:BoundField DataField="FullName" HeaderText="Name" />
-                                            <asp:BoundField DataField="CompanyName" HeaderText="Company"/>
-                                            <asp:BoundField DataField="Number" HeaderText="Contact No" />
-
-                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" />
-                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
+                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" />
+                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0: MMMM d, yyyy}" />
+                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0: MMMM d, yyyy}" />
                                             <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
                                             <asp:BoundField DataField="Status" HeaderText="Status" />
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
                                     </asp:GridView>
-                                </ContentTemplate>
-                                <Triggers>
-                                </Triggers>
-                            </asp:UpdatePanel>
-                        </div>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>

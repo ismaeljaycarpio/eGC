@@ -98,12 +98,14 @@
                 <div class="panel-body">
                     <div role="form">
                         <div class="col-lg-10">
-                            <label for="txtName">GC Number</label>
+                            <label for="txtGCNumber">GC Number</label>
                             <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtName">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate" runat="server" CssClass="form-control" data-provide="datepicker"></asp:TextBox>
+                            <label for="txtArrivalDate">Arrival Date</label>
+                            <asp:TextBox ID="txtArrivalDate" 
+                                runat="server" 
+                                CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                 runat="server"
                                 Display="Dynamic"
@@ -113,8 +115,10 @@
                                 ErrorMessage="Arrival Date is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtName">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate" runat="server" CssClass="form-control" data-provide="datepicker"></asp:TextBox>
+                            <label for="txtCheckoutDate">Check-out Date</label>
+                            <asp:TextBox ID="txtCheckoutDate" 
+                                runat="server" 
+                                CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"
                                 Display="Dynamic"
@@ -378,7 +382,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtEditNight">No of Nights</label>
-                                <asp:TextBox ID="txtEditNight" runat="server" CssClass="form-control" placeholder="No of Nights"></asp:TextBox>
+                                <asp:TextBox ID="txtEditNight" 
+                                    runat="server" 
+                                    CssClass="form-control" 
+                                    placeholder="No of Nights"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                                     runat="server"
                                     Display="Dynamic"
@@ -587,5 +594,13 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#<%=txtArrivalDate.ClientID%>').datetimepicker();
+            $('#<%=txtCheckoutDate.ClientID%>').datetimepicker();
+        });
+    </script>
+
     <asp:HiddenField ID="hfTransactionId" runat="server" />
 </asp:Content>

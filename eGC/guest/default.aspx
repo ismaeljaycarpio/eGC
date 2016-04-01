@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Guest List" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="eGC.guest._default" %>
+﻿<%@ Page Title="Guest" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="eGC.guest._default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -79,7 +79,7 @@
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
                                     </asp:GridView>
-                                    <a runat="server" href="~/guest/createguest.aspx">Create Guest Profile</a>
+                                    <asp:LinkButton ID="lbtnGuestProfile" runat="server" CssClass="btn btn-default" PostBackUrl="~/guest/createguest.aspx">Create Guest Profile</asp:LinkButton>
                                 </ContentTemplate>
                                 <Triggers>
                                 </Triggers>
