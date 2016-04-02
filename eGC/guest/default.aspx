@@ -29,8 +29,11 @@
                             </div>
                         </div>
 
-                        <asp:Button ID="btnExport" runat="server" Text="Export to Excel" OnClick="btnExport_Click" CssClass="btn btn-default btn-sm"/>
+                        
                         <div class="table-responsive">
+                            <div class="pull-right">
+                                <asp:Button ID="btnExport" runat="server" Text="Export to Excel" OnClick="btnExport_Click" CssClass="btn btn-default btn-sm"/>
+                            </div>
                             <asp:UpdatePanel ID="upGuests" runat="server">
                                 <ContentTemplate>           
                                     <asp:GridView ID="gvGuests"
