@@ -240,6 +240,8 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="guest\Web.config" />
+    <Content Include="fo\Web.config" />
     <None Include="Properties\PublishProfiles\eGC.pubxml" />
     <Content Include="ProfilePic\noImage.png" />
     <Content Include="room\default.aspx" />
@@ -338,6 +340,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="tran\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

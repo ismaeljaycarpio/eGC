@@ -196,6 +196,7 @@ namespace eGC.tran
             tran.ArrivalDate = Convert.ToDateTime(txtArrivalDate.Text);
             tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
             tran.ApprovalStatus = "Pending";
+            tran.StatusGC = "Waiting";
 
             db.GCTransactions.InsertOnSubmit(tran);
             db.SubmitChanges();

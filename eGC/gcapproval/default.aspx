@@ -73,7 +73,7 @@
                                             <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0: MMMM d, yyyy}" />
                                             <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0: MMMM d, yyyy}" />
                                             <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
-                                            <asp:BoundField DataField="Status" HeaderText="Status" />
+                                            <asp:BoundField DataField="Status" HeaderText="Approval Status" />
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
                                     </asp:GridView>
