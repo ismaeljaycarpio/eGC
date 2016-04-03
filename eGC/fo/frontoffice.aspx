@@ -82,6 +82,7 @@
                                                 GridLines="None"
                                                 AutoGenerateColumns="false"
                                                 AllowPaging="true"
+                                                EnablePersistedSelection="true"
                                                 AllowSorting="true"
                                                 EmptyDataText="No Record(s) found"
                                                 ShowHeaderWhenEmpty="true"
