@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-info">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h5>Update Gift Check</h5>
                 </div>
@@ -97,7 +97,7 @@
 
                 <div class="panel-body">
                     <div role="form">
-                        <div class="col-lg-10">
+                        <div class="col-md-4">
                             <label for="txtGCNumber">GC Number</label>
                             <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>

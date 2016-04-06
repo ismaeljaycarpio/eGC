@@ -71,8 +71,8 @@ namespace eGC.gcapproval
                     guest.MiddleName.Contains(strSearch) ||
                     guest.CompanyName.Contains(strSearch) ||
                     gctran.ApprovalStatus.Contains(strSearch) ||
-                    gctran.GCNumber.Contains(strSearch) &&
-                    gctran.ApprovalStatus == "Pending")
+                    gctran.GCNumber.Contains(strSearch)) &&
+                    (gctran.ApprovalStatus == "Pending")
                     select new
                     {
                         Id = gctran.Id,
