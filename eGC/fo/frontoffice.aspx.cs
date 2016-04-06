@@ -106,7 +106,8 @@ namespace eGC.fo
                     guest.LastName.Contains(strSearch) ||
                     guest.FirstName.Contains(strSearch) ||
                     guest.MiddleName.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch))
+                    guest.CompanyName.Contains(strSearch)) &&
+                    (gctran.ApprovalStatus == "Approved")
                     select new
                     {
                         Id = gctran.Id,
