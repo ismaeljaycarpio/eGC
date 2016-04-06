@@ -242,6 +242,11 @@
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="guest\Web.config" />
     <Content Include="fo\Web.config" />
+    <Content Include="EHRISDataContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>EHRISDataContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\eGC.pubxml" />
     <Content Include="ProfilePic\noImage.png" />
     <Content Include="room\default.aspx" />
@@ -394,6 +399,11 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EHRISDataContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EHRISDataContext.dbml</DependentUpon>
+    </Compile>
     <Compile Include="fo\frontoffice.aspx.cs">
       <DependentUpon>frontoffice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -509,6 +519,11 @@
   <ItemGroup>
     <None Include="GiftCheck.dbml.layout">
       <DependentUpon>GiftCheck.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EHRISDataContext.dbml.layout">
+      <DependentUpon>EHRISDataContext.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>

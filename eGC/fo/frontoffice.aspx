@@ -16,8 +16,16 @@
                             <asp:UpdatePanel ID="gProfile" runat="server">
                                 <ContentTemplate>
                                     <div class="col-sm-5">
-                                        <asp:Image ID="imgProfile" runat="server" AlternateText="Profile Image" Height="200" Width="200" />
-                                        <asp:Image ID="IDPic" runat="server" AlternateText="ID Image" Height="200" Width="200" />
+                                        <asp:Image ID="imgProfile"
+                                            runat="server"
+                                            AlternateText="Profile Image"
+                                            Height="200"
+                                            Width="200" />
+                                        <asp:Image ID="IDPic"
+                                            runat="server"
+                                            AlternateText="ID Image"
+                                            Height="200"
+                                            Width="200" />
                                     </div>
 
                                     <div class="col-xs-3">
@@ -46,8 +54,6 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
-                        <div class="panel-footer">
-                        </div>
                     </div>
 
                     <div class="panel panel-default">
@@ -55,83 +61,80 @@
                             <h5>Guest List</h5>
                         </div>
                         <div class="panel-body">
-                            <div class="panel-body">
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <div class="col-sm-10">
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <asp:Button ID="btnSearch"
-                                                        runat="server"
-                                                        CssClass="btn btn-primary"
-                                                        Text="Go"
-                                                        OnClick="btnSearch_Click" />
-                                                </span>
-                                                <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                            <asp:UpdatePanel ID="upApproval" runat="server">
+                                <ContentTemplate>
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="col-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <asp:Button ID="btnSearch"
+                                                            runat="server"
+                                                            CssClass="btn btn-primary"
+                                                            Text="Go"
+                                                            OnClick="btnSearch_Click" />
+                                                    </span>
+                                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="table-responsive">
-                                    <asp:UpdatePanel ID="upApproval" runat="server">
-                                        <ContentTemplate>
-                                            <asp:GridView ID="gvGC"
-                                                runat="server"
-                                                CssClass="table table-striped table-hover dataTable"
-                                                GridLines="None"
-                                                AutoGenerateColumns="false"
-                                                AllowPaging="true"
-                                                EnablePersistedSelection="true"
-                                                AllowSorting="true"
-                                                EmptyDataText="No Record(s) found"
-                                                ShowHeaderWhenEmpty="true"
-                                                DataKeyNames="Id"
-                                                OnRowDataBound="gvGC_RowDataBound"
-                                                OnPageIndexChanging="gvGC_PageIndexChanging"
-                                                OnRowCommand="gvGC_RowCommand"
-                                                OnSorting="gvGC_Sorting"
-                                                PageSize="10">
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="Row Id" Visible="false">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                                    <div class="table-responsive">
 
-                                                    <asp:TemplateField HeaderText="Guest ID">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="selectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                                        <asp:GridView ID="gvGC"
+                                            runat="server"
+                                            CssClass="table table-striped table-hover dataTable"
+                                            GridLines="None"
+                                            AutoGenerateColumns="false"
+                                            AllowPaging="true"
+                                            EnablePersistedSelection="true"
+                                            AllowSorting="true"
+                                            EmptyDataText="No Record(s) found"
+                                            ShowHeaderWhenEmpty="true"
+                                            DataKeyNames="Id"
+                                            OnRowDataBound="gvGC_RowDataBound"
+                                            OnPageIndexChanging="gvGC_PageIndexChanging"
+                                            OnRowCommand="gvGC_RowCommand"
+                                            OnSorting="gvGC_Sorting"
+                                            PageSize="10">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="Row Id" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                                    <asp:TemplateField HeaderText="GC Number">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Guest ID">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="selectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                                    <asp:BoundField DataField="FullName" HeaderText="Name" />
-                                                    <asp:BoundField DataField="CompanyName" HeaderText="Company" />
-                                                    <asp:BoundField DataField="Number" HeaderText="Contact No" />
+                                                <asp:TemplateField HeaderText="GC Number">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                                    <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" />
-                                                    <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
-                                                    <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                    <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
-                                                </Columns>
-                                                <PagerStyle CssClass="pagination-ys" />
-                                            </asp:GridView>
-                                        </ContentTemplate>
-                                        <Triggers>
-                                        </Triggers>
-                                    </asp:UpdatePanel>
-                                </div>
-                            </div>
+                                                <asp:BoundField DataField="FullName" HeaderText="Name" />
+                                                <asp:BoundField DataField="CompanyName" HeaderText="Company" />
+                                                <asp:BoundField DataField="Number" HeaderText="Contact No" />
+
+                                                <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" />
+                                                <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
+                                                <asp:BoundField DataField="Status" HeaderText="Status" />
+                                                <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
+                                            </Columns>
+                                            <PagerStyle CssClass="pagination-ys" />
+                                        </asp:GridView>
+                                </ContentTemplate>
+                                <Triggers>
+                                </Triggers>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </asp:Panel>

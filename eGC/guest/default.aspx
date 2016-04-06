@@ -23,7 +23,9 @@
                                                 Text="Go"
                                                 OnClick="btnSearch_Click" />
                                         </span>
-                                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                                        <asp:TextBox ID="txtSearch" 
+                                            runat="server" 
+                                            CssClass="form-control" placeholder="Search..."></asp:TextBox>
                                     <div class="pull-right">
                                 <asp:Button ID="btnExport" runat="server" Text="Export to Excel" OnClick="btnExport_Click" CssClass="btn btn-default btn-sm"/>
                             </div>
