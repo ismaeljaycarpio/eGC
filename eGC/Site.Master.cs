@@ -71,7 +71,7 @@ namespace eGC
         {
             if(!Page.IsPostBack)
             {
-                if(Page.User.Identity.IsAuthenticated)
+                if (Page.User.Identity.IsAuthenticated)
                 {
                     Control financeOnly;
                     Control foOnly;
