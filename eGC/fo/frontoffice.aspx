@@ -123,8 +123,8 @@
 
                                                 <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" />
                                                 <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
-                                                <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
+                                                <asp:BoundField DataField="Status" HeaderText="Approval" />
+                                                <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" DataFormatString="{0:C}" />
                                             </Columns>
                                             <PagerStyle CssClass="pagination-ys" />
                                         </asp:GridView>

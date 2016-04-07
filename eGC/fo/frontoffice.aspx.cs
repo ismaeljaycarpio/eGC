@@ -52,14 +52,16 @@ namespace eGC.fo
                          {
                              FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
                              GuestId = g.GuestId,
-                             ArrivalDate = tran.ArrivalDate.ToString(),
-                             CheckoutDate = tran.CheckOutDate.ToString()
+                             ArrivalDate = tran.ArrivalDate,
+                             CheckoutDate = tran.CheckOutDate,
+                             StatusGC = tran.StatusGC
                          }).FirstOrDefault();
 
                 txtName.Text = gu.FullName;
                 txtGuestId.Text = gu.GuestId;
-                txtArrival.Text = gu.ArrivalDate;
-                txtCheckout.Text = gu.CheckoutDate;
+                txtArrival.Text = gu.ArrivalDate.ToString();
+                txtCheckout.Text = gu.CheckoutDate.ToString();
+                txtStatus.Text = gu.StatusGC;
 
                 //load pics
                 //load guest

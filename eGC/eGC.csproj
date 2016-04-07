@@ -122,6 +122,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="ActivityLog.txt" />
+    <Content Include="admin\UserConfig.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />
@@ -354,6 +355,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\UserConfig.aspx.cs">
+      <DependentUpon>UserConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\UserConfig.aspx.designer.cs">
+      <DependentUpon>UserConfig.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="Account\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

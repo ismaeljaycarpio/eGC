@@ -101,7 +101,7 @@
                             <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtName">Arrival Date</label>
+                            <label for="txtArrivalDate">Arrival Date</label>
                             <asp:TextBox ID="txtArrivalDate" 
                                 runat="server"
                                 CssClass="form-control"></asp:TextBox>
@@ -114,7 +114,7 @@
                                 ErrorMessage="Arrival Date is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtName">Check-out Date</label>
+                            <label for="txtCheckoutDate">Check-out Date</label>
                             <asp:TextBox ID="txtCheckoutDate" 
                                 runat="server" 
                                 CssClass="form-control"></asp:TextBox>

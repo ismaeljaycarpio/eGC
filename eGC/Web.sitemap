@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="~/Default.aspx" title="Home"  description="">
+
+      <siteMapNode url="~/Login.aspx" title="Login"  description="">
+      </siteMapNode>
+
+      <siteMapNode url="~/admin/userconfig.aspx" title="User Configuration"  description="">
+      </siteMapNode>
       
       <siteMapNode url="~/guest/default.aspx" title="Guest"  description="">
         <siteMapNode url="~/tran/gcform.aspx" title="Add GC"  description="" />
