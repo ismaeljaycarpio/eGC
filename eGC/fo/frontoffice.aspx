@@ -32,7 +32,7 @@
                                         <label for="txtName">Name</label>
                                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <label for="txtGuestId">Guest ID</label>
                                         <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>

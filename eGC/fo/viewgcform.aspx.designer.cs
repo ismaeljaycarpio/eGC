@@ -229,40 +229,22 @@ namespace eGC.fo {
         protected global::System.Web.UI.WebControls.GridView gvDining;
         
         /// <summary>
-        /// btnSave control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
         
         /// <summary>
-        /// btnApprove control.
+        /// btnClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApprove;
-        
-        /// <summary>
-        /// btnDisapprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDisapprove;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnClose;
         
         /// <summary>
         /// TabName control.
