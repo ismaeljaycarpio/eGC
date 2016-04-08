@@ -143,6 +143,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fo\frontoffice.aspx" />
+    <Content Include="fo\viewgcform.aspx" />
     <Content Include="gcapproval\default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="guest\createguest.aspx" />
@@ -418,6 +419,13 @@
     </Compile>
     <Compile Include="fo\frontoffice.aspx.designer.cs">
       <DependentUpon>frontoffice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="fo\viewgcform.aspx.cs">
+      <DependentUpon>viewgcform.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fo\viewgcform.aspx.designer.cs">
+      <DependentUpon>viewgcform.aspx</DependentUpon>
     </Compile>
     <Compile Include="gcapproval\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

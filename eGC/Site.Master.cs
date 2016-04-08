@@ -10,7 +10,7 @@ namespace eGC
 {
     public partial class SiteMaster : MasterPage
     {
-        EHRISDataContextDataContext db = new EHRISDataContextDataContext();
+        //EHRISDataContextDataContext db = new EHRISDataContextDataContext();
 
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";

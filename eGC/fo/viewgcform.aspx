@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Edit GC Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editgcform.aspx.cs" Inherits="eGC.tran.editgcform" %>
+﻿<%@ Page Title="View GC Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="viewgcform.aspx.cs" Inherits="eGC.fo.viewgcform" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h5>Update Gift Check</h5>
+                    <h5>View Gift Check</h5>
                 </div>
                 <div class="panel-body">
                     <div role="form">
@@ -604,4 +604,5 @@
     </script>
 
     <asp:HiddenField ID="hfTransactionId" runat="server" />
+
 </asp:Content>

@@ -87,7 +87,7 @@ namespace eGC.fo
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
-                Response.Redirect("~/tran/editgcform.aspx?gcId=" + rowId);
+                Response.Redirect("~/fo/viewgcform.aspx?gcId=" + rowId);
             }
         }
 

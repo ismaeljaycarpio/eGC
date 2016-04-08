@@ -45,7 +45,7 @@
                                         <asp:TextBox ID="txtCheckout" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <div class="col-xs-3">
-                                        <label for="txtStatus">Status</label>
+                                        <label for="txtStatus">GC Status</label>
                                         <asp:TextBox ID="txtStatus" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                 </ContentTemplate>
@@ -81,7 +81,6 @@
                                     </div>
 
                                     <div class="table-responsive">
-
                                         <asp:GridView ID="gvGC"
                                             runat="server"
                                             CssClass="table table-striped table-hover dataTable"
