@@ -158,6 +158,25 @@ namespace eGC.guest
                 db.SubmitChanges();
 
                 pnlSuccess.Visible = true;
+
+                //load images
+                if (!File.Exists(Server.MapPath("~/ProfilePic/") + g.GuestId + "_Profile.png"))
+                {
+                    imgProfile.ImageUrl = "~/ProfilePic/noImage.png";
+                }
+                else
+                {
+                    imgProfile.ImageUrl = "~/ProfilePic/" + g.GuestId + "_Profile.png";
+                }
+
+                if (!File.Exists(Server.MapPath("~/IDPic/") + g.GuestId + "_IDPic.png"))
+                {
+                    IDPic.ImageUrl = "~/IDPic/noImage.png";
+                }
+                else
+                {
+                    IDPic.ImageUrl = "~/IDPic/" + g.GuestId + "_IDPic.png";
+                }
             }
         }
     }
