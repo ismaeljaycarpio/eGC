@@ -45,7 +45,7 @@
         <script>
             $(function () {
                 $('.modal').on('hidden.bs.modal', function () {
-                    $(this).find('input[type="text"],textarea').val('');
+                    $(this).find('input[type="text"],textarea,input[type="checkbox"]').val('');
                     $('.label-danger').hide();
                 });
             });
@@ -79,7 +79,7 @@
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
-                            <ul class="nav navbar-nav">
+                            <%--<ul class="nav navbar-nav">
                                 <li id="FinanceOnly" class="dropdown" runat="server"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File Maintenance<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a runat="server" href="~/guest/default.aspx">Guest</a></li>
@@ -87,9 +87,9 @@
                                         <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
                                     </ul>
                                 </li>
-                                <%--<li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>--%>
+                                <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
                                 <li id="FrontOfficeOnly" runat="server"><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
-                            </ul>
+                            </ul>--%>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a runat="server"
@@ -114,11 +114,19 @@
                         </LoggedInTemplate>
 
                         <RoleGroups>
-                            <asp:RoleGroup Roles="General Manager,Director">
+                            <asp:RoleGroup Roles="Admin">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
+                                        <li class="dropdown" runat="server"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File Maintenance<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a runat="server" href="~/guest/default.aspx">Guest</a></li>
+                                                <li><a runat="server" href="~/room/default.aspx">Room</a></li>
+                                                <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
                                         <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
+                                        <li><a runat="server" href="~/admin/userconfig.aspx">User Config</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li class="dropdown">
@@ -144,7 +152,7 @@
                                 </ContentTemplate>
                             </asp:RoleGroup>
 
-                            <asp:RoleGroup Roles="Admin">
+                            <asp:RoleGroup Roles="CanCreateGC">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown" runat="server"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File Maintenance<span class="caret"></span></a>
@@ -154,9 +162,64 @@
                                                 <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
                                             </ul>
                                         </li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a runat="server"
+                                                href="#"
+                                                class="dropdown-toggle"
+                                                data-toggle="dropdown"
+                                                role="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <span class="badge"><%: System.Web.Security.Roles.GetRolesForUser().FirstOrDefault() %></span>
+                                                <asp:LoginName ID="LoginName1" runat="server" />
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a runat="server" href="~/Account/Manage.aspx">Change Password</a></li>
+                                                <li>
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="Log Out" />
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+
+                            <asp:RoleGroup Roles="CanApprove">
+                                <ContentTemplate>
+                                    <ul class="nav navbar-nav">
                                         <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a runat="server"
+                                                href="#"
+                                                class="dropdown-toggle"
+                                                data-toggle="dropdown"
+                                                role="button"
+                                                aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <span class="badge"><%: System.Web.Security.Roles.GetRolesForUser().FirstOrDefault() %></span>
+                                                <asp:LoginName ID="LoginName1" runat="server" />
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a runat="server" href="~/Account/Manage.aspx">Change Password</a></li>
+                                                <li>
+                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="Log Out" />
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+
+                            <asp:RoleGroup Roles="CanFO">
+                                <ContentTemplate>
+                                    <ul class="nav navbar-nav">
                                         <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
-                                        <li><a runat="server" href="~/admin/userconfig.aspx">User Config</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li class="dropdown">

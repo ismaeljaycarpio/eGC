@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.625" name="GiftCheck">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 17.25" name="GiftCheck">
   <DataContextMoniker Name="/GiftCheckDataContext" />
   <nestedChildShapes>
     <classShape Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" absoluteBounds="3, 0.5, 2, 1.1939925130208333">
@@ -46,7 +46,7 @@
         <classShapeMoniker Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.125 : 5.23640055338542); (2.625 : 5.23640055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.125 : 5.23640055338542); (2.625 : 5.23640055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/GCTransaction/GCTransaction_GCRoom" />
       <nodes>
         <classShapeMoniker Id="6ac0aa15-a8c2-46a9-b7d6-86e2d058c189" />
@@ -64,6 +64,44 @@
       <nodes>
         <classShapeMoniker Id="b9706dc2-8505-48ef-87a5-fac13d7adf69" />
         <classShapeMoniker Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="784842ff-1df9-4695-b110-94a7caf5f088" absoluteBounds="0.5, 10.875, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/GiftCheckDataContext/MembershipLINQ" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c57ffeff-b69d-43fa-97c0-80e7de7bf749" absoluteBounds="0.51500000000000012, 11.335, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0c68e5c4-aa28-46d9-8deb-4dead1efc313" absoluteBounds="3.875, 11.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GiftCheckDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bfbe0844-04cd-45c6-b40d-b754458a9c5e" absoluteBounds="3.89, 12.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b7dcce53-ef28-4ad3-9354-e944f9de3b68" absoluteBounds="6.5, 14.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/GiftCheckDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="735ade31-c59b-4052-923f-e1e433d246db" absoluteBounds="6.515, 15.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (4.83333333333333 : 15.0440584309896 : JumpStart); (4.66666666666667 : 15.0440584309896 : JumpEnd); (2.5 : 15.0440584309896)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GiftCheckDataContext/User/User_Membership" />
+      <nodes>
+        <classShapeMoniker Id="b7dcce53-ef28-4ad3-9354-e944f9de3b68" />
+        <classShapeMoniker Id="784842ff-1df9-4695-b110-94a7caf5f088" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="44841eb9-7afb-4fef-af14-e5c7d13bb27a" absoluteBounds="3.625, 15.75, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/GiftCheckDataContext/UsersInRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c20f0831-f61c-41de-885c-a27a427b003b" absoluteBounds="3.64, 16.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.75 : 13.4535953776042); (4.75 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GiftCheckDataContext/Role/Role_UsersInRole" />
+      <nodes>
+        <classShapeMoniker Id="0c68e5c4-aa28-46d9-8deb-4dead1efc313" />
+        <classShapeMoniker Id="44841eb9-7afb-4fef-af14-e5c7d13bb27a" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -14,9 +14,13 @@ namespace eGC
         {
             if(!Page.IsPostBack)
             {
-                Membership.CreateUser("test-account", "pass123");
-                Roles.CreateRole("Admin");
-                Roles.AddUserToRole("test-account", "Admin");
+                Membership.CreateUser("admin", "pa$$word");
+                //Roles.CreateRole("Admin");
+                Roles.AddUserToRole("admin", "Admin");
+
+                //Roles.CreateRole("CanApprove");
+                //Roles.CreateRole("CanCreateGC");
+                //Roles.CreateRole("CanFO");
             }
         }
     }

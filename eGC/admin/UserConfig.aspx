@@ -49,11 +49,14 @@
                                     <Columns>
                                         <asp:TemplateField HeaderText="ID">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lblEmpId" runat="server" Text='<%# Eval("EmpId") %>' CommandName="editRecord" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                <asp:LinkButton ID="lblEmpId" runat="server" Text='<%# Eval("EmpId") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <asp:BoundField DataField="FullName" HeaderText="Name" />
+
+                                        <asp:BoundField DataField="RoleName" HeaderText="Role" />
+
                                     </Columns>
                                     <PagerStyle CssClass="pagination-ys" />
                                 </asp:GridView>
@@ -66,4 +69,57 @@
             </div>
         </div>
     </asp:Panel>
+
+    <div id="editRole" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Role</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <asp:Label ID="lblUserId" runat="server" Visible="false"></asp:Label>
+                                <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlRoles">Role</label>
+                                <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-control"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+                                    runat="server"
+                                    ForeColor="Red"
+                                    Display="Dynamic"
+                                    ControlToValidate="ddlRoles"
+                                    InitialValue="0"
+                                    ValidationGroup="gvEditRole"
+                                    ErrorMessage="*"></asp:RequiredFieldValidator>                                
+                            </div>
+
+                            <div class="form-group">
+                                <asp:CheckBox ID="chkDelete" runat="server" Text="Remove all access" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnUpdate"
+                                runat="server"
+                                CssClass="btn btn-primary"
+                                Text="Update"
+                                ValidationGroup="gvEditRole"
+                                OnClick="btnUpdate_Click" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="gvUsers" EventName="RowCommand" />
+                        <asp:AsyncPostBackTrigger ControlID="btnUpdate" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>
