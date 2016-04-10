@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,8 +53,8 @@ namespace eGC.fo
                          {
                              FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
                              GuestId = g.GuestId,
-                             ArrivalDate = tran.ArrivalDate,
-                             CheckoutDate = tran.CheckOutDate,
+                             ArrivalDate = String.Format("{0: MM/dd/yyyy}", tran.ArrivalDate),
+                             CheckoutDate = String.Format("{0: MM/dd/yyyy}", tran.CheckOutDate),
                              StatusGC = tran.StatusGC
                          }).FirstOrDefault();
 
@@ -108,7 +109,9 @@ namespace eGC.fo
                     guest.LastName.Contains(strSearch) ||
                     guest.FirstName.Contains(strSearch) ||
                     guest.MiddleName.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch)) &&
+                    guest.CompanyName.Contains(strSearch) ||
+                    gctran.GCNumber.Contains(strSearch) ||
+                    gctran.ApprovalStatus.Contains(strSearch)) &&
                     (gctran.ApprovalStatus == "Approved")
                     select new
                     {
@@ -120,7 +123,7 @@ namespace eGC.fo
                         GCNumber = gctran.GCNumber,
                         ArrivalDate = gctran.ArrivalDate,
                         CheckoutDate = gctran.CheckOutDate,
-                        Status = gctran.ApprovalStatus,
+                        Status = gctran.StatusGC,
                         TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                     };
 
@@ -128,6 +131,64 @@ namespace eGC.fo
             gvGC.DataBind();
 
             txtSearch.Focus();
+        }
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            string strSearch = txtSearch.Text;
+            var products = (from guest in db.Guests
+                           join gctran in db.GCTransactions
+                           on guest.GuestId equals gctran.GuestId
+                           where
+                           (guest.GuestId.Contains(strSearch) ||
+                           guest.LastName.Contains(strSearch) ||
+                           guest.FirstName.Contains(strSearch) ||
+                           guest.MiddleName.Contains(strSearch) ||
+                           guest.CompanyName.Contains(strSearch) ||
+                           gctran.GCNumber.Contains(strSearch) ||
+                           gctran.ApprovalStatus.Contains(strSearch)) &&
+                           (gctran.ApprovalStatus == "Approved")
+                           select new
+                           {
+                               GuestId = guest.GuestId,
+                               FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                               CompanyName = guest.CompanyName,
+                               Number = guest.ContactNumber,
+                               GCNumber = gctran.GCNumber,
+                               ArrivalDate = gctran.ArrivalDate,
+                               CheckoutDate = gctran.CheckOutDate,
+                               Status = gctran.StatusGC,
+                               TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                           }).ToList();
+
+            GridView1.DataSource = products;
+            GridView1.DataBind();
+            ExcelPackage excel = new ExcelPackage();
+            var workSheet = excel.Workbook.Worksheets.Add("GC Lists");
+            var totalCols = GridView1.Rows[0].Cells.Count;
+            var totalRows = GridView1.Rows.Count;
+            var headerRow = GridView1.HeaderRow;
+            for (var i = 1; i <= totalCols; i++)
+            {
+                workSheet.Cells[1, i].Value = headerRow.Cells[i - 1].Text;
+            }
+            for (var j = 1; j <= totalRows; j++)
+            {
+                for (var i = 1; i <= totalCols; i++)
+                {
+                    var product = products.ElementAt(j - 1);
+                    workSheet.Cells[j + 1, i].Value = product.GetType().GetProperty(headerRow.Cells[i - 1].Text).GetValue(product, null);
+                }
+            }
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=GC.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.End();
+            }
         }
     }
 }

@@ -70,8 +70,8 @@
 
                                             <asp:BoundField DataField="FullName" HeaderText="Name" />
                                             <asp:BoundField DataField="CompanyName" HeaderText="Company" />
-                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date"  />
-                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
+                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date"  DataFormatString="{0:d}" />
+                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" />
                                             <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
                                             <asp:BoundField DataField="Status" HeaderText="Approval Status" />
                                         </Columns>

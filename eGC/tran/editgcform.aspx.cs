@@ -45,8 +45,8 @@ namespace eGC.tran
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
                     txtReason.Text = tGC.Reason;
-                    txtArrivalDate.Text = tGC.ArrivalDate.ToString();
-                    txtCheckoutDate.Text = tGC.CheckOutDate.ToString();
+                    txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
+                    txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
 
                     //load related table
                     bindRooms();

@@ -103,8 +103,8 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtArrivalDate">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate" 
-                                runat="server" 
+                            <asp:TextBox ID="txtArrivalDate"
+                                runat="server"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                 runat="server"
@@ -116,8 +116,8 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtCheckoutDate">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate" 
-                                runat="server" 
+                            <asp:TextBox ID="txtCheckoutDate"
+                                runat="server"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"
@@ -127,6 +127,22 @@
                                 ValidationGroup="vgPrimaryAdd"
                                 ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
                         </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <label for="lblCurrentGCStatus">Current GC Status: </label>
+                        <asp:Label ID="lblCurrentGCStatus" runat="server"></asp:Label>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <label for="btnUsed">Set GC Status: </label>
+                        <asp:Button ID="btnUsed" runat="server" Text="Used" CssClass="btn btn-success" OnClick="btnUsed_Click"/>
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancelled" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
+                        <asp:Button ID="btnExpire" runat="server" Text="Expired" CssClass="btn btn-warning"  OnClick="btnExpire_Click"/>
+                        <asp:Button ID="btnWaiting" runat="server" Text="Waiting" CssClass="btn btn-default"  OnClick="btnWaiting_Click"/>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -168,7 +184,7 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-                                                        
+
                                                         <asp:TemplateField HeaderText="Regular/Peak">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
@@ -380,9 +396,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtEditNight">No of Nights</label>
-                                <asp:TextBox ID="txtEditNight" 
-                                    runat="server" 
-                                    CssClass="form-control" 
+                                <asp:TextBox ID="txtEditNight"
+                                    runat="server"
+                                    CssClass="form-control"
                                     placeholder="No of Nights"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                                     runat="server"
@@ -596,8 +612,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#<%=txtArrivalDate.ClientID%>').datetimepicker();
-            $('#<%=txtCheckoutDate.ClientID%>').datetimepicker();
+            $('#<%=txtArrivalDate.ClientID%>').datepicker();
+            $('#<%=txtCheckoutDate.ClientID%>').datepicker();
         });
     </script>
 

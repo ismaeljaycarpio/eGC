@@ -592,8 +592,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#<%=txtArrivalDate.ClientID%>').datetimepicker();
-            $('#<%=txtCheckoutDate.ClientID%>').datetimepicker();
+            $('#<%=txtArrivalDate.ClientID%>').datepicker();
+            $('#<%=txtCheckoutDate.ClientID%>').datepicker();
         });
     </script>
 

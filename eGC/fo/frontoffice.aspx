@@ -65,7 +65,7 @@
                                 <ContentTemplate>
                                     <div class="form-horizontal">
                                         <div class="form-group">
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-12">
                                                 <div class="input-group">
                                                     <span class="input-group-btn">
                                                         <asp:Button ID="btnSearch"
@@ -75,6 +75,15 @@
                                                             OnClick="btnSearch_Click" />
                                                     </span>
                                                     <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+
+                                                    <div class="pull-right">
+                                                        <asp:Button ID="btnExport" 
+                                                            runat="server" 
+                                                            Text="Export to Excel" 
+                                                            OnClick="btnExport_Click" 
+                                                            CssClass="btn btn-default btn-sm" />
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -120,15 +129,16 @@
                                                 <asp:BoundField DataField="CompanyName" HeaderText="Company" />
                                                 <asp:BoundField DataField="Number" HeaderText="Contact No" />
 
-                                                <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" />
-                                                <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" />
-                                                <asp:BoundField DataField="Status" HeaderText="Approval" />
+                                                <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" />
+                                                <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" />
+                                                <asp:BoundField DataField="Status" HeaderText="Status" />
                                                 <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" DataFormatString="{0:C}" />
                                             </Columns>
                                             <PagerStyle CssClass="pagination-ys" />
                                         </asp:GridView>
                                 </ContentTemplate>
                                 <Triggers>
+                                    <asp:PostBackTrigger ControlID="btnExport" />
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
@@ -137,4 +147,5 @@
             </div>
         </div>
     </asp:Panel>
+    <asp:GridView ID="GridView1" runat="server"></asp:GridView>
 </asp:Content>

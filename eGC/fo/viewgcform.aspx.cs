@@ -45,8 +45,9 @@ namespace eGC.fo
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
                     txtReason.Text = tGC.Reason;
-                    txtArrivalDate.Text = tGC.ArrivalDate.ToString();
-                    txtCheckoutDate.Text = tGC.CheckOutDate.ToString();
+                    txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
+                    txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
+                    lblCurrentGCStatus.Text = tGC.StatusGC;
 
                     //load related table
                     bindRooms();
@@ -435,6 +436,58 @@ namespace eGC.fo
 
             gvDining.DataSource = q.ToList();
             gvDining.DataBind();
+        }
+
+        protected void btnUsed_Click(object sender, EventArgs e)
+        {
+            string gcId = Request.QueryString["gcId"];
+            var gc = (from g in db.GCTransactions
+                      where g.GCNumber == gcId
+                      select g).FirstOrDefault();
+
+            gc.StatusGC = "Used";
+            db.SubmitChanges();
+
+            Response.Redirect("~/fo/frontoffice.aspx");
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            string gcId = Request.QueryString["gcId"];
+            var gc = (from g in db.GCTransactions
+                      where g.GCNumber == gcId
+                      select g).FirstOrDefault();
+
+            gc.StatusGC = "Cancelled";
+            db.SubmitChanges();
+
+            Response.Redirect("~/fo/frontoffice.aspx");
+        }
+
+        protected void btnExpire_Click(object sender, EventArgs e)
+        {
+            string gcId = Request.QueryString["gcId"];
+            var gc = (from g in db.GCTransactions
+                      where g.GCNumber == gcId
+                      select g).FirstOrDefault();
+
+            gc.StatusGC = "Expired";
+            db.SubmitChanges();
+
+            Response.Redirect("~/fo/frontoffice.aspx");
+        }
+
+        protected void btnWaiting_Click(object sender, EventArgs e)
+        {
+            string gcId = Request.QueryString["gcId"];
+            var gc = (from g in db.GCTransactions
+                      where g.GCNumber == gcId
+                      select g).FirstOrDefault();
+
+            gc.StatusGC = "Waiting";
+            db.SubmitChanges();
+
+            Response.Redirect("~/fo/frontoffice.aspx");
         }
     }
 }
