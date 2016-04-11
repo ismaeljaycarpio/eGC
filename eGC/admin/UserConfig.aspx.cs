@@ -12,6 +12,7 @@ namespace eGC.admin
     {
         EHRISDataContextDataContext dbeHRIS = new EHRISDataContextDataContext();
         GiftCheckDataContext dbGc = new GiftCheckDataContext();
+        DAL.AccountManagement accnt = new DAL.AccountManagement();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +40,41 @@ namespace eGC.admin
 
         protected void gvUsers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lblStatus");
+                LinkButton lnkReset = (LinkButton)e.Row.FindControl("lblReset");
+                LinkButton lbtnLockedOut = (LinkButton)e.Row.FindControl("lbtnLockedOut");
 
+                if (lnkStatus.Text == "Active")
+                {
+                    lnkStatus.Attributes.Add("onclick", "return confirm('Do you want to deactivate this user ? ');");
+                }
+                else
+                {
+                    lnkStatus.Attributes.Add("onclick", "return confirm('Do you want to activate this user ? ');");
+                }
+
+                lnkReset.Attributes.Add("onclick", "return confirm('Do you want to reset the password of this user ? ');");
+
+                if (lbtnLockedOut.Text == "Yes")
+                {
+                    lbtnLockedOut.Attributes.Add("onclick", "return confirm('Do you want to Unlock this user ? ');");
+                }
+                else
+                {
+                    lbtnLockedOut.Attributes.Add("onclick", "return confirm('Do you want to Lock this user ? ');");
+                }
+            }
+            else if(e.Row.RowType == DataControlRowType.Footer)
+            {
+                int _TotalRecs = rowCount();
+                int _CurrentRecStart = gvUsers.PageIndex * gvUsers.PageSize + 1;
+                int _CurrentRecEnd = gvUsers.PageIndex * gvUsers.PageSize + gvUsers.Rows.Count;
+
+                e.Row.Cells[0].ColumnSpan = 2;
+                e.Row.Cells[0].Text = string.Format("Displaying <b style=color:red>{0}</b> to <b style=color:red>{1}</b> of {2} records found", _CurrentRecStart, _CurrentRecEnd, _TotalRecs);
+            }
         }
 
         protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -107,6 +142,10 @@ namespace eGC.admin
                     on e.Emp_Id equals u.UserName
                     into a
                     from b in a.DefaultIfEmpty(new User())
+                    join mem in dbGc.MembershipLINQs
+                    on b.UserId equals mem.UserId
+                    into x
+                    from z in x.DefaultIfEmpty(new MembershipLINQ())
                     join uir in dbGc.UsersInRoles
                     on b.UserId equals uir.UserId
                     into c
@@ -122,17 +161,54 @@ namespace eGC.admin
                     e.MiddleName.Contains(strSearch))
                     select new
                     {
-                        UserId = e.UserId,
+                        UserId = b.UserId,
                         EmpId = e.Emp_Id,
                         FullName = e.LastName + " , " + e.FirstName + " " + e.MiddleName,
-                        RoleName = g.RoleName
+                        RoleName = g.RoleName,
+                        IsApproved = z.IsApproved,
+                        IsLockedOut = z.IsLockedOut
                     }).ToList();
 
             gvUsers.DataSource = q;
             gvUsers.DataBind();
-            lblRowCount.Text = q.Count.ToString();
 
             txtSearch.Focus();
+        }
+
+        private int rowCount()
+        {
+            string strSearch = txtSearch.Text;
+
+            var emp = (from e in dbeHRIS.EMPLOYEEs
+                       select e).ToList();
+
+            var q = (from e in emp
+                     join u in dbGc.Users
+                     on e.Emp_Id equals u.UserName
+                     into a
+                     from b in a.DefaultIfEmpty(new User())
+                     join uir in dbGc.UsersInRoles
+                     on b.UserId equals uir.UserId
+                     into c
+                     from d in c.DefaultIfEmpty(new UsersInRole())
+                     join r in dbGc.Roles
+                     on d.RoleId equals r.RoleId
+                     into f
+                     from g in f.DefaultIfEmpty(new Role())
+                     where
+                     (e.Emp_Id.Contains(strSearch) ||
+                     e.LastName.Contains(strSearch) ||
+                     e.FirstName.Contains(strSearch) ||
+                     e.MiddleName.Contains(strSearch))
+                     select new
+                     {
+                         UserId = e.UserId,
+                         EmpId = e.Emp_Id,
+                         FullName = e.LastName + " , " + e.FirstName + " " + e.MiddleName,
+                         RoleName = g.RoleName
+                     }).ToList();
+
+            return q.Count;
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
@@ -165,6 +241,56 @@ namespace eGC.admin
             sb.Append("$('#editRole').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
+        }
+
+        protected void lbtnLockedOut_Click(object sender, EventArgs e)
+        {
+            LinkButton lbtnLockedOut_Click = sender as LinkButton;
+            GridViewRow gvrow = lbtnLockedOut_Click.NamingContainer as GridViewRow;
+            Guid UserId = Guid.Parse(gvUsers.DataKeys[gvrow.RowIndex].Value.ToString());
+
+            MembershipUser getUser = Membership.GetUser(UserId);
+
+            if (lbtnLockedOut_Click.Text == "Yes")
+            {
+                //unlock
+                getUser.UnlockUser();
+            }
+            else
+            {
+                //lock
+                accnt.LockUser(UserId);
+            }
+
+            bindGridview();
+        }
+
+        protected void lblReset_Click(object sender, EventArgs e)
+        {
+            LinkButton lnkReset = sender as LinkButton;
+            GridViewRow gvrow = lnkReset.NamingContainer as GridViewRow;
+            Guid UserId = Guid.Parse(gvUsers.DataKeys[gvrow.RowIndex].Value.ToString());
+
+            accnt.ResetPassword(UserId);
+            bindGridview();
+        }
+
+        protected void lblStatus_Click(object sender, EventArgs e)
+        {
+            LinkButton lnkStatus = sender as LinkButton;
+            GridViewRow gvrow = lnkStatus.NamingContainer as GridViewRow;
+            Guid UserId = Guid.Parse(gvUsers.DataKeys[gvrow.RowIndex].Value.ToString());
+
+            if (lnkStatus.Text == "Active")
+            {
+                accnt.DeactivateUser(UserId);
+            }
+            else
+            {
+                accnt.ActivateUser(UserId);
+            }
+
+            bindGridview();
         }
     }
 }

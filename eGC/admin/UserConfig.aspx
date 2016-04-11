@@ -37,6 +37,7 @@
                                     GridLines="None"
                                     AutoGenerateColumns="false"
                                     AllowPaging="true"
+                                    ShowFooter="true"
                                     AllowSorting="true"
                                     EmptyDataText="No Record(s) found"
                                     ShowHeaderWhenEmpty="true"
@@ -47,6 +48,13 @@
                                     OnSorting="gvUsers_Sorting"
                                     PageSize="10">
                                     <Columns>
+
+                                        <%--<asp:TemplateField HeaderText="ID">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lblUserId" runat="server" Text='<%# Eval("UserId") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>--%>
+
                                         <asp:TemplateField HeaderText="ID">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lblEmpId" runat="server" Text='<%# Eval("EmpId") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
@@ -56,6 +64,36 @@
                                         <asp:BoundField DataField="FullName" HeaderText="Name" />
 
                                         <asp:BoundField DataField="RoleName" HeaderText="Role" />
+
+                                        <asp:TemplateField HeaderText="Account Status" SortExpression="IsApproved">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lblStatus"
+                                                    runat="server"
+                                                    OnClick="lblStatus_Click"
+                                                    Text='<%# (Boolean.Parse(Eval("IsApproved").ToString())) ? "Active" : "Inactive" %>'>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Locked Out" SortExpression="IsLockedOut">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lbtnLockedOut"
+                                                    runat="server"
+                                                    OnClick="lbtnLockedOut_Click"
+                                                    Text='<%# (Boolean.Parse(Eval("IsLockedOut").ToString())) ? "Yes" : "No" %>'>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="Reset Password">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lblReset"
+                                                    runat="server"
+                                                    OnClick="lblReset_Click"
+                                                    Text="Reset Password">
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
                                     </Columns>
                                     <PagerStyle CssClass="pagination-ys" />
