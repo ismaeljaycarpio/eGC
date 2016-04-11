@@ -130,6 +130,7 @@ namespace eGC.admin
 
             gvUsers.DataSource = q;
             gvUsers.DataBind();
+            lblRowCount.Text = q.Count.ToString();
 
             txtSearch.Focus();
         }
@@ -164,7 +165,6 @@ namespace eGC.admin
             sb.Append("$('#editRole').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
-
         }
     }
 }

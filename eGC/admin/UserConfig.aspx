@@ -60,6 +60,7 @@
                                     </Columns>
                                     <PagerStyle CssClass="pagination-ys" />
                                 </asp:GridView>
+                                <asp:Label ID="lblRowCount" runat="server"></asp:Label>
                             </ContentTemplate>
                             <Triggers>
                             </Triggers>
