@@ -272,6 +272,7 @@ namespace eGC.admin
             GridViewRow gvrow = lnkReset.NamingContainer as GridViewRow;
             Guid UserId = Guid.Parse(gvUsers.DataKeys[gvrow.RowIndex].Value.ToString());
 
+            //pswd resets to own username
             accnt.ResetPassword(UserId);
             bindGridview();
         }

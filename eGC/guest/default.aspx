@@ -32,50 +32,46 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-
                         <asp:UpdatePanel ID="upGuests" runat="server">
                             <ContentTemplate>
                                 <asp:GridView ID="gvGuests"
                                     runat="server"
                                     CssClass="table table-striped table-hover dataTable"
                                     GridLines="None"
-                                    AutoGenerateColumns="false"
-                                    AllowPaging="true"
-                                    AllowSorting="true"
+                                    AutoGenerateColumns="False"
+                                    AllowPaging="True"
+                                    AllowSorting="True"
                                     EmptyDataText="No Record(s) found"
-                                    ShowHeaderWhenEmpty="true"
+                                    ShowHeaderWhenEmpty="True"
                                     DataKeyNames="Id"
-                                    OnRowDataBound="gvGuests_RowDataBound"
-                                    OnPageIndexChanging="gvGuests_PageIndexChanging"
-                                    OnRowCommand="gvGuests_RowCommand"
-                                    OnSorting="gvGuests_Sorting"
-                                    PageSize="10">
+                                    DataSourceID="GuestDataSource"
+                                    OnRowCommand="gvGuests_RowCommand">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Row Id" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="editRecord" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
+                                        <asp:TemplateField HeaderText="Name" SortExpression="LastName">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblName" runat="server" Text='<%# Eval("FullName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                         <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
-                                        <asp:BoundField DataField="Number" HeaderText="Contact No" SortExpression="Number" />
+                                        <asp:BoundField DataField="Number" HeaderText="Number" SortExpression="ContactNumber" />
+                                        <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="btnShowDelete" runat="server" Text="Delete" CommandName="deleteRecord" CssClass="btn btn-danger" CommandArgument='<%#((GridViewRow) Container).RowIndex %>' />
+                                                <asp:Button ID="btnAddGC" runat="server" Text="Add GC" CommandName="addGC" CssClass="btn btn-success" CommandArgument='<%#((GridViewRow) Container).RowIndex %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="btnAddGC" runat="server" Text="Add GC" CommandName="addGC" CssClass="btn btn-success" CommandArgument='<%#((GridViewRow) Container).RowIndex %>' />
+                                                <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="deleteRecord" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' CssClass="btn btn-danger"></asp:Button>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -121,4 +117,11 @@
         </div>
     </div>
 
+    <asp:LinqDataSource ID="GuestDataSource"       
+        runat="server" 
+        ContextTypeName="eGC.GiftCheckDataContext" 
+        EntityTypeName=""
+        OnSelecting="GuestDataSource_Selecting"
+        TableName="Guests" >
+    </asp:LinqDataSource>
 </asp:Content>

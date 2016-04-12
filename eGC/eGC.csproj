@@ -45,6 +45,10 @@
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.9.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.dll</HintPath>
@@ -120,6 +124,7 @@
     <Content Include="ActivityLog.txt" />
     <Content Include="admin\roles.aspx" />
     <Content Include="admin\UserConfig.aspx" />
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />

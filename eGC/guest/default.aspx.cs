@@ -18,24 +18,12 @@ namespace eGC.guest
         {
             if(!Page.IsPostBack)
             {
-                bindGridview();
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            bindGridview();
-        }
-
-        protected void gvGuests_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-
-        }
-
-        protected void gvGuests_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvGuests.PageIndex = e.NewPageIndex;
-            bindGridview();
+            gvGuests.DataBind();
         }
 
         protected void gvGuests_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -43,7 +31,7 @@ namespace eGC.guest
             if (e.CommandName.Equals("deleteRecord"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((Label)gvGuests.Rows[index].FindControl("lblRowId")).Text;
+                string rowId = gvGuests.DataKeys[index].Value.ToString();
                 hfDeleteId.Value = rowId;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -66,10 +54,6 @@ namespace eGC.guest
             }
         }
 
-        protected void gvGuests_Sorting(object sender, GridViewSortEventArgs e)
-        {
-
-        }
 
         protected void bindGridview()
         {
@@ -85,7 +69,8 @@ namespace eGC.guest
                         GuestId = g.GuestId,
                         FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
                         CompanyName = g.CompanyName,
-                        Number = g.ContactNumber
+                        Number = g.ContactNumber,
+                        Email = g.Email
                     };
 
             gvGuests.DataSource = q.ToList();
@@ -94,22 +79,6 @@ namespace eGC.guest
             txtSearch.Focus();
         }
 
-        public SortDirection direction
-        {
-            get
-            {
-                if (ViewState["directionState"] == null)
-                {
-                    ViewState["directionState"] = SortDirection.Ascending;
-                }
-                return (SortDirection)ViewState["directionState"];
-            }
-
-            set
-            {
-                ViewState["directionState"] = value;
-            }
-        }
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
@@ -120,7 +89,8 @@ namespace eGC.guest
             db.Guests.DeleteOnSubmit(q);
             db.SubmitChanges();
 
-            bindGridview();
+            //bindGridview();
+            gvGuests.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -176,6 +146,31 @@ namespace eGC.guest
                 Response.Flush();
                 Response.End();
             }
+        }
+
+        protected void GuestDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            var q = from g in db.Guests
+                    where 
+                    (g.GuestId.Contains(txtSearch.Text) ||
+                    g.FirstName.Contains(txtSearch.Text) ||
+                    g.MiddleName.Contains(txtSearch.Text) ||
+                    g.LastName.Contains(txtSearch.Text) ||
+                    g.CompanyName.Contains(txtSearch.Text) ||
+                    g.ContactNumber.Contains(txtSearch.Text) ||
+                    g.Email.Contains(txtSearch.Text))
+                    select new
+                    {
+                        Id = g.Id,
+                        GuestId = g.GuestId,
+                        FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
+                        CompanyName = g.CompanyName,
+                        Number = g.ContactNumber,
+                        Email = g.Email
+                    };
+
+            e.Result = q.ToList();
+            txtSearch.Focus();
         }
     }
 }
