@@ -230,6 +230,7 @@ namespace eGC.admin
             }
             else
             {
+                //create user with same password
                 Membership.CreateUser(lblUserName.Text, lblUserName.Text);
                 Roles.AddUserToRole(lblUserName.Text, ddlRoles.SelectedItem.Text);
             }

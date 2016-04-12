@@ -67,7 +67,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">eGC (Test) </a>
+                    <a class="navbar-brand" runat="server" href="~/">eGC (Test Site) </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <asp:LoginView ID="LoginView1"

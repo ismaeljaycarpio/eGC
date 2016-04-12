@@ -27,6 +27,11 @@
       <siteMapNode url="~/fo/frontoffice.aspx" title="Guest List"  description="">
         <siteMapNode url="~/fo/viewgcform.aspx" title="View GC"></siteMapNode>
       </siteMapNode>
+
+      <siteMapNode url="" title="Account"  description="">
+        <siteMapNode url="~/Account/Manage.aspx" title="Change Password"  description="">
+        </siteMapNode>
+      </siteMapNode>
       
     </siteMapNode>
 </siteMap>

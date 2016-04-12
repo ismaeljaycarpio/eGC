@@ -23,7 +23,7 @@
                                     </span>
                                     <asp:TextBox ID="txtSearch"
                                         runat="server"
-                                        CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                                        CssClass="form-control" placeholder="Search by Employee ID only"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
