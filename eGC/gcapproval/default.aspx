@@ -38,17 +38,17 @@
                                         runat="server"
                                         CssClass="table table-striped table-hover dataTable"
                                         GridLines="None"
-                                        AutoGenerateColumns="false"
-                                        AllowPaging="true"
-                                        AllowSorting="true"
+                                        AutoGenerateColumns="False"
+                                        AllowPaging="True"
+                                        AllowSorting="True"
                                         EmptyDataText="No Record(s) found"
-                                        ShowHeaderWhenEmpty="true"
+                                        ShowHeaderWhenEmpty="True"
                                         DataKeyNames="Id"
                                         OnRowDataBound="gvGC_RowDataBound"
                                         OnPageIndexChanging="gvGC_PageIndexChanging"
                                         OnRowCommand="gvGC_RowCommand"
                                         OnSorting="gvGC_Sorting"
-                                        PageSize="10">
+                                        DataSourceID="LinqDataSource1">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Row Id" Visible="false">
                                                 <ItemTemplate>
@@ -56,24 +56,24 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="GC Number">
+                                            <asp:TemplateField HeaderText="GC Number" SortExpression="GCNumber">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Guest ID">
+                                            <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:BoundField DataField="FullName" HeaderText="Name" />
-                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" />
-                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date"  DataFormatString="{0:d}" />
-                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" />
-                                            <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" />
-                                            <asp:BoundField DataField="Status" HeaderText="Approval Status" />
+                                            <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
+                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
+                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
+                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
+                                            <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" SortExpression="TotalValue" />
+                                            <asp:BoundField DataField="Status" HeaderText="Approval Status" SortExpression="Status" />
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
                                     </asp:GridView>
@@ -87,4 +87,9 @@
             </div>
         </div>
     </asp:Panel>
+
+    <asp:LinqDataSource ID="LinqDataSource1"
+        runat="server"
+        OnSelecting="LinqDataSource1_Selecting">
+    </asp:LinqDataSource>
 </asp:Content>

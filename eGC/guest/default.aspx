@@ -45,7 +45,8 @@
                                     ShowHeaderWhenEmpty="True"
                                     DataKeyNames="Id"
                                     DataSourceID="GuestDataSource"
-                                    OnRowCommand="gvGuests_RowCommand">
+                                    OnRowCommand="gvGuests_RowCommand"
+                                    OnPageIndexChanging="gvGuests_PageIndexChanging">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
                                             <ItemTemplate>
@@ -53,14 +54,14 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="Name" SortExpression="LastName">
+                                        <asp:TemplateField HeaderText="Name" SortExpression="FullName">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblName" runat="server" Text='<%# Eval("FullName") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
-                                        <asp:BoundField DataField="Number" HeaderText="Number" SortExpression="ContactNumber" />
+                                        <asp:BoundField DataField="Number" HeaderText="Number" SortExpression="Number" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
 
                                         <asp:TemplateField>

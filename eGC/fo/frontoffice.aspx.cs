@@ -17,13 +17,16 @@ namespace eGC.fo
         {
             if (!Page.IsPostBack)
             {
-                bindGridview();
+                //bindGridview();
+                gvGC.DataBind();
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            bindGridview();
+            //bindGridview();
+            gvGC.DataBind();
+            txtSearch.Focus();
         }
 
         protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -33,8 +36,8 @@ namespace eGC.fo
 
         protected void gvGC_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvGC.PageIndex = e.NewPageIndex;
-            bindGridview();
+            //gvGC.PageIndex = e.NewPageIndex;
+            //bindGridview();
         }
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -94,7 +97,7 @@ namespace eGC.fo
 
         protected void gvGC_Sorting(object sender, GridViewSortEventArgs e)
         {
-
+            gvGC.DataBind();
         }
 
         protected void bindGridview()
@@ -189,6 +192,38 @@ namespace eGC.fo
                 Response.Flush();
                 Response.End();
             }
+        }
+
+        protected void LinqDataSource1_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            string strSearch = txtSearch.Text;
+
+            var q = (from guest in db.Guests
+                    join gctran in db.GCTransactions
+                    on guest.GuestId equals gctran.GuestId
+                    where
+                    (guest.GuestId.Contains(strSearch) ||
+                    guest.LastName.Contains(strSearch) ||
+                    guest.FirstName.Contains(strSearch) ||
+                    guest.MiddleName.Contains(strSearch) ||
+                    guest.CompanyName.Contains(strSearch) ||
+                    gctran.GCNumber.Contains(strSearch) ||
+                    gctran.ApprovalStatus.Contains(strSearch)) &&
+                    (gctran.ApprovalStatus == "Approved")
+                    select new
+                    {
+                        Id = gctran.Id,
+                        GuestId = guest.GuestId,
+                        FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                        CompanyName = guest.CompanyName,
+                        Number = guest.ContactNumber,
+                        GCNumber = gctran.GCNumber,
+                        ArrivalDate = gctran.ArrivalDate,
+                        CheckoutDate = gctran.CheckOutDate,
+                        Status = gctran.StatusGC,
+                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                    }).ToList();
+            e.Result = q;
         }
     }
 }

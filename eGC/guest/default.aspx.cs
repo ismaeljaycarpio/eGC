@@ -18,6 +18,7 @@ namespace eGC.guest
         {
             if(!Page.IsPostBack)
             {
+                gvGuests.DataBind();
             }
         }
 
@@ -171,6 +172,11 @@ namespace eGC.guest
 
             e.Result = q.ToList();
             txtSearch.Focus();
+        }
+
+        protected void gvGuests_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvGuests.DataBind();
         }
     }
 }
