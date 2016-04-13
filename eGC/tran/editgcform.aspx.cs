@@ -110,7 +110,7 @@ namespace eGC.tran
 
                     //show/hide buttons
                     if(!User.IsInRole("Admin") &&
-                        !User.IsInRole("General Manager"))
+                        !User.IsInRole("CanApprove"))
                     {
                         btnApprove.Visible = false;
                         btnDisapprove.Visible = false;

@@ -65,8 +65,9 @@
                                 <ContentTemplate>
                                     <div class="form-horizontal">
                                         <div class="form-group">
-                                            <div class="col-sm-12">
+                                            <div class="col-md-12">
                                                 <div class="input-group">
+                                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
                                                     <span class="input-group-btn">
                                                         <asp:Button ID="btnSearch"
                                                             runat="server"
@@ -74,7 +75,7 @@
                                                             Text="Go"
                                                             OnClick="btnSearch_Click" />
                                                     </span>
-                                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                                                    
 
                                                     <div class="pull-right">
                                                         <asp:Button ID="btnExport"
@@ -101,10 +102,8 @@
                                             EmptyDataText="No Record(s) found"
                                             ShowHeaderWhenEmpty="True"
                                             DataKeyNames="Id"
-                                            OnRowDataBound="gvGC_RowDataBound"
-                                            OnPageIndexChanging="gvGC_PageIndexChanging"
                                             OnRowCommand="gvGC_RowCommand"
-                                            OnSorting="gvGC_Sorting" DataSourceID="LinqDataSource1">
+                                            DataSourceID="LinqDataSource1">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Row Id" Visible="false">
                                                     <ItemTemplate>
@@ -137,6 +136,7 @@
                                         </asp:GridView>
                                 </ContentTemplate>
                                 <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
                                     <asp:PostBackTrigger ControlID="btnExport" />
                                 </Triggers>
                             </asp:UpdatePanel>
@@ -147,5 +147,8 @@
         </div>
     </asp:Panel>
     <asp:GridView ID="GridView1" runat="server"></asp:GridView>
-    <asp:LinqDataSource ID="LinqDataSource1" runat="server" OnSelecting="LinqDataSource1_Selecting"></asp:LinqDataSource>
+    <asp:LinqDataSource ID="LinqDataSource1"
+        runat="server"
+        OnSelecting="LinqDataSource1_Selecting">
+    </asp:LinqDataSource>
 </asp:Content>

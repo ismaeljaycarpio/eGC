@@ -1,4 +1,74 @@
 ﻿====================================================================
+============================= 2016 Apr 13 ==========================
+====================================================================
+
+GC Report
+
+General manager etc
+-	Can view both reports.
+
+FO side
+
+-	Can sort by status (cancelled, used, waiting, expired) by date from (arrival date) (checkout date)
+
+Finance side
+
+-	Can sort by status (cancelled, used, waiting, expired) by date from (arrival date) (checkout date)
+-	Per guest profile and accounting records (customized Report viewer)
+
+
+Include guest details info and All GC issued and at the buttom the 
+total grand total (add all the grand total) can be sort by status (cancelled, used, waiting, expired) 
+by date from (arrival date) (checkout date)
+
+
+Profile Picture: 
+Valid ID Picture: 
+Guest ID: 
+
+First Name : 
+
+Middle Name: 
+
+Last Name: 
+
+Company Name: 
+
+Contact No: 
+
+Email: 
+
+Valid ID Number: 
+
+Contact Person 
+
+Contact Person Number 
+
+Contact Person Address
+
+
+Guest ID	GC Number	Name	Company	Contact No	Arrival Date	Checkout Date	Status	Grand Total
+AZA-2600-2016-1 
+2600-2016-1 
+momomn, dedemon kikimon	RAJ	09111111111	4/2/2016	4/30/2016	Waiting	Php5,008.00
+AZA-2600-2016-3 
+2600-2016-11 
+dasdas, asddas dasdas	dasdas	dasdas	4/28/2016	4/30/2016	Cancelled	 
+
+
+
+Total:  Php5,008.00
+
+Waiting         : 1
+Cancelled     : 1
+Used            :0
+Expired        :0
+
+
+>> Where does used GC goes to?
+
+
+====================================================================
 ============================= 2016 Apr 012 ==========================
 ====================================================================
 - search for user config **NOT FUNCTIONING WELL**

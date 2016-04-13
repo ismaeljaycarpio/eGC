@@ -15,6 +15,29 @@
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>Success!</strong> Guest successfully created.
                         </asp:Panel>
+
+                        <div class="form-group">
+                            <label for="txtEmpId" class="col-sm-3 control-label">Guest ID: </label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                    <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" placeholder="Employee ID"></asp:TextBox>
+                                    <asp:Button ID="btnGenerateId"
+                                        runat="server"
+                                        Text="Generate ID"
+                                        CausesValidation="false"
+                                        OnClick="btnGenerateId_Click"
+                                        CssClass="btn btn-default" />
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtGuestId"
+                                        CssClass="label label-danger"
+                                        ErrorMessage="Guest ID is required"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="imgProfile" class="col-sm-3 control-label">Profile Picture: </label>
                             <div class="col-sm-6">
@@ -38,28 +61,6 @@
                                     ControlToValidate="FileUpload2"
                                     CssClass="label label-danger"
                                     ErrorMessage="Valid ID Picture is required"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="txtEmpId" class="col-sm-3 control-label">Guest ID: </label>
-                            <div class="col-sm-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                    <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" placeholder="Employee ID"></asp:TextBox>
-                                    <asp:Button ID="btnGenerateId"
-                                        runat="server"
-                                        Text="Generate ID"
-                                        CausesValidation="false"
-                                        OnClick="btnGenerateId_Click"
-                                        CssClass="btn btn-default" />
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtGuestId"
-                                        CssClass="label label-danger"
-                                        ErrorMessage="Guest ID is required"></asp:RequiredFieldValidator>
-                                </div>
                             </div>
                         </div>
 

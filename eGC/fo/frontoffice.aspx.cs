@@ -17,27 +17,14 @@ namespace eGC.fo
         {
             if (!Page.IsPostBack)
             {
-                //bindGridview();
-                gvGC.DataBind();
+                this.gvGC.DataBind();
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //bindGridview();
             gvGC.DataBind();
             txtSearch.Focus();
-        }
-
-        protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            
-        }
-
-        protected void gvGC_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            //gvGC.PageIndex = e.NewPageIndex;
-            //bindGridview();
         }
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -93,11 +80,6 @@ namespace eGC.fo
                 string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
                 Response.Redirect("~/fo/viewgcform.aspx?gcId=" + rowId);
             }
-        }
-
-        protected void gvGC_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            gvGC.DataBind();
         }
 
         protected void bindGridview()
@@ -223,6 +205,7 @@ namespace eGC.fo
                         Status = gctran.StatusGC,
                         TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                     }).ToList();
+
             e.Result = q;
         }
     }

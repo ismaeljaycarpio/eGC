@@ -12,8 +12,12 @@
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="input-group">
+                                    <asp:TextBox ID="txtSearch"
+                                        runat="server"
+                                        CssClass="form-control" 
+                                        placeholder="Search by Employee ID only"></asp:TextBox>
                                     <span class="input-group-btn">
                                         <asp:Button ID="btnSearch"
                                             runat="server"
@@ -21,9 +25,6 @@
                                             Text="Go"
                                             OnClick="btnSearch_Click" />
                                     </span>
-                                    <asp:TextBox ID="txtSearch"
-                                        runat="server"
-                                        CssClass="form-control" placeholder="Search by Employee ID only"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -35,35 +36,26 @@
                                     runat="server"
                                     CssClass="table table-striped table-hover dataTable"
                                     GridLines="None"
-                                    AutoGenerateColumns="false"
-                                    AllowPaging="true"
-                                    ShowFooter="true"
-                                    AllowSorting="true"
+                                    AutoGenerateColumns="False"
+                                    AllowPaging="True"
+                                    ShowFooter="True"
+                                    AllowSorting="True"
                                     EmptyDataText="No Record(s) found"
-                                    ShowHeaderWhenEmpty="true"
+                                    ShowHeaderWhenEmpty="True"
                                     DataKeyNames="UserId"
                                     OnRowDataBound="gvUsers_RowDataBound"
-                                    OnPageIndexChanging="gvUsers_PageIndexChanging"
                                     OnRowCommand="gvUsers_RowCommand"
-                                    OnSorting="gvUsers_Sorting"
-                                    PageSize="10">
+                                    DataSourceID="UserDataSource">
                                     <Columns>
-
-                                        <%--<asp:TemplateField HeaderText="ID">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="lblUserId" runat="server" Text='<%# Eval("UserId") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
-
-                                        <asp:TemplateField HeaderText="ID">
+                                        <asp:TemplateField HeaderText="ID" SortExpression="EmpId">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lblEmpId" runat="server" Text='<%# Eval("EmpId") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:BoundField DataField="FullName" HeaderText="Name" />
+                                        <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
 
-                                        <asp:BoundField DataField="RoleName" HeaderText="Role" />
+                                        <asp:BoundField DataField="RoleName" HeaderText="Role" SortExpression="RoleName" />
 
                                         <asp:TemplateField HeaderText="Account Status" SortExpression="IsApproved">
                                             <ItemTemplate>
@@ -127,14 +119,14 @@
                             <div class="form-group">
                                 <label for="ddlRoles">Role</label>
                                 <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-control"></asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                     runat="server"
                                     ForeColor="Red"
                                     Display="Dynamic"
                                     ControlToValidate="ddlRoles"
                                     InitialValue="0"
                                     ValidationGroup="gvEditRole"
-                                    ErrorMessage="*"></asp:RequiredFieldValidator>                                
+                                    ErrorMessage="*"></asp:RequiredFieldValidator>
                             </div>
 
                             <div class="form-group">
@@ -161,4 +153,8 @@
         </div>
     </div>
 
+    <asp:LinqDataSource ID="UserDataSource"
+        OnSelecting="UserDataSource_Selecting"
+        runat="server">
+    </asp:LinqDataSource>
 </asp:Content>

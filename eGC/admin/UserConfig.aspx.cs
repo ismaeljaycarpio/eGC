@@ -18,7 +18,8 @@ namespace eGC.admin
         {
             if(!Page.IsPostBack)
             {
-                bindGridview();
+                //bindGridview();
+                this.gvUsers.DataBind();
 
                 //load roles
                 var roles = (from r in dbGc.Roles
@@ -35,7 +36,9 @@ namespace eGC.admin
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            bindGridview();
+            //bindGridview();
+            this.gvUsers.DataBind();
+            txtSearch.Focus();
         }
 
         protected void gvUsers_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -75,12 +78,6 @@ namespace eGC.admin
                 e.Row.Cells[0].ColumnSpan = 2;
                 e.Row.Cells[0].Text = string.Format("Displaying <b style=color:red>{0}</b> to <b style=color:red>{1}</b> of {2} records found", _CurrentRecStart, _CurrentRecEnd, _TotalRecs);
             }
-        }
-
-        protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvUsers.PageIndex = e.NewPageIndex;
-            bindGridview();
         }
 
         protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -123,11 +120,6 @@ namespace eGC.admin
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
-        }
-
-        protected void gvUsers_Sorting(object sender, GridViewSortEventArgs e)
-        {
-
         }
 
         protected void bindGridview()
@@ -235,7 +227,8 @@ namespace eGC.admin
                 Roles.AddUserToRole(lblUserName.Text, ddlRoles.SelectedItem.Text);
             }
 
-            bindGridview();
+            //bindGridview();
+            this.gvUsers.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -263,7 +256,9 @@ namespace eGC.admin
                 accnt.LockUser(UserId);
             }
 
-            bindGridview();
+            //bindGridview();
+
+            this.gvUsers.DataBind();
         }
 
         protected void lblReset_Click(object sender, EventArgs e)
@@ -274,7 +269,9 @@ namespace eGC.admin
 
             //pswd resets to own username
             accnt.ResetPassword(UserId);
-            bindGridview();
+            
+            //bindGridview();
+            this.gvUsers.DataBind();
         }
 
         protected void lblStatus_Click(object sender, EventArgs e)
@@ -292,7 +289,52 @@ namespace eGC.admin
                 accnt.ActivateUser(UserId);
             }
 
-            bindGridview();
+            //bindGridview();
+            this.gvUsers.DataBind();
+        }
+
+        protected void UserDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            string strSearch = txtSearch.Text;
+
+            var emp = (from em in dbeHRIS.EMPLOYEEs
+                       select em).ToList();
+
+            var q = (from empl in emp
+                     join u in dbGc.Users
+                     on empl.Emp_Id equals u.UserName
+                     into a
+                     from b in a.DefaultIfEmpty(new User())
+                     join mem in dbGc.MembershipLINQs
+                     on b.UserId equals mem.UserId
+                     into x
+                     from z in x.DefaultIfEmpty(new MembershipLINQ())
+                     join uir in dbGc.UsersInRoles
+                     on b.UserId equals uir.UserId
+                     into c
+                     from d in c.DefaultIfEmpty(new UsersInRole())
+                     join r in dbGc.Roles
+                     on d.RoleId equals r.RoleId
+                     into f
+                     from g in f.DefaultIfEmpty(new Role())
+                     where
+                     (
+                     empl.Emp_Id.Contains(strSearch) ||
+                     empl.LastName.Contains(strSearch) ||
+                     empl.FirstName.Contains(strSearch) ||
+                     empl.MiddleName.Contains(strSearch)
+                     )
+                     select new
+                     {
+                         UserId = b.UserId,
+                         EmpId = empl.Emp_Id,
+                         FullName = empl.LastName + " , " + empl.FirstName + " " + empl.MiddleName,
+                         RoleName = g.RoleName,
+                         IsApproved = z.IsApproved,
+                         IsLockedOut = z.IsLockedOut
+                     }).ToList();
+
+            e.Result = q;
         }
     }
 }
