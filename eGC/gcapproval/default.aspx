@@ -16,8 +16,12 @@
                             <ContentTemplate>
                                 <div class="form-horizontal">
                                     <div class="form-group">
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <div class="input-group">
+                                                <asp:TextBox ID="txtSearch"
+                                                    runat="server"
+                                                    CssClass="form-control"
+                                                    placeholder="Search..."></asp:TextBox>
                                                 <span class="input-group-btn">
                                                     <asp:Button ID="btnSearch"
                                                         runat="server"
@@ -25,10 +29,6 @@
                                                         Text="Go"
                                                         OnClick="btnSearch_Click" />
                                                 </span>
-                                                <asp:TextBox ID="txtSearch"
-                                                    runat="server"
-                                                    CssClass="form-control"
-                                                    placeholder="Search..."></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>

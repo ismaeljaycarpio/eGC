@@ -18,7 +18,6 @@ namespace eGC.admin
         {
             if(!Page.IsPostBack)
             {
-                //bindGridview();
                 this.gvUsers.DataBind();
 
                 //load roles
@@ -36,7 +35,6 @@ namespace eGC.admin
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //bindGridview();
             this.gvUsers.DataBind();
             txtSearch.Focus();
         }
@@ -227,7 +225,6 @@ namespace eGC.admin
                 Roles.AddUserToRole(lblUserName.Text, ddlRoles.SelectedItem.Text);
             }
 
-            //bindGridview();
             this.gvUsers.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -256,8 +253,6 @@ namespace eGC.admin
                 accnt.LockUser(UserId);
             }
 
-            //bindGridview();
-
             this.gvUsers.DataBind();
         }
 
@@ -270,7 +265,6 @@ namespace eGC.admin
             //pswd resets to own username
             accnt.ResetPassword(UserId);
             
-            //bindGridview();
             this.gvUsers.DataBind();
         }
 

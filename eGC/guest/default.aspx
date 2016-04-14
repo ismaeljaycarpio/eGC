@@ -14,6 +14,10 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <div class="input-group">
+                                    <asp:TextBox ID="txtSearch"
+                                        runat="server"
+                                        CssClass="form-control"
+                                        placeholder="Search..."></asp:TextBox>
                                     <span class="input-group-btn">
                                         <asp:Button ID="btnSearch"
                                             runat="server"
@@ -21,14 +25,17 @@
                                             Text="Go"
                                             OnClick="btnSearch_Click" />
                                     </span>
-                                    <asp:TextBox ID="txtSearch"
-                                        runat="server"
-                                        CssClass="form-control" placeholder="Search..."></asp:TextBox>
+
                                     <div class="pull-right">
-                                        <asp:Button ID="btnExport" runat="server" Text="Export to Excel" OnClick="btnExport_Click" CssClass="btn btn-default btn-sm" />
+                                        <asp:Button ID="btnExport"
+                                            runat="server"
+                                            Text="Export to Excel"
+                                            OnClick="btnExport_Click"
+                                            CssClass="btn btn-default btn-sm" />
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -118,11 +125,11 @@
         </div>
     </div>
 
-    <asp:LinqDataSource ID="GuestDataSource"       
-        runat="server" 
-        ContextTypeName="eGC.GiftCheckDataContext" 
+    <asp:LinqDataSource ID="GuestDataSource"
+        runat="server"
+        ContextTypeName="eGC.GiftCheckDataContext"
         EntityTypeName=""
         OnSelecting="GuestDataSource_Selecting"
-        TableName="Guests" >
+        TableName="Guests">
     </asp:LinqDataSource>
 </asp:Content>
