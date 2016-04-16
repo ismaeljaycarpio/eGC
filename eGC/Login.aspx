@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
-        <div class="col-lg-6 col-lg-offset-3 text-center">
+        <div class="col-lg-4 col-lg-offset-4 text-center">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <asp:Login runat="server"
