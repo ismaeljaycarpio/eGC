@@ -145,49 +145,49 @@
                                 <asp:Label ID="lblRowId" runat="server" Visible="false"></asp:Label>
                             </div>
                             <div class="form-group">
-                                    <label for="txtEditType">Room Type</label>
-                                    <asp:TextBox ID="txtEditType" runat="server" CssClass="form-control" placeholder="Room Type"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtEditType"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgEdit"
-                                        ErrorMessage="Room Type is required"></asp:RequiredFieldValidator>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEditRoom">Room</label>
-                                    <asp:TextBox ID="txtEditRoom" runat="server" CssClass="form-control" placeholder="Room"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtEditRoom"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgEdit"
-                                        ErrorMessage="Room is required"></asp:RequiredFieldValidator>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEditRegular">Regular</label>
-                                    <asp:TextBox ID="txtEditRegular" runat="server" CssClass="form-control" placeholder="Regular rate"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtEditRegular"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgEdit"
-                                        ErrorMessage="Regular rate is required"></asp:RequiredFieldValidator>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEditPeak">Peak</label>
-                                    <asp:TextBox ID="txtEditPeak" runat="server" CssClass="form-control" placeholder="Peak rate"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtEditPeak"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgEdit"
-                                        ErrorMessage="Peak rate is required"></asp:RequiredFieldValidator>
-                                </div>
+                                <label for="txtEditType">Room Type</label>
+                                <asp:TextBox ID="txtEditType" runat="server" CssClass="form-control" placeholder="Room Type"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditType"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEdit"
+                                    ErrorMessage="Room Type is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtEditRoom">Room</label>
+                                <asp:TextBox ID="txtEditRoom" runat="server" CssClass="form-control" placeholder="Room"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditRoom"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEdit"
+                                    ErrorMessage="Room is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtEditRegular">Regular</label>
+                                <asp:TextBox ID="txtEditRegular" runat="server" CssClass="form-control" placeholder="Regular rate"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditRegular"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEdit"
+                                    ErrorMessage="Regular rate is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtEditPeak">Peak</label>
+                                <asp:TextBox ID="txtEditPeak" runat="server" CssClass="form-control" placeholder="Peak rate"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditPeak"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEdit"
+                                    ErrorMessage="Peak rate is required"></asp:RequiredFieldValidator>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary" Text="Update" ValidationGroup="vgEdit" OnClick="btnUpdate_Click" />
@@ -231,5 +231,5 @@
         </div>
     </div>
 
-    
+
 </asp:Content>
