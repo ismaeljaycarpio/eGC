@@ -120,6 +120,7 @@
                                         <li class="dropdown" runat="server"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File Maintenance<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a runat="server" href="~/guest/default.aspx">Guest</a></li>
+                                                <li><a runat="server" href="~/company/company-profile.aspx">Company</a></li>
                                                 <li><a runat="server" href="~/room/default.aspx">Room</a></li>
                                                 <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
                                             </ul>
@@ -158,6 +159,7 @@
                                         <li class="dropdown" runat="server"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File Maintenance<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a runat="server" href="~/guest/default.aspx">Guest</a></li>
+                                                <li><a runat="server" href="~/company/company-profile.aspx">Company</a></li>
                                                 <li><a runat="server" href="~/room/default.aspx">Room</a></li>
                                                 <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
                                             </ul>

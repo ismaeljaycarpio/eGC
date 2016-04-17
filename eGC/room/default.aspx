@@ -36,13 +36,12 @@
                                                 <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:ButtonField HeaderText="" ButtonType="Link" Text="Edit" CommandName="editRecord" />
                                         <asp:BoundField HeaderText="Type" DataField="Type" />
                                         <asp:BoundField HeaderText="Room" DataField="Room1" />
                                         <asp:BoundField HeaderText="Regular" DataField="Regular" />
                                         <asp:BoundField HeaderText="Peak" DataField="Peak" />
+                                        <asp:ButtonField HeaderText="" ButtonType="Link" Text="Edit" CommandName="editRecord" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Delete" CommandName="deleteRecord" />
-
                                     </Columns>
                                     <PagerStyle CssClass="pagination-ys" />
                                 </asp:GridView>
@@ -130,7 +129,6 @@
     <!-- Edit Modal -->
     <div id="updateModal" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
-
             <!-- Update Modal content-->
             <div class="modal-content">
                 <asp:UpdatePanel ID="upEdit" runat="server">
