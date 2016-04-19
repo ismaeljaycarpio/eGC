@@ -99,12 +99,14 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtGCNumber">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            <asp:TextBox ID="txtGCNumber"
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
                             <label for="txtArrivalDate">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate" 
-                                runat="server" 
+                            <asp:TextBox ID="txtArrivalDate"
+                                runat="server"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                 runat="server"
@@ -116,8 +118,8 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtCheckoutDate">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate" 
-                                runat="server" 
+                            <asp:TextBox ID="txtCheckoutDate"
+                                runat="server"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"
@@ -168,7 +170,7 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-                                                        
+
                                                         <asp:TemplateField HeaderText="Regular/Peak">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
@@ -382,9 +384,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtEditNight">No of Nights</label>
-                                <asp:TextBox ID="txtEditNight" 
-                                    runat="server" 
-                                    CssClass="form-control" 
+                                <asp:TextBox ID="txtEditNight"
+                                    runat="server"
+                                    CssClass="form-control"
                                     placeholder="No of Nights"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                                     runat="server"

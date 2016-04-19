@@ -29,24 +29,6 @@
       <Association Name="Guest_GCTransaction" Member="GCTransactions" ThisKey="GuestId" OtherKey="GuestId" Type="GCTransaction" />
     </Type>
   </Table>
-  <Table Name="dbo.GCTransaction" Member="GCTransactions">
-    <Type Name="GCTransaction">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="GCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="GuestId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="RecommendingApproval" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="ApprovedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Reason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CheckOutDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ApprovalStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="StatusGC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="GCTransaction_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="GCTransactionId" Type="GCRoom" />
-      <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="GuestId" Type="Guest" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.tmpRoom" Member="tmpRooms">
     <Type Name="tmpRoom">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -70,8 +52,8 @@
       <Column Name="Value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Association Name="Dining_GCRoom" Member="Dining" ThisKey="DiningId" OtherKey="Id" Type="Dining" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="GCTransaction_GCRoom" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Room_GCRoom" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="GCTransaction_GCRoom" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Room" Member="Rooms">
@@ -105,7 +87,7 @@
       <Column Name="FailedPasswordAnswerAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FailedPasswordAnswerAttemptWindowsStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Association Name="User_Membership" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+      <Association Name="User_MembershipLINQ" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Roles" Member="Roles">
@@ -124,7 +106,7 @@
       <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="User_Membership" Member="MembershipLINQ" ThisKey="UserId" OtherKey="UserId" Type="MembershipLINQ" Cardinality="One" />
+      <Association Name="User_MembershipLINQ" Member="MembershipLINQ" ThisKey="UserId" OtherKey="UserId" Type="MembershipLINQ" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.UsersInRoles" Member="UsersInRoles">
@@ -132,6 +114,27 @@
       <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Role_UsersInRole" Member="Role" ThisKey="RoleId" OtherKey="RoleId" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GCTransaction" Member="GCTransactions">
+    <Type Name="GCTransaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GuestId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RecommendingApproval" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Reason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CheckOutDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ApprovalStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusGC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CancellationReason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CancelledDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="GCTransaction_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="GCTransactionId" Type="GCRoom" />
+      <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="GuestId" Type="Guest" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

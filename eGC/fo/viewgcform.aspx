@@ -99,7 +99,7 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtGCNumber">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
                             <label for="txtArrivalDate">Arrival Date</label>
@@ -140,9 +140,9 @@
                     <div class="col-md-6">
                         <label for="btnUsed">Set GC Status: </label>
                         <asp:Button ID="btnUsed" runat="server" Text="Used" CssClass="btn btn-success" OnClick="btnUsed_Click"/>
-                        <asp:Button ID="btnCancel" runat="server" Text="Cancelled" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
+                        <%--<asp:Button ID="btnCancel" runat="server" Text="Cancelled" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
                         <asp:Button ID="btnExpire" runat="server" Text="Expired" CssClass="btn btn-warning"  OnClick="btnExpire_Click"/>
-                        <asp:Button ID="btnWaiting" runat="server" Text="Waiting" CssClass="btn btn-default"  OnClick="btnWaiting_Click"/>
+                        <asp:Button ID="btnWaiting" runat="server" Text="Waiting" CssClass="btn btn-default"  OnClick="btnWaiting_Click"/>--%>
                     </div>
                 </div>
                 <div class="panel-body">

@@ -98,11 +98,11 @@
                     <div role="form">
                         <div class="col-lg-10">
                             <label for="txtName">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
                             <label for="txtArrivalDate">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate" 
+                            <asp:TextBox ID="txtArrivalDate"
                                 runat="server"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
@@ -115,8 +115,8 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtCheckoutDate">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate" 
-                                runat="server" 
+                            <asp:TextBox ID="txtCheckoutDate"
+                                runat="server"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"

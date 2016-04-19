@@ -131,6 +131,29 @@
                                                 <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
                                                 <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
                                                 <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" DataFormatString="{0:C}" SortExpression="TotalValue" />
+
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="btnUsed" 
+                                                            runat="server"
+                                                            CommandName="usedRecord"
+                                                            Text="Used"
+                                                            CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
+                                                            CssClass="btn btn-success" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="btnCancelled" 
+                                                            runat="server"
+                                                            Text="Cancelled"
+                                                            CommandName="cancelledRecord"
+                                                            CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
+                                                            CssClass="btn btn-danger" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                             </Columns>
                                             <PagerStyle CssClass="pagination-ys" />
                                         </asp:GridView>

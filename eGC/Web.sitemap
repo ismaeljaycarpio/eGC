@@ -13,7 +13,10 @@
         <siteMapNode url="~/guest/editguest.aspx" title="Update Guest Profile"  description="" />
         <siteMapNode url="~/guest/createguest.aspx" title="Create Guest Profile"  description="" />
       </siteMapNode>
-
+    
+      <siteMapNode url="~/company/company-profile.aspx" title="Company"  description="">
+      </siteMapNode>
+      
       <siteMapNode url="~/room/default.aspx" title="Room"  description="">
       </siteMapNode>
 
