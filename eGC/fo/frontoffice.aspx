@@ -48,6 +48,10 @@
                                         <label for="txtStatus">GC Status</label>
                                         <asp:TextBox ID="txtStatus" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
+                                    <div class="col-xs-3">
+                                        <label for="txtGCExpirationDate">GC Expiration Date</label>
+                                        <asp:TextBox ID="txtGCExpirationDate" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    </div>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="gvGC" EventName="RowCommand" />
@@ -74,9 +78,7 @@
                                                             CssClass="btn btn-primary"
                                                             Text="Go"
                                                             OnClick="btnSearch_Click" />
-                                                    </span>
-                                                    
-
+                                                    </span>                                                    
                                                     <div class="pull-right">
                                                         <asp:Button ID="btnExport"
                                                             runat="server"
@@ -84,7 +86,6 @@
                                                             OnClick="btnExport_Click"
                                                             CssClass="btn btn-default btn-sm" />
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -103,6 +104,7 @@
                                             ShowHeaderWhenEmpty="True"
                                             DataKeyNames="Id"
                                             OnRowCommand="gvGC_RowCommand"
+                                            OnRowDataBound="gvGC_RowDataBound"
                                             DataSourceID="LinqDataSource1">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Row Id" Visible="false">
@@ -129,7 +131,13 @@
 
                                                 <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
                                                 <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
-                                                <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+                                                
+                                                <asp:TemplateField HeaderText="Status" SortExpression="Status">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
                                                 <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" DataFormatString="{0:C}" SortExpression="TotalValue" />
 
                                                 <asp:TemplateField>
@@ -137,7 +145,7 @@
                                                         <asp:Button ID="btnUsed" 
                                                             runat="server"
                                                             CommandName="usedRecord"
-                                                            Text="Used"
+                                                            Text="Use"
                                                             CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
                                                             CssClass="btn btn-success" />
                                                     </ItemTemplate>
@@ -147,7 +155,7 @@
                                                     <ItemTemplate>
                                                         <asp:Button ID="btnCancelled" 
                                                             runat="server"
-                                                            Text="Cancelled"
+                                                            Text="Cancel"
                                                             CommandName="cancelledRecord"
                                                             CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
                                                             CssClass="btn btn-danger" />
@@ -169,6 +177,86 @@
             </div>
         </div>
     </asp:Panel>
+
+    <!-- Used Modal -->
+    <div id="usedModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Use GC</h4>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to use this Gift Check ?
+                            <asp:HiddenField ID="hfUsedGCId" runat="server" />
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnConfirmUseGC" 
+                                runat="server" 
+                                CssClass="btn btn-success" 
+                                Text="Save" 
+                                OnClick="btnConfirmUseGC_Click" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnConfirmUseGC" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancelled Modal -->
+    <div id="cancelledModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Cancel GC</h4>
+                        </div>
+                        <div class="modal-body">
+                            Reason for cancellation:
+                            <asp:TextBox ID="txtCancellationReason" 
+                                runat="server" 
+                                TextMode="MultiLine"
+                                CssClass="form-control" 
+                                Columns="40" 
+                                Rows="5">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+                                runat="server"
+                                CssClass="label label-danger"
+                                ControlToValidate="txtCancellationReason"
+                                Display="Dynamic"
+                                ValidationGroup="vgCancellation"
+                                ErrorMessage="Reason for Cancellation is required"></asp:RequiredFieldValidator>
+                            <asp:HiddenField ID="hfCancellationId" runat="server" />
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnConfirmCancellation" 
+                                runat="server" 
+                                CssClass="btn btn-danger" 
+                                Text="Save"
+                                ValidationGroup="vgCancellation"
+                                OnClick="btnConfirmCancellation_Click" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnConfirmCancellation" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
     <asp:GridView ID="GridView1" runat="server"></asp:GridView>
     <asp:LinqDataSource ID="LinqDataSource1"
         runat="server"

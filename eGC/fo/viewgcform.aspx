@@ -39,7 +39,7 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtName">Recommending Approval</label>
-                            <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                                 runat="server"
                                 Display="Dynamic"
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtApprovedBy">Approved By</label>
-                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
                                 runat="server"
                                 Display="Dynamic"
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtAccountNo">Account No</label>
-                            <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
                                 runat="server"
                                 Display="Dynamic"
@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
-                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
                                 runat="server"
                                 Display="Dynamic"
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtReason">Reason</label>
-                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"
                                 Display="Dynamic"
@@ -92,6 +92,20 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Reason is required"></asp:RequiredFieldValidator>
                         </div>
+                        <div class="col-md-4">
+                            <label for="txtExpirationDate">Expiration Date</label>
+                            <asp:TextBox ID="txtExpirationDate"
+                                runat="server"
+                                Enabled="false"
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
+                                runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="vgPrimaryAdd"
+                                ControlToValidate="txtExpirationDate"
+                                CssClass="label label-danger"
+                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
+                        </div>
                     </div>
                 </div>
 
@@ -99,12 +113,16 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtGCNumber">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtGCNumber" 
+                                runat="server"
+                                Enabled="false"
+                                CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
                             <label for="txtArrivalDate">Arrival Date</label>
                             <asp:TextBox ID="txtArrivalDate"
                                 runat="server"
+                                Enabled="false"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                 runat="server"
@@ -118,6 +136,7 @@
                             <label for="txtCheckoutDate">Check-out Date</label>
                             <asp:TextBox ID="txtCheckoutDate"
                                 runat="server"
+                                Enabled="false"
                                 CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                 runat="server"
@@ -136,15 +155,15 @@
                         <asp:Label ID="lblCurrentGCStatus" runat="server"></asp:Label>
                     </div>
                 </div>
-                <div class="panel-body">
+                <%--<div class="panel-body">
                     <div class="col-md-6">
                         <label for="btnUsed">Set GC Status: </label>
-                        <asp:Button ID="btnUsed" runat="server" Text="Used" CssClass="btn btn-success" OnClick="btnUsed_Click"/>
-                        <%--<asp:Button ID="btnCancel" runat="server" Text="Cancelled" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
+                        <asp:Button ID="btnUsed" runat="server" Text="Used" CssClass="btn btn-success" OnClick="btnUsed_Click" />
+                        <asp:Button ID="btnCancel" runat="server" Text="Cancelled" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
                         <asp:Button ID="btnExpire" runat="server" Text="Expired" CssClass="btn btn-warning"  OnClick="btnExpire_Click"/>
-                        <asp:Button ID="btnWaiting" runat="server" Text="Waiting" CssClass="btn btn-default"  OnClick="btnWaiting_Click"/>--%>
+                        <asp:Button ID="btnWaiting" runat="server" Text="Waiting" CssClass="btn btn-default"  OnClick="btnWaiting_Click"/>
                     </div>
-                </div>
+                </div>--%>
                 <div class="panel-body">
                     <ul class="nav nav-tabs" id="myTab">
                         <li><a href="#roomTab" data-toggle="tab">Room</a></li>
@@ -155,9 +174,9 @@
                         <div class="tab-pane" id="roomTab">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <div class="pull-right">
+                                    <%--<div class="pull-right">
                                         <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addRoom">Add</button>
-                                    </div>
+                                    </div>--%>
                                     <h5 class="panel-title">Room</h5>
                                 </div>
                                 <div class="panel-body">
@@ -179,8 +198,6 @@
                                                                 <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-
-                                                        <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRoom" />
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
@@ -208,9 +225,8 @@
                                                                 <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("Total") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-
-                                                        <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteRoom" />
-
+                                                        <%--<asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRoom" />
+                                                        <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteRoom" />--%>
                                                     </Columns>
                                                     <PagerStyle CssClass="pagination-ys" />
                                                 </asp:GridView>
@@ -226,9 +242,9 @@
                         <div class="tab-pane" id="diningTab">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <div class="pull-right">
+                                    <%--<div class="pull-right">
                                         <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addDining">Add</button>
-                                    </div>
+                                    </div>--%>
                                     <h5 class="panel-title">Dining</h5>
                                 </div>
                                 <div class="panel-body">
@@ -252,8 +268,6 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
-                                                        <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
-
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
 
                                                         <asp:TemplateField HeaderText="Value">
@@ -261,9 +275,8 @@
                                                                 <asp:Label ID="lblValue" runat="server" Text='<%# Eval("Value") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-
-                                                        <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteDining" />
-
+                                                        <%--<asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
+                                                        <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteDining" />--%>
                                                     </Columns>
                                                     <PagerStyle CssClass="pagination-ys" />
                                                 </asp:GridView>
@@ -278,7 +291,7 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
+                    <%--<asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />--%>
                     <asp:Button ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" CssClass="btn btn-default" />
                 </div>
             </div>
@@ -614,6 +627,7 @@
         $(document).ready(function () {
             $('#<%=txtArrivalDate.ClientID%>').datepicker();
             $('#<%=txtCheckoutDate.ClientID%>').datepicker();
+            $('#<%=txtExpirationDate.ClientID%>').datepicker();
         });
     </script>
 

@@ -7,28 +7,6 @@
       <Association Name="Dining_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="DiningId" Type="GCRoom" />
     </Type>
   </Table>
-  <Table Name="dbo.Guest" Member="Guests">
-    <Type Name="Guest">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="GuestId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CompanyName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="ContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ValidIDNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PicFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="IDFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="EmergencyContactPerson" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EmergencyContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EmergencyContactAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Guest_GCTransaction" Member="GCTransactions" ThisKey="GuestId" OtherKey="GuestId" Type="GCTransaction" />
-    </Type>
-  </Table>
   <Table Name="dbo.tmpRoom" Member="tmpRooms">
     <Type Name="tmpRoom">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -133,8 +111,33 @@
       <Column Name="CancellationReason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="CancelledDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsArchive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="GCTransaction_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="GCTransactionId" Type="GCRoom" />
       <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="GuestId" Type="Guest" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Guest" Member="Guests">
+    <Type Name="Guest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GuestId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ValidIDNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PicFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IDFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="EmergencyContactPerson" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmergencyContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmergencyContactAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsCompany" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Guest_GCTransaction" Member="GCTransactions" ThisKey="GuestId" OtherKey="GuestId" Type="GCTransaction" />
     </Type>
   </Table>
 </Database>

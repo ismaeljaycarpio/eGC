@@ -114,7 +114,7 @@ namespace eGC.guest
                         LastName = g.LastName,
                         FirstName = g.FirstName,
                         MiddleName = g.MiddleName,
-                        CompanyName = g.CompanyName,
+                        CompanyName = db.Guests.Where(x => x.CompanyId == g.Id).FirstOrDefault().CompanyName,
                         Number = g.ContactNumber
                     }).ToList();
 
@@ -152,20 +152,27 @@ namespace eGC.guest
         protected void GuestDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             var q = from g in db.Guests
+                    join ggg in db.Guests
+                    on g.CompanyId equals ggg.Id
                     where 
-                    (g.GuestId.Contains(txtSearch.Text) ||
+                    (
+                    g.GuestId.Contains(txtSearch.Text) ||
                     g.FirstName.Contains(txtSearch.Text) ||
                     g.MiddleName.Contains(txtSearch.Text) ||
                     g.LastName.Contains(txtSearch.Text) ||
                     g.CompanyName.Contains(txtSearch.Text) ||
                     g.ContactNumber.Contains(txtSearch.Text) ||
-                    g.Email.Contains(txtSearch.Text))
+                    g.Email.Contains(txtSearch.Text) ||
+                    g.CompanyName.Contains(txtSearch.Text)
+                    ) 
+                    &&
+                    g.IsCompany == false
                     select new
                     {
                         Id = g.Id,
                         GuestId = g.GuestId,
                         FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
-                        CompanyName = g.CompanyName,
+                        CompanyName = (from gu in db.Guests where g.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = g.ContactNumber,
                         Email = g.Email
                     };

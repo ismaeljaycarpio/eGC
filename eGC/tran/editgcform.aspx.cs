@@ -47,6 +47,7 @@ namespace eGC.tran
                     txtReason.Text = tGC.Reason;
                     txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
                     txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
+                    txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
 
                     //load related table
                     bindRooms();
@@ -106,14 +107,6 @@ namespace eGC.tran
                         ddlEditDining.DataTextField = "Name";
                         ddlEditDining.DataValueField = "Id";
                         ddlEditDining.DataBind();
-                    }
-
-                    //show/hide buttons
-                    if(!User.IsInRole("Admin") &&
-                        !User.IsInRole("CanApprove"))
-                    {
-                        btnApprove.Visible = false;
-                        btnDisapprove.Visible = false;
                     }
                 }
             }
@@ -445,6 +438,12 @@ namespace eGC.tran
             var gc = (from g in db.GCTransactions
                       where g.GCNumber == Request.QueryString["gcId"]
                       select g).FirstOrDefault();
+
+            //check if cancelled
+            if (gc.StatusGC == "Cancelled")
+            {
+                gc.IsArchive = true;
+            }
 
             gc.ApprovalStatus = "Approved";
             db.SubmitChanges();

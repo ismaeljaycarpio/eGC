@@ -47,6 +47,7 @@ namespace eGC.fo
                     txtReason.Text = tGC.Reason;
                     txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
                     txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
+                    txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
                     lblCurrentGCStatus.Text = tGC.StatusGC;
 
                     //load related table

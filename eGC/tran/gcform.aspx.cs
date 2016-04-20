@@ -197,6 +197,8 @@ namespace eGC.tran
             tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
             tran.ApprovalStatus = "Pending";
             tran.StatusGC = "Waiting";
+            tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+            tran.IsArchive = false;
 
             db.GCTransactions.InsertOnSubmit(tran);
             db.SubmitChanges();

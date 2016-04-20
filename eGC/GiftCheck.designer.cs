@@ -33,9 +33,6 @@ namespace eGC
     partial void InsertDining(Dining instance);
     partial void UpdateDining(Dining instance);
     partial void DeleteDining(Dining instance);
-    partial void InsertGuest(Guest instance);
-    partial void UpdateGuest(Guest instance);
-    partial void DeleteGuest(Guest instance);
     partial void InserttmpRoom(tmpRoom instance);
     partial void UpdatetmpRoom(tmpRoom instance);
     partial void DeletetmpRoom(tmpRoom instance);
@@ -60,6 +57,9 @@ namespace eGC
     partial void InsertGCTransaction(GCTransaction instance);
     partial void UpdateGCTransaction(GCTransaction instance);
     partial void DeleteGCTransaction(GCTransaction instance);
+    partial void InsertGuest(Guest instance);
+    partial void UpdateGuest(Guest instance);
+    partial void DeleteGuest(Guest instance);
     #endregion
 		
 		public GiftCheckDataContext() : 
@@ -97,14 +97,6 @@ namespace eGC
 			get
 			{
 				return this.GetTable<Dining>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Guest> Guests
-		{
-			get
-			{
-				return this.GetTable<Guest>();
 			}
 		}
 		
@@ -169,6 +161,14 @@ namespace eGC
 			get
 			{
 				return this.GetTable<GCTransaction>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Guest> Guests
+		{
+			get
+			{
+				return this.GetTable<Guest>();
 			}
 		}
 	}
@@ -284,480 +284,6 @@ namespace eGC
 		{
 			this.SendPropertyChanging();
 			entity.Dining = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Guest")]
-	public partial class Guest : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _GuestId;
-		
-		private string _FirstName;
-		
-		private string _MiddleName;
-		
-		private string _LastName;
-		
-		private string _CompanyName;
-		
-		private string _ContactNumber;
-		
-		private string _Email;
-		
-		private string _ValidIDNumber;
-		
-		private string _PicFilePath;
-		
-		private string _IDFilePath;
-		
-		private string _EmergencyContactPerson;
-		
-		private string _EmergencyContactNumber;
-		
-		private string _EmergencyContactAddress;
-		
-		private string _Status;
-		
-		private System.Nullable<System.DateTime> _CreateDate;
-		
-		private string _CreatedBy;
-		
-		private EntitySet<GCTransaction> _GCTransactions;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnGuestIdChanging(string value);
-    partial void OnGuestIdChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnMiddleNameChanging(string value);
-    partial void OnMiddleNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnCompanyNameChanging(string value);
-    partial void OnCompanyNameChanged();
-    partial void OnContactNumberChanging(string value);
-    partial void OnContactNumberChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnValidIDNumberChanging(string value);
-    partial void OnValidIDNumberChanged();
-    partial void OnPicFilePathChanging(string value);
-    partial void OnPicFilePathChanged();
-    partial void OnIDFilePathChanging(string value);
-    partial void OnIDFilePathChanged();
-    partial void OnEmergencyContactPersonChanging(string value);
-    partial void OnEmergencyContactPersonChanged();
-    partial void OnEmergencyContactNumberChanging(string value);
-    partial void OnEmergencyContactNumberChanged();
-    partial void OnEmergencyContactAddressChanging(string value);
-    partial void OnEmergencyContactAddressChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreateDateChanged();
-    partial void OnCreatedByChanging(string value);
-    partial void OnCreatedByChanged();
-    #endregion
-		
-		public Guest()
-		{
-			this._GCTransactions = new EntitySet<GCTransaction>(new Action<GCTransaction>(this.attach_GCTransactions), new Action<GCTransaction>(this.detach_GCTransactions));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string GuestId
-		{
-			get
-			{
-				return this._GuestId;
-			}
-			set
-			{
-				if ((this._GuestId != value))
-				{
-					this.OnGuestIdChanging(value);
-					this.SendPropertyChanging();
-					this._GuestId = value;
-					this.SendPropertyChanged("GuestId");
-					this.OnGuestIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
-		public string FirstName
-		{
-			get
-			{
-				return this._FirstName;
-			}
-			set
-			{
-				if ((this._FirstName != value))
-				{
-					this.OnFirstNameChanging(value);
-					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50)")]
-		public string MiddleName
-		{
-			get
-			{
-				return this._MiddleName;
-			}
-			set
-			{
-				if ((this._MiddleName != value))
-				{
-					this.OnMiddleNameChanging(value);
-					this.SendPropertyChanging();
-					this._MiddleName = value;
-					this.SendPropertyChanged("MiddleName");
-					this.OnMiddleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50)")]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyName", DbType="VarChar(100)")]
-		public string CompanyName
-		{
-			get
-			{
-				return this._CompanyName;
-			}
-			set
-			{
-				if ((this._CompanyName != value))
-				{
-					this.OnCompanyNameChanging(value);
-					this.SendPropertyChanging();
-					this._CompanyName = value;
-					this.SendPropertyChanged("CompanyName");
-					this.OnCompanyNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="VarChar(50)")]
-		public string ContactNumber
-		{
-			get
-			{
-				return this._ContactNumber;
-			}
-			set
-			{
-				if ((this._ContactNumber != value))
-				{
-					this.OnContactNumberChanging(value);
-					this.SendPropertyChanging();
-					this._ContactNumber = value;
-					this.SendPropertyChanged("ContactNumber");
-					this.OnContactNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ValidIDNumber", DbType="VarChar(50)")]
-		public string ValidIDNumber
-		{
-			get
-			{
-				return this._ValidIDNumber;
-			}
-			set
-			{
-				if ((this._ValidIDNumber != value))
-				{
-					this.OnValidIDNumberChanging(value);
-					this.SendPropertyChanging();
-					this._ValidIDNumber = value;
-					this.SendPropertyChanged("ValidIDNumber");
-					this.OnValidIDNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PicFilePath", DbType="VarChar(MAX)")]
-		public string PicFilePath
-		{
-			get
-			{
-				return this._PicFilePath;
-			}
-			set
-			{
-				if ((this._PicFilePath != value))
-				{
-					this.OnPicFilePathChanging(value);
-					this.SendPropertyChanging();
-					this._PicFilePath = value;
-					this.SendPropertyChanged("PicFilePath");
-					this.OnPicFilePathChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDFilePath", DbType="VarChar(MAX)")]
-		public string IDFilePath
-		{
-			get
-			{
-				return this._IDFilePath;
-			}
-			set
-			{
-				if ((this._IDFilePath != value))
-				{
-					this.OnIDFilePathChanging(value);
-					this.SendPropertyChanging();
-					this._IDFilePath = value;
-					this.SendPropertyChanged("IDFilePath");
-					this.OnIDFilePathChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactPerson", DbType="VarChar(50)")]
-		public string EmergencyContactPerson
-		{
-			get
-			{
-				return this._EmergencyContactPerson;
-			}
-			set
-			{
-				if ((this._EmergencyContactPerson != value))
-				{
-					this.OnEmergencyContactPersonChanging(value);
-					this.SendPropertyChanging();
-					this._EmergencyContactPerson = value;
-					this.SendPropertyChanged("EmergencyContactPerson");
-					this.OnEmergencyContactPersonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactNumber", DbType="VarChar(50)")]
-		public string EmergencyContactNumber
-		{
-			get
-			{
-				return this._EmergencyContactNumber;
-			}
-			set
-			{
-				if ((this._EmergencyContactNumber != value))
-				{
-					this.OnEmergencyContactNumberChanging(value);
-					this.SendPropertyChanging();
-					this._EmergencyContactNumber = value;
-					this.SendPropertyChanged("EmergencyContactNumber");
-					this.OnEmergencyContactNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactAddress", DbType="VarChar(MAX)")]
-		public string EmergencyContactAddress
-		{
-			get
-			{
-				return this._EmergencyContactAddress;
-			}
-			set
-			{
-				if ((this._EmergencyContactAddress != value))
-				{
-					this.OnEmergencyContactAddressChanging(value);
-					this.SendPropertyChanging();
-					this._EmergencyContactAddress = value;
-					this.SendPropertyChanged("EmergencyContactAddress");
-					this.OnEmergencyContactAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreateDate
-		{
-			get
-			{
-				return this._CreateDate;
-			}
-			set
-			{
-				if ((this._CreateDate != value))
-				{
-					this.OnCreateDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreateDate = value;
-					this.SendPropertyChanged("CreateDate");
-					this.OnCreateDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="VarChar(50)")]
-		public string CreatedBy
-		{
-			get
-			{
-				return this._CreatedBy;
-			}
-			set
-			{
-				if ((this._CreatedBy != value))
-				{
-					this.OnCreatedByChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_GCTransactions", ThisKey="GuestId", OtherKey="GuestId")]
-		public EntitySet<GCTransaction> GCTransactions
-		{
-			get
-			{
-				return this._GCTransactions;
-			}
-			set
-			{
-				this._GCTransactions.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_GCTransactions(GCTransaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.Guest = this;
-		}
-		
-		private void detach_GCTransactions(GCTransaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.Guest = null;
 		}
 	}
 	
@@ -2580,6 +2106,8 @@ namespace eGC
 		
 		private System.Nullable<System.DateTime> _ExpiryDate;
 		
+		private System.Nullable<bool> _IsArchive;
+		
 		private EntitySet<GCRoom> _GCRooms;
 		
 		private EntityRef<Guest> _Guest;
@@ -2618,6 +2146,8 @@ namespace eGC
     partial void OnCancelledDateChanged();
     partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExpiryDateChanged();
+    partial void OnIsArchiveChanging(System.Nullable<bool> value);
+    partial void OnIsArchiveChanged();
     #endregion
 		
 		public GCTransaction()
@@ -2931,6 +2461,26 @@ namespace eGC
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsArchive", DbType="Bit")]
+		public System.Nullable<bool> IsArchive
+		{
+			get
+			{
+				return this._IsArchive;
+			}
+			set
+			{
+				if ((this._IsArchive != value))
+				{
+					this.OnIsArchiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsArchive = value;
+					this.SendPropertyChanged("IsArchive");
+					this.OnIsArchiveChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCRooms", ThisKey="Id", OtherKey="GCTransactionId")]
 		public EntitySet<GCRoom> GCRooms
 		{
@@ -3008,6 +2558,528 @@ namespace eGC
 		{
 			this.SendPropertyChanging();
 			entity.GCTransaction = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Guest")]
+	public partial class Guest : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _GuestId;
+		
+		private string _FirstName;
+		
+		private string _MiddleName;
+		
+		private string _LastName;
+		
+		private string _CompanyName;
+		
+		private string _ContactNumber;
+		
+		private string _Email;
+		
+		private string _ValidIDNumber;
+		
+		private string _PicFilePath;
+		
+		private string _IDFilePath;
+		
+		private string _EmergencyContactPerson;
+		
+		private string _EmergencyContactNumber;
+		
+		private string _EmergencyContactAddress;
+		
+		private string _Status;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private string _CreatedBy;
+		
+		private System.Nullable<bool> _IsCompany;
+		
+		private System.Nullable<int> _CompanyId;
+		
+		private EntitySet<GCTransaction> _GCTransactions;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnGuestIdChanging(string value);
+    partial void OnGuestIdChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnMiddleNameChanging(string value);
+    partial void OnMiddleNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnCompanyNameChanging(string value);
+    partial void OnCompanyNameChanged();
+    partial void OnContactNumberChanging(string value);
+    partial void OnContactNumberChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnValidIDNumberChanging(string value);
+    partial void OnValidIDNumberChanged();
+    partial void OnPicFilePathChanging(string value);
+    partial void OnPicFilePathChanged();
+    partial void OnIDFilePathChanging(string value);
+    partial void OnIDFilePathChanged();
+    partial void OnEmergencyContactPersonChanging(string value);
+    partial void OnEmergencyContactPersonChanged();
+    partial void OnEmergencyContactNumberChanging(string value);
+    partial void OnEmergencyContactNumberChanged();
+    partial void OnEmergencyContactAddressChanging(string value);
+    partial void OnEmergencyContactAddressChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreateDateChanged();
+    partial void OnCreatedByChanging(string value);
+    partial void OnCreatedByChanged();
+    partial void OnIsCompanyChanging(System.Nullable<bool> value);
+    partial void OnIsCompanyChanged();
+    partial void OnCompanyIdChanging(System.Nullable<int> value);
+    partial void OnCompanyIdChanged();
+    #endregion
+		
+		public Guest()
+		{
+			this._GCTransactions = new EntitySet<GCTransaction>(new Action<GCTransaction>(this.attach_GCTransactions), new Action<GCTransaction>(this.detach_GCTransactions));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string GuestId
+		{
+			get
+			{
+				return this._GuestId;
+			}
+			set
+			{
+				if ((this._GuestId != value))
+				{
+					this.OnGuestIdChanging(value);
+					this.SendPropertyChanging();
+					this._GuestId = value;
+					this.SendPropertyChanged("GuestId");
+					this.OnGuestIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50)")]
+		public string MiddleName
+		{
+			get
+			{
+				return this._MiddleName;
+			}
+			set
+			{
+				if ((this._MiddleName != value))
+				{
+					this.OnMiddleNameChanging(value);
+					this.SendPropertyChanging();
+					this._MiddleName = value;
+					this.SendPropertyChanged("MiddleName");
+					this.OnMiddleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyName", DbType="VarChar(100)")]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this.OnCompanyNameChanging(value);
+					this.SendPropertyChanging();
+					this._CompanyName = value;
+					this.SendPropertyChanged("CompanyName");
+					this.OnCompanyNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="VarChar(50)")]
+		public string ContactNumber
+		{
+			get
+			{
+				return this._ContactNumber;
+			}
+			set
+			{
+				if ((this._ContactNumber != value))
+				{
+					this.OnContactNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ContactNumber = value;
+					this.SendPropertyChanged("ContactNumber");
+					this.OnContactNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ValidIDNumber", DbType="VarChar(50)")]
+		public string ValidIDNumber
+		{
+			get
+			{
+				return this._ValidIDNumber;
+			}
+			set
+			{
+				if ((this._ValidIDNumber != value))
+				{
+					this.OnValidIDNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ValidIDNumber = value;
+					this.SendPropertyChanged("ValidIDNumber");
+					this.OnValidIDNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PicFilePath", DbType="VarChar(MAX)")]
+		public string PicFilePath
+		{
+			get
+			{
+				return this._PicFilePath;
+			}
+			set
+			{
+				if ((this._PicFilePath != value))
+				{
+					this.OnPicFilePathChanging(value);
+					this.SendPropertyChanging();
+					this._PicFilePath = value;
+					this.SendPropertyChanged("PicFilePath");
+					this.OnPicFilePathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDFilePath", DbType="VarChar(MAX)")]
+		public string IDFilePath
+		{
+			get
+			{
+				return this._IDFilePath;
+			}
+			set
+			{
+				if ((this._IDFilePath != value))
+				{
+					this.OnIDFilePathChanging(value);
+					this.SendPropertyChanging();
+					this._IDFilePath = value;
+					this.SendPropertyChanged("IDFilePath");
+					this.OnIDFilePathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactPerson", DbType="VarChar(50)")]
+		public string EmergencyContactPerson
+		{
+			get
+			{
+				return this._EmergencyContactPerson;
+			}
+			set
+			{
+				if ((this._EmergencyContactPerson != value))
+				{
+					this.OnEmergencyContactPersonChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyContactPerson = value;
+					this.SendPropertyChanged("EmergencyContactPerson");
+					this.OnEmergencyContactPersonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactNumber", DbType="VarChar(50)")]
+		public string EmergencyContactNumber
+		{
+			get
+			{
+				return this._EmergencyContactNumber;
+			}
+			set
+			{
+				if ((this._EmergencyContactNumber != value))
+				{
+					this.OnEmergencyContactNumberChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyContactNumber = value;
+					this.SendPropertyChanged("EmergencyContactNumber");
+					this.OnEmergencyContactNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactAddress", DbType="VarChar(MAX)")]
+		public string EmergencyContactAddress
+		{
+			get
+			{
+				return this._EmergencyContactAddress;
+			}
+			set
+			{
+				if ((this._EmergencyContactAddress != value))
+				{
+					this.OnEmergencyContactAddressChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyContactAddress = value;
+					this.SendPropertyChanged("EmergencyContactAddress");
+					this.OnEmergencyContactAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this.OnCreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="VarChar(50)")]
+		public string CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCompany", DbType="Bit")]
+		public System.Nullable<bool> IsCompany
+		{
+			get
+			{
+				return this._IsCompany;
+			}
+			set
+			{
+				if ((this._IsCompany != value))
+				{
+					this.OnIsCompanyChanging(value);
+					this.SendPropertyChanging();
+					this._IsCompany = value;
+					this.SendPropertyChanged("IsCompany");
+					this.OnIsCompanyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyId", DbType="Int")]
+		public System.Nullable<int> CompanyId
+		{
+			get
+			{
+				return this._CompanyId;
+			}
+			set
+			{
+				if ((this._CompanyId != value))
+				{
+					this.OnCompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._CompanyId = value;
+					this.SendPropertyChanged("CompanyId");
+					this.OnCompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_GCTransactions", ThisKey="GuestId", OtherKey="GuestId")]
+		public EntitySet<GCTransaction> GCTransactions
+		{
+			get
+			{
+				return this._GCTransactions;
+			}
+			set
+			{
+				this._GCTransactions.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GCTransactions(GCTransaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Guest = this;
+		}
+		
+		private void detach_GCTransactions(GCTransaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Guest = null;
 		}
 	}
 }

@@ -125,6 +125,7 @@
     <Content Include="admin\roles.aspx" />
     <Content Include="admin\UserConfig.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="company\add-company.aspx" />
     <Content Include="company\company-profile.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
@@ -385,6 +386,13 @@
       <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="company\add-company.aspx.cs">
+      <DependentUpon>add-company.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="company\add-company.aspx.designer.cs">
+      <DependentUpon>add-company.aspx</DependentUpon>
+    </Compile>
     <Compile Include="company\company-profile.aspx.cs">
       <DependentUpon>company-profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

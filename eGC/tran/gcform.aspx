@@ -91,6 +91,19 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Reason is required"></asp:RequiredFieldValidator>
                         </div>
+                        <div class="col-md-4">
+                            <label for="txtExpirationDate">Expiration Date</label>
+                            <asp:TextBox ID="txtExpirationDate"
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
+                                runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="vgPrimaryAdd"
+                                ControlToValidate="txtExpirationDate"
+                                CssClass="label label-danger"
+                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
+                        </div>
                     </div>
                 </div>
 
@@ -594,6 +607,7 @@
         $(document).ready(function () {
             $('#<%=txtArrivalDate.ClientID%>').datepicker();
             $('#<%=txtCheckoutDate.ClientID%>').datepicker();
+            $('#<%=txtExpirationDate.ClientID%>').datepicker();
         });
     </script>
 

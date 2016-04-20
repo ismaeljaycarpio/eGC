@@ -8,12 +8,6 @@
         <elementListCompartment Id="b0c65a84-e60e-4180-a4e6-702adc4093e7" absoluteBounds="3.0149999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="95d4a809-efc1-42c1-b360-1e69e4bffe2b" absoluteBounds="5.5, 0.5, 2, 4.0785139973958326">
-      <DataClassMoniker Name="/GiftCheckDataContext/Guest" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b75b2a71-d22e-4ac3-851b-7bd5b1e7c399" absoluteBounds="5.515, 0.96, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="0cc66f7e-c570-4e97-8754-151cce060f1e" absoluteBounds="5.625, 8.25, 2, 2.3478011067708335">
       <DataClassMoniker Name="/GiftCheckDataContext/tmpRoom" />
       <nestedChildShapes>
@@ -26,7 +20,7 @@
         <elementListCompartment Id="1d721aaa-78aa-4f4f-a48b-35097e2060c6" absoluteBounds="0.64, 4.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.09375 : 1.69399251302083); (3.09375 : 4.34375); (2.625 : 4.34375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.03125 : 1.69399251302083); (3.03125 : 4.40625); (2.625 : 4.40625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/Dining/Dining_GCRoom" />
       <nodes>
         <classShapeMoniker Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" />
@@ -77,31 +71,37 @@
         <classShapeMoniker Id="44841eb9-7afb-4fef-af14-e5c7d13bb27a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (4.83333333333333 : 15.0440584309896 : JumpStart); (4.66666666666667 : 15.0440584309896 : JumpEnd); (2.5 : 15.0440584309896)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (4.83333333333333 : 15.0440584309896 : JumpStart); (4.66666666666667 : 15.0440584309896 : JumpEnd); (2.5 : 15.0440584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GiftCheckDataContext/User/User_MembershipLINQ" />
       <nodes>
         <classShapeMoniker Id="b7dcce53-ef28-4ad3-9354-e944f9de3b68" />
         <classShapeMoniker Id="784842ff-1df9-4695-b110-94a7caf5f088" />
       </nodes>
     </associationConnector>
-    <classShape Id="dc8d5c82-6a34-4298-bc7e-7f5509254196" absoluteBounds="3.25, 5.125, 2, 3.6939111328124996">
+    <classShape Id="70e9b06b-c2a6-4b7a-864a-ab903ca12571" absoluteBounds="3.125, 5.25, 2, 3.8862125651041666">
       <DataClassMoniker Name="/GiftCheckDataContext/GCTransaction" />
       <nestedChildShapes>
-        <elementListCompartment Id="ab288559-b754-4471-91f8-06709bf09e30" absoluteBounds="3.265, 5.585, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7536b32a-eb68-4424-84a3-3a6188146bf8" absoluteBounds="3.14, 5.71, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.25 : 5.54890055338542); (2.625 : 5.54890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.125 : 5.61140055338542); (2.625 : 5.61140055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/GCTransaction/GCTransaction_GCRoom" />
       <nodes>
-        <classShapeMoniker Id="dc8d5c82-6a34-4298-bc7e-7f5509254196" />
+        <classShapeMoniker Id="70e9b06b-c2a6-4b7a-864a-ab903ca12571" />
         <classShapeMoniker Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.57851399739583); (5.25 : 5.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="ff07a76c-da37-4d69-bc49-e4c6291c1e18" absoluteBounds="5.75, 1.25, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/GiftCheckDataContext/Guest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1d7e3a3a-3ad8-4957-9336-d03873b89c3a" absoluteBounds="5.765, 1.71, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.75 : 5.48155843098958); (5.125 : 5.48155843098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/Guest/Guest_GCTransaction" />
       <nodes>
-        <classShapeMoniker Id="95d4a809-efc1-42c1-b360-1e69e4bffe2b" />
-        <classShapeMoniker Id="dc8d5c82-6a34-4298-bc7e-7f5509254196" />
+        <classShapeMoniker Id="ff07a76c-da37-4d69-bc49-e4c6291c1e18" />
+        <classShapeMoniker Id="70e9b06b-c2a6-4b7a-864a-ab903ca12571" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

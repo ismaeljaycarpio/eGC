@@ -14,7 +14,10 @@ namespace eGC.guest
         GiftCheckDataContext db = new GiftCheckDataContext();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!Page.IsPostBack)
+            {
+                bindDropdown();
+            }
         }
 
         protected void btnGenerateId_Click(object sender, EventArgs e)
@@ -93,7 +96,7 @@ namespace eGC.guest
                 g.FirstName = txtFirstName.Text;
                 g.MiddleName = txtMiddleName.Text;
                 g.LastName = txtLastName.Text;
-                g.CompanyName = txtCompanyName.Text;
+                g.CompanyId = Convert.ToInt32(ddlCompanyName.SelectedValue);
                 g.ContactNumber = txtContactNo.Text;
                 g.Email = txtEmail.Text;
                 g.ValidIDNumber = txtIdNumber.Text;
@@ -104,6 +107,7 @@ namespace eGC.guest
                 g.EmergencyContactAddress = txtContactPersonAddress.Text;
                 g.CreateDate = DateTime.Now;
                 g.CreatedBy = User.Identity.Name;
+                g.IsCompany = false;
 
                 db.Guests.InsertOnSubmit(g);
                 db.SubmitChanges();
@@ -119,13 +123,29 @@ namespace eGC.guest
             txtFirstName.Text = String.Empty;
             txtMiddleName.Text = String.Empty;
             txtLastName.Text = String.Empty;
-            txtCompanyName.Text = String.Empty;
             txtContactNo.Text = String.Empty;
             txtEmail.Text = String.Empty;
             txtIdNumber.Text = String.Empty;
             txtContactPerson.Text = String.Empty;
             txtContactPersonNumber.Text = String.Empty;
             txtContactPersonAddress.Text = String.Empty;
+        }
+
+        private void bindDropdown()
+        {
+            var q = (from g in db.Guests
+                    where g.IsCompany == true
+                    select new
+                    {
+                        Id = g.Id,
+                        CompanyName = g.CompanyName
+                    }).ToList();
+
+            ddlCompanyName.DataSource = q;
+            ddlCompanyName.DataTextField = "CompanyName";
+            ddlCompanyName.DataValueField = "Id";
+            ddlCompanyName.DataBind();
+            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
         }
     }
 }

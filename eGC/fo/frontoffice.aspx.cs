@@ -45,7 +45,8 @@ namespace eGC.fo
                              GuestId = g.GuestId,
                              ArrivalDate = String.Format("{0: MM/dd/yyyy}", tran.ArrivalDate),
                              CheckoutDate = String.Format("{0: MM/dd/yyyy}", tran.CheckOutDate),
-                             StatusGC = tran.StatusGC
+                             StatusGC = tran.StatusGC,
+                             ExpirationDate = String.Format("{0:MM/dd/yyyy}", tran.ExpiryDate)
                          }).FirstOrDefault();
 
                 txtName.Text = gu.FullName;
@@ -53,6 +54,7 @@ namespace eGC.fo
                 txtArrival.Text = gu.ArrivalDate.ToString();
                 txtCheckout.Text = gu.CheckoutDate.ToString();
                 txtStatus.Text = gu.StatusGC;
+                txtGCExpirationDate.Text = gu.ExpirationDate;
 
                 //load pics
                 //load guest
@@ -79,6 +81,38 @@ namespace eGC.fo
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
                 Response.Redirect("~/fo/viewgcform.aspx?gcId=" + rowId);
+            }
+            else if(e.CommandName.Equals("usedRecord"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
+
+                hfUsedGCId.Value = rowId;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#usedModal').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+            }
+            else if(e.CommandName.Equals("cancelledRecord"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
+
+                hfCancellationId.Value = rowId;
+
+                var tran = (from gc in db.GCTransactions
+                            where gc.Id == Convert.ToInt32(hfCancellationId.Value)
+                            select gc).FirstOrDefault();
+
+                txtCancellationReason.Text = tran.CancellationReason;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#cancelledModal').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
             }
         }
 
@@ -176,37 +210,95 @@ namespace eGC.fo
             }
         }
 
+        protected void btnConfirmUseGC_Click(object sender, EventArgs e)
+        {
+            int gcId = Convert.ToInt32(hfUsedGCId.Value);
+            var tran = (from gc in db.GCTransactions
+                        where gc.Id == gcId
+                        select gc).FirstOrDefault();
+
+            tran.StatusGC = "Used";
+            db.SubmitChanges();
+
+            this.gvGC.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#usedModal').modal('hide');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+        }
+
+        protected void btnConfirmCancellation_Click(object sender, EventArgs e)
+        {
+            int gcId = Convert.ToInt32(hfCancellationId.Value);
+            var tran = (from gc in db.GCTransactions
+                        where gc.Id == gcId
+                        select gc).FirstOrDefault();
+
+            tran.ApprovalStatus = "Pending";
+            tran.StatusGC = "Cancelled";
+            tran.CancellationReason = txtCancellationReason.Text;
+            tran.CancelledDate = DateTime.Now;
+            db.SubmitChanges();
+
+            this.gvGC.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#cancelledModal').modal('hide');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+        }
+
         protected void LinqDataSource1_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             string strSearch = txtSearch.Text;
 
             var q = (from guest in db.Guests
-                    join gctran in db.GCTransactions
-                    on guest.GuestId equals gctran.GuestId
-                    where
-                    (guest.GuestId.Contains(strSearch) ||
-                    guest.LastName.Contains(strSearch) ||
-                    guest.FirstName.Contains(strSearch) ||
-                    guest.MiddleName.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch) ||
-                    gctran.GCNumber.Contains(strSearch) ||
-                    gctran.ApprovalStatus.Contains(strSearch)) &&
-                    (gctran.ApprovalStatus == "Approved")
-                    select new
-                    {
-                        Id = gctran.Id,
-                        GuestId = guest.GuestId,
-                        FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                        CompanyName = guest.CompanyName,
-                        Number = guest.ContactNumber,
-                        GCNumber = gctran.GCNumber,
-                        ArrivalDate = gctran.ArrivalDate,
-                        CheckoutDate = gctran.CheckOutDate,
-                        Status = gctran.StatusGC,
-                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
-                    }).ToList();
+                     join gctran in db.GCTransactions
+                     on guest.GuestId equals gctran.GuestId
+                     where
+                     (
+                     guest.GuestId.Contains(strSearch) ||
+                     guest.LastName.Contains(strSearch) ||
+                     guest.FirstName.Contains(strSearch) ||
+                     guest.MiddleName.Contains(strSearch) ||
+                     guest.CompanyName.Contains(strSearch) ||
+                     gctran.GCNumber.Contains(strSearch) ||
+                     gctran.ApprovalStatus.Contains(strSearch)
+                     ) &&
+                     (gctran.ApprovalStatus == "Approved") &&
+                     (gctran.IsArchive == false)
+                     select new
+                     {
+                         Id = gctran.Id,
+                         GuestId = guest.GuestId,
+                         FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                         CompanyName = guest.CompanyName,
+                         Number = guest.ContactNumber,
+                         GCNumber = gctran.GCNumber,
+                         ArrivalDate = gctran.ArrivalDate,
+                         CheckoutDate = gctran.CheckOutDate,
+                         Status = gctran.StatusGC,
+                         TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                     }).ToList();
 
             e.Result = q;
+        }
+
+        protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if(e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Label lblGCStatus = e.Row.FindControl("lblGCStatus") as Label;
+                Button btnUse = e.Row.FindControl("btnUsed") as Button;
+
+                if(lblGCStatus.Text == "Used")
+                {
+                    btnUse.Visible = false;
+                }
+            }
         }
     }
 }

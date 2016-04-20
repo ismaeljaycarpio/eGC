@@ -92,6 +92,19 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Reason is required"></asp:RequiredFieldValidator>
                         </div>
+                        <div class="col-md-4">
+                            <label for="txtExpirationDate">Expiration Date</label>
+                            <asp:TextBox ID="txtExpirationDate"
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
+                                runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="vgPrimaryAdd"
+                                ControlToValidate="txtExpirationDate"
+                                CssClass="label label-danger"
+                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
+                        </div>
                     </div>
                 </div>
 
@@ -166,8 +179,6 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
-                                                        <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRoom" />
-
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
 
@@ -195,6 +206,7 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
+                                                        <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRoom" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteRoom" />
 
                                                     </Columns>
@@ -238,8 +250,6 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
-                                                        <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
-
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
 
                                                         <asp:TemplateField HeaderText="Value">
@@ -248,6 +258,7 @@
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
+                                                        <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteDining" />
 
                                                     </Columns>
@@ -265,8 +276,8 @@
                 </div>
                 <div class="panel-footer">
                     <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
-                    <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
-                    <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />
+                    <%--<asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
+                    <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />--%>
                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-default" />
                 </div>
             </div>
@@ -602,6 +613,7 @@
         $(document).ready(function () {
             $('#<%=txtArrivalDate.ClientID%>').datepicker();
             $('#<%=txtCheckoutDate.ClientID%>').datepicker();
+            $('#<%=txtExpirationDate.ClientID%>').datepicker();
         });
     </script>
 
