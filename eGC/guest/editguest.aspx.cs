@@ -24,6 +24,9 @@ namespace eGC.guest
                 }
                 else
                 {
+                    //load ddl
+                    bindDropdown();
+
                     //chk id if valid
                     var gu = (from g in db.Guests
                             where g.GuestId.Equals(guestId)
@@ -60,7 +63,7 @@ namespace eGC.guest
                         txtFirstName.Text = guest.FirstName;
                         txtMiddleName.Text = guest.MiddleName;
                         txtLastName.Text = guest.LastName;
-                        txtCompanyName.Text = guest.CompanyName;
+                        ddlCompanyName.SelectedValue = guest.CompanyId.ToString();
                         txtContactNo.Text = guest.ContactNumber;
                         txtEmail.Text = guest.Email;
                         txtIdNumber.Text = guest.ValidIDNumber;
@@ -144,7 +147,7 @@ namespace eGC.guest
                 g.FirstName = txtFirstName.Text;
                 g.MiddleName = txtMiddleName.Text;
                 g.LastName = txtLastName.Text;
-                g.CompanyName = txtCompanyName.Text;
+                g.CompanyId = Convert.ToInt32(ddlCompanyName.SelectedValue);
                 g.ContactNumber = txtContactNo.Text;
                 g.Email = txtEmail.Text;
                 g.ValidIDNumber = txtIdNumber.Text;
@@ -178,6 +181,23 @@ namespace eGC.guest
                     IDPic.ImageUrl = "~/IDPic/" + g.GuestId + "_IDPic.png";
                 }
             }
+        }
+
+        private void bindDropdown()
+        {
+            var q = (from g in db.Guests
+                     where g.IsCompany == true
+                     select new
+                     {
+                         Id = g.Id,
+                         CompanyName = g.CompanyName
+                     }).ToList();
+
+            ddlCompanyName.DataSource = q;
+            ddlCompanyName.DataTextField = "CompanyName";
+            ddlCompanyName.DataValueField = "Id";
+            ddlCompanyName.DataBind();
+            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
         }
     }
 }

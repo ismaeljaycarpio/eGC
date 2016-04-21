@@ -44,6 +44,7 @@ namespace eGC.company
 
         private void clearButtons()
         {
+            txtCompanyId.Text = String.Empty;
             txtCompanyName.Text = String.Empty;
             txtContactNo.Text = String.Empty;
             txtEmail.Text = String.Empty;

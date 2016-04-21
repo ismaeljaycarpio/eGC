@@ -55,7 +55,6 @@ namespace eGC.guest
             }
         }
 
-
         protected void bindGridview()
         {
             var q = from g in db.Guests
@@ -79,7 +78,6 @@ namespace eGC.guest
 
             txtSearch.Focus();
         }
-
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
@@ -152,8 +150,6 @@ namespace eGC.guest
         protected void GuestDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             var q = from g in db.Guests
-                    join ggg in db.Guests
-                    on g.CompanyId equals ggg.Id
                     where 
                     (
                     g.GuestId.Contains(txtSearch.Text) ||
@@ -162,11 +158,8 @@ namespace eGC.guest
                     g.LastName.Contains(txtSearch.Text) ||
                     g.CompanyName.Contains(txtSearch.Text) ||
                     g.ContactNumber.Contains(txtSearch.Text) ||
-                    g.Email.Contains(txtSearch.Text) ||
-                    g.CompanyName.Contains(txtSearch.Text)
-                    ) 
-                    &&
-                    g.IsCompany == false
+                    g.Email.Contains(txtSearch.Text)
+                    )
                     select new
                     {
                         Id = g.Id,
@@ -177,13 +170,9 @@ namespace eGC.guest
                         Email = g.Email
                     };
 
-            e.Result = q.ToList();
+            var list = q.Where(x => x.CompanyName.Contains(txtSearch.Text));
+            e.Result = list.ToList().OrderBy(i => i.Id);
             txtSearch.Focus();
-        }
-
-        protected void gvGuests_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvGuests.DataBind();
         }
     }
 }

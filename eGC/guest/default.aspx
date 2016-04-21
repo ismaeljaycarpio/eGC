@@ -52,8 +52,7 @@
                                     ShowHeaderWhenEmpty="True"
                                     DataKeyNames="Id"
                                     DataSourceID="GuestDataSource"
-                                    OnRowCommand="gvGuests_RowCommand"
-                                    OnPageIndexChanging="gvGuests_PageIndexChanging">
+                                    OnRowCommand="gvGuests_RowCommand">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
                                             <ItemTemplate>

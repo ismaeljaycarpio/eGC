@@ -88,13 +88,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="txtCompanyName" class="col-sm-3 control-label">Company Name: </label>
+                            <label for="ddlCompanyName" class="col-sm-3 control-label">Company Name: </label>
                             <div class="col-sm-6">
-                                <asp:TextBox ID="txtCompanyName" runat="server" CssClass="form-control" placeholder="Company Name"></asp:TextBox>
+                                <asp:DropDownList ID="ddlCompanyName"
+                                    runat="server"
+                                    CssClass="form-control">
+                                </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                                     runat="server"
                                     Display="Dynamic"
-                                    ControlToValidate="txtCompanyName"
+                                    InitialValue="0"
+                                    ControlToValidate="ddlCompanyName"
                                     CssClass="label label-danger"
                                     ErrorMessage="Company Name is required"></asp:RequiredFieldValidator>
                             </div>
