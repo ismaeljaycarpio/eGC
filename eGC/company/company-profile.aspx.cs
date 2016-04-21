@@ -1,9 +1,13 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.company
 {
@@ -13,10 +17,6 @@ namespace eGC.company
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
-            {
-                txtSearch.Focus();
-            }
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -44,7 +44,52 @@ namespace eGC.company
 
         protected void btnExport_Click(object sender, EventArgs e)
         {
+            var q = (from g in db.Guests
+                     where
+                     (g.GuestId.Contains(txtSearch.Text) ||
+                     g.CompanyName.Contains(txtSearch.Text) ||
+                     g.ContactNumber.Contains(txtSearch.Text) ||
+                     g.Email.Contains(txtSearch.Text)
+                     )
+                     &&
+                     g.IsCompany == true
+                     select new
+                     {
+                         ID = g.GuestId,
+                         Company = g.CompanyName,
+                         Number = g.ContactNumber,
+                         Email = g.Email
+                     }).ToList();
 
+            DataTable dt = new DataTable();
+            dt = q.ToDataTable();
+
+            var products = dt;
+            ExcelPackage excel = new ExcelPackage();
+            var workSheet = excel.Workbook.Worksheets.Add("Companies");
+            var totalCols = products.Columns.Count;
+            var totalRows = products.Rows.Count;
+
+            for (var col = 1; col <= totalCols; col++)
+            {
+                workSheet.Cells[1, col].Value = products.Columns[col - 1].ColumnName;
+            }
+            for (var row = 1; row <= totalRows; row++)
+            {
+                for (var col = 0; col < totalCols; col++)
+                {
+                    workSheet.Cells[row + 1, col + 1].Value = products.Rows[row - 1][col];
+                }
+            }
+            using (var memoryStream = new MemoryStream())
+            {
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=companies.xlsx");
+                excel.SaveAs(memoryStream);
+                memoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.End();
+            }
         }
 
         protected void CompanyDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
@@ -61,6 +106,7 @@ namespace eGC.company
                      select g).ToList();
 
             e.Result = q;
+            txtSearch.Focus();
         }
 
         protected void gvCompany_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -87,7 +133,7 @@ namespace eGC.company
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((LinkButton)gvCompany.Rows[index].FindControl("lbtnCompanyId")).Text;
-                Response.Redirect("~/tran/gcform.aspx?companyId=" + rowId);
+                Response.Redirect("~/tran/gcform.aspx?guestid=" + rowId);
             }
         }
     }

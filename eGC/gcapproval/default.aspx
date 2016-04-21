@@ -13,15 +13,19 @@
                     <div class="panel-body">
                         <asp:UpdatePanel ID="upApproval" runat="server">
                             <ContentTemplate>
-                                <div class="form-horizontal">
+                                <div class="form-inline">
                                     <div class="form-group">
-                                        <div class="col-sm-4">
+                                        <div class="col-md-12">
                                             <div class="input-group">
                                                 <asp:TextBox ID="txtSearch"
                                                     runat="server"
                                                     CssClass="form-control"
                                                     placeholder="Search..."></asp:TextBox>
+
                                                 <span class="input-group-btn">
+                                                    <asp:DropDownList ID="ddlCompanyName"
+                                                         CssClass="form-control"
+                                                         runat="server"></asp:DropDownList>
                                                     <asp:Button ID="btnSearch"
                                                         runat="server"
                                                         CssClass="btn btn-primary"
@@ -32,6 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br />
                                 <div class="table-responsive">
                                     <asp:GridView ID="gvGC"
                                         runat="server"
@@ -59,7 +64,7 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
+                                            <asp:TemplateField HeaderText="Guest/Company ID" SortExpression="GuestId">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
@@ -175,7 +180,7 @@
                         <div class="modal-footer">
                             <asp:Button ID="btnConfirmDisapproveGC" 
                                 runat="server" 
-                                CssClass="btn btn-success" 
+                                CssClass="btn btn-danger" 
                                 Text="Save" 
                                 OnClick="btnConfirmDisapproveGC_Click" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

@@ -13,11 +13,12 @@ namespace eGC.gcapproval
     public partial class _default : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
             {
-                this.gvGC.DataBind();
+                bindDropdown();
             }
         }
 
@@ -31,12 +32,19 @@ namespace eGC.gcapproval
             if(e.Row.RowType == DataControlRowType.DataRow)
             {
                 Label lblGCStatus = e.Row.FindControl("lblGCStatus") as Label;
+                Label lblApproval = e.Row.FindControl("lblApproval") as Label;
                 Button btnDisapprove = e.Row.FindControl("btnDisapprove") as Button;
 
                 if(lblGCStatus.Text == "Cancelled")
                 {
                     lblGCStatus.ForeColor = Color.Red;
                     btnDisapprove.Visible = false;
+                }
+
+                if (lblApproval.Text == "Disapproved")
+                {
+                    lblApproval.ForeColor = Color.DarkRed;
+                    lblApproval.Font.Bold = true;
                 }
             }
         }
@@ -47,7 +55,20 @@ namespace eGC.gcapproval
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lbtnGuestId")).Text;
-                Response.Redirect("~/guest/editguest.aspx?guestid=" + rowId);
+
+                //chk if company
+                var g = (from gu in db.Guests
+                         where gu.GuestId == rowId
+                         select gu).FirstOrDefault();
+
+                if(g.IsCompany == true)
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + rowId);
+                }
+                else
+                {
+                    Response.Redirect("~/guest/editguest.aspx?guestid=" + rowId);
+                }
             }
             else if (e.CommandName.Equals("redirectGC"))
             {
@@ -79,7 +100,7 @@ namespace eGC.gcapproval
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
             }
-            else if (e.CommandName.Equals("disapproveModal"))
+            else if (e.CommandName.Equals("disapproveRecord"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
@@ -137,38 +158,76 @@ namespace eGC.gcapproval
         {
             string strSearch = txtSearch.Text;
 
-            var q = (from guest in db.Guests
-                    join gctran in db.GCTransactions
-                    on guest.GuestId equals gctran.GuestId
-                    where
-                    (
-                    guest.GuestId.Contains(strSearch) ||
-                    guest.LastName.Contains(strSearch) ||
-                    guest.FirstName.Contains(strSearch) ||
-                    guest.MiddleName.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch) ||
-                    gctran.ApprovalStatus.Contains(strSearch) ||
-                    gctran.GCNumber.Contains(strSearch)
-                    ) &&
-                    (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
-                    (gctran.IsArchive == false)
-                    select new
-                    {
-                        Id = gctran.Id,
-                        GuestId = guest.GuestId,
-                        FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                        CompanyName = guest.CompanyName,
-                        Number = guest.ContactNumber,
-                        GCNumber = gctran.GCNumber,
-                        ArrivalDate = gctran.ArrivalDate,
-                        CheckoutDate = gctran.CheckOutDate,
-                        Status = gctran.StatusGC,
-                        TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
-                        Approval = gctran.ApprovalStatus,
-                        CancellationReason = gctran.CancellationReason
-                    }).ToList();
+            if(ddlCompanyName.SelectedValue == "0")
+            {
+                var q = (from guest in db.Guests
+                         join gctran in db.GCTransactions
+                         on guest.GuestId equals gctran.GuestId
+                         where
+                         (
+                         guest.GuestId.Contains(strSearch) ||
+                         guest.LastName.Contains(strSearch) ||
+                         guest.FirstName.Contains(strSearch) ||
+                         guest.MiddleName.Contains(strSearch) ||
+                         gctran.ApprovalStatus.Contains(strSearch) ||
+                         gctran.GCNumber.Contains(strSearch)
+                         ) &&
+                         (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
+                         (gctran.IsArchive == false)
+                         select new
+                         {
+                             Id = gctran.Id,
+                             GuestId = guest.GuestId,
+                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                             Number = guest.ContactNumber,
+                             GCNumber = gctran.GCNumber,
+                             ArrivalDate = gctran.ArrivalDate,
+                             CheckoutDate = gctran.CheckOutDate,
+                             Status = gctran.StatusGC,
+                             TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
+                             Approval = gctran.ApprovalStatus,
+                             CancellationReason = gctran.CancellationReason
+                         }).ToList();
 
-            e.Result = q;
+                e.Result = q;
+            }
+            else
+            {
+                var q = (from guest in db.Guests
+                         join gctran in db.GCTransactions
+                         on guest.GuestId equals gctran.GuestId
+                         where
+                         (
+                         guest.GuestId.Contains(strSearch) ||
+                         guest.LastName.Contains(strSearch) ||
+                         guest.FirstName.Contains(strSearch) ||
+                         guest.MiddleName.Contains(strSearch) ||
+                         gctran.ApprovalStatus.Contains(strSearch) ||
+                         gctran.GCNumber.Contains(strSearch)
+                         ) &&
+                         (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
+                         (gctran.IsArchive == false) &&
+                         (guest.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue))
+                         select new
+                         {
+                             Id = gctran.Id,
+                             GuestId = guest.GuestId,
+                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                             Number = guest.ContactNumber,
+                             GCNumber = gctran.GCNumber,
+                             ArrivalDate = gctran.ArrivalDate,
+                             CheckoutDate = gctran.CheckOutDate,
+                             Status = gctran.StatusGC,
+                             TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
+                             Approval = gctran.ApprovalStatus,
+                             CancellationReason = gctran.CancellationReason
+                         }).ToList();
+
+                e.Result = q;
+            }
+            
             txtSearch.Focus();
         }
 
@@ -199,7 +258,7 @@ namespace eGC.gcapproval
 
         protected void btnConfirmDisapproveGC_Click(object sender, EventArgs e)
         {
-            int Id = Convert.ToInt32(hfApproveGCId.Value);
+            int Id = Convert.ToInt32(hfDisapproveGCId.Value);
             var tran = (from gc in db.GCTransactions
                         where gc.Id == Id
                         select gc).FirstOrDefault();
@@ -214,6 +273,23 @@ namespace eGC.gcapproval
             sb.Append("$('#disapproveModal').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+        }
+
+        private void bindDropdown()
+        {
+            var q = (from g in db.Guests
+                     where g.IsCompany == true
+                     select new
+                     {
+                         Id = g.Id,
+                         CompanyName = g.CompanyName
+                     }).ToList();
+
+            ddlCompanyName.DataSource = q;
+            ddlCompanyName.DataTextField = "CompanyName";
+            ddlCompanyName.DataValueField = "Id";
+            ddlCompanyName.DataBind();
+            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
         }
     }
 }

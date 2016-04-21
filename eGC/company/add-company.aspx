@@ -20,7 +20,6 @@
                             <label for="txtEmpId" class="col-sm-3 control-label">Company ID: </label>
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                                     <asp:TextBox ID="txtCompanyId" runat="server" CssClass="form-control" placeholder="Company ID"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                         runat="server"

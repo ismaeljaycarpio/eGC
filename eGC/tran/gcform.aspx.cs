@@ -41,7 +41,11 @@ namespace eGC.tran
                         var guest = gu.FirstOrDefault();
                         txtName.Text = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName;
                         txtGuestId.Text = guest.GuestId;
-                        txtCompany.Text = guest.CompanyName;
+
+                        txtCompany.Text = (from c in db.Guests
+                                           where guest.CompanyId == c.Id
+                                           select c).FirstOrDefault().CompanyName;
+
                         txtEmail.Text = guest.Email;
                         txtContactNo.Text = guest.ContactNumber;
 
@@ -94,6 +98,15 @@ namespace eGC.tran
                             ddlEditDining.DataValueField = "Id";
                             ddlEditDining.DataBind();
                         }
+
+                        //chk if company
+                        if(guest.IsCompany == true)
+                        {
+                            panelName.Visible = false;
+                            lblForGuestId.InnerText = "Company ID";
+                        }
+
+                        txtRecommendingApproval.Focus();
                     }
                 }
             }

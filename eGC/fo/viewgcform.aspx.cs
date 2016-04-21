@@ -110,10 +110,11 @@ namespace eGC.fo
                         ddlEditDining.DataBind();
                     }
 
-                    //show/hide buttons
-                    if (!User.IsInRole("Admin") &&
-                        !User.IsInRole("General Manager"))
+                    //chk if company
+                    if (guest.IsCompany == true)
                     {
+                        panelName.Visible = false;
+                        lblForGuestId.InnerText = "Company ID";
                     }
                 }
             }

@@ -17,14 +17,13 @@ namespace eGC.fo
         {
             if (!Page.IsPostBack)
             {
-                this.gvGC.DataBind();
+                bindDropdown();
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             gvGC.DataBind();
-            txtSearch.Focus();
         }
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -255,36 +254,73 @@ namespace eGC.fo
         {
             string strSearch = txtSearch.Text;
 
-            var q = (from guest in db.Guests
-                     join gctran in db.GCTransactions
-                     on guest.GuestId equals gctran.GuestId
-                     where
-                     (
-                     guest.GuestId.Contains(strSearch) ||
-                     guest.LastName.Contains(strSearch) ||
-                     guest.FirstName.Contains(strSearch) ||
-                     guest.MiddleName.Contains(strSearch) ||
-                     guest.CompanyName.Contains(strSearch) ||
-                     gctran.GCNumber.Contains(strSearch) ||
-                     gctran.ApprovalStatus.Contains(strSearch)
-                     ) &&
-                     (gctran.ApprovalStatus == "Approved") &&
-                     (gctran.IsArchive == false)
-                     select new
-                     {
-                         Id = gctran.Id,
-                         GuestId = guest.GuestId,
-                         FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                         CompanyName = guest.CompanyName,
-                         Number = guest.ContactNumber,
-                         GCNumber = gctran.GCNumber,
-                         ArrivalDate = gctran.ArrivalDate,
-                         CheckoutDate = gctran.CheckOutDate,
-                         Status = gctran.StatusGC,
-                         TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
-                     }).ToList();
+            if(ddlCompanyName.SelectedValue == "0")
+            {
+                var q = (from guest in db.Guests
+                         join gctran in db.GCTransactions
+                         on guest.GuestId equals gctran.GuestId
+                         where
+                         (
+                         guest.GuestId.Contains(strSearch) ||
+                         guest.LastName.Contains(strSearch) ||
+                         guest.FirstName.Contains(strSearch) ||
+                         guest.MiddleName.Contains(strSearch) ||
+                         guest.CompanyName.Contains(strSearch) ||
+                         gctran.GCNumber.Contains(strSearch) ||
+                         gctran.ApprovalStatus.Contains(strSearch)
+                         ) &&
+                         (gctran.ApprovalStatus == "Approved") &&
+                         (gctran.IsArchive == false)
+                         select new
+                         {
+                             Id = gctran.Id,
+                             GuestId = guest.GuestId,
+                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                             Number = guest.ContactNumber,
+                             GCNumber = gctran.GCNumber,
+                             ArrivalDate = gctran.ArrivalDate,
+                             CheckoutDate = gctran.CheckOutDate,
+                             Status = gctran.StatusGC,
+                             TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                         }).ToList();
 
-            e.Result = q;
+                e.Result = q;
+            }
+            else
+            {
+                var q = (from guest in db.Guests
+                         join gctran in db.GCTransactions
+                         on guest.GuestId equals gctran.GuestId
+                         where
+                         (
+                         guest.GuestId.Contains(strSearch) ||
+                         guest.LastName.Contains(strSearch) ||
+                         guest.FirstName.Contains(strSearch) ||
+                         guest.MiddleName.Contains(strSearch) ||
+                         gctran.GCNumber.Contains(strSearch) ||
+                         gctran.ApprovalStatus.Contains(strSearch)
+                         ) 
+                         &&
+                         (gctran.ApprovalStatus == "Approved") &&
+                         (gctran.IsArchive == false) &&
+                         (guest.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue))
+                         select new
+                         {
+                             Id = gctran.Id,
+                             GuestId = guest.GuestId,
+                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                             Number = guest.ContactNumber,
+                             GCNumber = gctran.GCNumber,
+                             ArrivalDate = gctran.ArrivalDate,
+                             CheckoutDate = gctran.CheckOutDate,
+                             Status = gctran.StatusGC,
+                             TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                         }).ToList();
+
+                e.Result = q;
+            }
         }
 
         protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -299,6 +335,23 @@ namespace eGC.fo
                     btnUse.Visible = false;
                 }
             }
+        }
+
+        private void bindDropdown()
+        {
+            var q = (from g in db.Guests
+                     where g.IsCompany == true
+                     select new
+                     {
+                         Id = g.Id,
+                         CompanyName = g.CompanyName
+                     }).ToList();
+
+            ddlCompanyName.DataSource = q;
+            ddlCompanyName.DataTextField = "CompanyName";
+            ddlCompanyName.DataValueField = "Id";
+            ddlCompanyName.DataBind();
+            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
         }
     }
 }

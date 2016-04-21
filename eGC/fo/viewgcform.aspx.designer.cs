@@ -13,6 +13,15 @@ namespace eGC.fo {
     public partial class viewgcform {
         
         /// <summary>
+        /// panelName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelName;
+        
+        /// <summary>
         /// txtName control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace eGC.fo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtName;
+        
+        /// <summary>
+        /// lblForGuestId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblForGuestId;
         
         /// <summary>
         /// txtGuestId control.

@@ -9,7 +9,7 @@
                 <div class="panel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h5>Guest Profile</h5>
+                            <h5>Guest/Company Profile</h5>
                         </div>
 
                         <div class="panel-body">
@@ -33,7 +33,7 @@
                                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <div class="col-xs-4">
-                                        <label for="txtGuestId">Guest ID</label>
+                                        <label for="txtGuestId">Guest/Company ID</label>
                                         <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                     </div>
                                     <div class="col-xs-3">
@@ -62,35 +62,29 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h5>Guest List</h5>
+                            <h5>Approved List</h5>
                         </div>
                         <div class="panel-body">
                             <asp:UpdatePanel ID="upApproval" runat="server">
                                 <ContentTemplate>
-                                    <div class="form-horizontal">
+                                    <div class="form-inline">
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <div class="input-group">
                                                     <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
                                                     <span class="input-group-btn">
+                                                        <asp:DropDownList ID="ddlCompanyName" runat="server" CssClass="form-control"></asp:DropDownList>
                                                         <asp:Button ID="btnSearch"
                                                             runat="server"
                                                             CssClass="btn btn-primary"
                                                             Text="Go"
                                                             OnClick="btnSearch_Click" />
-                                                    </span>                                                    
-                                                    <div class="pull-right">
-                                                        <asp:Button ID="btnExport"
-                                                            runat="server"
-                                                            Text="Export to Excel"
-                                                            OnClick="btnExport_Click"
-                                                            CssClass="btn btn-default btn-sm" />
-                                                    </div>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <br />
                                     <div class="table-responsive">
                                         <asp:GridView ID="gvGC"
                                             runat="server"
@@ -113,7 +107,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
+                                                <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
                                                     <ItemTemplate>
                                                         <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="selectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                     </ItemTemplate>
@@ -131,7 +125,7 @@
 
                                                 <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
                                                 <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
-                                                
+
                                                 <asp:TemplateField HeaderText="Status" SortExpression="Status">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
@@ -142,7 +136,7 @@
 
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
-                                                        <asp:Button ID="btnUsed" 
+                                                        <asp:Button ID="btnUsed"
                                                             runat="server"
                                                             CommandName="usedRecord"
                                                             Text="Use"
@@ -153,7 +147,7 @@
 
                                                 <asp:TemplateField>
                                                     <ItemTemplate>
-                                                        <asp:Button ID="btnCancelled" 
+                                                        <asp:Button ID="btnCancelled"
                                                             runat="server"
                                                             Text="Cancel"
                                                             CommandName="cancelledRecord"
@@ -165,6 +159,11 @@
                                             </Columns>
                                             <PagerStyle CssClass="pagination-ys" />
                                         </asp:GridView>
+                                        <asp:Button ID="btnExport"
+                                            runat="server"
+                                            Text="Export to Excel"
+                                            OnClick="btnExport_Click"
+                                            CssClass="btn btn-default btn-sm pull-right" />
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
@@ -194,10 +193,10 @@
                             <asp:HiddenField ID="hfUsedGCId" runat="server" />
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btnConfirmUseGC" 
-                                runat="server" 
-                                CssClass="btn btn-success" 
-                                Text="Save" 
+                            <asp:Button ID="btnConfirmUseGC"
+                                runat="server"
+                                CssClass="btn btn-success"
+                                Text="Save"
                                 OnClick="btnConfirmUseGC_Click" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
@@ -223,14 +222,14 @@
                         </div>
                         <div class="modal-body">
                             Reason for cancellation:
-                            <asp:TextBox ID="txtCancellationReason" 
-                                runat="server" 
+                            <asp:TextBox ID="txtCancellationReason"
+                                runat="server"
                                 TextMode="MultiLine"
-                                CssClass="form-control" 
-                                Columns="40" 
+                                CssClass="form-control"
+                                Columns="40"
                                 Rows="5">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                 runat="server"
                                 CssClass="label label-danger"
                                 ControlToValidate="txtCancellationReason"
@@ -240,9 +239,9 @@
                             <asp:HiddenField ID="hfCancellationId" runat="server" />
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btnConfirmCancellation" 
-                                runat="server" 
-                                CssClass="btn btn-danger" 
+                            <asp:Button ID="btnConfirmCancellation"
+                                runat="server"
+                                CssClass="btn btn-danger"
                                 Text="Save"
                                 ValidationGroup="vgCancellation"
                                 OnClick="btnConfirmCancellation_Click" />

@@ -13,7 +13,10 @@ namespace eGC.company
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!Page.IsPostBack)
+            {
+                txtCompanyId.Focus();
+            }
         }
 
         protected void btnCreate_Click(object sender, EventArgs e)
@@ -35,6 +38,9 @@ namespace eGC.company
                 g.IsCompany = true;
 
                 db.Guests.InsertOnSubmit(g);
+                db.SubmitChanges();
+
+                g.CompanyId = g.Id;
                 db.SubmitChanges();
 
                 pnlSuccess.Visible = true;

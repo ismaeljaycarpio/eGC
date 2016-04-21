@@ -12,12 +12,12 @@
                 </div>
                 <div class="panel-body">
                     <div role="form">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="panelName" runat="server">
                             <label for="txtName">Name</label>
                             <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtName">Guest ID</label>
+                            <label for="txtName" id="lblForGuestId" runat="server">Guest ID</label>
                             <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="col-md-4">

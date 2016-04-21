@@ -121,6 +121,15 @@ namespace eGC.fo {
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
         
         /// <summary>
+        /// ddlCompanyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCompanyName;
+        
+        /// <summary>
         /// btnSearch control.
         /// </summary>
         /// <remarks>
@@ -130,15 +139,6 @@ namespace eGC.fo {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
-        /// btnExport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExport;
-        
-        /// <summary>
         /// gvGC control.
         /// </summary>
         /// <remarks>
@@ -146,6 +146,15 @@ namespace eGC.fo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvGC;
+        
+        /// <summary>
+        /// btnExport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExport;
         
         /// <summary>
         /// UpdatePanel4 control.

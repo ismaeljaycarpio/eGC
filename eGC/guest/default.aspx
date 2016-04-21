@@ -91,6 +91,7 @@
                                 </div>
                             </ContentTemplate>
                             <Triggers>
+                                <asp:PostBackTrigger ControlID="btnExport" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>

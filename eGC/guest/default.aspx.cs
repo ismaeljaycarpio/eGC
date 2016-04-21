@@ -101,19 +101,24 @@ namespace eGC.guest
         protected void btnExport_Click(object sender, EventArgs e)
         {
             var q = (from g in db.Guests
-                    where g.GuestId.Contains(txtSearch.Text) ||
+                    where
+                    (
+                    g.GuestId.Contains(txtSearch.Text) ||
                     g.FirstName.Contains(txtSearch.Text) ||
                     g.MiddleName.Contains(txtSearch.Text) ||
                     g.LastName.Contains(txtSearch.Text) ||
-                    g.CompanyName.Contains(txtSearch.Text)
+                    g.ContactNumber.Contains(txtSearch.Text) ||
+                    g.Email.Contains(txtSearch.Text)
+                    )
+                    &&
+                    g.IsCompany == false
                     select new
                     {
                         GuestId = g.GuestId,
-                        LastName = g.LastName,
-                        FirstName = g.FirstName,
-                        MiddleName = g.MiddleName,
-                        CompanyName = db.Guests.Where(x => x.CompanyId == g.Id).FirstOrDefault().CompanyName,
-                        Number = g.ContactNumber
+                        FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
+                        CompanyName = (from gu in db.Guests where g.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                        Number = g.ContactNumber,
+                        Email = g.Email
                     }).ToList();
 
             DataTable dt = new DataTable();

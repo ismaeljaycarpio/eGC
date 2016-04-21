@@ -29,7 +29,7 @@
         <siteMapNode url="~/tran/editgcform.aspx" title="Update GC"></siteMapNode>
       </siteMapNode>
 
-      <siteMapNode url="~/fo/frontoffice.aspx" title="Guest List"  description="">
+      <siteMapNode url="~/fo/frontoffice.aspx" title="GC List"  description="">
         <siteMapNode url="~/fo/viewgcform.aspx" title="View GC"></siteMapNode>
       </siteMapNode>
 

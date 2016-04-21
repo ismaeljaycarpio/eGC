@@ -17,6 +17,7 @@ namespace eGC.guest
             if(!Page.IsPostBack)
             {
                 bindDropdown();
+                txtGuestId.Focus();
             }
         }
 
