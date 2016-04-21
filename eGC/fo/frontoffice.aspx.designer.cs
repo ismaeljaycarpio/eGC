@@ -166,6 +166,24 @@ namespace eGC.fo {
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
         
         /// <summary>
+        /// lblForUseGCTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblForUseGCTitle;
+        
+        /// <summary>
+        /// lblForUseGCContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblForUseGCContent;
+        
+        /// <summary>
         /// hfUsedGCId control.
         /// </summary>
         /// <remarks>
@@ -173,6 +191,15 @@ namespace eGC.fo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfUsedGCId;
+        
+        /// <summary>
+        /// hfBtnUsedStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfBtnUsedStatus;
         
         /// <summary>
         /// btnConfirmUseGC control.

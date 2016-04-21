@@ -186,11 +186,12 @@
                     <ContentTemplate>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Use GC</h4>
+                            <h4 class="modal-title"><asp:Label ID="lblForUseGCTitle" runat="server">Use GC</asp:Label></h4>
                         </div>
                         <div class="modal-body">
-                            Are you sure you want to use this Gift Check ?
+                            <asp:Label ID="lblForUseGCContent" runat="server">Are you sure you want to use this Gift Check ?</asp:Label>
                             <asp:HiddenField ID="hfUsedGCId" runat="server" />
+                            <asp:HiddenField ID="hfBtnUsedStatus" runat="server" />
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="btnConfirmUseGC"

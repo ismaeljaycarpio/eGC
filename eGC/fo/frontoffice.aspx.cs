@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace eGC.fo
 {
@@ -86,6 +87,16 @@ namespace eGC.fo
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
 
+                //chk if complete
+                string btnComplete = ((Button)gvGC.Rows[index].FindControl("btnUsed")).Text;
+
+                if(btnComplete == "Complete")
+                {
+                    hfBtnUsedStatus.Value = "Complete";
+                    lblForUseGCTitle.Text = "Complete GC";
+                    lblForUseGCContent.Text = "Are you sure you want to complete this Gift Check and move it to History ?";
+                }
+
                 hfUsedGCId.Value = rowId;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -154,32 +165,36 @@ namespace eGC.fo
         protected void btnExport_Click(object sender, EventArgs e)
         {
             string strSearch = txtSearch.Text;
-            var products = (from guest in db.Guests
-                           join gctran in db.GCTransactions
-                           on guest.GuestId equals gctran.GuestId
-                           where
-                           (guest.GuestId.Contains(strSearch) ||
-                           guest.LastName.Contains(strSearch) ||
-                           guest.FirstName.Contains(strSearch) ||
-                           guest.MiddleName.Contains(strSearch) ||
-                           guest.CompanyName.Contains(strSearch) ||
-                           gctran.GCNumber.Contains(strSearch) ||
-                           gctran.ApprovalStatus.Contains(strSearch)) &&
-                           (gctran.ApprovalStatus == "Approved")
-                           select new
-                           {
-                               GuestId = guest.GuestId,
-                               FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                               CompanyName = guest.CompanyName,
-                               Number = guest.ContactNumber,
-                               GCNumber = gctran.GCNumber,
-                               ArrivalDate = gctran.ArrivalDate,
-                               CheckoutDate = gctran.CheckOutDate,
-                               Status = gctran.StatusGC,
-                               TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
-                           }).ToList();
 
-            GridView1.DataSource = products;
+            var q = (from guest in db.Guests
+                     join gctran in db.GCTransactions
+                     on guest.GuestId equals gctran.GuestId
+                     where
+                     (
+                     guest.GuestId.Contains(strSearch) ||
+                     guest.LastName.Contains(strSearch) ||
+                     guest.FirstName.Contains(strSearch) ||
+                     guest.MiddleName.Contains(strSearch) ||
+                     guest.CompanyName.Contains(strSearch) ||
+                     gctran.GCNumber.Contains(strSearch) ||
+                     gctran.ApprovalStatus.Contains(strSearch)
+                     ) &&
+                     (gctran.ApprovalStatus == "Approved") &&
+                     (gctran.IsArchive == false)
+                     select new
+                     {
+                         GuestId = guest.GuestId,
+                         FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                         Number = guest.ContactNumber,
+                         GCNumber = gctran.GCNumber,
+                         ArrivalDate = gctran.ArrivalDate,
+                         CheckoutDate = gctran.CheckOutDate,
+                         Status = gctran.StatusGC,
+                         TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                     }).ToList();
+
+            GridView1.DataSource = q;
             GridView1.DataBind();
             ExcelPackage excel = new ExcelPackage();
             var workSheet = excel.Workbook.Worksheets.Add("GC Lists");
@@ -194,7 +209,7 @@ namespace eGC.fo
             {
                 for (var i = 1; i <= totalCols; i++)
                 {
-                    var product = products.ElementAt(j - 1);
+                    var product = q.ElementAt(j - 1);
                     workSheet.Cells[j + 1, i].Value = product.GetType().GetProperty(headerRow.Cells[i - 1].Text).GetValue(product, null);
                 }
             }
@@ -216,7 +231,16 @@ namespace eGC.fo
                         where gc.Id == gcId
                         select gc).FirstOrDefault();
 
-            tran.StatusGC = "Used";
+            if(hfBtnUsedStatus.Value == "Complete")
+            {
+                tran.StatusGC = "Completed";
+                //tran.IsArchive = true;
+            }
+            else
+            {
+                tran.StatusGC = "Used";
+            }
+            
             db.SubmitChanges();
 
             this.gvGC.DataBind();
@@ -329,10 +353,21 @@ namespace eGC.fo
             {
                 Label lblGCStatus = e.Row.FindControl("lblGCStatus") as Label;
                 Button btnUse = e.Row.FindControl("btnUsed") as Button;
+                Button btnCancel = e.Row.FindControl("btnCancelled") as Button;
 
                 if(lblGCStatus.Text == "Used")
                 {
+                    //btnUse.Visible = false;
+                    lblGCStatus.ForeColor = Color.Green;
+                    btnUse.Text = "Complete";
+                    btnUse.CssClass = "btn btn-primary";
+                }
+                else if(lblGCStatus.Text == "Completed")
+                {
                     btnUse.Visible = false;
+                    btnCancel.Visible = false;
+                    lblGCStatus.ForeColor = Color.DarkGreen;
+                    lblGCStatus.Font.Bold = true;
                 }
             }
         }
