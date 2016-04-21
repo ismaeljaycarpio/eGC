@@ -345,6 +345,7 @@ namespace eGC.fo
 
                 e.Result = q;
             }
+            txtSearch.Focus();
         }
 
         protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)

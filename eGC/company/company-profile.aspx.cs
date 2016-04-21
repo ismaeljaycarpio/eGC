@@ -135,6 +135,12 @@ namespace eGC.company
                 string rowId = ((LinkButton)gvCompany.Rows[index].FindControl("lbtnCompanyId")).Text;
                 Response.Redirect("~/tran/gcform.aspx?guestid=" + rowId);
             }
+            else if(e.CommandName.Equals("viewGCRecords"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string Id = gvCompany.DataKeys[index].Value.ToString();
+                Response.Redirect("~/company/company-gc-records.aspx?companyId=" + Id);
+            }
         }
     }
 }

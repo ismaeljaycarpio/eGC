@@ -126,6 +126,7 @@
     <Content Include="admin\UserConfig.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="company\add-company.aspx" />
+    <Content Include="company\company-gc-records.aspx" />
     <Content Include="company\company-profile.aspx" />
     <Content Include="company\edit-company.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
@@ -393,6 +394,13 @@
     </Compile>
     <Compile Include="company\add-company.aspx.designer.cs">
       <DependentUpon>add-company.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="company\company-gc-records.aspx.cs">
+      <DependentUpon>company-gc-records.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="company\company-gc-records.aspx.designer.cs">
+      <DependentUpon>company-gc-records.aspx</DependentUpon>
     </Compile>
     <Compile Include="company\company-profile.aspx.cs">
       <DependentUpon>company-profile.aspx</DependentUpon>

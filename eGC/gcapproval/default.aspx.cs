@@ -187,7 +187,8 @@ namespace eGC.gcapproval
                              Status = gctran.StatusGC,
                              TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
                              Approval = gctran.ApprovalStatus,
-                             CancellationReason = gctran.CancellationReason
+                             CancellationReason = gctran.CancellationReason,
+                             CancelledDate = gctran.CancelledDate
                          }).ToList();
 
                 e.Result = q;
@@ -222,7 +223,8 @@ namespace eGC.gcapproval
                              Status = gctran.StatusGC,
                              TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
                              Approval = gctran.ApprovalStatus,
-                             CancellationReason = gctran.CancellationReason
+                             CancellationReason = gctran.CancellationReason,
+                             CancelledDate = gctran.CancelledDate
                          }).ToList();
 
                 e.Result = q;

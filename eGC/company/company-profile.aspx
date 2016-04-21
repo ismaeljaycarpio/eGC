@@ -69,6 +69,16 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
+                                                <asp:LinkButton ID="lbtnViewGCRecords"
+                                                    runat="server"
+                                                    Text="View GC Records"
+                                                    CommandName="viewGCRecords"
+                                                    CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
                                                 <asp:Button ID="btnAddGC" 
                                                     runat="server" 
                                                     Text="Add GC" 
