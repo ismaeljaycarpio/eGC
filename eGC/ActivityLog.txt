@@ -6,7 +6,7 @@
 to do:
 	- automated expiration
 	- Date Cancelled in approval list
-	- Include fm-> Guest and Company in Approver  but cant add GC/Delete/Create Guest Profile and [Company]
+<DONE>		- Include fm-> Guest and Company in Approver  but cant add GC/Delete/Create Guest Profile and [Company]
 	- add Export to - http://localhost:2919/company/company-gc-records.aspx?companyId=14
 	- Guest report [add date range]
 

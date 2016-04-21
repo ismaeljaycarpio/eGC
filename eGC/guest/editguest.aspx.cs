@@ -70,6 +70,13 @@ namespace eGC.guest
                         txtContactPerson.Text = guest.EmergencyContactPerson;
                         txtContactPersonNumber.Text = guest.EmergencyContactNumber;
                         txtContactPersonAddress.Text = guest.EmergencyContactAddress;
+
+                        if(User.IsInRole("CanApprove"))
+                        {
+                            pnlInputForm.Enabled = false;
+                            FileUpload1.Enabled = false;
+                            FileUpload2.Enabled = false;
+                        }
                     }
                 }
             }
@@ -198,6 +205,11 @@ namespace eGC.guest
             ddlCompanyName.DataValueField = "Id";
             ddlCompanyName.DataBind();
             ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
+        }
+
+        protected void lbtnClose_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/guest/default.aspx");
         }
     }
 }

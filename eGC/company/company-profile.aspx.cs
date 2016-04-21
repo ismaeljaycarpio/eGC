@@ -17,6 +17,15 @@ namespace eGC.company
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!Page.IsPostBack)
+            {
+                if(User.IsInRole("CanApprove"))
+                {
+                    lbtnCreateCompany.Visible = false;
+                    gvCompany.Columns[5].Visible = false;
+                    gvCompany.Columns[6].Visible = false;
+                }
+            }
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)

@@ -156,6 +156,7 @@
     <Content Include="guest\createguest.aspx" />
     <Content Include="guest\default.aspx" />
     <Content Include="guest\editguest.aspx" />
+    <Content Include="guest\guest-gc-records.aspx" />
     <Content Include="IDPic\noImage.png" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
@@ -479,6 +480,13 @@
     </Compile>
     <Compile Include="guest\editguest.aspx.designer.cs">
       <DependentUpon>editguest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guest\guest-gc-records.aspx.cs">
+      <DependentUpon>guest-gc-records.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guest\guest-gc-records.aspx.designer.cs">
+      <DependentUpon>guest-gc-records.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

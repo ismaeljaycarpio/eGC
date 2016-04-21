@@ -16,9 +16,18 @@ namespace eGC.guest
         GiftCheckDataContext db = new GiftCheckDataContext();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
                 bindDropdown();
+                this.gvGuests.DataBind();
+
+                //hide from approver
+                if (User.IsInRole("CanApprove"))
+                {
+                    lbtnGuestProfile.Visible = false;
+                    gvGuests.Columns[6].Visible = false;
+                    gvGuests.Columns[7].Visible = false;
+                }
             }
         }
 
@@ -52,6 +61,12 @@ namespace eGC.guest
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((LinkButton)gvGuests.Rows[index].FindControl("lbtnGuestId")).Text;
                 Response.Redirect("~/tran/gcform.aspx?guestid=" + rowId);
+            }
+            else if (e.CommandName.Equals("viewGCRecords"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string Id = gvGuests.DataKeys[index].Value.ToString();
+                Response.Redirect("~/guest/guest-gc-records.aspx?guestId=" + Id);
             }
         }
 

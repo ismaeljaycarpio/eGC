@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eGC.company {
+namespace eGC.guest {
     
     
-    public partial class company_gc_records {
+    public partial class guest_gc_records {
         
         /// <summary>
         /// Panel1 control.

@@ -46,6 +46,11 @@ namespace eGC.company
                         txtContactPersonNumber.Text = guest.EmergencyContactNumber;
                         txtContactPersonAddress.Text = guest.EmergencyContactAddress;
                     }
+
+                    if(User.IsInRole("CanApprove"))
+                    {
+                        disableFields();
+                    }
                 }
             }
         }
@@ -73,6 +78,19 @@ namespace eGC.company
 
                 pnlSuccess.Visible = true;
             }
+        }
+
+        protected void disableFields()
+        {
+            txtCompanyId.Enabled = false;
+            txtCompanyName.Enabled = false;
+            txtContactNo.Enabled = false;
+            txtEmail.Enabled = false;
+            txtIdNumber.Enabled = false;
+            txtContactPerson.Enabled = false;
+            txtContactPersonNumber.Enabled = false;
+            txtContactPersonAddress.Enabled = false;
+            btnUpdate.Enabled = false;
         }
     }
 }

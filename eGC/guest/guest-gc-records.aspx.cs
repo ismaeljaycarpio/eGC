@@ -12,9 +12,9 @@ using OfficeOpenXml;
 using eGC.DAL;
 using System.IO;
 
-namespace eGC.company
+namespace eGC.guest
 {
-    public partial class company_gc_records : System.Web.UI.Page
+    public partial class guest_gc_records : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
 
@@ -38,10 +38,11 @@ namespace eGC.company
 
         }
 
-        protected void GCRecordDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        protected void btnExport_Click(object sender, EventArgs e)
         {
             string strSearch = txtSearch.Text;
-            var q = from guest in db.Guests
+
+            var q = (from guest in db.Guests
                      join gctran in db.GCTransactions
                      on guest.GuestId equals gctran.GuestId
                      where
@@ -53,12 +54,11 @@ namespace eGC.company
                      gctran.ApprovalStatus.Contains(strSearch) ||
                      gctran.GCNumber.Contains(strSearch) ||
                      guest.CompanyName.Contains(strSearch)
-                     ) 
+                     )
                      &&
-                     (guest.CompanyId == Convert.ToInt32(Request.QueryString["companyId"]))
+                     (guest.Id == Convert.ToInt32(Request.QueryString["guestId"]))
                      select new
                      {
-                         Id = gctran.Id,
                          GuestId = guest.GuestId,
                          FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
                          CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
@@ -71,55 +71,7 @@ namespace eGC.company
                          Approval = gctran.ApprovalStatus,
                          CancellationReason = gctran.CancellationReason,
                          CancelledDate = gctran.CancelledDate
-                     };
-
-            if(txtDateFrom.Text != String.Empty && txtDateTo.Text == String.Empty)
-            {
-                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text));
-            }
-            else if(txtDateFrom.Text != String.Empty && txtDateTo.Text != String.Empty)
-            {
-                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text) &&
-                    a.ArrivalDate <= Convert.ToDateTime(txtDateTo.Text));
-            }
-
-            e.Result = q;
-            txtSearch.Focus();
-        }
-
-        protected void btnExport_Click(object sender, EventArgs e)
-        {
-            string strSearch = txtSearch.Text;
-            var q = (from guest in db.Guests
-                    join gctran in db.GCTransactions
-                    on guest.GuestId equals gctran.GuestId
-                    where
-                    (
-                    guest.GuestId.Contains(strSearch) ||
-                    guest.LastName.Contains(strSearch) ||
-                    guest.FirstName.Contains(strSearch) ||
-                    guest.MiddleName.Contains(strSearch) ||
-                    gctran.ApprovalStatus.Contains(strSearch) ||
-                    gctran.GCNumber.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch)
-                    )
-                    &&
-                    (guest.CompanyId == Convert.ToInt32(Request.QueryString["companyId"]))
-                    select new
-                    {
-                        GuestId = guest.GuestId,
-                        FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                        CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
-                        Number = guest.ContactNumber,
-                        GCNumber = gctran.GCNumber,
-                        ArrivalDate = gctran.ArrivalDate,
-                        CheckoutDate = gctran.CheckOutDate,
-                        Status = gctran.StatusGC,
-                        TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
-                        Approval = gctran.ApprovalStatus,
-                        CancellationReason = gctran.CancellationReason,
-                        CancelledDate = gctran.CancelledDate
-                    }).ToList();
+                     }).ToList();
 
             if (txtDateFrom.Text != String.Empty && txtDateTo.Text == String.Empty)
             {
@@ -136,7 +88,7 @@ namespace eGC.company
 
             var products = dt;
             ExcelPackage excel = new ExcelPackage();
-            var workSheet = excel.Workbook.Worksheets.Add("Company GC Records");
+            var workSheet = excel.Workbook.Worksheets.Add("Guest GC Records");
             var totalCols = products.Columns.Count;
             var totalRows = products.Rows.Count;
 
@@ -154,12 +106,61 @@ namespace eGC.company
             using (var memoryStream = new MemoryStream())
             {
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;  filename=company-gc-records.xlsx");
+                Response.AddHeader("content-disposition", "attachment;  filename=guest-gc-records.xlsx");
                 excel.SaveAs(memoryStream);
                 memoryStream.WriteTo(Response.OutputStream);
                 Response.Flush();
                 Response.End();
             }
+        }
+
+        protected void GCRecordDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            string strSearch = txtSearch.Text;
+            var q = from guest in db.Guests
+                    join gctran in db.GCTransactions
+                    on guest.GuestId equals gctran.GuestId
+                    where
+                    (
+                    guest.GuestId.Contains(strSearch) ||
+                    guest.LastName.Contains(strSearch) ||
+                    guest.FirstName.Contains(strSearch) ||
+                    guest.MiddleName.Contains(strSearch) ||
+                    gctran.ApprovalStatus.Contains(strSearch) ||
+                    gctran.GCNumber.Contains(strSearch) ||
+                    guest.CompanyName.Contains(strSearch)
+                    )
+                    &&
+                    (guest.Id == Convert.ToInt32(Request.QueryString["guestId"]))
+                    select new
+                    {
+                        Id = gctran.Id,
+                        GuestId = guest.GuestId,
+                        FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                        CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                        Number = guest.ContactNumber,
+                        GCNumber = gctran.GCNumber,
+                        ArrivalDate = gctran.ArrivalDate,
+                        CheckoutDate = gctran.CheckOutDate,
+                        Status = gctran.StatusGC,
+                        TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
+                        Approval = gctran.ApprovalStatus,
+                        CancellationReason = gctran.CancellationReason,
+                        CancelledDate = gctran.CancelledDate
+                    };
+
+            if (txtDateFrom.Text != String.Empty && txtDateTo.Text == String.Empty)
+            {
+                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text));
+            }
+            else if (txtDateFrom.Text != String.Empty && txtDateTo.Text != String.Empty)
+            {
+                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text) &&
+                    a.ArrivalDate <= Convert.ToDateTime(txtDateTo.Text));
+            }
+
+            e.Result = q;
+            txtSearch.Focus();
         }
     }
 }

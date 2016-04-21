@@ -66,6 +66,16 @@
                                         <asp:BoundField DataField="Number" HeaderText="Number" SortExpression="Number" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
 
+                                        <asp:TemplateField HeaderText="GC Records">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lbtnViewGCRecords"
+                                                    runat="server"
+                                                    Text="View GC Records"
+                                                    CommandName="viewGCRecords"
+                                                    CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:Button ID="btnAddGC" runat="server" Text="Add GC" CommandName="addGC" CssClass="btn btn-success" CommandArgument='<%#((GridViewRow) Container).RowIndex %>' />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="GC Records" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="company-gc-records.aspx.cs" Inherits="eGC.company.company_gc_records" %>
+﻿<%@ Page Title="GC Records" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="guest-gc-records.aspx.cs" Inherits="eGC.guest.guest_gc_records" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -128,5 +128,4 @@
         runat="server"
         OnSelecting="GCRecordDataSource_Selecting">
     </asp:LinqDataSource>
-
 </asp:Content>

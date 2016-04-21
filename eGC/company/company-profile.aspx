@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <div class="col-md-12">
+                            <div class="col-md-5">
                                 <div class="input-group">
                                     <asp:TextBox ID="txtSearch"
                                         runat="server"
@@ -25,14 +25,6 @@
                                             Text="Go"
                                             OnClick="btnSearch_Click" />
                                     </span>
-
-                                    <div class="pull-right">
-                                        <asp:Button ID="btnExport"
-                                            runat="server"
-                                            Text="Export to Excel"
-                                            OnClick="btnExport_Click"
-                                            CssClass="btn btn-default btn-sm" />
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +59,7 @@
                                         <asp:BoundField DataField="ContactNumber" HeaderText="Number" SortExpression="Number" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
 
-                                        <asp:TemplateField>
+                                        <asp:TemplateField HeaderText="GC Records">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnViewGCRecords"
                                                     runat="server"
@@ -79,22 +71,22 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="btnAddGC" 
-                                                    runat="server" 
-                                                    Text="Add GC" 
-                                                    CommandName="addGC" 
-                                                    CssClass="btn btn-success" 
+                                                <asp:Button ID="btnAddGC"
+                                                    runat="server"
+                                                    Text="Add GC"
+                                                    CommandName="addGC"
+                                                    CssClass="btn btn-success"
                                                     CommandArgument='<%#((GridViewRow) Container).RowIndex %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="btnDelete" 
-                                                    runat="server" 
-                                                    Text="Delete" 
-                                                    CommandName="deleteRecord" 
-                                                    CommandArgument='<%#((GridViewRow)Container).RowIndex %>' 
+                                                <asp:Button ID="btnDelete"
+                                                    runat="server"
+                                                    Text="Delete"
+                                                    CommandName="deleteRecord"
+                                                    CommandArgument='<%#((GridViewRow)Container).RowIndex %>'
                                                     CssClass="btn btn-danger"></asp:Button>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -106,8 +98,16 @@
                                     runat="server"
                                     CssClass="btn btn-default"
                                     PostBackUrl="~/company/add-company.aspx">Create Company Profile</asp:LinkButton>
+
+                                <asp:Button ID="btnExport"
+                                    runat="server"
+                                    Text="Export to Excel"
+                                    OnClick="btnExport_Click"
+                                    CssClass="btn btn-default btn-sm pull-right" />
+
                             </ContentTemplate>
                             <Triggers>
+                                <asp:PostBackTrigger ControlID="btnExport" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>

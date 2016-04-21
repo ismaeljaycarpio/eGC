@@ -130,7 +130,10 @@
                                     Text="Update"
                                     CausesValidation="true"
                                     OnClick="btnUpdate_Click" />
-                                <asp:LinkButton ID="lbtnClose" runat="server" PostBackUrl="~/company/company-profile.aspx" CssClass="btn btn-default">Close</asp:LinkButton>
+                                <asp:LinkButton ID="lbtnClose" 
+                                    runat="server" 
+                                    PostBackUrl="~/company/company-profile.aspx" 
+                                    CssClass="btn btn-default">Close</asp:LinkButton>
                             </div>
                         </div>
                     </div>
