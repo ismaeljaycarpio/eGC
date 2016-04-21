@@ -10,7 +10,7 @@
                     <h5>Guests</h5>
                 </div>
                 <div class="panel-body">
-                    <div class="form-horizontal">
+                    <div class="form-inline">
                         <div class="form-group">
                             <div class="col-md-12">
                                 <div class="input-group">
@@ -19,25 +19,21 @@
                                         CssClass="form-control"
                                         placeholder="Search..."></asp:TextBox>
                                     <span class="input-group-btn">
+                                        <asp:DropDownList ID="ddlCompanyName"
+                                            CssClass="form-control"
+                                            runat="server">
+                                        </asp:DropDownList>
                                         <asp:Button ID="btnSearch"
                                             runat="server"
                                             CssClass="btn btn-primary"
                                             Text="Go"
                                             OnClick="btnSearch_Click" />
                                     </span>
-
-                                    <div class="pull-right">
-                                        <asp:Button ID="btnExport"
-                                            runat="server"
-                                            Text="Export to Excel"
-                                            OnClick="btnExport_Click"
-                                            CssClass="btn btn-default btn-sm" />
-                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                    <br />
                     <div class="table-responsive">
                         <asp:UpdatePanel ID="upGuests" runat="server">
                             <ContentTemplate>
@@ -86,6 +82,13 @@
                                     <PagerStyle CssClass="pagination-ys" />
                                 </asp:GridView>
                                 <asp:LinkButton ID="lbtnGuestProfile" runat="server" CssClass="btn btn-default" PostBackUrl="~/guest/createguest.aspx">Create Guest Profile</asp:LinkButton>
+                                <div class="pull-right">
+                                    <asp:Button ID="btnExport"
+                                        runat="server"
+                                        Text="Export to Excel"
+                                        OnClick="btnExport_Click"
+                                        CssClass="btn btn-default btn-sm" />
+                                </div>
                             </ContentTemplate>
                             <Triggers>
                             </Triggers>

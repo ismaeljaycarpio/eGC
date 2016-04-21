@@ -15,8 +15,8 @@
       </siteMapNode>
     
       <siteMapNode url="~/company/company-profile.aspx" title="Company"  description="">
-        <siteMapNode url="~/company/add-company.aspx" title="Create Company"  description="">
-        </siteMapNode>
+        <siteMapNode url="~/company/add-company.aspx" title="Create Company"  description=""></siteMapNode>
+        <siteMapNode url="~/company/edit-company.aspx" title="Edit Company"  description=""></siteMapNode>
       </siteMapNode>
       
       <siteMapNode url="~/room/default.aspx" title="Room"  description="">

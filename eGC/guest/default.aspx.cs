@@ -18,7 +18,7 @@ namespace eGC.guest
         {
             if(!Page.IsPostBack)
             {
-                gvGuests.DataBind();
+                bindDropdown();
             }
         }
 
@@ -149,30 +149,80 @@ namespace eGC.guest
 
         protected void GuestDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
-            var q = from g in db.Guests
-                    where 
-                    (
-                    g.GuestId.Contains(txtSearch.Text) ||
-                    g.FirstName.Contains(txtSearch.Text) ||
-                    g.MiddleName.Contains(txtSearch.Text) ||
-                    g.LastName.Contains(txtSearch.Text) ||
-                    g.CompanyName.Contains(txtSearch.Text) ||
-                    g.ContactNumber.Contains(txtSearch.Text) ||
-                    g.Email.Contains(txtSearch.Text)
-                    )
-                    select new
-                    {
-                        Id = g.Id,
-                        GuestId = g.GuestId,
-                        FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
-                        CompanyName = (from gu in db.Guests where g.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
-                        Number = g.ContactNumber,
-                        Email = g.Email
-                    };
+            //chk compay ddl
+            if (ddlCompanyName.SelectedValue != "0")
+            {
+                var q = from g in db.Guests
+                        where
+                        (
+                        g.GuestId.Contains(txtSearch.Text) ||
+                        g.FirstName.Contains(txtSearch.Text) ||
+                        g.MiddleName.Contains(txtSearch.Text) ||
+                        g.LastName.Contains(txtSearch.Text) ||
+                        g.ContactNumber.Contains(txtSearch.Text) ||
+                        g.Email.Contains(txtSearch.Text)
+                        )
+                        &&
+                        g.IsCompany == false
+                        &&
+                        g.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue)
+                        select new
+                        {
+                            Id = g.Id,
+                            GuestId = g.GuestId,
+                            FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
+                            CompanyName = (from gu in db.Guests where g.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                            Number = g.ContactNumber,
+                            Email = g.Email
+                        };
 
-            var list = q.Where(x => x.CompanyName.Contains(txtSearch.Text));
-            e.Result = list.ToList().OrderBy(i => i.Id);
+                e.Result = q.ToList();
+            }
+            else
+            {
+                var q = from g in db.Guests
+                        where
+                        (
+                        g.GuestId.Contains(txtSearch.Text) ||
+                        g.FirstName.Contains(txtSearch.Text) ||
+                        g.MiddleName.Contains(txtSearch.Text) ||
+                        g.LastName.Contains(txtSearch.Text) ||
+                        g.ContactNumber.Contains(txtSearch.Text) ||
+                        g.Email.Contains(txtSearch.Text)
+                        )
+                        &&
+                        g.IsCompany == false
+                        select new
+                        {
+                            Id = g.Id,
+                            GuestId = g.GuestId,
+                            FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
+                            CompanyName = (from gu in db.Guests where g.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                            Number = g.ContactNumber,
+                            Email = g.Email
+                        };
+
+                e.Result = q.ToList();
+            }
+            
             txtSearch.Focus();
+        }
+
+        private void bindDropdown()
+        {
+            var q = (from g in db.Guests
+                     where g.IsCompany == true
+                     select new
+                     {
+                         Id = g.Id,
+                         CompanyName = g.CompanyName
+                     }).ToList();
+
+            ddlCompanyName.DataSource = q;
+            ddlCompanyName.DataTextField = "CompanyName";
+            ddlCompanyName.DataValueField = "Id";
+            ddlCompanyName.DataBind();
+            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
         }
     }
 }
