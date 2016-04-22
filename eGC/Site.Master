@@ -127,6 +127,7 @@
                                         </li>
                                         <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
                                         <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
+                                        <li><a runat="server" href="~/report/report.aspx">Reports</a></li>
                                         <li><a runat="server" href="~/admin/userconfig.aspx">User Config</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
@@ -171,35 +172,7 @@
                                            {%>
                                         <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
                                         <%} %>
-                                    </ul>
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li class="dropdown">
-                                            <a runat="server"
-                                                href="#"
-                                                class="dropdown-toggle"
-                                                data-toggle="dropdown"
-                                                role="button"
-                                                aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <span class="badge"><%: System.Web.Security.Roles.GetRolesForUser().FirstOrDefault() %></span>
-                                                <asp:LoginName ID="LoginName1" runat="server" />
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a runat="server" href="~/Account/Manage.aspx">Change Password</a></li>
-                                                <li>
-                                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="Log Out" />
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </ContentTemplate>
-                            </asp:RoleGroup>
-
-                            <asp:RoleGroup Roles="CanApprove">
-                                <ContentTemplate>
-                                    <ul class="nav navbar-nav">
-                                        <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
+                                        <li><a runat="server" href="~/report/report.aspx">Reports</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li class="dropdown">

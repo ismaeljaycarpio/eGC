@@ -122,7 +122,7 @@ namespace eGC.gcapproval
 
             var q = from guest in db.Guests
                     join gctran in db.GCTransactions
-                    on guest.GuestId equals gctran.GuestId
+                    on guest.Id equals gctran.GuestId
                     where
                     (
                     guest.GuestId.Contains(strSearch) ||
@@ -163,7 +163,7 @@ namespace eGC.gcapproval
             {
                 var q = (from guest in db.Guests
                          join gctran in db.GCTransactions
-                         on guest.GuestId equals gctran.GuestId
+                         on guest.Id equals gctran.GuestId
                          where
                          (
                          guest.GuestId.Contains(strSearch) ||
@@ -199,7 +199,7 @@ namespace eGC.gcapproval
             {
                 var q = (from guest in db.Guests
                          join gctran in db.GCTransactions
-                         on guest.GuestId equals gctran.GuestId
+                         on guest.Id equals gctran.GuestId
                          where
                          (
                          guest.GuestId.Contains(strSearch) ||

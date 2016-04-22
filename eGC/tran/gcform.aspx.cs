@@ -200,7 +200,6 @@ namespace eGC.tran
         {
             GCTransaction tran = new GCTransaction();
             tran.GCNumber = txtGCNumber.Text;
-            tran.GuestId = txtGuestId.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
             tran.ApprovedBy = txtApprovedBy.Text;
             tran.AccountNo = txtAccountNo.Text;

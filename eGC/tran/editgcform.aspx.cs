@@ -55,7 +55,7 @@ namespace eGC.tran
 
                     //load guest
                     var guest = (from gu in db.Guests
-                             where gu.GuestId == tGC.GuestId
+                             where gu.Id == tGC.GuestId
                              select gu).FirstOrDefault();
 
                     txtName.Text = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName;
@@ -166,7 +166,6 @@ namespace eGC.tran
 
 
             tran.GCNumber = txtGCNumber.Text;
-            tran.GuestId = txtGuestId.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
             tran.ApprovedBy = txtApprovedBy.Text;
             tran.AccountNo = txtAccountNo.Text;

@@ -94,32 +94,10 @@
       <Association Name="Role_UsersInRole" Member="Role" ThisKey="RoleId" OtherKey="RoleId" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.GCTransaction" Member="GCTransactions">
-    <Type Name="GCTransaction">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="GCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="GuestId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="RecommendingApproval" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="ApprovedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Reason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CheckOutDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ApprovalStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="StatusGC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CancellationReason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="CancelledDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsArchive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="GCTransaction_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="GCTransactionId" Type="GCRoom" />
-      <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="GuestId" Type="Guest" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.Guest" Member="Guests">
     <Type Name="Guest">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="GuestId" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GuestId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -137,7 +115,29 @@
       <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IsCompany" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Guest_GCTransaction" Member="GCTransactions" ThisKey="GuestId" OtherKey="GuestId" Type="GCTransaction" />
+      <Association Name="Guest_GCTransaction" Member="GCTransactions" ThisKey="Id" OtherKey="GuestId" Type="GCTransaction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GCTransaction" Member="GCTransactions">
+    <Type Name="GCTransaction">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GuestId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RecommendingApproval" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ApprovedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Reason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CheckOutDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ApprovalStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusGC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CancellationReason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CancelledDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsArchive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="GCTransaction_GCRoom" Member="GCRooms" ThisKey="Id" OtherKey="GCTransactionId" Type="GCRoom" />
+      <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="Id" Type="Guest" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -40,5 +40,7 @@
         </siteMapNode>
       </siteMapNode>
       
+    <siteMapNode url="~/report/report.aspx" title="Reports"  description=""></siteMapNode>
+
     </siteMapNode>
 </siteMap>

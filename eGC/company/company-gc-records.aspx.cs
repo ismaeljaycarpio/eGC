@@ -43,7 +43,7 @@ namespace eGC.company
             string strSearch = txtSearch.Text;
             var q = from guest in db.Guests
                      join gctran in db.GCTransactions
-                     on guest.GuestId equals gctran.GuestId
+                     on guest.Id equals gctran.GuestId
                      where
                      (
                      guest.GuestId.Contains(strSearch) ||
@@ -93,7 +93,7 @@ namespace eGC.company
             string strSearch = txtSearch.Text;
             var q = (from guest in db.Guests
                     join gctran in db.GCTransactions
-                    on guest.GuestId equals gctran.GuestId
+                    on guest.Id equals gctran.GuestId
                     where
                     (
                     guest.GuestId.Contains(strSearch) ||

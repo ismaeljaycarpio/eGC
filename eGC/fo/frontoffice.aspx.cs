@@ -38,7 +38,7 @@ namespace eGC.fo
                 //load guest profile
                 var gu = (from g in db.Guests
                          join tran in db.GCTransactions
-                         on g.GuestId equals tran.GuestId
+                         on g.Id equals tran.GuestId
                          where tran.Id == Convert.ToInt32(rowId)
                          select new
                          {
@@ -133,7 +133,7 @@ namespace eGC.fo
 
             var q = from guest in db.Guests
                     join gctran in db.GCTransactions
-                    on guest.GuestId equals gctran.GuestId
+                    on guest.Id equals gctran.GuestId
                     where
                     (guest.GuestId.Contains(strSearch) ||
                     guest.LastName.Contains(strSearch) ||
@@ -169,7 +169,7 @@ namespace eGC.fo
 
             var q = (from guest in db.Guests
                      join gctran in db.GCTransactions
-                     on guest.GuestId equals gctran.GuestId
+                     on guest.Id equals gctran.GuestId
                      where
                      (
                      guest.GuestId.Contains(strSearch) ||
@@ -284,7 +284,7 @@ namespace eGC.fo
             {
                 var q = (from guest in db.Guests
                          join gctran in db.GCTransactions
-                         on guest.GuestId equals gctran.GuestId
+                         on guest.Id equals gctran.GuestId
                          where
                          (
                          guest.GuestId.Contains(strSearch) ||
@@ -318,7 +318,7 @@ namespace eGC.fo
             {
                 var q = (from guest in db.Guests
                          join gctran in db.GCTransactions
-                         on guest.GuestId equals gctran.GuestId
+                         on guest.Id equals gctran.GuestId
                          where
                          (
                          guest.GuestId.Contains(strSearch) ||

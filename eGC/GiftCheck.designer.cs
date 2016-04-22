@@ -54,12 +54,12 @@ namespace eGC
     partial void InsertUsersInRole(UsersInRole instance);
     partial void UpdateUsersInRole(UsersInRole instance);
     partial void DeleteUsersInRole(UsersInRole instance);
-    partial void InsertGCTransaction(GCTransaction instance);
-    partial void UpdateGCTransaction(GCTransaction instance);
-    partial void DeleteGCTransaction(GCTransaction instance);
     partial void InsertGuest(Guest instance);
     partial void UpdateGuest(Guest instance);
     partial void DeleteGuest(Guest instance);
+    partial void InsertGCTransaction(GCTransaction instance);
+    partial void UpdateGCTransaction(GCTransaction instance);
+    partial void DeleteGCTransaction(GCTransaction instance);
     #endregion
 		
 		public GiftCheckDataContext() : 
@@ -156,19 +156,19 @@ namespace eGC
 			}
 		}
 		
-		public System.Data.Linq.Table<GCTransaction> GCTransactions
-		{
-			get
-			{
-				return this.GetTable<GCTransaction>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Guest> Guests
 		{
 			get
 			{
 				return this.GetTable<Guest>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GCTransaction> GCTransactions
+		{
+			get
+			{
+				return this.GetTable<GCTransaction>();
 			}
 		}
 	}
@@ -2070,497 +2070,6 @@ namespace eGC
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCTransaction")]
-	public partial class GCTransaction : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _GCNumber;
-		
-		private string _GuestId;
-		
-		private string _RecommendingApproval;
-		
-		private string _ApprovedBy;
-		
-		private string _AccountNo;
-		
-		private string _Remarks;
-		
-		private string _Reason;
-		
-		private System.Nullable<System.DateTime> _ArrivalDate;
-		
-		private System.Nullable<System.DateTime> _CheckOutDate;
-		
-		private string _ApprovalStatus;
-		
-		private string _StatusGC;
-		
-		private string _CancellationReason;
-		
-		private System.Nullable<System.DateTime> _CancelledDate;
-		
-		private System.Nullable<System.DateTime> _ExpiryDate;
-		
-		private System.Nullable<bool> _IsArchive;
-		
-		private EntitySet<GCRoom> _GCRooms;
-		
-		private EntityRef<Guest> _Guest;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnGCNumberChanging(string value);
-    partial void OnGCNumberChanged();
-    partial void OnGuestIdChanging(string value);
-    partial void OnGuestIdChanged();
-    partial void OnRecommendingApprovalChanging(string value);
-    partial void OnRecommendingApprovalChanged();
-    partial void OnApprovedByChanging(string value);
-    partial void OnApprovedByChanged();
-    partial void OnAccountNoChanging(string value);
-    partial void OnAccountNoChanged();
-    partial void OnRemarksChanging(string value);
-    partial void OnRemarksChanged();
-    partial void OnReasonChanging(string value);
-    partial void OnReasonChanged();
-    partial void OnArrivalDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnArrivalDateChanged();
-    partial void OnCheckOutDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCheckOutDateChanged();
-    partial void OnApprovalStatusChanging(string value);
-    partial void OnApprovalStatusChanged();
-    partial void OnStatusGCChanging(string value);
-    partial void OnStatusGCChanged();
-    partial void OnCancellationReasonChanging(string value);
-    partial void OnCancellationReasonChanged();
-    partial void OnCancelledDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCancelledDateChanged();
-    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnExpiryDateChanged();
-    partial void OnIsArchiveChanging(System.Nullable<bool> value);
-    partial void OnIsArchiveChanged();
-    #endregion
-		
-		public GCTransaction()
-		{
-			this._GCRooms = new EntitySet<GCRoom>(new Action<GCRoom>(this.attach_GCRooms), new Action<GCRoom>(this.detach_GCRooms));
-			this._Guest = default(EntityRef<Guest>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GCNumber", DbType="VarChar(50)")]
-		public string GCNumber
-		{
-			get
-			{
-				return this._GCNumber;
-			}
-			set
-			{
-				if ((this._GCNumber != value))
-				{
-					this.OnGCNumberChanging(value);
-					this.SendPropertyChanging();
-					this._GCNumber = value;
-					this.SendPropertyChanged("GCNumber");
-					this.OnGCNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="VarChar(50)")]
-		public string GuestId
-		{
-			get
-			{
-				return this._GuestId;
-			}
-			set
-			{
-				if ((this._GuestId != value))
-				{
-					if (this._Guest.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGuestIdChanging(value);
-					this.SendPropertyChanging();
-					this._GuestId = value;
-					this.SendPropertyChanged("GuestId");
-					this.OnGuestIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecommendingApproval", DbType="VarChar(MAX)")]
-		public string RecommendingApproval
-		{
-			get
-			{
-				return this._RecommendingApproval;
-			}
-			set
-			{
-				if ((this._RecommendingApproval != value))
-				{
-					this.OnRecommendingApprovalChanging(value);
-					this.SendPropertyChanging();
-					this._RecommendingApproval = value;
-					this.SendPropertyChanged("RecommendingApproval");
-					this.OnRecommendingApprovalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovedBy", DbType="VarChar(MAX)")]
-		public string ApprovedBy
-		{
-			get
-			{
-				return this._ApprovedBy;
-			}
-			set
-			{
-				if ((this._ApprovedBy != value))
-				{
-					this.OnApprovedByChanging(value);
-					this.SendPropertyChanging();
-					this._ApprovedBy = value;
-					this.SendPropertyChanged("ApprovedBy");
-					this.OnApprovedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)")]
-		public string AccountNo
-		{
-			get
-			{
-				return this._AccountNo;
-			}
-			set
-			{
-				if ((this._AccountNo != value))
-				{
-					this.OnAccountNoChanging(value);
-					this.SendPropertyChanging();
-					this._AccountNo = value;
-					this.SendPropertyChanged("AccountNo");
-					this.OnAccountNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(MAX)")]
-		public string Remarks
-		{
-			get
-			{
-				return this._Remarks;
-			}
-			set
-			{
-				if ((this._Remarks != value))
-				{
-					this.OnRemarksChanging(value);
-					this.SendPropertyChanging();
-					this._Remarks = value;
-					this.SendPropertyChanged("Remarks");
-					this.OnRemarksChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reason", DbType="VarChar(MAX)")]
-		public string Reason
-		{
-			get
-			{
-				return this._Reason;
-			}
-			set
-			{
-				if ((this._Reason != value))
-				{
-					this.OnReasonChanging(value);
-					this.SendPropertyChanging();
-					this._Reason = value;
-					this.SendPropertyChanged("Reason");
-					this.OnReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArrivalDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ArrivalDate
-		{
-			get
-			{
-				return this._ArrivalDate;
-			}
-			set
-			{
-				if ((this._ArrivalDate != value))
-				{
-					this.OnArrivalDateChanging(value);
-					this.SendPropertyChanging();
-					this._ArrivalDate = value;
-					this.SendPropertyChanged("ArrivalDate");
-					this.OnArrivalDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CheckOutDate
-		{
-			get
-			{
-				return this._CheckOutDate;
-			}
-			set
-			{
-				if ((this._CheckOutDate != value))
-				{
-					this.OnCheckOutDateChanging(value);
-					this.SendPropertyChanging();
-					this._CheckOutDate = value;
-					this.SendPropertyChanged("CheckOutDate");
-					this.OnCheckOutDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50)")]
-		public string ApprovalStatus
-		{
-			get
-			{
-				return this._ApprovalStatus;
-			}
-			set
-			{
-				if ((this._ApprovalStatus != value))
-				{
-					this.OnApprovalStatusChanging(value);
-					this.SendPropertyChanging();
-					this._ApprovalStatus = value;
-					this.SendPropertyChanged("ApprovalStatus");
-					this.OnApprovalStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusGC", DbType="VarChar(50)")]
-		public string StatusGC
-		{
-			get
-			{
-				return this._StatusGC;
-			}
-			set
-			{
-				if ((this._StatusGC != value))
-				{
-					this.OnStatusGCChanging(value);
-					this.SendPropertyChanging();
-					this._StatusGC = value;
-					this.SendPropertyChanged("StatusGC");
-					this.OnStatusGCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancellationReason", DbType="VarChar(MAX)")]
-		public string CancellationReason
-		{
-			get
-			{
-				return this._CancellationReason;
-			}
-			set
-			{
-				if ((this._CancellationReason != value))
-				{
-					this.OnCancellationReasonChanging(value);
-					this.SendPropertyChanging();
-					this._CancellationReason = value;
-					this.SendPropertyChanged("CancellationReason");
-					this.OnCancellationReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancelledDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CancelledDate
-		{
-			get
-			{
-				return this._CancelledDate;
-			}
-			set
-			{
-				if ((this._CancelledDate != value))
-				{
-					this.OnCancelledDateChanging(value);
-					this.SendPropertyChanging();
-					this._CancelledDate = value;
-					this.SendPropertyChanged("CancelledDate");
-					this.OnCancelledDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ExpiryDate
-		{
-			get
-			{
-				return this._ExpiryDate;
-			}
-			set
-			{
-				if ((this._ExpiryDate != value))
-				{
-					this.OnExpiryDateChanging(value);
-					this.SendPropertyChanging();
-					this._ExpiryDate = value;
-					this.SendPropertyChanged("ExpiryDate");
-					this.OnExpiryDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsArchive", DbType="Bit")]
-		public System.Nullable<bool> IsArchive
-		{
-			get
-			{
-				return this._IsArchive;
-			}
-			set
-			{
-				if ((this._IsArchive != value))
-				{
-					this.OnIsArchiveChanging(value);
-					this.SendPropertyChanging();
-					this._IsArchive = value;
-					this.SendPropertyChanged("IsArchive");
-					this.OnIsArchiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCRooms", ThisKey="Id", OtherKey="GCTransactionId")]
-		public EntitySet<GCRoom> GCRooms
-		{
-			get
-			{
-				return this._GCRooms;
-			}
-			set
-			{
-				this._GCRooms.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_Guest", ThisKey="GuestId", OtherKey="GuestId", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Guest Guest
-		{
-			get
-			{
-				return this._Guest.Entity;
-			}
-			set
-			{
-				Guest previousValue = this._Guest.Entity;
-				if (((previousValue != value) 
-							|| (this._Guest.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Guest.Entity = null;
-						previousValue.GCTransactions.Remove(this);
-					}
-					this._Guest.Entity = value;
-					if ((value != null))
-					{
-						value.GCTransactions.Add(this);
-						this._GuestId = value.GuestId;
-					}
-					else
-					{
-						this._GuestId = default(string);
-					}
-					this.SendPropertyChanged("Guest");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_GCRooms(GCRoom entity)
-		{
-			this.SendPropertyChanging();
-			entity.GCTransaction = this;
-		}
-		
-		private void detach_GCRooms(GCRoom entity)
-		{
-			this.SendPropertyChanging();
-			entity.GCTransaction = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Guest")]
 	public partial class Guest : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2657,7 +2166,7 @@ namespace eGC
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -2677,7 +2186,7 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="VarChar(50)")]
 		public string GuestId
 		{
 			get
@@ -3037,7 +2546,7 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_GCTransactions", ThisKey="GuestId", OtherKey="GuestId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_GCTransactions", ThisKey="Id", OtherKey="GuestId")]
 		public EntitySet<GCTransaction> GCTransactions
 		{
 			get
@@ -3080,6 +2589,497 @@ namespace eGC
 		{
 			this.SendPropertyChanging();
 			entity.Guest = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCTransaction")]
+	public partial class GCTransaction : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _GuestId;
+		
+		private string _GCNumber;
+		
+		private string _RecommendingApproval;
+		
+		private string _ApprovedBy;
+		
+		private string _AccountNo;
+		
+		private string _Remarks;
+		
+		private string _Reason;
+		
+		private System.Nullable<System.DateTime> _ArrivalDate;
+		
+		private System.Nullable<System.DateTime> _CheckOutDate;
+		
+		private string _ApprovalStatus;
+		
+		private string _StatusGC;
+		
+		private string _CancellationReason;
+		
+		private System.Nullable<System.DateTime> _CancelledDate;
+		
+		private System.Nullable<System.DateTime> _ExpiryDate;
+		
+		private System.Nullable<bool> _IsArchive;
+		
+		private EntitySet<GCRoom> _GCRooms;
+		
+		private EntityRef<Guest> _Guest;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnGuestIdChanging(System.Nullable<int> value);
+    partial void OnGuestIdChanged();
+    partial void OnGCNumberChanging(string value);
+    partial void OnGCNumberChanged();
+    partial void OnRecommendingApprovalChanging(string value);
+    partial void OnRecommendingApprovalChanged();
+    partial void OnApprovedByChanging(string value);
+    partial void OnApprovedByChanged();
+    partial void OnAccountNoChanging(string value);
+    partial void OnAccountNoChanged();
+    partial void OnRemarksChanging(string value);
+    partial void OnRemarksChanged();
+    partial void OnReasonChanging(string value);
+    partial void OnReasonChanged();
+    partial void OnArrivalDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnArrivalDateChanged();
+    partial void OnCheckOutDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckOutDateChanged();
+    partial void OnApprovalStatusChanging(string value);
+    partial void OnApprovalStatusChanged();
+    partial void OnStatusGCChanging(string value);
+    partial void OnStatusGCChanged();
+    partial void OnCancellationReasonChanging(string value);
+    partial void OnCancellationReasonChanged();
+    partial void OnCancelledDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCancelledDateChanged();
+    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpiryDateChanged();
+    partial void OnIsArchiveChanging(System.Nullable<bool> value);
+    partial void OnIsArchiveChanged();
+    #endregion
+		
+		public GCTransaction()
+		{
+			this._GCRooms = new EntitySet<GCRoom>(new Action<GCRoom>(this.attach_GCRooms), new Action<GCRoom>(this.detach_GCRooms));
+			this._Guest = default(EntityRef<Guest>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="Int")]
+		public System.Nullable<int> GuestId
+		{
+			get
+			{
+				return this._GuestId;
+			}
+			set
+			{
+				if ((this._GuestId != value))
+				{
+					if (this._Guest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGuestIdChanging(value);
+					this.SendPropertyChanging();
+					this._GuestId = value;
+					this.SendPropertyChanged("GuestId");
+					this.OnGuestIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GCNumber", DbType="VarChar(50)")]
+		public string GCNumber
+		{
+			get
+			{
+				return this._GCNumber;
+			}
+			set
+			{
+				if ((this._GCNumber != value))
+				{
+					this.OnGCNumberChanging(value);
+					this.SendPropertyChanging();
+					this._GCNumber = value;
+					this.SendPropertyChanged("GCNumber");
+					this.OnGCNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecommendingApproval", DbType="VarChar(MAX)")]
+		public string RecommendingApproval
+		{
+			get
+			{
+				return this._RecommendingApproval;
+			}
+			set
+			{
+				if ((this._RecommendingApproval != value))
+				{
+					this.OnRecommendingApprovalChanging(value);
+					this.SendPropertyChanging();
+					this._RecommendingApproval = value;
+					this.SendPropertyChanged("RecommendingApproval");
+					this.OnRecommendingApprovalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovedBy", DbType="VarChar(MAX)")]
+		public string ApprovedBy
+		{
+			get
+			{
+				return this._ApprovedBy;
+			}
+			set
+			{
+				if ((this._ApprovedBy != value))
+				{
+					this.OnApprovedByChanging(value);
+					this.SendPropertyChanging();
+					this._ApprovedBy = value;
+					this.SendPropertyChanged("ApprovedBy");
+					this.OnApprovedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)")]
+		public string AccountNo
+		{
+			get
+			{
+				return this._AccountNo;
+			}
+			set
+			{
+				if ((this._AccountNo != value))
+				{
+					this.OnAccountNoChanging(value);
+					this.SendPropertyChanging();
+					this._AccountNo = value;
+					this.SendPropertyChanged("AccountNo");
+					this.OnAccountNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(MAX)")]
+		public string Remarks
+		{
+			get
+			{
+				return this._Remarks;
+			}
+			set
+			{
+				if ((this._Remarks != value))
+				{
+					this.OnRemarksChanging(value);
+					this.SendPropertyChanging();
+					this._Remarks = value;
+					this.SendPropertyChanged("Remarks");
+					this.OnRemarksChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reason", DbType="VarChar(MAX)")]
+		public string Reason
+		{
+			get
+			{
+				return this._Reason;
+			}
+			set
+			{
+				if ((this._Reason != value))
+				{
+					this.OnReasonChanging(value);
+					this.SendPropertyChanging();
+					this._Reason = value;
+					this.SendPropertyChanged("Reason");
+					this.OnReasonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArrivalDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ArrivalDate
+		{
+			get
+			{
+				return this._ArrivalDate;
+			}
+			set
+			{
+				if ((this._ArrivalDate != value))
+				{
+					this.OnArrivalDateChanging(value);
+					this.SendPropertyChanging();
+					this._ArrivalDate = value;
+					this.SendPropertyChanged("ArrivalDate");
+					this.OnArrivalDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CheckOutDate
+		{
+			get
+			{
+				return this._CheckOutDate;
+			}
+			set
+			{
+				if ((this._CheckOutDate != value))
+				{
+					this.OnCheckOutDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckOutDate = value;
+					this.SendPropertyChanged("CheckOutDate");
+					this.OnCheckOutDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50)")]
+		public string ApprovalStatus
+		{
+			get
+			{
+				return this._ApprovalStatus;
+			}
+			set
+			{
+				if ((this._ApprovalStatus != value))
+				{
+					this.OnApprovalStatusChanging(value);
+					this.SendPropertyChanging();
+					this._ApprovalStatus = value;
+					this.SendPropertyChanged("ApprovalStatus");
+					this.OnApprovalStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusGC", DbType="VarChar(50)")]
+		public string StatusGC
+		{
+			get
+			{
+				return this._StatusGC;
+			}
+			set
+			{
+				if ((this._StatusGC != value))
+				{
+					this.OnStatusGCChanging(value);
+					this.SendPropertyChanging();
+					this._StatusGC = value;
+					this.SendPropertyChanged("StatusGC");
+					this.OnStatusGCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancellationReason", DbType="VarChar(MAX)")]
+		public string CancellationReason
+		{
+			get
+			{
+				return this._CancellationReason;
+			}
+			set
+			{
+				if ((this._CancellationReason != value))
+				{
+					this.OnCancellationReasonChanging(value);
+					this.SendPropertyChanging();
+					this._CancellationReason = value;
+					this.SendPropertyChanged("CancellationReason");
+					this.OnCancellationReasonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancelledDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CancelledDate
+		{
+			get
+			{
+				return this._CancelledDate;
+			}
+			set
+			{
+				if ((this._CancelledDate != value))
+				{
+					this.OnCancelledDateChanging(value);
+					this.SendPropertyChanging();
+					this._CancelledDate = value;
+					this.SendPropertyChanged("CancelledDate");
+					this.OnCancelledDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ExpiryDate
+		{
+			get
+			{
+				return this._ExpiryDate;
+			}
+			set
+			{
+				if ((this._ExpiryDate != value))
+				{
+					this.OnExpiryDateChanging(value);
+					this.SendPropertyChanging();
+					this._ExpiryDate = value;
+					this.SendPropertyChanged("ExpiryDate");
+					this.OnExpiryDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsArchive", DbType="Bit")]
+		public System.Nullable<bool> IsArchive
+		{
+			get
+			{
+				return this._IsArchive;
+			}
+			set
+			{
+				if ((this._IsArchive != value))
+				{
+					this.OnIsArchiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsArchive = value;
+					this.SendPropertyChanged("IsArchive");
+					this.OnIsArchiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCRooms", ThisKey="Id", OtherKey="GCTransactionId")]
+		public EntitySet<GCRoom> GCRooms
+		{
+			get
+			{
+				return this._GCRooms;
+			}
+			set
+			{
+				this._GCRooms.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_Guest", ThisKey="GuestId", OtherKey="Id", IsForeignKey=true)]
+		public Guest Guest
+		{
+			get
+			{
+				return this._Guest.Entity;
+			}
+			set
+			{
+				Guest previousValue = this._Guest.Entity;
+				if (((previousValue != value) 
+							|| (this._Guest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Guest.Entity = null;
+						previousValue.GCTransactions.Remove(this);
+					}
+					this._Guest.Entity = value;
+					if ((value != null))
+					{
+						value.GCTransactions.Add(this);
+						this._GuestId = value.Id;
+					}
+					else
+					{
+						this._GuestId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Guest");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GCRooms(GCRoom entity)
+		{
+			this.SendPropertyChanging();
+			entity.GCTransaction = this;
+		}
+		
+		private void detach_GCRooms(GCRoom entity)
+		{
+			this.SendPropertyChanging();
+			entity.GCTransaction = null;
 		}
 	}
 }

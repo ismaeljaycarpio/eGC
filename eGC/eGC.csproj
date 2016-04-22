@@ -261,6 +261,7 @@
     <None Include="Properties\PublishProfiles\eeGC.pubxml" />
     <None Include="Properties\PublishProfiles\eGC.pubxml" />
     <Content Include="ProfilePic\noImage.png" />
+    <Content Include="report\report.aspx" />
     <Content Include="room\default.aspx" />
     <Content Include="room\dining.aspx" />
     <Content Include="Scripts\ai.0.21.5-build00175.js" />
@@ -496,6 +497,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="report\report.aspx.cs">
+      <DependentUpon>report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report\report.aspx.designer.cs">
+      <DependentUpon>report.aspx</DependentUpon>
+    </Compile>
     <Compile Include="room\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
