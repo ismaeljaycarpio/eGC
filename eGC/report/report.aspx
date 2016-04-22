@@ -1,4 +1,4 @@
-﻿<%@ Page Title="GC Approval" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="eGC.gcapproval._default" %>
+﻿<%@ Page Title="Report" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="report.aspx.cs" Inherits="eGC.report.report" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -8,10 +8,10 @@
             <div class="col-md-12">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        <h5>GC Approval</h5>
+                        <h5>GC Records</h5>
                     </div>
                     <div class="panel-body">
-                        <asp:UpdatePanel ID="upApproval" runat="server">
+                        <asp:UpdatePanel ID="upGCRecords" runat="server">
                             <ContentTemplate>
                                 <div class="form-inline">
                                     <div class="form-group">
@@ -22,10 +22,25 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <asp:DropDownList ID="ddlCompanyName"
+                                        <asp:TextBox ID="txtDateFrom"
+                                            runat="server"
+                                            placeholder="Date From"
                                             CssClass="form-control"
-                                            runat="server">
-                                        </asp:DropDownList>
+                                            data-provide="datepicker"></asp:TextBox>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <asp:TextBox ID="txtDateTo"
+                                            runat="server"
+                                            placeholder="Date To"
+                                            CssClass="form-control"
+                                            data-provide="datepicker"></asp:TextBox>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <asp:DropDownList ID="ddlCompanyName"
+                                            runat="server"
+                                            CssClass="form-control"></asp:DropDownList>
                                     </div>
 
                                     <asp:Button ID="btnSearch"
@@ -33,7 +48,6 @@
                                         CssClass="btn btn-primary"
                                         Text="Go"
                                         OnClick="btnSearch_Click" />
-
                                 </div>
                                 <br />
                                 <div class="table-responsive">
@@ -49,17 +63,11 @@
                                         DataKeyNames="Id"
                                         OnRowDataBound="gvGC_RowDataBound"
                                         OnRowCommand="gvGC_RowCommand"
-                                        DataSourceID="LinqDataSource1">
+                                        DataSourceID="GCRecordDataSource">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Row Id" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="ID" Visible="false">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
@@ -69,9 +77,9 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestIdName">
+                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lbtnGuestIdName" runat="server" Text='<%# Eval("GuestIdName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
@@ -101,34 +109,20 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <asp:Button ID="btnApprove"
-                                                        runat="server"
-                                                        CommandName="approveRecord"
-                                                        Text="Approve"
-                                                        CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
-                                                        CssClass="btn btn-success" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <asp:Button ID="btnDisapprove"
-                                                        runat="server"
-                                                        Text="Disapprove"
-                                                        CommandName="disapproveRecord"
-                                                        CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
-                                                        CssClass="btn btn-danger" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
                                     </asp:GridView>
+
+                                    <asp:Button ID="btnExport"
+                                        runat="server"
+                                        Text="Export to Excel"
+                                        OnClick="btnExport_Click"
+                                        CssClass="btn btn-default btn-sm pull-right" />
+
                                 </div>
                             </ContentTemplate>
                             <Triggers>
+                                <asp:PostBackTrigger ControlID="btnExport" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -137,73 +131,8 @@
         </div>
     </asp:Panel>
 
-    <!-- Approve Modal -->
-    <div id="approveModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                    <ContentTemplate>
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">
-                                <asp:Label ID="lblApproveTitle" runat="server">Approve Gift Check</asp:Label></h4>
-                        </div>
-                        <div class="modal-body">
-                            <asp:Label ID="lblApproveContent" runat="server">Are you sure you want to approve this Gift Check ?</asp:Label>
-                            <asp:HiddenField ID="hfApproveGCId" runat="server" />
-                        </div>
-                        <div class="modal-footer">
-                            <asp:Button ID="btnConfirmApproveGC"
-                                runat="server"
-                                CssClass="btn btn-success"
-                                Text="Save"
-                                OnClick="btnConfirmApproveGC_Click" />
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnConfirmApproveGC" EventName="Click" />
-                    </Triggers>
-                </asp:UpdatePanel>
-            </div>
-        </div>
-    </div>
-
-    <!-- Disapprove Modal -->
-    <div id="disapproveModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Disapprove Gift Check</h4>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to disapprove this Gift Check ?
-                            <asp:HiddenField ID="hfDisapproveGCId" runat="server" />
-                        </div>
-                        <div class="modal-footer">
-                            <asp:Button ID="btnConfirmDisapproveGC"
-                                runat="server"
-                                CssClass="btn btn-danger"
-                                Text="Save"
-                                OnClick="btnConfirmDisapproveGC_Click" />
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnConfirmDisapproveGC" EventName="Click" />
-                    </Triggers>
-                </asp:UpdatePanel>
-            </div>
-        </div>
-    </div>
-
-    <asp:LinqDataSource ID="LinqDataSource1"
+    <asp:LinqDataSource ID="GCRecordDataSource"
         runat="server"
-        OnSelecting="LinqDataSource1_Selecting">
+        OnSelecting="GCRecordDataSource_Selecting">
     </asp:LinqDataSource>
 </asp:Content>

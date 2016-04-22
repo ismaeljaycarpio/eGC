@@ -61,7 +61,7 @@ namespace eGC.company
             if(Page.IsValid)
             {
                 var g = (from gu in db.Guests
-                         where gu.GuestId.Equals(Request.QueryString["companyId"])
+                         where gu.Id.Equals(Request.QueryString["companyId"])
                          select gu).FirstOrDefault();
 
                 g.GuestId = txtCompanyId.Text;

@@ -59,7 +59,7 @@ namespace eGC.gcapproval
 
                 //chk if company
                 var g = (from gu in db.Guests
-                         where gu.GuestId == rowId
+                         where gu.Id == Convert.ToInt32(rowId)
                          select gu).FirstOrDefault();
 
                 if(g.IsCompany == true)
@@ -178,7 +178,8 @@ namespace eGC.gcapproval
                          select new
                          {
                              Id = gctran.Id,
-                             GuestId = guest.GuestId,
+                             GuestId = guest.Id,
+                             GuestIdName = guest.GuestId,
                              FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
@@ -215,7 +216,8 @@ namespace eGC.gcapproval
                          select new
                          {
                              Id = gctran.Id,
-                             GuestId = guest.GuestId,
+                             GuestId = guest.Id,
+                             GuestIdName = guest.GuestId,
                              FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
