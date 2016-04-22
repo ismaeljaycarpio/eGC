@@ -15,8 +15,8 @@ namespace eGC.company
         {
             if(!Page.IsPostBack)
             {
-                string companyId = Request.QueryString["companyId"];
-                if (companyId == String.Empty)
+                int companyId = Convert.ToInt32(Request.QueryString["companyId"]);
+                if (companyId == 0)
                 {
                     Response.Redirect("~/company/company-profile.aspx");
                 }
@@ -25,7 +25,7 @@ namespace eGC.company
 
                     //chk id if valid
                     var gu = (from g in db.Guests
-                              where g.GuestId.Equals(companyId)
+                              where g.Id.Equals(companyId)
                               select g).ToList();
 
                     if (gu.Count < 1)

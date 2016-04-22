@@ -53,20 +53,20 @@ namespace eGC.guest
             else if(e.CommandName.Equals("editRecord"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((LinkButton)gvGuests.Rows[index].FindControl("lbtnGuestId")).Text;
+                string rowId = gvGuests.DataKeys[index].Value.ToString();
                 Response.Redirect("~/guest/editguest.aspx?guestid=" + rowId);
             }
             else if(e.CommandName.Equals("addGC"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((LinkButton)gvGuests.Rows[index].FindControl("lbtnGuestId")).Text;
+                string rowId = gvGuests.DataKeys[index].Value.ToString();
                 Response.Redirect("~/tran/gcform.aspx?guestid=" + rowId);
             }
             else if (e.CommandName.Equals("viewGCRecords"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string Id = gvGuests.DataKeys[index].Value.ToString();
-                Response.Redirect("~/guest/guest-gc-records.aspx?guestId=" + Id);
+                string rowId = gvGuests.DataKeys[index].Value.ToString();
+                Response.Redirect("~/guest/guest-gc-records.aspx?guestId=" + rowId);
             }
         }
 

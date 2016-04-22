@@ -45,7 +45,7 @@
                                     DataSourceID="CompanyDataSource"
                                     OnRowCommand="gvCompany_RowCommand">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Company ID" SortExpression="CompanyId">
+                                        <asp:TemplateField HeaderText="ID" SortExpression="CompanyId">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnCompanyId"
                                                     runat="server"

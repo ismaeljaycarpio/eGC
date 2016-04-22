@@ -29,7 +29,7 @@ namespace eGC.guest
 
                     //chk id if valid
                     var gu = (from g in db.Guests
-                            where g.GuestId.Equals(guestId)
+                            where g.Id.Equals(guestId)
                             select g).ToList();
 
                     if(gu.Count < 1)
@@ -39,25 +39,25 @@ namespace eGC.guest
                     else
                     {
                         //load guest
-                        if (!File.Exists(Server.MapPath("~/ProfilePic/") + guestId + "_Profile.png"))
+                        var guest = gu.FirstOrDefault();
+
+                        if (!File.Exists(Server.MapPath("~/ProfilePic/") + guest.GuestId + "_Profile.png"))
                         {
                             imgProfile.ImageUrl = "~/ProfilePic/noImage.png";
                         }
                         else
                         {
-                            imgProfile.ImageUrl = "~/ProfilePic/" + guestId + "_Profile.png";
+                            imgProfile.ImageUrl = "~/ProfilePic/" + guest.GuestId + "_Profile.png";
                         }
 
-                        if (!File.Exists(Server.MapPath("~/IDPic/") + guestId + "_IDPic.png"))
+                        if (!File.Exists(Server.MapPath("~/IDPic/") + guest.GuestId + "_IDPic.png"))
                         {
                             IDPic.ImageUrl = "~/IDPic/noImage.png";
                         }
                         else
                         {
-                            IDPic.ImageUrl = "~/IDPic/" + guestId + "_IDPic.png";
+                            IDPic.ImageUrl = "~/IDPic/" + guest.GuestId + "_IDPic.png";
                         }
-
-                        var guest = gu.FirstOrDefault();
 
                         txtGuestId.Text = guest.GuestId;
                         txtFirstName.Text = guest.FirstName;
@@ -147,7 +147,7 @@ namespace eGC.guest
                 }
 
                 var g = (from gu in db.Guests
-                         where gu.GuestId.Equals(Request.QueryString["guestid"])
+                         where gu.Id.Equals(Request.QueryString["guestid"])
                          select gu).FirstOrDefault();
 
                 g.GuestId = txtGuestId.Text;
@@ -204,7 +204,7 @@ namespace eGC.guest
             ddlCompanyName.DataTextField = "CompanyName";
             ddlCompanyName.DataValueField = "Id";
             ddlCompanyName.DataBind();
-            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
+            ddlCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
         }
 
         protected void lbtnClose_Click(object sender, EventArgs e)

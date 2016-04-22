@@ -23,7 +23,7 @@ namespace eGC.tran
                 else
                 {
                     var gu = (from g in db.Guests
-                              where g.GuestId.Equals(guestId)
+                              where g.Id.Equals(guestId)
                               select g).ToList();
 
                     if (gu.Count < 1)
@@ -35,9 +35,10 @@ namespace eGC.tran
                         //clear content from tmp
                         flushTemp();
 
-                        //load guest
+                        //maintain tab
                         TabName.Value = Request.Form[TabName.UniqueID];
-                        
+
+                        //load guest
                         var guest = gu.FirstOrDefault();
                         txtName.Text = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName;
                         txtGuestId.Text = guest.GuestId;
@@ -160,7 +161,6 @@ namespace eGC.tran
             }
         }
 
-
         protected void gvDining_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("editDining"))
@@ -199,6 +199,7 @@ namespace eGC.tran
         protected void btnSave_Click(object sender, EventArgs e)
         {
             GCTransaction tran = new GCTransaction();
+            tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
             tran.GCNumber = txtGCNumber.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
             tran.ApprovedBy = txtApprovedBy.Text;

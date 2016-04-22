@@ -135,13 +135,13 @@ namespace eGC.company
             else if (e.CommandName.Equals("editRecord"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((LinkButton)gvCompany.Rows[index].FindControl("lbtnCompanyId")).Text;
+                string rowId = gvCompany.DataKeys[index].Value.ToString();
                 Response.Redirect("~/company/edit-company.aspx?companyId=" + rowId);
             }
             else if (e.CommandName.Equals("addGC"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((LinkButton)gvCompany.Rows[index].FindControl("lbtnCompanyId")).Text;
+                string rowId = gvCompany.DataKeys[index].Value.ToString();
                 Response.Redirect("~/tran/gcform.aspx?guestid=" + rowId);
             }
             else if(e.CommandName.Equals("viewGCRecords"))
