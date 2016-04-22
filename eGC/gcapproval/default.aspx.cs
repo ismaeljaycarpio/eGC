@@ -19,6 +19,7 @@ namespace eGC.gcapproval
             if(!Page.IsPostBack)
             {
                 bindDropdown();
+                checkExpiration();
             }
         }
 
@@ -184,6 +185,7 @@ namespace eGC.gcapproval
                              GCNumber = gctran.GCNumber,
                              ArrivalDate = gctran.ArrivalDate,
                              CheckoutDate = gctran.CheckOutDate,
+                             ExpiryDate = gctran.ExpiryDate,
                              Status = gctran.StatusGC,
                              TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
                              Approval = gctran.ApprovalStatus,
@@ -220,6 +222,7 @@ namespace eGC.gcapproval
                              GCNumber = gctran.GCNumber,
                              ArrivalDate = gctran.ArrivalDate,
                              CheckoutDate = gctran.CheckOutDate,
+                             ExpiryDate = gctran.ExpiryDate,
                              Status = gctran.StatusGC,
                              TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
                              Approval = gctran.ApprovalStatus,
@@ -292,6 +295,21 @@ namespace eGC.gcapproval
             ddlCompanyName.DataValueField = "Id";
             ddlCompanyName.DataBind();
             ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
+        }
+
+        private void checkExpiration()
+        {
+            var trans = (from tran in db.GCTransactions
+                         where 
+                         (DateTime.Today >= tran.ExpiryDate) &&
+                         (tran.StatusGC == "Waiting")
+                         select tran).ToList();
+
+            foreach(var tr in trans)
+            {
+                tr.StatusGC = "Expired";
+                db.SubmitChanges();
+            }
         }
     }
 }

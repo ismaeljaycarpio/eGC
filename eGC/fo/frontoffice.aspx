@@ -69,20 +69,16 @@
                                 <ContentTemplate>
                                     <div class="form-inline">
                                         <div class="form-group">
-                                            <div class="col-md-12">
-                                                <div class="input-group">
-                                                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
-                                                    <span class="input-group-btn">
-                                                        <asp:DropDownList ID="ddlCompanyName" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                        <asp:Button ID="btnSearch"
-                                                            runat="server"
-                                                            CssClass="btn btn-primary"
-                                                            Text="Go"
-                                                            OnClick="btnSearch_Click" />
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
                                         </div>
+                                        <div class="form-group">
+                                            <asp:DropDownList ID="ddlCompanyName" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        </div>
+                                        <asp:Button ID="btnSearch"
+                                            runat="server"
+                                            CssClass="btn btn-primary"
+                                            Text="Go"
+                                            OnClick="btnSearch_Click" />
                                     </div>
                                     <br />
                                     <div class="table-responsive">
@@ -125,6 +121,7 @@
 
                                                 <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
                                                 <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
+                                                <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
 
                                                 <asp:TemplateField HeaderText="Status" SortExpression="Status">
                                                     <ItemTemplate>

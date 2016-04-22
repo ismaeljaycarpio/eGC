@@ -19,6 +19,7 @@ namespace eGC.fo
             if (!Page.IsPostBack)
             {
                 bindDropdown();
+                checkExpiration();
             }
         }
 
@@ -190,6 +191,7 @@ namespace eGC.fo
                          GCNumber = gctran.GCNumber,
                          ArrivalDate = gctran.ArrivalDate,
                          CheckoutDate = gctran.CheckOutDate,
+                         ExpiryDate = gctran.ExpiryDate,
                          Status = gctran.StatusGC,
                          TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                      }).ToList();
@@ -305,6 +307,7 @@ namespace eGC.fo
                              GCNumber = gctran.GCNumber,
                              ArrivalDate = gctran.ArrivalDate,
                              CheckoutDate = gctran.CheckOutDate,
+                             ExpiryDate = gctran.ExpiryDate,
                              Status = gctran.StatusGC,
                              TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                          }).ToList();
@@ -339,6 +342,7 @@ namespace eGC.fo
                              GCNumber = gctran.GCNumber,
                              ArrivalDate = gctran.ArrivalDate,
                              CheckoutDate = gctran.CheckOutDate,
+                             ExpiryDate = gctran.ExpiryDate,
                              Status = gctran.StatusGC,
                              TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                          }).ToList();
@@ -388,6 +392,21 @@ namespace eGC.fo
             ddlCompanyName.DataValueField = "Id";
             ddlCompanyName.DataBind();
             ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
+        }
+
+        private void checkExpiration()
+        {
+            var trans = (from tran in db.GCTransactions
+                         where
+                         (DateTime.Today >= tran.ExpiryDate) &&
+                         (tran.StatusGC == "Waiting")
+                         select tran).ToList();
+
+            foreach (var tr in trans)
+            {
+                tr.StatusGC = "Expired";
+                db.SubmitChanges();
+            }
         }
     }
 }

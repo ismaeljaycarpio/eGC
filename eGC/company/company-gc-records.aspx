@@ -81,6 +81,7 @@
                                             <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
                                             <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
                                             <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
+                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
                                             <asp:BoundField DataField="TotalValue" HeaderText="Total" SortExpression="TotalValue" />
 
                                             <asp:TemplateField HeaderText="Approval" SortExpression="Approval">
