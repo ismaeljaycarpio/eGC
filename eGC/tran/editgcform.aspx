@@ -50,14 +50,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="txtApprovedBy">Approved By</label>
-                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtApprovedBy"
-                                CssClass="label label-danger"
-                                ErrorMessage="Approved By is required"></asp:RequiredFieldValidator>
+                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
                             <label for="txtAccountNo">Account No</label>
@@ -104,6 +97,16 @@
                                 ControlToValidate="txtExpirationDate"
                                 CssClass="label label-danger"
                                 ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
+                            <asp:CompareValidator ID="CompareValidator1" 
+                                runat="server"
+                                ControlToCompare="txtCheckoutDate"
+                                ControlToValidate="txtExpirationDate"
+                                CssClass="label label-danger"
+                                Display="Dynamic"
+                                Operator="GreaterThan"
+                                Type="Date"
+                                ValidationGroup="vgPrimaryAdd"
+                                ErrorMessage="Expiration Date must be greater than Check-out date"></asp:CompareValidator>
                         </div>
                     </div>
                 </div>
@@ -141,6 +144,16 @@
                                 CssClass="label label-danger"
                                 ValidationGroup="vgPrimaryAdd"
                                 ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
+                            <asp:CompareValidator ID="CompareValidator2" 
+                                runat="server"
+                                ControlToCompare="txtArrivalDate"
+                                ControlToValidate="txtCheckoutDate"
+                                CssClass="label label-danger"
+                                Display="Dynamic"
+                                Operator="GreaterThan"
+                                Type="Date"
+                                ValidationGroup="vgPrimaryAdd"
+                                ErrorMessage="Check-out Date must be greater than Arrival date"></asp:CompareValidator> 
                         </div>
                     </div>
                 </div>

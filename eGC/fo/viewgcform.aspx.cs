@@ -10,6 +10,7 @@ namespace eGC.fo
     public partial class viewgcform : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
+        EHRISDataContextDataContext dbEHRIS = new EHRISDataContextDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,7 +42,7 @@ namespace eGC.fo
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    txtApprovedBy.Text = tGC.ApprovedBy;
+                    //txtApprovedBy.Text = tGC.ApprovedBy;
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
                     txtReason.Text = tGC.Reason;
@@ -49,6 +50,19 @@ namespace eGC.fo
                     txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
                     lblCurrentGCStatus.Text = tGC.StatusGC;
+
+                    //chk approver
+                    if (tGC.ApprovedBy != String.Empty)
+                    {
+                        var u = (from emp in dbEHRIS.EMPLOYEEs
+                                 where emp.Emp_Id == tGC.ApprovedBy
+                                 select emp).FirstOrDefault();
+
+                        if (u != null)
+                        {
+                            txtApprovedBy.Text = u.LastName + " , " + u.FirstName + " " + u.MiddleName;
+                        }
+                    }
 
                     //load related table
                     bindRooms();

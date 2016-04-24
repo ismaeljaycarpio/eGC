@@ -11,6 +11,8 @@ namespace eGC.tran
     public partial class editgcform : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
+        EHRISDataContextDataContext dbEHRIS = new EHRISDataContextDataContext();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -41,13 +43,26 @@ namespace eGC.tran
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    txtApprovedBy.Text = tGC.ApprovedBy;
+                    //txtApprovedBy.Text = tGC.ApprovedBy;
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
                     txtReason.Text = tGC.Reason;
                     txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
                     txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
+
+                    //chk approver
+                    if(tGC.ApprovedBy != String.Empty)
+                    {
+                        var u = (from emp in dbEHRIS.EMPLOYEEs
+                                 where emp.Emp_Id == tGC.ApprovedBy
+                                 select emp).FirstOrDefault();
+
+                        if(u != null)
+                        {
+                            txtApprovedBy.Text = u.LastName + " , " + u.FirstName + " " + u.MiddleName;
+                        }
+                    }
 
                     //load related table
                     bindRooms();
@@ -167,12 +182,19 @@ namespace eGC.tran
 
             tran.GCNumber = txtGCNumber.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
-            tran.ApprovedBy = txtApprovedBy.Text;
+            //tran.ApprovedBy = txtApprovedBy.Text;
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
             tran.Reason = txtReason.Text;
             tran.ArrivalDate = Convert.ToDateTime(txtArrivalDate.Text);
             tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
+            tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+
+            //chk if prev expired
+            if(Convert.ToDateTime(txtExpirationDate.Text) > Convert.ToDateTime(txtCheckoutDate.Text))
+            {
+                tran.StatusGC = "Waiting";
+            }
 
             db.SubmitChanges();
             Response.Redirect("~/gcapproval/default.aspx");
