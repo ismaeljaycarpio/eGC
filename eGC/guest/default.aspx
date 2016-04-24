@@ -46,7 +46,7 @@
                                     DataSourceID="GuestDataSource"
                                     OnRowCommand="gvGuests_RowCommand">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="Guest ID" SortExpression="GuestId">
+                                        <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="editRecord" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                             </ItemTemplate>
@@ -87,7 +87,7 @@
                                     </Columns>
                                     <PagerStyle CssClass="pagination-ys" />
                                 </asp:GridView>
-                                <asp:LinkButton ID="lbtnGuestProfile" runat="server" CssClass="btn btn-default" PostBackUrl="~/guest/createguest.aspx">Create Guest Profile</asp:LinkButton>
+                                <asp:LinkButton ID="lbtnGuestProfile" runat="server" CssClass="btn btn-default" PostBackUrl="~/guest/createguest.aspx">Create Invidual Profile</asp:LinkButton>
                                 <div class="pull-right">
                                     <asp:Button ID="btnExport"
                                         runat="server"

@@ -7,29 +7,31 @@
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h5>Add Gift Check</h5>
+                    <h5>Add GC</h5>
                 </div>
                 <div class="panel-body">
                     <div role="form">
-                        <div class="col-md-4" id="panelName" runat="server">
-                            <label for="txtName">Name</label>
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtName" id="lblForGuestId" runat="server">Guest ID</label>
-                            <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtName">Company</label>
-                            <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtName">Email</label>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtName">Contact No</label>
-                            <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        <div class="form-inline">
+                            <div class="form-group" id="panelName" runat="server">
+                                <label for="txtName">Name</label>
+                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtName" id="lblForGuestId" runat="server">ID</label>
+                                <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtName">Company</label>
+                                <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtName">Email</label>
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtName">Contact No</label>
+                                <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,17 +50,6 @@
                                 ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtApprovedBy">Approved By</label>
-                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtApprovedBy"
-                                CssClass="label label-danger"
-                                ErrorMessage="Approved By is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
                             <label for="txtAccountNo">Account No</label>
                             <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
@@ -69,6 +60,11 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Account No is required"></asp:RequiredFieldValidator>
                         </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div role="form"> 
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
                             <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
@@ -90,19 +86,6 @@
                                 ControlToValidate="txtReason"
                                 CssClass="label label-danger"
                                 ErrorMessage="Reason is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtExpirationDate">Expiration Date</label>
-                            <asp:TextBox ID="txtExpirationDate"
-                                runat="server"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtExpirationDate"
-                                CssClass="label label-danger"
-                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </div>
@@ -138,6 +121,19 @@
                                 CssClass="label label-danger"
                                 ValidationGroup="vgPrimaryAdd"
                                 ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtExpirationDate">Expiration Date</label>
+                            <asp:TextBox ID="txtExpirationDate"
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
+                                runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="vgPrimaryAdd"
+                                ControlToValidate="txtExpirationDate"
+                                CssClass="label label-danger"
+                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </div>

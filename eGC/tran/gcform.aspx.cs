@@ -104,7 +104,7 @@ namespace eGC.tran
                         if(guest.IsCompany == true)
                         {
                             panelName.Visible = false;
-                            lblForGuestId.InnerText = "Company ID";
+                            lblForGuestId.InnerText = "ID";
                         }
 
                         txtRecommendingApproval.Focus();
@@ -202,7 +202,7 @@ namespace eGC.tran
             tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
             tran.GCNumber = txtGCNumber.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
-            tran.ApprovedBy = txtApprovedBy.Text;
+            //tran.ApprovedBy = txtApprovedBy.Text;
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
             tran.Reason = txtReason.Text;

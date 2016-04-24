@@ -17,11 +17,11 @@
                         </asp:Panel>
 
                         <div class="form-group">
-                            <label for="txtEmpId" class="col-sm-3 control-label">Guest ID: </label>
+                            <label for="txtEmpId" class="col-sm-3 control-label">ID: </label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                    <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" placeholder="Employee ID"></asp:TextBox>
+                                    <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" placeholder="ID"></asp:TextBox>
                                     <asp:Button ID="btnGenerateId"
                                         runat="server"
                                         Text="Generate ID"

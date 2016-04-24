@@ -8,11 +8,11 @@
       <siteMapNode url="~/admin/userconfig.aspx" title="User Configuration"  description="">
       </siteMapNode>
       
-      <siteMapNode url="~/guest/default.aspx" title="Guest"  description="">
+      <siteMapNode url="~/guest/default.aspx" title="Individual"  description="">
         <siteMapNode url="~/tran/gcform.aspx" title="Add GC"  description="" />
-        <siteMapNode url="~/guest/editguest.aspx" title="Update Guest Profile"  description="" />
-        <siteMapNode url="~/guest/createguest.aspx" title="Create Guest Profile"  description="" />
-        <siteMapNode url="~/guest/guest-gc-records.aspx" title="View Guest GC Records"  description="" />
+        <siteMapNode url="~/guest/editguest.aspx" title="Update Individual Profile"  description="" />
+        <siteMapNode url="~/guest/createguest.aspx" title="Create Individual Profile"  description="" />
+        <siteMapNode url="~/guest/guest-gc-records.aspx" title="View GC Records"  description="" />
       </siteMapNode>
     
       <siteMapNode url="~/company/company-profile.aspx" title="Company"  description="">

@@ -246,6 +246,7 @@ namespace eGC.gcapproval
                         select gc).FirstOrDefault();
 
             tran.ApprovalStatus = "Approved";
+            tran.ApprovedBy = User.Identity.Name;
 
             if(tran.StatusGC == "Cancelled")
             {
