@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <div role="form"> 
+                    <div role="form">
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
                             <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
@@ -121,7 +121,7 @@
                                 CssClass="label label-danger"
                                 ValidationGroup="vgPrimaryAdd"
                                 ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator2" 
+                            <asp:CompareValidator ID="CompareValidator2"
                                 runat="server"
                                 ControlToCompare="txtArrivalDate"
                                 ControlToValidate="txtCheckoutDate"
@@ -130,7 +130,7 @@
                                 Operator="GreaterThan"
                                 Type="Date"
                                 ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Check-out Date must be greater than Arrival date"></asp:CompareValidator>                           
+                                ErrorMessage="Check-out Date must be greater than Arrival date"></asp:CompareValidator>
                         </div>
                         <div class="col-md-4">
                             <label for="txtExpirationDate">Expiration Date</label>
@@ -144,7 +144,7 @@
                                 ControlToValidate="txtExpirationDate"
                                 CssClass="label label-danger"
                                 ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator1" 
+                            <asp:CompareValidator ID="CompareValidator1"
                                 runat="server"
                                 ControlToCompare="txtCheckoutDate"
                                 ControlToValidate="txtExpirationDate"
