@@ -106,7 +106,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a runat="server" href="~/Account/Manage.aspx">Change Password</a></li>
                                         <li>
-                                            <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="Log Out" />
+                                            <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="Log Out"  />
                                         </li>
                                     </ul>
                                 </li>
@@ -125,7 +125,7 @@
                                                 <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
                                             </ul>
                                         </li>
-                                        <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
+                                        <li><a runat="server" href="~/gcapproval/default.aspx">Approval</a></li>
                                         <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
                                         <li><a runat="server" href="~/report/report.aspx">Reports</a></li>
                                         <li><a runat="server" href="~/admin/userconfig.aspx">User Config</a></li>
@@ -170,7 +170,7 @@
                                         </li>
                                         <% if (Page.User.IsInRole("CanApprove"))
                                            {%>
-                                        <li><a runat="server" href="~/gcapproval/default.aspx">GC Approval</a></li>
+                                        <li><a runat="server" href="~/gcapproval/default.aspx">Approval</a></li>
                                         <%} %>
                                         <li><a runat="server" href="~/report/report.aspx">Reports</a></li>
                                     </ul>

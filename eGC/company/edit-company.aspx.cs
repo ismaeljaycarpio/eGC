@@ -76,7 +76,8 @@ namespace eGC.company
 
                 db.SubmitChanges();
 
-                pnlSuccess.Visible = true;
+                Response.Redirect("~/company/company-profile.aspx");
+                //pnlSuccess.Visible = true;
             }
         }
 

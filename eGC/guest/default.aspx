@@ -16,18 +16,17 @@
                                 runat="server"
                                 CssClass="form-control"
                                 placeholder="Search..."></asp:TextBox>
-                        </div>
-                        <div class="form-group">
+
                             <asp:DropDownList ID="ddlCompanyName"
                                 CssClass="form-control"
                                 runat="server">
                             </asp:DropDownList>
+                            <asp:Button ID="btnSearch"
+                                runat="server"
+                                CssClass="btn btn-primary"
+                                Text="Go"
+                                OnClick="btnSearch_Click" />
                         </div>
-                        <asp:Button ID="btnSearch"
-                            runat="server"
-                            CssClass="btn btn-primary"
-                            Text="Go"
-                            OnClick="btnSearch_Click" />
                     </div>
                     <br />
                     <div class="table-responsive">

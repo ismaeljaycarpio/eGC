@@ -141,7 +141,7 @@ namespace eGC.guest
 
             var products = dt;
             ExcelPackage excel = new ExcelPackage();
-            var workSheet = excel.Workbook.Worksheets.Add("Guests");
+            var workSheet = excel.Workbook.Worksheets.Add("Individual-Profile");
             var totalCols = products.Columns.Count;
             var totalRows = products.Rows.Count;
 
@@ -159,7 +159,7 @@ namespace eGC.guest
             using (var memoryStream = new MemoryStream())
             {
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;  filename=guests.xlsx");
+                Response.AddHeader("content-disposition", "attachment;  filename=Individual-Profile.xlsx");
                 excel.SaveAs(memoryStream);
                 memoryStream.WriteTo(Response.OutputStream);
                 Response.Flush();

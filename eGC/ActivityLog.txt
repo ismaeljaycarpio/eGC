@@ -1,5 +1,23 @@
 ﻿
 
+
+
+====================================================================
+============================= 2016 May 06 ==========================
+====================================================================
+- add another <insert here> field when creating company - http://localhost:2919/company/add-company.aspx
+- add another <insert here> field when creating individual - http://localhost:2919/guest/createguest.aspx
+- removed prices in Rooms - http://localhost:2919/room/default.aspx
+- gcform - add dropdown for validity
+		 - ArrivalDate / Checkout date / Expiration Date - not required
+		 - Add Room - include checkbox for [with breakfast] [with lunch]
+					- include textbox for [number of participants]
+		 - Add Dining - include textbox for [number of participants]
+- Approval - put Approval inside the GC Record when viewing
+- Reports - individual GC Record - [customized Report Viewer]
+- GC number should not duplicate
+
+
 ====================================================================
 ============================= 2016 Apr 28 ==========================
 ====================================================================

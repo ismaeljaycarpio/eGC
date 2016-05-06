@@ -43,8 +43,10 @@ namespace eGC.company
                 g.CompanyId = g.Id;
                 db.SubmitChanges();
 
-                pnlSuccess.Visible = true;
-                clearButtons();
+                Response.Redirect("~/company/company-profile.aspx");
+
+                //pnlSuccess.Visible = true;
+                //clearButtons();
             }
         }
 
