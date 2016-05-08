@@ -8,6 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <asp:Login runat="server"
+                        ID="loginControl"
                         ViewStateMode="Disabled"
                         RenderOuterTable="false"
                         DestinationPageUrl="~/Default.aspx">

@@ -30,6 +30,8 @@ namespace eGC.admin
                 ddlRoles.DataBind();
 
                 ddlRoles.Items.Insert(0, new ListItem("Select a Role", "0"));
+
+                txtSearch.Focus();
             }
         }
 

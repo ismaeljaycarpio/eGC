@@ -98,17 +98,6 @@ namespace eGC.tran
                         ddlEditRoom.DataTextField = "Room1";
                         ddlEditRoom.DataValueField = "Id";
                         ddlEditRoom.DataBind();
-
-                        //show rates
-                        string roomId = ddlAddRoom.SelectedValue;
-                        var roomSelected = (from r in db.Rooms
-                                            where r.Id.Equals(roomId)
-                                            select r).FirstOrDefault();
-                        if (roomSelected != null)
-                        {
-                            lblAddRoomRegularRate.Text = roomSelected.Regular.ToString();
-                            lblAddRoomPeakRate.Text = roomSelected.Peak.ToString();
-                        }
                     }
 
                     //lazy load dining
@@ -200,39 +189,12 @@ namespace eGC.tran
             Response.Redirect("~/gcapproval/default.aspx");
         }
 
-        protected void ddlAddRoom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //show rates
-            string roomId = ddlAddRoom.SelectedValue;
-            var roomSelected = (from r in db.Rooms
-                                where r.Id.Equals(roomId)
-                                select r).FirstOrDefault();
-            if (roomSelected != null)
-            {
-                lblAddRoomRegularRate.Text = roomSelected.Regular.ToString();
-                lblAddRoomPeakRate.Text = roomSelected.Peak.ToString();
-            }
-        }
-
         protected void btnAddRoom_Click(object sender, EventArgs e)
         {
             //add to gcroom table
             GCRoom tmp = new GCRoom();
             tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
             tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
-            tmp.Status = ddlAddPeakRegular.SelectedValue;
-            tmp.Nights = Convert.ToInt32(txtAddNight.Text);
-
-            if (ddlAddPeakRegular.SelectedItem.Text == "Regular")
-            {
-                tmp.Value = Convert.ToDecimal(lblAddRoomRegularRate.Text);
-            }
-            else
-            {
-                tmp.Value = Convert.ToDecimal(lblAddRoomPeakRate.Text);
-            }
-
-            tmp.Total = tmp.Nights * tmp.Value;
 
             db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
@@ -246,20 +208,6 @@ namespace eGC.tran
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
         }
 
-        protected void ddlEditRoom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //show rates
-            string roomId = ddlEditRoom.SelectedValue;
-            var roomSelected = (from r in db.Rooms
-                                where r.Id.Equals(roomId)
-                                select r).FirstOrDefault();
-            if (roomSelected != null)
-            {
-                lblEditRoomRegularRate.Text = roomSelected.Regular.ToString();
-                lblEditRoomPeakRate.Text = roomSelected.Peak.ToString();
-            }
-        }
-
         protected void btnUpdateRoom_Click(object sender, EventArgs e)
         {
             var r = (from room in db.GCRooms
@@ -267,19 +215,6 @@ namespace eGC.tran
                      select room).FirstOrDefault();
 
             r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
-            r.Status = ddlEditPeakRegular.SelectedValue;
-            r.Nights = Convert.ToInt32(txtEditNight.Text);
-
-            if (ddlEditPeakRegular.SelectedItem.Text == "Regular")
-            {
-                r.Value = Convert.ToDecimal(lblEditRoomRegularRate.Text);
-            }
-            else
-            {
-                r.Value = Convert.ToDecimal(lblEditRoomPeakRate.Text);
-            }
-
-            r.Total = r.Nights * r.Value;
 
             db.SubmitChanges();
 
@@ -382,20 +317,6 @@ namespace eGC.tran
 
                 lblEditRoomId.Text = q.Id.ToString();
                 ddlEditRoom.SelectedValue = q.RoomId.ToString();
-                ddlEditPeakRegular.SelectedValue = q.Status;
-                txtEditNight.Text = q.Nights.ToString();
-                lblEditTotalValue.Text = q.Total.ToString();
-
-                //show rates
-                string roomId = ddlEditRoom.SelectedValue;
-                var roomSelected = (from r in db.Rooms
-                                    where r.Id.Equals(roomId)
-                                    select r).FirstOrDefault();
-                if (roomSelected != null)
-                {
-                    lblEditRoomRegularRate.Text = roomSelected.Regular.ToString();
-                    lblEditRoomPeakRate.Text = roomSelected.Peak.ToString();
-                }
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");

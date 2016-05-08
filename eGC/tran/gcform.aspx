@@ -196,31 +196,6 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-
-                                                        <asp:TemplateField HeaderText="Regular/Peak">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Nights">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblNights" runat="server" Text='<%# Eval("Nights") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Value">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblValue" runat="server" Text='<%# Eval("Value") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Total">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("Total") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteRoom" />
 
                                                     </Columns>
@@ -315,8 +290,6 @@
                                     <label for="ddlAddRoom">Room</label>
                                     <asp:DropDownList ID="ddlAddRoom"
                                         runat="server"
-                                        AutoPostBack="true"
-                                        OnSelectedIndexChanged="ddlAddRoom_SelectedIndexChanged"
                                         CssClass="form-control">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
@@ -327,32 +300,6 @@
                                         ValidationGroup="vgAddRoom"
                                         ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                                 </div>
-                                <div class="form-group">
-                                    <label for="ddlAddPeakRegular">Peak/Regular</label>
-                                    <asp:DropDownList ID="ddlAddPeakRegular" runat="server" CssClass="form-control">
-                                        <asp:ListItem Value="Regular">Regular</asp:ListItem>
-                                        <asp:ListItem Value="Peak">Peak</asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtAddNight">No of Nights</label>
-                                    <asp:TextBox ID="txtAddNight" runat="server" CssClass="form-control" placeholder="No of Nights"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtAddNight"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgAddRoom"
-                                        ErrorMessage="No of Nights is required"></asp:RequiredFieldValidator>
-                                </div>
-                                <p>
-                                    <b>Regular Rate</b>:
-                                    <asp:Label ID="lblAddRoomRegularRate" runat="server"></asp:Label>
-                                </p>
-                                <p>
-                                    <b>Peak Rate</b>:
-                                    <asp:Label ID="lblAddRoomPeakRate" runat="server"></asp:Label>
-                                </p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -387,8 +334,6 @@
                                 <label for="ddlEditRoom">Room</label>
                                 <asp:DropDownList ID="ddlEditRoom"
                                     runat="server"
-                                    AutoPostBack="true"
-                                    OnSelectedIndexChanged="ddlEditRoom_SelectedIndexChanged"
                                     CssClass="form-control">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
@@ -398,36 +343,6 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="Room is required"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="ddlEditPeakRegular">Peak/Regular</label>
-                                <asp:DropDownList ID="ddlEditPeakRegular" runat="server" CssClass="form-control">
-                                    <asp:ListItem Value="Regular">Regular</asp:ListItem>
-                                    <asp:ListItem Value="Peak">Peak</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtEditNight">No of Nights</label>
-                                <asp:TextBox ID="txtEditNight" runat="server" CssClass="form-control" placeholder="No of Nights"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-                                    runat="server"
-                                    Display="Dynamic"
-                                    ControlToValidate="txtEditNight"
-                                    CssClass="label label-danger"
-                                    ValidationGroup="vgEditRoom"
-                                    ErrorMessage="No of Nights is required"></asp:RequiredFieldValidator>
-                            </div>
-                            <p>
-                                <b>Regular Rate</b>:
-                                    <asp:Label ID="lblEditRoomRegularRate" runat="server"></asp:Label>
-                            </p>
-                            <p>
-                                <b>Peak Rate</b>:
-                                    <asp:Label ID="lblEditRoomPeakRate" runat="server"></asp:Label>
-                            </p>
-                            <div class="form-group">
-                                <label for="lblEditTotalValue">Total</label>
-                                <asp:Label ID="lblEditTotalValue" runat="server" ForeColor="Green"></asp:Label>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -473,7 +388,7 @@
     </div>
 
 
-    <!-- Add Modal -->
+    <!-- Add Dining Modal -->
     <div id="addDining" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->

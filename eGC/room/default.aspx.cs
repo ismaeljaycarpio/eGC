@@ -33,8 +33,6 @@ namespace eGC.room
                 lblRowId.Text = q.Id.ToString();
                 txtEditType.Text = q.Type;
                 txtEditRoom.Text = q.Room1;
-                txtEditRegular.Text = q.Regular.ToString();
-                txtEditPeak.Text = q.Peak.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -67,8 +65,6 @@ namespace eGC.room
             Room r = new Room();
             r.Type = txtAddType.Text;
             r.Room1 = txtAddRoom.Text;
-            r.Regular = Convert.ToDecimal(txtAddRegular.Text);
-            r.Peak = Convert.ToDecimal(txtAddPeak.Text);
 
             db.Rooms.InsertOnSubmit(r);
 
@@ -89,13 +85,8 @@ namespace eGC.room
                      where r.Id.Equals(Convert.ToInt32(lblRowId.Text))
                      select r).FirstOrDefault();
 
-            decimal reg = decimal.Parse(txtEditRegular.Text);
-            decimal peak = decimal.Parse(txtEditPeak.Text);
-
             q.Type = txtEditType.Text;
             q.Room1 = txtEditRoom.Text;
-            q.Regular = reg;
-            q.Peak = peak;
 
             db.SubmitChanges();
 
@@ -115,9 +106,7 @@ namespace eGC.room
                     {
                         Id = r.Id,
                         Type = r.Type,
-                        Room1 = r.Room1,
-                        Regular = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", r.Regular),
-                        Peak = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", r.Peak)
+                        Room1 = r.Room1
                     };
             gvRoom.DataSource = q.ToList();
             gvRoom.DataBind();

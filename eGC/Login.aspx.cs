@@ -17,6 +17,8 @@ namespace eGC
                 Session.RemoveAll();
                 Session.Clear();
                 FormsAuthentication.SignOut();
+                TextBox txtusername = loginControl.FindControl("UserName") as TextBox;
+                txtusername.Focus();
             }
         }
     }

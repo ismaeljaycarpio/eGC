@@ -327,32 +327,6 @@
                                         ValidationGroup="vgAddRoom"
                                         ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                                 </div>
-                                <div class="form-group">
-                                    <label for="ddlAddPeakRegular">Peak/Regular</label>
-                                    <asp:DropDownList ID="ddlAddPeakRegular" runat="server" CssClass="form-control">
-                                        <asp:ListItem Value="Regular">Regular</asp:ListItem>
-                                        <asp:ListItem Value="Peak">Peak</asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtAddNight">No of Nights</label>
-                                    <asp:TextBox ID="txtAddNight" runat="server" CssClass="form-control" placeholder="No of Nights"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtAddNight"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgAddRoom"
-                                        ErrorMessage="No of Nights is required"></asp:RequiredFieldValidator>
-                                </div>
-                                <p>
-                                    <b>Regular Rate</b>:
-                                    <asp:Label ID="lblAddRoomRegularRate" runat="server"></asp:Label>
-                                </p>
-                                <p>
-                                    <b>Peak Rate</b>:
-                                    <asp:Label ID="lblAddRoomPeakRate" runat="server"></asp:Label>
-                                </p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -398,39 +372,6 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="Room is required"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="ddlEditPeakRegular">Peak/Regular</label>
-                                <asp:DropDownList ID="ddlEditPeakRegular" runat="server" CssClass="form-control">
-                                    <asp:ListItem Value="Regular">Regular</asp:ListItem>
-                                    <asp:ListItem Value="Peak">Peak</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtEditNight">No of Nights</label>
-                                <asp:TextBox ID="txtEditNight"
-                                    runat="server"
-                                    CssClass="form-control"
-                                    placeholder="No of Nights"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-                                    runat="server"
-                                    Display="Dynamic"
-                                    ControlToValidate="txtEditNight"
-                                    CssClass="label label-danger"
-                                    ValidationGroup="vgEditRoom"
-                                    ErrorMessage="No of Nights is required"></asp:RequiredFieldValidator>
-                            </div>
-                            <p>
-                                <b>Regular Rate</b>:
-                                    <asp:Label ID="lblEditRoomRegularRate" runat="server"></asp:Label>
-                            </p>
-                            <p>
-                                <b>Peak Rate</b>:
-                                    <asp:Label ID="lblEditRoomPeakRate" runat="server"></asp:Label>
-                            </p>
-                            <div class="form-group">
-                                <label for="lblEditTotalValue">Total</label>
-                                <asp:Label ID="lblEditTotalValue" runat="server" ForeColor="Green"></asp:Label>
                             </div>
                         </div>
                         <div class="modal-footer">
