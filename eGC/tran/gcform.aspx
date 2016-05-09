@@ -11,27 +11,25 @@
                 </div>
                 <div class="panel-body">
                     <div role="form">
-                        <div class="form-inline">
-                            <div class="form-group" id="panelName" runat="server">
-                                <label for="txtName">Name</label>
-                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtName" id="lblForGuestId" runat="server">ID</label>
-                                <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtName">Company</label>
-                                <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtName">Email</label>
-                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtName">Contact No</label>
-                                <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
+                        <div class="col-md-4" id="panelName" runat="server">
+                            <label for="txtName">Name</label>
+                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtName" id="lblForGuestId" runat="server">Guest ID</label>
+                            <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtName">Company</label>
+                            <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtName">Email</label>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtName">Contact No</label>
+                            <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -97,63 +95,10 @@
                             <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtArrivalDate">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate"
-                                runat="server"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtArrivalDate"
-                                CssClass="label label-danger"
-                                ErrorMessage="Arrival Date is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtCheckoutDate">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate"
-                                runat="server"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                                runat="server"
-                                Display="Dynamic"
-                                ControlToValidate="txtCheckoutDate"
-                                CssClass="label label-danger"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator2"
-                                runat="server"
-                                ControlToCompare="txtArrivalDate"
-                                ControlToValidate="txtCheckoutDate"
-                                CssClass="label label-danger"
-                                Display="Dynamic"
-                                Operator="GreaterThan"
-                                Type="Date"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Check-out Date must be greater than Arrival date"></asp:CompareValidator>
-                        </div>
-                        <div class="col-md-4">
                             <label for="txtExpirationDate">Expiration Date</label>
                             <asp:TextBox ID="txtExpirationDate"
                                 runat="server"
                                 CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtExpirationDate"
-                                CssClass="label label-danger"
-                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator1"
-                                runat="server"
-                                ControlToCompare="txtCheckoutDate"
-                                ControlToValidate="txtExpirationDate"
-                                CssClass="label label-danger"
-                                Display="Dynamic"
-                                Operator="GreaterThan"
-                                Type="Date"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Expiration Date must be greater than Check-out date"></asp:CompareValidator>
                         </div>
                     </div>
                 </div>
@@ -536,8 +481,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#<%=txtArrivalDate.ClientID%>').datepicker();
-            $('#<%=txtCheckoutDate.ClientID%>').datepicker();
             $('#<%=txtExpirationDate.ClientID%>').datepicker();
         });
     </script>

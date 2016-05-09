@@ -64,25 +64,13 @@ namespace eGC.company
                          CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                          Number = guest.ContactNumber,
                          GCNumber = gctran.GCNumber,
-                         ArrivalDate = gctran.ArrivalDate,
-                         CheckoutDate = gctran.CheckOutDate,
                          ExpiryDate = gctran.ExpiryDate,
                          Status = gctran.StatusGC,
-                         TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
                          Approval = gctran.ApprovalStatus,
                          CancellationReason = gctran.CancellationReason,
                          CancelledDate = gctran.CancelledDate
                      };
 
-            if(txtDateFrom.Text != String.Empty && txtDateTo.Text == String.Empty)
-            {
-                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text));
-            }
-            else if(txtDateFrom.Text != String.Empty && txtDateTo.Text != String.Empty)
-            {
-                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text) &&
-                    a.ArrivalDate <= Convert.ToDateTime(txtDateTo.Text));
-            }
 
             e.Result = q;
             txtSearch.Focus();
@@ -113,25 +101,13 @@ namespace eGC.company
                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
-                        ArrivalDate = gctran.ArrivalDate,
-                        CheckoutDate = gctran.CheckOutDate,
                         ExpiryDate = gctran.ExpiryDate,
                         Status = gctran.StatusGC,
-                        TotalValue = String.Format(CultureInfo.GetCultureInfo("en-PH"), "{0:C}", db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)),
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
                         CancelledDate = gctran.CancelledDate
                     }).ToList();
 
-            if (txtDateFrom.Text != String.Empty && txtDateTo.Text == String.Empty)
-            {
-                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text)).ToList();
-            }
-            else if (txtDateFrom.Text != String.Empty && txtDateTo.Text != String.Empty)
-            {
-                q = q.Where(a => a.ArrivalDate >= Convert.ToDateTime(txtDateFrom.Text) &&
-                    a.ArrivalDate <= Convert.ToDateTime(txtDateTo.Text)).ToList();
-            }
 
             DataTable dt = new DataTable();
             dt = q.ToDataTable();

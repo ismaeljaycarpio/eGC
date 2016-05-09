@@ -180,8 +180,6 @@ namespace eGC.tran
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
             tran.Reason = txtReason.Text;
-            tran.ArrivalDate = Convert.ToDateTime(txtArrivalDate.Text);
-            tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
             tran.ApprovalStatus = "Pending";
             tran.StatusGC = "Waiting";
             tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);

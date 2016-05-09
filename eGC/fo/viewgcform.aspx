@@ -118,34 +118,6 @@
                                 Enabled="false"
                                 CssClass="form-control"></asp:TextBox>
                         </div>
-                        <div class="col-md-4">
-                            <label for="txtArrivalDate">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate"
-                                runat="server"
-                                Enabled="false"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtArrivalDate"
-                                CssClass="label label-danger"
-                                ErrorMessage="Arrival Date is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtCheckoutDate">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate"
-                                runat="server"
-                                Enabled="false"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                                runat="server"
-                                Display="Dynamic"
-                                ControlToValidate="txtCheckoutDate"
-                                CssClass="label label-danger"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
-                        </div>
                     </div>
                 </div>
 
@@ -155,15 +127,7 @@
                         <asp:Label ID="lblCurrentGCStatus" runat="server"></asp:Label>
                     </div>
                 </div>
-                <%--<div class="panel-body">
-                    <div class="col-md-6">
-                        <label for="btnUsed">Set GC Status: </label>
-                        <asp:Button ID="btnUsed" runat="server" Text="Used" CssClass="btn btn-success" OnClick="btnUsed_Click" />
-                        <asp:Button ID="btnCancel" runat="server" Text="Cancelled" CssClass="btn btn-danger" OnClick="btnCancel_Click" />
-                        <asp:Button ID="btnExpire" runat="server" Text="Expired" CssClass="btn btn-warning"  OnClick="btnExpire_Click"/>
-                        <asp:Button ID="btnWaiting" runat="server" Text="Waiting" CssClass="btn btn-default"  OnClick="btnWaiting_Click"/>
-                    </div>
-                </div>--%>
+
                 <div class="panel-body">
                     <ul class="nav nav-tabs" id="myTab">
                         <li><a href="#roomTab" data-toggle="tab">Room</a></li>
@@ -187,8 +151,7 @@
                                                     AutoGenerateColumns="false"
                                                     EmptyDataText="No Record(s) found"
                                                     ShowHeaderWhenEmpty="true"
-                                                    DataKeyNames="Id"
-                                                    OnRowCommand="gvRoom_RowCommand">
+                                                    DataKeyNames="Id">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Row Id" Visible="false">
                                                             <ItemTemplate>
@@ -227,7 +190,6 @@
                                                     EmptyDataText="No Record(s) found"
                                                     ShowHeaderWhenEmpty="true"
                                                     DataKeyNames="Id"
-                                                    OnRowCommand="gvDining_RowCommand"
                                                     PageSize="10">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Row Id" Visible="false">
@@ -237,12 +199,6 @@
                                                         </asp:TemplateField>
 
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
-
-                                                        <asp:TemplateField HeaderText="Value">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblValue" runat="server" Text='<%# Eval("Value") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
                                                     </Columns>
                                                     <PagerStyle CssClass="pagination-ys" />
                                                 </asp:GridView>
@@ -277,8 +233,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#<%=txtArrivalDate.ClientID%>').datepicker();
-            $('#<%=txtCheckoutDate.ClientID%>').datepicker();
             $('#<%=txtExpirationDate.ClientID%>').datepicker();
         });
     </script>

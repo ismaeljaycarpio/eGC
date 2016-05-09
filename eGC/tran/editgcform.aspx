@@ -90,23 +90,6 @@
                             <asp:TextBox ID="txtExpirationDate"
                                 runat="server"
                                 CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtExpirationDate"
-                                CssClass="label label-danger"
-                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator1" 
-                                runat="server"
-                                ControlToCompare="txtCheckoutDate"
-                                ControlToValidate="txtExpirationDate"
-                                CssClass="label label-danger"
-                                Display="Dynamic"
-                                Operator="GreaterThan"
-                                Type="Date"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Expiration Date must be greater than Check-out date"></asp:CompareValidator>
                         </div>
                     </div>
                 </div>
@@ -118,42 +101,6 @@
                             <asp:TextBox ID="txtGCNumber"
                                 runat="server"
                                 CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtArrivalDate">Arrival Date</label>
-                            <asp:TextBox ID="txtArrivalDate"
-                                runat="server"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtArrivalDate"
-                                CssClass="label label-danger"
-                                ErrorMessage="Arrival Date is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtCheckoutDate">Check-out Date</label>
-                            <asp:TextBox ID="txtCheckoutDate"
-                                runat="server"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                                runat="server"
-                                Display="Dynamic"
-                                ControlToValidate="txtCheckoutDate"
-                                CssClass="label label-danger"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Checkout Date is required"></asp:RequiredFieldValidator>
-                            <asp:CompareValidator ID="CompareValidator2" 
-                                runat="server"
-                                ControlToCompare="txtArrivalDate"
-                                ControlToValidate="txtCheckoutDate"
-                                CssClass="label label-danger"
-                                Display="Dynamic"
-                                Operator="GreaterThan"
-                                Type="Date"
-                                ValidationGroup="vgPrimaryAdd"
-                                ErrorMessage="Check-out Date must be greater than Arrival date"></asp:CompareValidator> 
                         </div>
                     </div>
                 </div>
@@ -197,25 +144,7 @@
 
                                                         <asp:TemplateField HeaderText="Regular/Peak">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Nights">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblNights" runat="server" Text='<%# Eval("Nights") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Value">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblValue" runat="server" Text='<%# Eval("Value") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Total">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("Total") %>'></asp:Label>
+                                                                <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("PeakRegular") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
@@ -265,12 +194,6 @@
 
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
 
-                                                        <asp:TemplateField HeaderText="Value">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblValue" runat="server" Text='<%# Eval("Value") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
                                                         <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteDining" />
 
@@ -315,8 +238,6 @@
                                     <label for="ddlAddRoom">Room</label>
                                     <asp:DropDownList ID="ddlAddRoom"
                                         runat="server"
-                                        AutoPostBack="true"
-                                        OnSelectedIndexChanged="ddlAddRoom_SelectedIndexChanged"
                                         CssClass="form-control">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
@@ -361,8 +282,6 @@
                                 <label for="ddlEditRoom">Room</label>
                                 <asp:DropDownList ID="ddlEditRoom"
                                     runat="server"
-                                    AutoPostBack="true"
-                                    OnSelectedIndexChanged="ddlEditRoom_SelectedIndexChanged"
                                     CssClass="form-control">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
@@ -420,7 +339,6 @@
     <!-- Add Dining Modal -->
     <div id="addDining" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
@@ -565,8 +483,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#<%=txtArrivalDate.ClientID%>').datepicker();
-            $('#<%=txtCheckoutDate.ClientID%>').datepicker();
             $('#<%=txtExpirationDate.ClientID%>').datepicker();
         });
     </script>

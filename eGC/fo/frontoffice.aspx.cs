@@ -44,16 +44,12 @@ namespace eGC.fo
                          {
                              FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
                              GuestId = g.GuestId,
-                             ArrivalDate = String.Format("{0: MM/dd/yyyy}", tran.ArrivalDate),
-                             CheckoutDate = String.Format("{0: MM/dd/yyyy}", tran.CheckOutDate),
                              StatusGC = tran.StatusGC,
                              ExpirationDate = String.Format("{0:MM/dd/yyyy}", tran.ExpiryDate)
                          }).FirstOrDefault();
 
                 txtName.Text = gu.FullName;
                 txtGuestId.Text = gu.GuestId;
-                txtArrival.Text = gu.ArrivalDate.ToString();
-                txtCheckout.Text = gu.CheckoutDate.ToString();
                 txtStatus.Text = gu.StatusGC;
                 txtGCExpirationDate.Text = gu.ExpirationDate;
 
@@ -151,10 +147,7 @@ namespace eGC.fo
                         CompanyName = guest.CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
-                        ArrivalDate = gctran.ArrivalDate,
-                        CheckoutDate = gctran.CheckOutDate,
                         Status = gctran.StatusGC,
-                        TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
                     };
 
             gvGC.DataSource = q.ToList();
@@ -189,11 +182,8 @@ namespace eGC.fo
                          CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                          Number = guest.ContactNumber,
                          GCNumber = gctran.GCNumber,
-                         ArrivalDate = gctran.ArrivalDate,
-                         CheckoutDate = gctran.CheckOutDate,
                          ExpiryDate = gctran.ExpiryDate,
-                         Status = gctran.StatusGC,
-                         TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                         Status = gctran.StatusGC
                      }).ToList();
 
             GridView1.DataSource = q;
@@ -305,11 +295,8 @@ namespace eGC.fo
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
-                             ArrivalDate = gctran.ArrivalDate,
-                             CheckoutDate = gctran.CheckOutDate,
                              ExpiryDate = gctran.ExpiryDate,
-                             Status = gctran.StatusGC,
-                             TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                             Status = gctran.StatusGC
                          }).ToList();
 
                 e.Result = q;
@@ -340,11 +327,8 @@ namespace eGC.fo
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
-                             ArrivalDate = gctran.ArrivalDate,
-                             CheckoutDate = gctran.CheckOutDate,
                              ExpiryDate = gctran.ExpiryDate,
-                             Status = gctran.StatusGC,
-                             TotalValue = db.GCRooms.Where(x => x.GCTransactionId == gctran.Id).Sum(t => t.Total)
+                             Status = gctran.StatusGC
                          }).ToList();
 
                 e.Result = q;

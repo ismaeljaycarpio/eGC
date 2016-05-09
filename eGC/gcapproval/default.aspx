@@ -77,8 +77,6 @@
 
                                             <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
                                             <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
-                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
-                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
                                             <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
 
                                             <asp:TemplateField HeaderText="Approval" SortExpression="Approval">

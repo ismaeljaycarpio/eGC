@@ -2,25 +2,12 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 17.25" name="GiftCheck">
   <DataContextMoniker Name="/GiftCheckDataContext" />
   <nestedChildShapes>
-    <classShape Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" absoluteBounds="3, 0.5, 2, 1.1939925130208333">
+    <classShape Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" absoluteBounds="3.125, 0.5, 2, 1.1939925130208333">
       <DataClassMoniker Name="/GiftCheckDataContext/Dining" />
       <nestedChildShapes>
-        <elementListCompartment Id="b0c65a84-e60e-4180-a4e6-702adc4093e7" absoluteBounds="3.0149999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b0c65a84-e60e-4180-a4e6-702adc4093e7" absoluteBounds="3.1399999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" absoluteBounds="0.625, 3.625, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/GiftCheckDataContext/GCRoom" />
-      <nestedChildShapes>
-        <elementListCompartment Id="1d721aaa-78aa-4f4f-a48b-35097e2060c6" absoluteBounds="0.64, 4.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(4 : 1.69399251302083); (4 : 4.79890055338542); (2.625 : 4.79890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/GiftCheckDataContext/Dining/Dining_GCRoom" />
-      <nodes>
-        <classShapeMoniker Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" />
-        <classShapeMoniker Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" />
-      </nodes>
-    </associationConnector>
     <classShape Id="784842ff-1df9-4695-b110-94a7caf5f088" absoluteBounds="0.5, 10.875, 2, 4.4631168619791666">
       <DataClassMoniker Name="/GiftCheckDataContext/MembershipLINQ" />
       <nestedChildShapes>
@@ -52,7 +39,7 @@
         <classShapeMoniker Id="44841eb9-7afb-4fef-af14-e5c7d13bb27a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (4.83333333333333 : 15.0440584309896 : JumpStart); (4.66666666666667 : 15.0440584309896 : JumpEnd); (2.5 : 15.0440584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (2.5 : 15.0440584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GiftCheckDataContext/User/User_MembershipLINQ" />
       <nodes>
         <classShapeMoniker Id="b7dcce53-ef28-4ad3-9354-e944f9de3b68" />
@@ -65,44 +52,57 @@
         <elementListCompartment Id="7606f50b-0e3b-4262-a32c-3278947da304" absoluteBounds="5.64, 2.835, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="59e9d99a-0d4f-4e0e-8c67-a54ec84d9a78" absoluteBounds="2.75, 6.75, 2.375, 3.8862125651041666">
-      <DataClassMoniker Name="/GiftCheckDataContext/GCTransaction" />
+    <classShape Id="4ccb9957-1bc0-4cb8-b16c-eade30e22ff4" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/GiftCheckDataContext/Room" />
       <nestedChildShapes>
-        <elementListCompartment Id="f65e10f3-38e9-4f0e-af77-7c9e50dbd844" absoluteBounds="2.765, 7.21, 2.3449999999999998, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="44bef9fe-b3ab-4618-94db-defe0922359b" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.375 : 6.75); (3.375 : 5.41710333007813); (2.625 : 5.41710333007813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/GiftCheckDataContext/GCTransaction/GCTransaction_GCRoom" />
-      <nodes>
-        <classShapeMoniker Id="59e9d99a-0d4f-4e0e-8c67-a54ec84d9a78" />
-        <classShapeMoniker Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.625 : 3.58695077669271); (4.5624995 : 3.58695077669271); (4.5624995 : 6.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="91e9e2c8-9dd1-41dd-8adf-07de7dbe1e7a" absoluteBounds="2.5, 7.125, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/GiftCheckDataContext/GCTransaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="236da08c-63e7-4b49-a5ca-5eada84ba9a9" absoluteBounds="2.515, 7.585, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.625 : 2.90625); (4.69270833333333 : 2.90625 : JumpStart); (4.52604166666667 : 2.90625 : JumpEnd); (4.09375 : 2.90625); (4.09375 : 7.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/Guest/Guest_GCTransaction" />
       <nodes>
         <classShapeMoniker Id="49c09bba-bb80-4fc3-a48b-2e3db444dd06" />
-        <classShapeMoniker Id="59e9d99a-0d4f-4e0e-8c67-a54ec84d9a78" />
+        <classShapeMoniker Id="91e9e2c8-9dd1-41dd-8adf-07de7dbe1e7a" />
       </nodes>
     </associationConnector>
-    <classShape Id="b103aebd-ae06-4c93-9130-7dcb270da93f" absoluteBounds="0.5, 0.75, 2, 1.3862939453125">
-      <DataClassMoniker Name="/GiftCheckDataContext/Room" />
-      <nestedChildShapes>
-        <elementListCompartment Id="8758e7c7-7827-499d-a0fd-280eac8532bf" absoluteBounds="0.51500000000000012, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(1.5625 : 2.1362939453125); (1.5625 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/GiftCheckDataContext/Room/Room_GCRoom" />
-      <nodes>
-        <classShapeMoniker Id="b103aebd-ae06-4c93-9130-7dcb270da93f" />
-        <classShapeMoniker Id="c7796db7-fbd5-4223-bbcd-a3e2eba266d1" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="7c49d77e-1e05-4952-985f-23c07b4123ee" absoluteBounds="6.125, 8.375, 2, 1.5785953776041666">
+    <classShape Id="32b62506-1d55-489f-bf65-674be151ffb2" absoluteBounds="5.5, 8, 2, 2.3478011067708335">
       <DataClassMoniker Name="/GiftCheckDataContext/tmpRoom" />
       <nestedChildShapes>
-        <elementListCompartment Id="7cadbb67-cd24-485b-994f-eca164e3b205" absoluteBounds="6.14, 8.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="777828fa-26f8-4759-b93c-2aa05ef66595" absoluteBounds="5.515, 8.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="3aa4b38f-9f83-49f7-ace4-389c2946b7e5" absoluteBounds="1, 3.5, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/GiftCheckDataContext/GCRoom" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa4077cb-0c78-4aab-b7b8-931c4cc7286f" absoluteBounds="1.0150000000000001, 3.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.609375 : 1.69399251302083); (4.609375 : 4.67390055338542); (4.17708333333333 : 4.67390055338542 : JumpStart); (4.01041666666667 : 4.67390055338542 : JumpEnd); (3 : 4.67390055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GiftCheckDataContext/Dining/Dining_GCRoom" />
+      <nodes>
+        <classShapeMoniker Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" />
+        <classShapeMoniker Id="3aa4b38f-9f83-49f7-ace4-389c2946b7e5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.125); (2.75 : 5.84780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GiftCheckDataContext/GCTransaction/GCTransaction_GCRoom" />
+      <nodes>
+        <classShapeMoniker Id="91e9e2c8-9dd1-41dd-8adf-07de7dbe1e7a" />
+        <classShapeMoniker Id="3aa4b38f-9f83-49f7-ace4-389c2946b7e5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.875 : 2.1362939453125); (1.875 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GiftCheckDataContext/Room/Room_GCRoom" />
+      <nodes>
+        <classShapeMoniker Id="4ccb9957-1bc0-4cb8-b16c-eade30e22ff4" />
+        <classShapeMoniker Id="3aa4b38f-9f83-49f7-ace4-389c2946b7e5" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -46,8 +46,6 @@ namespace eGC.fo
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
                     txtReason.Text = tGC.Reason;
-                    txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
-                    txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
                     lblCurrentGCStatus.Text = tGC.StatusGC;
 
@@ -109,8 +107,6 @@ namespace eGC.fo
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
             tran.Reason = txtReason.Text;
-            tran.ArrivalDate = Convert.ToDateTime(txtArrivalDate.Text);
-            tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
 
             db.SubmitChanges();
             Response.Redirect("~/fo/frontoffice.aspx");
@@ -130,11 +126,7 @@ namespace eGC.fo
                     {
                         Id = gcroom.Id,
                         Type = room.Type,
-                        Room = room.Room1,
-                        Status = gcroom.Status,
-                        Nights = gcroom.Nights,
-                        Value = gcroom.Value,
-                        Total = gcroom.Total
+                        Room = room.Room1
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -152,8 +144,7 @@ namespace eGC.fo
                     select new
                     {
                         Id = gcdining.Id,
-                        Name = dining.Name,
-                        Value = gcdining.Value
+                        Name = dining.Name
                     };
 
             gvDining.DataSource = q.ToList();

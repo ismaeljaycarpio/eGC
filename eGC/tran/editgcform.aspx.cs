@@ -47,8 +47,6 @@ namespace eGC.tran
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
                     txtReason.Text = tGC.Reason;
-                    txtArrivalDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ArrivalDate);
-                    txtCheckoutDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.CheckOutDate);
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
 
                     //chk approver
@@ -140,7 +138,6 @@ namespace eGC.tran
 
                 lblEditDiningId.Text = q.Id.ToString();
                 ddlEditDining.SelectedValue = q.DiningId.ToString();
-                txtEditValue.Text = q.Value.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -175,15 +172,7 @@ namespace eGC.tran
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
             tran.Reason = txtReason.Text;
-            tran.ArrivalDate = Convert.ToDateTime(txtArrivalDate.Text);
-            tran.CheckOutDate = Convert.ToDateTime(txtCheckoutDate.Text);
             tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
-
-            //chk if prev expired
-            if(Convert.ToDateTime(txtExpirationDate.Text) > Convert.ToDateTime(txtCheckoutDate.Text))
-            {
-                tran.StatusGC = "Waiting";
-            }
 
             db.SubmitChanges();
             Response.Redirect("~/gcapproval/default.aspx");
@@ -251,8 +240,6 @@ namespace eGC.tran
             GCRoom tmp = new GCRoom();
             tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
             tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
-            tmp.Value = Convert.ToDecimal(txtAddValue.Text);
-            tmp.Total = tmp.Value;
 
             db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
@@ -273,8 +260,6 @@ namespace eGC.tran
                      select dining).FirstOrDefault();
 
             d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
-            d.Value = Convert.ToDecimal(txtEditValue.Text);
-            d.Total = d.Value;
             db.SubmitChanges();
 
             bindDinings();
@@ -355,11 +340,7 @@ namespace eGC.tran
                     {
                         Id = gcroom.Id,
                         Type = room.Type,
-                        Room = room.Room1,
-                        Status = gcroom.Status,
-                        Nights = gcroom.Nights,
-                        Value = gcroom.Value,
-                        Total = gcroom.Total
+                        Room = room.Room1
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -377,8 +358,7 @@ namespace eGC.tran
                     select new
                     {
                         Id = gcdining.Id,
-                        Name = dining.Name,
-                        Value = gcdining.Value
+                        Name = dining.Name
                     };
 
             gvDining.DataSource = q.ToList();

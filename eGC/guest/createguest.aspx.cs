@@ -113,8 +113,9 @@ namespace eGC.guest
                 db.Guests.InsertOnSubmit(g);
                 db.SubmitChanges();
 
-                pnlSuccess.Visible = true;
-                clearButtons();
+                Response.Redirect("~/guest/default.aspx");
+                //pnlSuccess.Visible = true;
+                //clearButtons();
             }
         }
 

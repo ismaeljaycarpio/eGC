@@ -36,14 +36,6 @@
                                     <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                 </div>
                                 <div class="col-xs-3">
-                                    <label for="txtArrival">Arrival</label>
-                                    <asp:TextBox ID="txtArrival" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                                </div>
-                                <div class="col-xs-3">
-                                    <label for="txtCheckout">Checkout Date</label>
-                                    <asp:TextBox ID="txtCheckout" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                                </div>
-                                <div class="col-xs-3">
                                     <label for="txtStatus">GC Status</label>
                                     <asp:TextBox ID="txtStatus" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                 </div>
@@ -114,9 +106,6 @@
                                             <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
                                             <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
                                             <asp:BoundField DataField="Number" HeaderText="Contact No" SortExpression="Number" />
-
-                                            <asp:BoundField DataField="ArrivalDate" HeaderText="Arrival Date" DataFormatString="{0:d}" SortExpression="ArrivalDate" />
-                                            <asp:BoundField DataField="CheckoutDate" HeaderText="Checkout Date" DataFormatString="{0:d}" SortExpression="CheckoutDate" />
                                             <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
 
                                             <asp:TemplateField HeaderText="Status" SortExpression="Status">
@@ -124,8 +113,6 @@
                                                     <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-
-                                            <asp:BoundField DataField="TotalValue" HeaderText="Grand Total" DataFormatString="{0:C}" SortExpression="TotalValue" />
 
                                             <asp:TemplateField>
                                                 <ItemTemplate>
