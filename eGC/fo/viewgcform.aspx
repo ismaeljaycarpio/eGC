@@ -37,6 +37,10 @@
 
                 <div class="panel-body">
                     <div role="form">
+                        <asp:Panel Id="pnlApprovedBy" runat="server" CssClass="col-md-4">
+                            <label for="txtApprovedBy">Approved By</label>
+                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </asp:Panel>
                         <div class="col-md-4">
                             <label for="txtName">Recommending Approval</label>
                             <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
@@ -47,17 +51,6 @@
                                 ControlToValidate="txtRecommendingApproval"
                                 CssClass="label label-danger"
                                 ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtApprovedBy">Approved By</label>
-                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtApprovedBy"
-                                CssClass="label label-danger"
-                                ErrorMessage="Approved By is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
                             <label for="txtAccountNo">Account No</label>
@@ -81,17 +74,25 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
                         </div>
+
                         <div class="col-md-4">
-                            <label for="txtReason">Reason</label>
-                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
+                            <label for="ddlGCType">GC Type</label>
+                            <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" Enabled="false">
+                                <asp:ListItem Selected="True" Value="0">-- Select One --</asp:ListItem>
+                                <asp:ListItem Value="Representation">Representation</asp:ListItem>
+                                <asp:ListItem Value="Sold">Sold</asp:ListItem>
+                                <asp:ListItem Value="Barter">Barter</asp:ListItem>
+                            </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtReason"
+                                ControlToValidate="ddlGCType"
+                                InitialValue="0"
                                 CssClass="label label-danger"
-                                ErrorMessage="Reason is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="GC Type is required"></asp:RequiredFieldValidator>
                         </div>
+
                         <div class="col-md-4">
                             <label for="txtExpirationDate">Expiration Date</label>
                             <asp:TextBox ID="txtExpirationDate"
@@ -161,6 +162,8 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
+                                                        <asp:BoundField DataField="WithBreakfast" HeaderText="With Breakfast?" />
+                                                        <asp:BoundField DataField="HowManyPerson" HeaderText="Head Count" />
                                                     </Columns>
                                                     <PagerStyle CssClass="pagination-ys" />
                                                 </asp:GridView>
@@ -199,6 +202,9 @@
                                                         </asp:TemplateField>
 
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
+                                                        <asp:BoundField DataField="DiningType" HeaderText="Dining Type" />
+                                                        <asp:BoundField DataField="HeadCount" HeaderText="Head Count" />
+
                                                     </Columns>
                                                     <PagerStyle CssClass="pagination-ys" />
                                                 </asp:GridView>

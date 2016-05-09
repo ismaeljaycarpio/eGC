@@ -5,7 +5,7 @@
       <siteMapNode url="~/Login.aspx" title="Login"  description="">
       </siteMapNode>
 
-      <siteMapNode url="~/admin/userconfig.aspx" title="User Configuration"  description="">
+      <siteMapNode url="~/admin/userconfig.aspx" title="User Config"  description="">
       </siteMapNode>
       
       <siteMapNode url="~/guest/default.aspx" title="Individual"  description="">
@@ -32,7 +32,7 @@
         <siteMapNode url="~/tran/editgcform.aspx" title="Update GC"></siteMapNode>
       </siteMapNode>
 
-      <siteMapNode url="~/fo/frontoffice.aspx" title="GC List"  description="">
+      <siteMapNode url="~/fo/frontoffice.aspx" title="Front Office"  description="">
         <siteMapNode url="~/fo/viewgcform.aspx" title="View GC"></siteMapNode>
       </siteMapNode>
 

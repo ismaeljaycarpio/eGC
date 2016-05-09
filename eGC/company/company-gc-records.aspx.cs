@@ -35,7 +35,12 @@ namespace eGC.company
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
+            if (e.CommandName.Equals("redirectGC"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
+                Response.Redirect("~/tran/editgcform.aspx?gcId=" + rowId);
+            }
         }
 
         protected void GCRecordDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
@@ -68,7 +73,8 @@ namespace eGC.company
                          Status = gctran.StatusGC,
                          Approval = gctran.ApprovalStatus,
                          CancellationReason = gctran.CancellationReason,
-                         CancelledDate = gctran.CancelledDate
+                         CancelledDate = gctran.CancelledDate,
+                         Type = gctran.Type
                      };
 
 

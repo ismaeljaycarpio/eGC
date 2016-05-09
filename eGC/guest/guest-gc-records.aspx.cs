@@ -35,7 +35,12 @@ namespace eGC.guest
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
+            if (e.CommandName.Equals("redirectGC"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
+                Response.Redirect("~/tran/editgcform.aspx?gcId=" + rowId);
+            }
         }
 
         protected void btnExport_Click(object sender, EventArgs e)
@@ -133,7 +138,8 @@ namespace eGC.guest
                         Status = gctran.StatusGC,
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
-                        CancelledDate = gctran.CancelledDate
+                        CancelledDate = gctran.CancelledDate,
+                        Type = gctran.Type
                     };
 
 

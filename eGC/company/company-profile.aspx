@@ -56,7 +56,7 @@
                                         <asp:BoundField DataField="ContactNumber" HeaderText="Number" SortExpression="Number" />
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
 
-                                        <asp:TemplateField HeaderText="GC Records">
+                                        <asp:TemplateField HeaderText="">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lbtnViewGCRecords"
                                                     runat="server"
@@ -72,7 +72,7 @@
                                                     runat="server"
                                                     Text="Add GC"
                                                     CommandName="addGC"
-                                                    CssClass="btn btn-success"
+                                                    CssClass="btn btn-success btn-sm"
                                                     CommandArgument='<%#((GridViewRow) Container).RowIndex %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -84,7 +84,7 @@
                                                     Text="Delete"
                                                     CommandName="deleteRecord"
                                                     CommandArgument='<%#((GridViewRow)Container).RowIndex %>'
-                                                    CssClass="btn btn-danger"></asp:Button>
+                                                    CssClass="btn btn-danger btn-sm"></asp:Button>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 

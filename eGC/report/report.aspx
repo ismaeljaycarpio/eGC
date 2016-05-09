@@ -21,7 +21,7 @@
                                             placeholder="Search..."></asp:TextBox>
                                     </div>
 
-                                    <div class="form-group">
+                                    <%--<div class="form-group">
                                         <asp:TextBox ID="txtDateFrom"
                                             runat="server"
                                             placeholder="Date From"
@@ -35,7 +35,7 @@
                                             placeholder="Date To"
                                             CssClass="form-control"
                                             data-provide="datepicker"></asp:TextBox>
-                                    </div>
+                                    </div>--%>
 
                                     <div class="form-group">
                                         <asp:DropDownList ID="ddlCompanyName"

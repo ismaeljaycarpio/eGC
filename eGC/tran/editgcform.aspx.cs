@@ -42,15 +42,15 @@ namespace eGC.tran
                     int id = tGC.Id;
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
+                    hfGCNumber.Value = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    //txtApprovedBy.Text = tGC.ApprovedBy;
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
-                    txtReason.Text = tGC.Reason;
+                    ddlGCType.SelectedValue = tGC.Type;
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
 
                     //chk approver
-                    if(tGC.ApprovedBy != String.Empty)
+                    if(tGC.ApprovedBy != null)
                     {
                         var u = (from emp in dbEHRIS.EMPLOYEEs
                                  where emp.Emp_Id == tGC.ApprovedBy
@@ -60,6 +60,16 @@ namespace eGC.tran
                         {
                             txtApprovedBy.Text = u.LastName + " , " + u.FirstName + " " + u.MiddleName;
                         }
+                    }
+                    else
+                    {
+                        pnlApprovedBy.Visible = false;
+                    }
+
+                    //chk gc type
+                    if(tGC.Type == "Representation")
+                    {
+                        txtExpirationDate.Enabled = true;
                     }
 
                     //load related table
@@ -121,7 +131,45 @@ namespace eGC.tran
                         panelName.Visible = false;
                         lblForGuestId.InnerText = "Company ID";
                     }
+
+                    txtRecommendingApproval.Focus();
                 }
+            }
+        }
+
+        protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("editRoom"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                //load room
+                var q = (from r in db.GCRooms
+                         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
+                         select r).FirstOrDefault();
+
+                lblEditRoomId.Text = q.Id.ToString();
+                ddlEditRoom.SelectedValue = q.RoomId.ToString();
+                ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
+                txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editRoom').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+            }
+            else if (e.CommandName.Equals("deleteRoom"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
+                hfDeleteRoomId.Value = rowId;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#deleteRoom').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
         }
 
@@ -138,6 +186,8 @@ namespace eGC.tran
 
                 lblEditDiningId.Text = q.Id.ToString();
                 ddlEditDining.SelectedValue = q.DiningId.ToString();
+                ddlEditDiningType.SelectedValue = q.DiningType;
+                txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -161,21 +211,73 @@ namespace eGC.tran
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var tran = (from tr in db.GCTransactions
-                     where tr.GCNumber == Request.QueryString["gcId"]
-                     select tr).FirstOrDefault();
+            //chk if modified gc number from prev
+            if(txtGCNumber.Text != hfGCNumber.Value)
+            {
+                var gcs = (from gctran in db.GCTransactions
+                           where gctran.GCNumber == txtGCNumber.Text.Trim()
+                           select gctran).ToList();
+
+                if (gcs.Count > 0)
+                {
+                    //show duplicate gc
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#duplicateGCModal').modal('show');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);               
+                }
+                else
+                {
+                    var tran = (from tr in db.GCTransactions
+                                where tr.GCNumber == Request.QueryString["gcId"]
+                                select tr).FirstOrDefault();
 
 
-            tran.GCNumber = txtGCNumber.Text;
-            tran.RecommendingApproval = txtRecommendingApproval.Text;
-            //tran.ApprovedBy = txtApprovedBy.Text;
-            tran.AccountNo = txtAccountNo.Text;
-            tran.Remarks = txtRemarks.Text;
-            tran.Reason = txtReason.Text;
-            tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                    tran.GCNumber = txtGCNumber.Text;
+                    tran.RecommendingApproval = txtRecommendingApproval.Text;
+                    tran.AccountNo = txtAccountNo.Text;
+                    tran.Remarks = txtRemarks.Text;
+                    tran.Type = ddlGCType.SelectedValue;
 
-            db.SubmitChanges();
-            Response.Redirect("~/gcapproval/default.aspx");
+                    if (txtExpirationDate.Text != String.Empty)
+                    {
+                        tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                    }
+                    else
+                    {
+                        tran.ExpiryDate = null;
+                    }
+
+                    db.SubmitChanges();
+                    Response.Redirect("~/gcapproval/default.aspx");
+                }
+            }
+            else
+            {
+                var tran = (from tr in db.GCTransactions
+                            where tr.GCNumber == Request.QueryString["gcId"]
+                            select tr).FirstOrDefault();
+
+
+                //tran.GCNumber = txtGCNumber.Text;
+                tran.RecommendingApproval = txtRecommendingApproval.Text;
+                tran.AccountNo = txtAccountNo.Text;
+                tran.Remarks = txtRemarks.Text;
+                tran.Type = ddlGCType.SelectedValue;
+
+                if (txtExpirationDate.Text != String.Empty)
+                {
+                    tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                }
+                else
+                {
+                    tran.ExpiryDate = null;
+                }
+
+                db.SubmitChanges();
+                Response.Redirect("~/gcapproval/default.aspx");
+            }
         }
 
         protected void btnAddRoom_Click(object sender, EventArgs e)
@@ -184,6 +286,8 @@ namespace eGC.tran
             GCRoom tmp = new GCRoom();
             tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
             tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
+            tmp.WithBreakfast = ddlAddRoomBreakfast.SelectedValue;
+            tmp.HowManyPerson = Convert.ToInt32(txtAddRoomHeadCount.Text);
 
             db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
@@ -204,6 +308,8 @@ namespace eGC.tran
                      select room).FirstOrDefault();
 
             r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
+            r.WithBreakfast = ddlEditRoomBreakfast.SelectedValue;
+            r.HowManyPerson = Convert.ToInt32(txtEditRoomHeadCount.Text);
 
             db.SubmitChanges();
 
@@ -240,6 +346,8 @@ namespace eGC.tran
             GCRoom tmp = new GCRoom();
             tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
             tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
+            tmp.DiningType = ddlAddDiningType.SelectedValue;
+            tmp.HowManyDiningPerson = Convert.ToInt32(txtAddDiningHeadCount.Text);
 
             db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
@@ -260,6 +368,9 @@ namespace eGC.tran
                      select dining).FirstOrDefault();
 
             d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
+            d.DiningType = ddlEditDiningType.SelectedValue;
+            d.HowManyDiningPerson = Convert.ToInt32(txtEditDiningHeadCount.Text);
+
             db.SubmitChanges();
 
             bindDinings();
@@ -289,40 +400,6 @@ namespace eGC.tran
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteHideModalScript", sb.ToString(), false);
         }
 
-        protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("editRoom"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                //load room
-                var q = (from r in db.GCRooms
-                         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
-                         select r).FirstOrDefault();
-
-                lblEditRoomId.Text = q.Id.ToString();
-                ddlEditRoom.SelectedValue = q.RoomId.ToString();
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#editRoom').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
-            }
-            else if (e.CommandName.Equals("deleteRoom"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
-                hfDeleteRoomId.Value = rowId;
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#deleteRoom').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
-            }
-        }
-
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/gcapproval/default.aspx");
@@ -340,7 +417,9 @@ namespace eGC.tran
                     {
                         Id = gcroom.Id,
                         Type = room.Type,
-                        Room = room.Room1
+                        Room = room.Room1,
+                        WithBreakfast = gcroom.WithBreakfast,
+                        HowManyPerson = gcroom.HowManyPerson
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -358,7 +437,9 @@ namespace eGC.tran
                     select new
                     {
                         Id = gcdining.Id,
-                        Name = dining.Name
+                        Name = dining.Name,
+                        DiningType = gcdining.DiningType,
+                        HeadCount = gcdining.HowManyDiningPerson
                     };
 
             gvDining.DataSource = q.ToList();
@@ -393,6 +474,21 @@ namespace eGC.tran
             gc.ApprovalStatus = "Disapproved";
             db.SubmitChanges();
             Response.Redirect("~/gcapproval/default.aspx");
+        }
+
+        protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlGCType.SelectedValue == "Representation")
+            {
+                txtExpirationDate.Enabled = true;
+                RequiredFieldValidator1.Enabled = true;
+            }
+            else
+            {
+                txtExpirationDate.Enabled = false;
+                RequiredFieldValidator1.Enabled = false;
+                txtExpirationDate.Text = String.Empty;
+            }
         }
     }
 }

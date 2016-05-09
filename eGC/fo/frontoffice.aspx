@@ -114,6 +114,8 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
+                                            <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
+
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:Button ID="btnUsed"
@@ -121,7 +123,7 @@
                                                         CommandName="usedRecord"
                                                         Text="Use"
                                                         CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
-                                                        CssClass="btn btn-success" />
+                                                        CssClass="btn btn-success btn-sm" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
@@ -132,7 +134,7 @@
                                                         Text="Cancel"
                                                         CommandName="cancelledRecord"
                                                         CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
-                                                        CssClass="btn btn-danger" />
+                                                        CssClass="btn btn-danger btn-sm" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 

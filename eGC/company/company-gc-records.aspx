@@ -73,7 +73,7 @@
 
                                             <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    <asp:Label ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
@@ -92,6 +92,8 @@
                                                     <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+
+                                            <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
 
                                             <asp:BoundField DataField="CancelledDate" HeaderText="Date Cancelled" DataFormatString="{0:d}" SortExpression="CancelledDate" />
                                             <asp:TemplateField HeaderText="Cancellation Reason" SortExpression="CancellationReason">

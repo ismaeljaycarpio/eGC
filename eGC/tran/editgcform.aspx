@@ -3,12 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-primary">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h5>Update Gift Check</h5>
+                    <h5>Update GC</h5>
                 </div>
                 <div class="panel-body">
                     <div role="form">
@@ -37,6 +36,10 @@
 
                 <div class="panel-body">
                     <div role="form">
+                        <asp:Panel Id="pnlApprovedBy" runat="server" CssClass="col-md-4">
+                            <label for="txtApprovedBy">Approved By</label>
+                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </asp:Panel>
                         <div class="col-md-4">
                             <label for="txtName">Recommending Approval</label>
                             <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control"></asp:TextBox>
@@ -49,10 +52,6 @@
                                 ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtApprovedBy">Approved By</label>
-                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
                             <label for="txtAccountNo">Account No</label>
                             <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
@@ -63,6 +62,11 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Account No is required"></asp:RequiredFieldValidator>
                         </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div role="form">
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
                             <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
@@ -75,35 +79,49 @@
                                 ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
-                            <label for="txtReason">Reason</label>
-                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                            <label for="ddlGCType">GC Type</label>
+                            <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlGCType_SelectedIndexChanged">
+                                <asp:ListItem Selected="True" Value="0">-- Select One --</asp:ListItem>
+                                <asp:ListItem Value="Representation">Representation</asp:ListItem>
+                                <asp:ListItem Value="Sold">Sold</asp:ListItem>
+                                <asp:ListItem Value="Barter">Barter</asp:ListItem>
+                            </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtReason"
+                                ControlToValidate="ddlGCType"
+                                InitialValue="0"
                                 CssClass="label label-danger"
-                                ErrorMessage="Reason is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="GC Type is required"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-md-4">
                             <label for="txtExpirationDate">Expiration Date</label>
                             <asp:TextBox ID="txtExpirationDate"
                                 runat="server"
+                                Enabled="false"
                                 CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                                runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="vgPrimaryAdd"
+                                ControlToValidate="txtExpirationDate"
+                                CssClass="label label-danger"
+                                Enabled="false"
+                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </div>
 
                 <div class="panel-body">
                     <div role="form">
-                        <div class="col-md-4">
-                            <label for="txtGCNumber">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber"
-                                runat="server"
-                                CssClass="form-control"></asp:TextBox>
+                        <div class="col-lg-10">
+                            <label for="txtName">GC Number</label>
+                            <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
                 </div>
+
                 <div class="panel-body">
                     <ul class="nav nav-tabs" id="myTab">
                         <li><a href="#roomTab" data-toggle="tab">Room</a></li>
@@ -141,12 +159,8 @@
 
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-
-                                                        <asp:TemplateField HeaderText="Regular/Peak">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="lblRegularOrPeak" runat="server" Text='<%# Eval("PeakRegular") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="WithBreakfast" HeaderText="With Breakfast?" />
+                                                        <asp:BoundField DataField="HowManyPerson" HeaderText="Head Count" />
 
                                                         <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRoom" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteRoom" />
@@ -193,6 +207,8 @@
                                                         </asp:TemplateField>
 
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
+                                                        <asp:BoundField DataField="DiningType" HeaderText="Dining Type" />
+                                                        <asp:BoundField DataField="HeadCount" HeaderText="Head Count" />
 
                                                         <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteDining" />
@@ -210,18 +226,20 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="panel-footer">
                     <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
                     <%--<asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
                     <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />--%>
                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-default" />
                 </div>
+
             </div>
         </div>
         <asp:HiddenField ID="TabName" runat="server" />
     </div>
 
-    <!-- Add Room Modal -->
+    <!-- Add Modal -->
     <div id="addRoom" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -248,6 +266,39 @@
                                         ValidationGroup="vgAddRoom"
                                         ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="ddlAddRoomBreakfast">Breakfast</label>
+                                    <asp:DropDownList ID="ddlAddRoomBreakfast" runat="server"
+                                        CssClass="form-control">
+                                        <asp:ListItem Value="0" Selected="True">-- Select One--</asp:ListItem>
+                                        <asp:ListItem Value="With-Breakfast">With Breakfast</asp:ListItem>
+                                        <asp:ListItem Value="Without-Breakfast">Without Breakfast</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        InitialValue="0"
+                                        ControlToValidate="ddlAddRoomBreakfast"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddRoom"
+                                        ErrorMessage="Breakfast is required"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtAddRoomHeadCount"></label>
+                                    <asp:TextBox ID="txtAddRoomHeadCount"
+                                        runat="server"
+                                        CssClass="form-control">
+                                    </asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtAddRoomHeadCount"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddRoom"
+                                        ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -263,7 +314,7 @@
         </div>
     </div>
 
-    <!-- Update Room Modal content-->
+    <!-- Update Modal content-->
     <div id="editRoom" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -292,6 +343,39 @@
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                             </div>
+
+                            <div class="form-group">
+                                <label for="ddlEditRoomBreakfast">Breakfast</label>
+                                <asp:DropDownList ID="ddlEditRoomBreakfast" runat="server"
+                                    CssClass="form-control">
+                                    <asp:ListItem Value="With-Breakfast">With Breakfast</asp:ListItem>
+                                    <asp:ListItem Value="Without-Breakfast">Without Breakfast</asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    InitialValue="0"
+                                    ControlToValidate="ddlEditRoomBreakfast"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditRoom"
+                                    ErrorMessage="Breakfast is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditRoomHeadCount"></label>
+                                <asp:TextBox ID="txtEditRoomHeadCount"
+                                    runat="server"
+                                    CssClass="form-control">
+                                </asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditRoomHeadCount"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditRoom"
+                                    ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="btnUpdateRoom" runat="server" CssClass="btn btn-primary" Text="Update" ValidationGroup="vgEditRoom" OnClick="btnUpdateRoom_Click" />
@@ -307,7 +391,7 @@
         </div>
     </div>
 
-    <!-- Delete Room Modal -->
+    <!-- Delete Modal -->
     <div id="deleteRoom" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -339,6 +423,7 @@
     <!-- Add Dining Modal -->
     <div id="addDining" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
+            <!-- Modal content-->
             <div class="modal-content">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
@@ -362,16 +447,37 @@
                                         ValidationGroup="vgAddDining"
                                         ErrorMessage="Dining is required"></asp:RequiredFieldValidator>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="txtAddValue">Value</label>
-                                    <asp:TextBox ID="txtAddValue" runat="server" CssClass="form-control" placeholder="Value"></asp:TextBox>
+                                    <label for="ddlAddDiningType">Dining Type</label>
+                                    <asp:DropDownList ID="ddlAddDiningType"
+                                        runat="server"
+                                        CssClass="form-control">
+                                        <asp:ListItem Selected="True" Value="0">-- Select One --</asp:ListItem>
+                                        <asp:ListItem Value="Buffet Breakfast">Buffet Breakfast</asp:ListItem>
+                                        <asp:ListItem Value="Ala Carte">Ala Carte</asp:ListItem>
+                                        <asp:ListItem Value="Promotion">Promotion</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        InitialValue="0"
+                                        ControlToValidate="ddlAddDiningType"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddDining"
+                                        ErrorMessage="Dining Type is required"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtAddDiningHeadCount">Head Count</label>
+                                    <asp:TextBox ID="txtAddDiningHeadCount" runat="server" CssClass="form-control" placeholder="Value"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                         runat="server"
                                         Display="Dynamic"
-                                        ControlToValidate="txtAddValue"
+                                        ControlToValidate="txtAddDiningHeadCount"
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAddDining"
-                                        ErrorMessage="Value is required"></asp:RequiredFieldValidator>
+                                        ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -388,7 +494,7 @@
         </div>
     </div>
 
-    <!-- Update Dining Modal content-->
+    <!-- Update Modal content-->
     <div id="editDining" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -417,16 +523,37 @@
                                     ValidationGroup="vgEditDining"
                                     ErrorMessage="Dining is required"></asp:RequiredFieldValidator>
                             </div>
+
                             <div class="form-group">
-                                <label for="txtEditValue">Value</label>
-                                <asp:TextBox ID="txtEditValue" runat="server" CssClass="form-control" placeholder="Value"></asp:TextBox>
+                                <label for="ddlEditDiningType">Dining Type</label>
+                                <asp:DropDownList ID="ddlEditDiningType"
+                                    runat="server"
+                                    CssClass="form-control">
+                                    <asp:ListItem Value="0">-- Select One --</asp:ListItem>
+                                    <asp:ListItem Value="Buffet Breakfast">Buffet Breakfast</asp:ListItem>
+                                    <asp:ListItem Value="Ala Carte">Ala Carte</asp:ListItem>
+                                    <asp:ListItem Value="Promotion">Promotion</asp:ListItem>
+                                </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
                                     runat="server"
                                     Display="Dynamic"
-                                    ControlToValidate="txtEditValue"
+                                    InitialValue="0"
+                                    ControlToValidate="ddlEditDiningType"
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditDining"
-                                    ErrorMessage="Value is required"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Dining Type is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditDiningHeadCount">Head Count</label>
+                                <asp:TextBox ID="txtEditDiningHeadCount" runat="server" CssClass="form-control" placeholder="Value"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditDiningHeadCount"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditDining"
+                                    ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -443,7 +570,7 @@
         </div>
     </div>
 
-    <!-- Delete Dining Modal -->
+    <!-- Delete Modal -->
     <div id="deleteDining" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -471,6 +598,33 @@
         </div>
     </div>
 
+    <!-- Duplicate GC Modal -->
+    <div id="duplicateGCModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content panel-warning">
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header panel-heading">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Duplicate GC Number</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Duplicate GC Number detected!</p>
+                            <p>Modify your GC Number and try again.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         $(function () {
             var tabName = $("[id*=TabName]").val() != "" ? $("[id*=TabName]").val() : "roomTab";
@@ -488,4 +642,5 @@
     </script>
 
     <asp:HiddenField ID="hfTransactionId" runat="server" />
+    <asp:HiddenField ID="hfGCNumber" runat="server" />
 </asp:Content>

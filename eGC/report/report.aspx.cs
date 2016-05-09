@@ -98,7 +98,12 @@ namespace eGC.report
 
         protected void gvGC_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
+            if (e.CommandName.Equals("redirectGC"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
+                Response.Redirect("~/fo/viewgcform.aspx?gcId=" + rowId);
+            }
         }
 
         protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)

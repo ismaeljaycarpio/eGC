@@ -42,15 +42,14 @@ namespace eGC.fo
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    //txtApprovedBy.Text = tGC.ApprovedBy;
                     txtAccountNo.Text = tGC.AccountNo;
                     txtRemarks.Text = tGC.Remarks;
-                    txtReason.Text = tGC.Reason;
+                    ddlGCType.SelectedValue = tGC.Type;
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
                     lblCurrentGCStatus.Text = tGC.StatusGC;
 
                     //chk approver
-                    if (tGC.ApprovedBy != String.Empty)
+                    if (tGC.ApprovedBy != null)
                     {
                         var u = (from emp in dbEHRIS.EMPLOYEEs
                                  where emp.Emp_Id == tGC.ApprovedBy
@@ -60,6 +59,10 @@ namespace eGC.fo
                         {
                             txtApprovedBy.Text = u.LastName + " , " + u.FirstName + " " + u.MiddleName;
                         }
+                    }
+                    else
+                    {
+                        pnlApprovedBy.Visible = false;
                     }
 
                     //load related table
@@ -73,7 +76,11 @@ namespace eGC.fo
 
                     txtName.Text = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName;
                     txtGuestId.Text = guest.GuestId;
-                    txtCompany.Text = guest.CompanyName;
+
+                    txtCompany.Text = (from c in db.Guests
+                                       where guest.CompanyId == c.Id
+                                       select c).FirstOrDefault().CompanyName;
+
                     txtEmail.Text = guest.Email;
                     txtContactNo.Text = guest.ContactNumber;
 
@@ -87,7 +94,6 @@ namespace eGC.fo
                 }
             }
         }
-
 
         protected void btnClose_Click(object sender, EventArgs e)
         {
@@ -106,13 +112,11 @@ namespace eGC.fo
             tran.ApprovedBy = txtApprovedBy.Text;
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
-            tran.Reason = txtReason.Text;
+            tran.Type = ddlGCType.SelectedValue;
 
             db.SubmitChanges();
             Response.Redirect("~/fo/frontoffice.aspx");
         }
-
-
 
         private void bindRooms()
         {
@@ -126,7 +130,9 @@ namespace eGC.fo
                     {
                         Id = gcroom.Id,
                         Type = room.Type,
-                        Room = room.Room1
+                        Room = room.Room1,
+                        WithBreakfast = gcroom.WithBreakfast,
+                        HowManyPerson = gcroom.HowManyPerson
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -144,7 +150,9 @@ namespace eGC.fo
                     select new
                     {
                         Id = gcdining.Id,
-                        Name = dining.Name
+                        Name = dining.Name,
+                        DiningType = gcdining.DiningType,
+                        HeadCount = gcdining.HowManyDiningPerson
                     };
 
             gvDining.DataSource = q.ToList();

@@ -115,6 +115,8 @@ namespace eGC.tran
 
                 lblEditRoomId.Text = q.Id.ToString();
                 ddlEditRoom.SelectedValue = q.RoomId.ToString();
+                ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
+                txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -149,6 +151,8 @@ namespace eGC.tran
 
                 lblEditDiningId.Text = q.Id.ToString();
                 ddlEditDining.SelectedValue = q.DiningId.ToString();
+                ddlEditDiningType.SelectedValue = q.DiningType;
+                txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -172,66 +176,70 @@ namespace eGC.tran
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            GCTransaction tran = new GCTransaction();
-            tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
-            tran.GCNumber = txtGCNumber.Text;
-            tran.RecommendingApproval = txtRecommendingApproval.Text;
-            //tran.ApprovedBy = txtApprovedBy.Text;
-            tran.AccountNo = txtAccountNo.Text;
-            tran.Remarks = txtRemarks.Text;
-            tran.Reason = txtReason.Text;
-            tran.ApprovalStatus = "Pending";
-            tran.StatusGC = "Waiting";
-            tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
-            tran.IsArchive = false;
+            var gcs = (from gctran in db.GCTransactions
+                       where gctran.GCNumber == txtGCNumber.Text.Trim()
+                       select gctran).ToList();
 
-            db.GCTransactions.InsertOnSubmit(tran);
-            db.SubmitChanges();
-
-            int id = tran.Id;
-
-            //insert rooms
-            var tmpRoom = (from tmp in db.tmpRooms
-                           where tmp.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
-                           select tmp).ToList();
-
-            foreach (var r in tmpRoom)
+            if(gcs.Count > 0)
             {
-                //insert to tran
-                GCRoom room = new GCRoom();
-                room.GCTransactionId = id;
-                room.RoomId = r.RoomId;
-                room.DiningId = r.DiningId;
-
-                db.GCRooms.InsertOnSubmit(room);
+                //show duplicate gc
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#duplicateGCModal').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
             }
+            else
+            {
+                GCTransaction tran = new GCTransaction();
+                tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
+                tran.GCNumber = txtGCNumber.Text;
+                tran.RecommendingApproval = txtRecommendingApproval.Text;
+                tran.AccountNo = txtAccountNo.Text;
+                tran.Remarks = txtRemarks.Text;
+                tran.Type = ddlGCType.SelectedValue;
+                tran.ApprovalStatus = "Pending";
+                tran.StatusGC = "Waiting";
 
-            db.SubmitChanges();
-            Response.Redirect("~/guest/default.aspx");
+                if (txtExpirationDate.Text != String.Empty)
+                {
+                    tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                }
+                tran.IsArchive = false;
+
+                db.GCTransactions.InsertOnSubmit(tran);
+                db.SubmitChanges();
+
+                int id = tran.Id;
+
+                //insert rooms
+                var tmpRoom = (from tmp in db.tmpRooms
+                               where tmp.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
+                               select tmp).ToList();
+
+                foreach (var r in tmpRoom)
+                {
+                    //insert to tran
+                    GCRoom room = new GCRoom();
+                    room.GCTransactionId = id;
+                    room.RoomId = r.RoomId;
+                    room.DiningId = r.DiningId;
+                    room.WithBreakfast = r.WithBreakfast;
+                    room.HowManyPerson = r.HowManyPerson;
+                    room.DiningType = r.DiningType;
+                    room.HowManyDiningPerson = r.HowManyDiningPerson;
+
+                    db.GCRooms.InsertOnSubmit(room);
+                }
+
+                db.SubmitChanges();
+                Response.Redirect("~/guest/default.aspx");
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/guest/default.aspx");
-        }
-
-        protected void btnUpdateRoom_Click(object sender, EventArgs e)
-        {
-            var r = (from room in db.tmpRooms
-                     where room.Id == Convert.ToInt32(lblEditRoomId.Text)
-                     select room).FirstOrDefault();
-
-            r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
-
-            db.SubmitChanges();
-
-            bindRooms();
-
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(@"<script type='text/javascript'>");
-            sb.Append("$('#editRoom').modal('hide');");
-            sb.Append(@"</script>");
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
         }
 
         protected void btnAddRoom_Click(object sender, EventArgs e)
@@ -240,6 +248,8 @@ namespace eGC.tran
             tmpRoom tmp = new tmpRoom();
             tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
             tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
+            tmp.WithBreakfast = ddlAddRoomBreakfast.SelectedValue;
+            tmp.HowManyPerson = Convert.ToInt32(txtAddRoomHeadCount.Text);
 
             db.tmpRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
@@ -253,51 +263,25 @@ namespace eGC.tran
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
         }
 
-        private void bindRooms()
+        protected void btnUpdateRoom_Click(object sender, EventArgs e)
         {
-            var q = from room in db.Rooms
-                    join gcroom in db.tmpRooms
-                    on room.Id equals gcroom.RoomId
-                    where gcroom.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
-                    select new
-                    {
-                        Id = gcroom.Id,
-                        Type = room.Type,
-                        Room = room.Room1
-                    };
+            var r = (from room in db.tmpRooms
+                     where room.Id == Convert.ToInt32(lblEditRoomId.Text)
+                     select room).FirstOrDefault();
 
-            gvRoom.DataSource = q.ToList();
-            gvRoom.DataBind();
-        }
+            r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
+            r.WithBreakfast = ddlEditRoomBreakfast.SelectedValue;
+            r.HowManyPerson = Convert.ToInt32(txtEditRoomHeadCount.Text);
 
-        private void bindDinings()
-        {
-            var q = from dining in db.Dinings
-                    join gcdining in db.tmpRooms
-                    on dining.Id equals gcdining.DiningId
-                    where gcdining.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
-                    select new
-                    {
-                        Id = gcdining.Id,
-                        Name = dining.Name            
-                    };
-
-            gvDining.DataSource = q.ToList();
-            gvDining.DataBind();
-        }
-
-        private void flushTemp()
-        {
-            //clear content of tmpRoom
-            var q = (from r in db.tmpRooms
-                    where r.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
-                    select r).ToList();
-
-            foreach(var room in q)
-            {
-                db.tmpRooms.DeleteOnSubmit(room);
-            }
             db.SubmitChanges();
+
+            bindRooms();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#editRoom').modal('hide');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
         }
 
         protected void btnDeleteRoom_Click(object sender, EventArgs e)
@@ -324,6 +308,8 @@ namespace eGC.tran
             tmpRoom tmp = new tmpRoom();
             tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
             tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
+            tmp.DiningType = ddlAddDiningType.SelectedValue;
+            tmp.HowManyDiningPerson = Convert.ToInt32(txtAddDiningHeadCount.Text);
 
             db.tmpRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
@@ -344,6 +330,9 @@ namespace eGC.tran
                      select dining).FirstOrDefault();
 
             d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
+            d.DiningType = ddlEditDiningType.SelectedValue;
+            d.HowManyDiningPerson = Convert.ToInt32(txtEditDiningHeadCount.Text);
+
             db.SubmitChanges();
 
             bindDinings();
@@ -371,6 +360,72 @@ namespace eGC.tran
             sb.Append("$('#deleteDining').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteHideModalScript", sb.ToString(), false);
+        }
+
+        private void bindRooms()
+        {
+            var q = from room in db.Rooms
+                    join gcroom in db.tmpRooms
+                    on room.Id equals gcroom.RoomId
+                    where gcroom.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
+                    select new
+                    {
+                        Id = gcroom.Id,
+                        Type = room.Type,
+                        Room = room.Room1,
+                        WithBreakfast = gcroom.WithBreakfast,
+                        HowManyPerson = gcroom.HowManyPerson
+                    };
+
+            gvRoom.DataSource = q.ToList();
+            gvRoom.DataBind();
+        }
+
+        private void bindDinings()
+        {
+            var q = from dining in db.Dinings
+                    join gcdining in db.tmpRooms
+                    on dining.Id equals gcdining.DiningId
+                    where gcdining.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
+                    select new
+                    {
+                        Id = gcdining.Id,
+                        Name = dining.Name,
+                        DiningType = gcdining.DiningType,
+                        HeadCount = gcdining.HowManyDiningPerson
+                    };
+
+            gvDining.DataSource = q.ToList();
+            gvDining.DataBind();
+        }
+
+        private void flushTemp()
+        {
+            //clear content of tmpRoom
+            var q = (from r in db.tmpRooms
+                    where r.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
+                    select r).ToList();
+
+            foreach(var room in q)
+            {
+                db.tmpRooms.DeleteOnSubmit(room);
+            }
+            db.SubmitChanges();
+        }
+
+        protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ddlGCType.SelectedValue == "Representation")
+            {
+                txtExpirationDate.Enabled = true;
+                RequiredFieldValidator1.Enabled = true;
+            }
+            else
+            {
+                txtExpirationDate.Enabled = false;
+                RequiredFieldValidator1.Enabled = false;
+                txtExpirationDate.Text = String.Empty;
+            }
         }
     }
 }

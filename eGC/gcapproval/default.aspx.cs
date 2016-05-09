@@ -143,7 +143,8 @@ namespace eGC.gcapproval
                         CompanyName = guest.CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
-                        Status = gctran.ApprovalStatus
+                        Status = gctran.ApprovalStatus,
+                        Type = gctran.Type
                     };
 
             gvGC.DataSource = q.ToList();
@@ -185,7 +186,8 @@ namespace eGC.gcapproval
                              Status = gctran.StatusGC,
                              Approval = gctran.ApprovalStatus,
                              CancellationReason = gctran.CancellationReason,
-                             CancelledDate = gctran.CancelledDate
+                             CancelledDate = gctran.CancelledDate,
+                             Type = gctran.Type
                          }).ToList();
 
                 e.Result = q;

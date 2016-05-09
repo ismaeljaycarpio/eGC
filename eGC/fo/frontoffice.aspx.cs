@@ -296,7 +296,8 @@ namespace eGC.fo
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
                              ExpiryDate = gctran.ExpiryDate,
-                             Status = gctran.StatusGC
+                             Status = gctran.StatusGC,
+                             Type = gctran.Type
                          }).ToList();
 
                 e.Result = q;
@@ -328,7 +329,8 @@ namespace eGC.fo
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
                              ExpiryDate = gctran.ExpiryDate,
-                             Status = gctran.StatusGC
+                             Status = gctran.StatusGC,
+                             Type = gctran.Type
                          }).ToList();
 
                 e.Result = q;

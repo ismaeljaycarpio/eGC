@@ -98,7 +98,7 @@
       <Column Name="ApprovedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Reason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ApprovalStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="StatusGC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CancellationReason" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
@@ -109,31 +109,31 @@
       <Association Name="Guest_GCTransaction" Member="Guest" ThisKey="GuestId" OtherKey="Id" Type="Guest" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tmpRoom" Member="tmpRooms">
-    <Type Name="tmpRoom">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DiningId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="WithBreakfast" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="HowManyPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DiningTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="HowManyDiningPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.GCRoom" Member="GCRooms">
     <Type Name="GCRoom">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="GCTransactionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DiningId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="WithBreakfast" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WithBreakfast" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="HowManyPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DiningTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiningType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="HowManyDiningPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Dining_GCRoom" Member="Dining" ThisKey="DiningId" OtherKey="Id" Type="Dining" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="GCTransaction_GCRoom" Member="GCTransaction" ThisKey="GCTransactionId" OtherKey="Id" Type="GCTransaction" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Room_GCRoom" Member="Room" ThisKey="RoomId" OtherKey="Id" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tmpRoom" Member="tmpRooms">
+    <Type Name="tmpRoom">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RoomId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiningId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WithBreakfast" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HowManyPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiningType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HowManyDiningPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
