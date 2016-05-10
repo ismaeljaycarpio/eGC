@@ -330,6 +330,7 @@ namespace eGC.admin
                          IsLockedOut = z.IsLockedOut
                      }).ToList();
 
+            q = q.OrderByDescending(o => o.RoleName).ToList();
             e.Result = q;
         }
     }

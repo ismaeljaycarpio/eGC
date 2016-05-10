@@ -111,7 +111,8 @@ namespace eGC.company
                         Status = gctran.StatusGC,
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
-                        CancelledDate = gctran.CancelledDate
+                        CancelledDate = gctran.CancelledDate,
+                        Type = gctran.Type
                     }).ToList();
 
 

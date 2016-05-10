@@ -70,30 +70,6 @@ namespace eGC.guest
             }
         }
 
-        protected void bindGridview()
-        {
-            var q = from g in db.Guests
-                    where g.GuestId.Contains(txtSearch.Text) ||
-                    g.FirstName.Contains(txtSearch.Text) ||
-                    g.MiddleName.Contains(txtSearch.Text) ||
-                    g.LastName.Contains(txtSearch.Text) ||
-                    g.CompanyName.Contains(txtSearch.Text)
-                    select new
-                    {
-                        Id = g.Id,
-                        GuestId = g.GuestId,
-                        FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
-                        CompanyName = g.CompanyName,
-                        Number = g.ContactNumber,
-                        Email = g.Email
-                    };
-
-            gvGuests.DataSource = q.ToList();
-            gvGuests.DataBind();
-
-            txtSearch.Focus();
-        }
-
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             var q = (from g in db.Guests

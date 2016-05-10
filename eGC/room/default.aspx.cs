@@ -13,10 +13,6 @@ namespace eGC.room
         GiftCheckDataContext db = new GiftCheckDataContext();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                bindGridview();
-            }
         }
 
         protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -54,12 +50,6 @@ namespace eGC.room
             }
         }
 
-        protected void gvRoom_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvRoom.PageIndex = e.NewPageIndex;
-            bindGridview();
-        }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             Room r = new Room();
@@ -70,7 +60,7 @@ namespace eGC.room
 
             db.SubmitChanges();
 
-            bindGridview();
+            this.gvRoom.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -90,26 +80,13 @@ namespace eGC.room
 
             db.SubmitChanges();
 
-            bindGridview();
+            this.gvRoom.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#updateModal').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditHideModalScript", sb.ToString(), false);   
-        }
-
-        protected void bindGridview()
-        {
-            var q = from r in db.Rooms
-                    select new
-                    {
-                        Id = r.Id,
-                        Type = r.Type,
-                        Room1 = r.Room1
-                    };
-            gvRoom.DataSource = q.ToList();
-            gvRoom.DataBind();
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -120,13 +97,26 @@ namespace eGC.room
             db.Rooms.DeleteOnSubmit(q);
             db.SubmitChanges();
 
-            bindGridview();
+            this.gvRoom.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#deleteModal').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteHideModalScript", sb.ToString(), false); 
+        }
+
+        protected void RoomDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            var q = from r in db.Rooms
+                    select new
+                    {
+                        Id = r.Id,
+                        Type = r.Type,
+                        Room1 = r.Room1
+                    };
+
+            e.Result = q.ToList();
         }
     }
 }

@@ -23,19 +23,19 @@
                                     GridLines="None"
                                     AutoGenerateColumns="false"
                                     AllowPaging="true"
+                                    AllowSorting="true"
                                     EmptyDataText="No Record(s) found"
                                     ShowHeaderWhenEmpty="true"
                                     DataKeyNames="Id"
                                     OnRowCommand="gvDining_RowCommand"
-                                    OnPageIndexChanging="gvDining_PageIndexChanging"
-                                    PageSize="10">
+                                    DataSourceID="DiningDataSource">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Row Id" Visible="false">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField HeaderText="Name" DataField="Name" />
+                                        <asp:BoundField HeaderText="Name" DataField="Name" SortExpression="Name" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Edit" CommandName="editRecord" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Delete" CommandName="deleteRecord" />
                                     </Columns>
@@ -92,7 +92,6 @@
     <!-- Edit Modal -->
     <div id="updateModal" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
-
             <!-- Update Modal content-->
             <div class="modal-content">
                 <asp:UpdatePanel ID="upEdit" runat="server">
@@ -159,4 +158,8 @@
             </div>
         </div>
     </div>
+
+    <asp:LinqDataSource ID="DiningDataSource"
+        OnSelecting="DiningDataSource_Selecting" 
+        runat="server"></asp:LinqDataSource>
 </asp:Content>

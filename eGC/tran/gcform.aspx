@@ -277,7 +277,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="txtAddRoomHeadCount"></label>
+                                    <label for="txtAddRoomHeadCount">Head Count</label>
                                     <asp:TextBox ID="txtAddRoomHeadCount"
                                         runat="server"
                                         CssClass="form-control">

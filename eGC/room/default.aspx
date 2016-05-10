@@ -24,20 +24,20 @@
                                     GridLines="None"
                                     AutoGenerateColumns="false"
                                     AllowPaging="true"
+                                    AllowSorting="true"
                                     EmptyDataText="No Record(s) found"
                                     ShowHeaderWhenEmpty="true"
                                     DataKeyNames="Id"
                                     OnRowCommand="gvRoom_RowCommand"
-                                    OnPageIndexChanging="gvRoom_PageIndexChanging"
-                                    PageSize="10">
+                                    DataSourceID="RoomDataSource">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Row Id" Visible="false">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblRowId" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField HeaderText="Type" DataField="Type" />
-                                        <asp:BoundField HeaderText="Room" DataField="Room1" />
+                                        <asp:BoundField HeaderText="Type" DataField="Type" SortExpression="Type" />
+                                        <asp:BoundField HeaderText="Room" DataField="Room1" SortExpression="Room1" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Edit" CommandName="editRecord" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Delete" CommandName="deleteRecord" />
                                     </Columns>
@@ -183,5 +183,7 @@
         </div>
     </div>
 
-
+    <asp:LinqDataSource ID="RoomDataSource"
+        OnSelecting="RoomDataSource_Selecting"
+        runat="server"></asp:LinqDataSource>
 </asp:Content>

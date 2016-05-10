@@ -13,10 +13,7 @@ namespace eGC.room
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                bindGridview();
-            }
+
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -27,7 +24,7 @@ namespace eGC.room
             db.Dinings.DeleteOnSubmit(q);
             db.SubmitChanges();
 
-            bindGridview();
+            this.gvDining.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -46,7 +43,7 @@ namespace eGC.room
 
             db.SubmitChanges();
 
-            bindGridview();
+            this.gvDining.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -64,7 +61,7 @@ namespace eGC.room
             
             db.SubmitChanges();
 
-            bindGridview();
+            this.gvDining.DataBind();
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -107,19 +104,12 @@ namespace eGC.room
             }
         }
 
-        protected void gvDining_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvDining.PageIndex = e.NewPageIndex;
-            bindGridview();
-        }
-
-        protected void bindGridview()
+        protected void DiningDataSource_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             var q = from r in db.Dinings
                     select r;
 
-            gvDining.DataSource = q.ToList();
-            gvDining.DataBind();
+            e.Result = q.ToList();
         }
     }
 }
