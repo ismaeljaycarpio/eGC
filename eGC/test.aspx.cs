@@ -14,17 +14,6 @@ namespace eGC
         {
             if(!Page.IsPostBack)
             {
-                //create db
-                //GiftCheckDataContext db = new GiftCheckDataContext(@"C:\dbGC.mdf");
-                //if(db.DatabaseExists())
-                //{
-                //    Console.WriteLine("Deleting old db...");
-                //    db.DeleteDatabase();
-                //}
-                //db.CreateDatabase();
-                //Console.WriteLine("db created successfully!");
-
-
                 //chk for roles
                 if(!Roles.RoleExists("Admin"))
                 {
@@ -62,5 +51,6 @@ namespace eGC
                 Console.Write("success!");
             }
         }
+
     }
 }

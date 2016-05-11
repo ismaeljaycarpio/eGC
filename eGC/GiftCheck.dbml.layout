@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 17.25" name="GiftCheck">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 19.375" name="GiftCheck">
   <DataContextMoniker Name="/GiftCheckDataContext" />
   <nestedChildShapes>
     <classShape Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" absoluteBounds="3.125, 0.5, 2, 1.1939925130208333">
@@ -39,7 +39,7 @@
         <classShapeMoniker Id="44841eb9-7afb-4fef-af14-e5c7d13bb27a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (4.83333333333333 : 15.0440584309896 : JumpStart); (4.66666666666667 : 15.0440584309896 : JumpEnd); (2.5 : 15.0440584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.5 : 15.0440584309896); (2.5 : 15.0440584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GiftCheckDataContext/User/User_MembershipLINQ" />
       <nodes>
         <classShapeMoniker Id="b7dcce53-ef28-4ad3-9354-e944f9de3b68" />
@@ -64,7 +64,7 @@
         <elementListCompartment Id="049ff258-c789-46aa-8190-4724eb5ea33a" absoluteBounds="1.6400000000000001, 7.46, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.625 : 6.249208984375); (3.28125 : 6.249208984375); (3.28125 : 7)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.625 : 6.249208984375); (3.28125 : 6.249208984375); (3.28125 : 7)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GiftCheckDataContext/Guest/Guest_GCTransaction" />
       <nodes>
         <classShapeMoniker Id="49c09bba-bb80-4fc3-a48b-2e3db444dd06" />
@@ -77,14 +77,14 @@
         <elementListCompartment Id="35dfb64d-ebf4-43a2-8ccf-a9428516daab" absoluteBounds="0.89000000000000012, 3.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.125 : 1.69399251302083); (4.125 : 4.42390055338542); (2.875 : 4.42390055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.125 : 1.69399251302083); (4.125 : 4.42390055338542); (2.875 : 4.42390055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GiftCheckDataContext/Dining/Dining_GCRoom" />
       <nodes>
         <classShapeMoniker Id="84dea295-cb4d-42ca-9dd7-9b3f6b92c183" />
         <classShapeMoniker Id="4a55a075-1ad4-4922-a980-cbb670381c83" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.25 : 7); (2.25 : 5.59780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.25 : 7); (2.25 : 5.59780110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/GiftCheckDataContext/GCTransaction/GCTransaction_GCRoom" />
       <nodes>
         <classShapeMoniker Id="b662cedb-e405-48b6-9f5a-b66705fac7f2" />
@@ -102,6 +102,12 @@
       <DataClassMoniker Name="/GiftCheckDataContext/tmpRoom" />
       <nestedChildShapes>
         <elementListCompartment Id="20cff99a-fc57-40ed-b133-9fc95531ba5c" absoluteBounds="4.765, 8.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="846ae790-915e-418d-a19e-4e132343141c" absoluteBounds="1.125, 17.875, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/GiftCheckDataContext/StatusSite" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3cf4f6ab-7cd3-4c01-903c-0a9c76372b74" absoluteBounds="1.1400000000000001, 18.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

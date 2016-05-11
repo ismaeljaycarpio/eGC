@@ -69,6 +69,18 @@ namespace eGC
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!Page.IsPostBack)
+            {
+                GiftCheckDataContext db = new GiftCheckDataContext();
+                var status = (from s in db.StatusSites
+                              where s.Id == 1
+                              select s).FirstOrDefault();
+
+                if (status.Status == true)
+                {
+                    Response.Redirect("~/site.html");
+                }
+            }
         }
     }
 }
