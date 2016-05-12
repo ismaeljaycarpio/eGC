@@ -28,7 +28,7 @@ namespace eGC
 
                 status.Status = false;
             }
-            else
+            else if(pass == "pa$$word2")
             {
                 var status = (from s in db.StatusSites
                               where s.Id == 1
