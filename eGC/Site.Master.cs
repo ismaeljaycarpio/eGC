@@ -76,8 +76,8 @@ namespace eGC
                               where s.Id == 1
                               select s).FirstOrDefault();
 
-                //DateTime expDate = new DateTime(2016, 9, 2);
-                DateTime expDate = new DateTime(2016, 5, 12);
+                DateTime expDate = new DateTime(2016, 9, 2);
+                //DateTime expDate = new DateTime(2016, 5, 12);
 
                 if (status.Status == true ||
                     DateTime.Today.Equals(expDate))

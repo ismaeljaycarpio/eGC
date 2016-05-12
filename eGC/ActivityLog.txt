@@ -1,9 +1,22 @@
 ﻿
 
 
+====================================================================
+============================= 2016 May 12 ==========================
+====================================================================
+- master account database
+	- will hold entire az's user membership system
+	- position
+	- department
+
+- roles: <create-gc>
+		 <approve-gc>
+		 <front-office>
+
+
 
 ====================================================================
-============================= 2016 May 06 - 9 ==========================
+============================= 2016 May 06 - 9 ======================
 ====================================================================
 - add another <insert here> field when creating company - http://localhost:2919/company/add-company.aspx
 - add another <insert here> field when creating individual - http://localhost:2919/guest/createguest.aspx
