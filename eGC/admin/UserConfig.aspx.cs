@@ -10,8 +10,8 @@ namespace eGC.admin
 {
     public partial class UserConfig : System.Web.UI.Page
     {
-        EHRISDataContextDataContext dbeHRIS = new EHRISDataContextDataContext();
         GiftCheckDataContext dbGc = new GiftCheckDataContext();
+        UserAccountsDataContext dbUser = new UserAccountsDataContext();
         DAL.AccountManagement accnt = new DAL.AccountManagement();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,7 +21,7 @@ namespace eGC.admin
                 this.gvUsers.DataBind();
 
                 //load roles
-                var roles = (from r in dbGc.Roles
+                var roles = (from r in dbUser.Roles
                              select r).ToList();
 
                 ddlRoles.DataSource = roles;
@@ -29,7 +29,7 @@ namespace eGC.admin
                 ddlRoles.DataValueField = "RoleId";
                 ddlRoles.DataBind();
 
-                ddlRoles.Items.Insert(0, new ListItem("Select a Role", "0"));
+                ddlRoles.Items.Insert(0, new ListItem("-- Select a Role --", "0"));
 
                 txtSearch.Focus();
             }
@@ -88,14 +88,14 @@ namespace eGC.admin
 
                 //load user info
                 lblUserId.Text = gvUsers.DataKeys[index].Value.ToString();
-                lblUserName.Text = (gvUsers.Rows[index].FindControl("lblEmpId") as LinkButton).Text;
+                lblUserName.Text = (gvUsers.Rows[index].FindControl("lblUsername") as LinkButton).Text;
 
                 
                 //set selected role
-                var ro = (from u in dbGc.Users
-                          join uir in dbGc.UsersInRoles
+                var ro = (from u in dbUser.Users
+                          join uir in dbUser.UsersInRoles
                           on u.UserId equals uir.UserId
-                          join r in dbGc.Roles
+                          join r in dbUser.Roles
                           on uir.RoleId equals r.RoleId
                           where
                           u.UserName == lblUserName.Text
@@ -122,82 +122,29 @@ namespace eGC.admin
             }
         }
 
-        protected void bindGridview()
-        {
-            string strSearch = txtSearch.Text;
-
-            var emp = (from e in dbeHRIS.EMPLOYEEs
-                       select e).ToList();
-
-            var q = (from e in emp
-                    join u in dbGc.Users
-                    on e.Emp_Id equals u.UserName
-                    into a
-                    from b in a.DefaultIfEmpty(new User())
-                    join mem in dbGc.MembershipLINQs
-                    on b.UserId equals mem.UserId
-                    into x
-                    from z in x.DefaultIfEmpty(new MembershipLINQ())
-                    join uir in dbGc.UsersInRoles
-                    on b.UserId equals uir.UserId
-                    into c
-                    from d in c.DefaultIfEmpty(new UsersInRole())
-                    join r in dbGc.Roles
-                    on d.RoleId equals r.RoleId
-                    into f
-                    from g in f.DefaultIfEmpty(new Role())
-                    where
-                    (e.Emp_Id.Contains(strSearch) || 
-                    e.LastName.Contains(strSearch) ||
-                    e.FirstName.Contains(strSearch) ||
-                    e.MiddleName.Contains(strSearch))
-                    select new
-                    {
-                        UserId = b.UserId,
-                        EmpId = e.Emp_Id,
-                        FullName = e.LastName + " , " + e.FirstName + " " + e.MiddleName,
-                        RoleName = g.RoleName,
-                        IsApproved = z.IsApproved,
-                        IsLockedOut = z.IsLockedOut
-                    }).ToList();
-
-            gvUsers.DataSource = q;
-            gvUsers.DataBind();
-
-            txtSearch.Focus();
-        }
-
         private int rowCount()
         {
             string strSearch = txtSearch.Text;
 
-            var emp = (from e in dbeHRIS.EMPLOYEEs
-                       select e).ToList();
-
-            var q = (from e in emp
-                     join u in dbGc.Users
-                     on e.Emp_Id equals u.UserName
-                     into a
-                     from b in a.DefaultIfEmpty(new User())
-                     join uir in dbGc.UsersInRoles
-                     on b.UserId equals uir.UserId
-                     into c
-                     from d in c.DefaultIfEmpty(new UsersInRole())
-                     join r in dbGc.Roles
-                     on d.RoleId equals r.RoleId
-                     into f
-                     from g in f.DefaultIfEmpty(new Role())
-                     where
-                     (e.Emp_Id.Contains(strSearch) ||
-                     e.LastName.Contains(strSearch) ||
-                     e.FirstName.Contains(strSearch) ||
-                     e.MiddleName.Contains(strSearch))
+            var q = (from m in dbUser.MembershipLINQs
+                     join u in dbUser.Users
+                     on m.UserId equals u.UserId
+                     join up in dbUser.UserProfiles
+                     on u.UserId equals up.UserId
+                     join p in dbUser.Positions
+                     on up.PositionId equals p.Id
+                     join uir in dbUser.UsersInRoles
+                     on up.UserId equals uir.UserId
+                     join r in dbUser.Roles
+                     on uir.RoleId equals r.RoleId
                      select new
                      {
-                         UserId = e.UserId,
-                         EmpId = e.Emp_Id,
-                         FullName = e.LastName + " , " + e.FirstName + " " + e.MiddleName,
-                         RoleName = g.RoleName
+                         UserId = m.UserId,
+                         Username = u.UserName,
+                         FullName = up.LastName + " , " + up.FirstName + " " + up.MiddleName,
+                         RoleName = r.RoleName,
+                         IsApproved = m.IsApproved,
+                         IsLockedOut = m.IsLockedOut
                      }).ToList();
 
             return q.Count;
@@ -293,41 +240,25 @@ namespace eGC.admin
         {
             string strSearch = txtSearch.Text;
 
-            var emp = (from em in dbeHRIS.EMPLOYEEs
-                       select em).ToList();
-
-            var q = (from empl in emp
-                     join u in dbGc.Users
-                     on empl.Emp_Id equals u.UserName
-                     into a
-                     from b in a.DefaultIfEmpty(new User())
-                     join mem in dbGc.MembershipLINQs
-                     on b.UserId equals mem.UserId
-                     into x
-                     from z in x.DefaultIfEmpty(new MembershipLINQ())
-                     join uir in dbGc.UsersInRoles
-                     on b.UserId equals uir.UserId
-                     into c
-                     from d in c.DefaultIfEmpty(new UsersInRole())
-                     join r in dbGc.Roles
-                     on d.RoleId equals r.RoleId
-                     into f
-                     from g in f.DefaultIfEmpty(new Role())
-                     where
-                     (
-                     empl.Emp_Id.Contains(strSearch) ||
-                     empl.LastName.Contains(strSearch) ||
-                     empl.FirstName.Contains(strSearch) ||
-                     empl.MiddleName.Contains(strSearch)
-                     )
+            var q = (from m in dbUser.MembershipLINQs
+                     join u in dbUser.Users
+                     on m.UserId equals u.UserId
+                     join up in dbUser.UserProfiles
+                     on u.UserId equals up.UserId
+                     join p in dbUser.Positions
+                     on up.PositionId equals p.Id
+                     join uir in dbUser.UsersInRoles
+                     on up.UserId equals uir.UserId
+                     join r in dbUser.Roles
+                     on uir.RoleId equals r.RoleId
                      select new
                      {
-                         UserId = b.UserId,
-                         EmpId = empl.Emp_Id,
-                         FullName = empl.LastName + " , " + empl.FirstName + " " + empl.MiddleName,
-                         RoleName = g.RoleName,
-                         IsApproved = z.IsApproved,
-                         IsLockedOut = z.IsLockedOut
+                         UserId = m.UserId,
+                         Username = u.UserName,
+                         FullName = up.LastName + " , " + up.FirstName + " " + up.MiddleName,
+                         RoleName = r.RoleName,
+                         IsApproved = m.IsApproved,
+                         IsLockedOut = m.IsLockedOut
                      }).ToList();
 
             q = q.OrderByDescending(o => o.RoleName).ToList();

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace eGC.fo
 {
     public partial class viewgcform : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
-        EHRISDataContextDataContext dbEHRIS = new EHRISDataContextDataContext();
+        UserAccountsDataContext dbUser = new UserAccountsDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,9 +52,9 @@ namespace eGC.fo
                     //chk approver
                     if (tGC.ApprovedBy != null)
                     {
-                        var u = (from emp in dbEHRIS.EMPLOYEEs
-                                 where emp.Emp_Id == tGC.ApprovedBy
-                                 select emp).FirstOrDefault();
+                        var u = (from user in dbUser.UserProfiles
+                                 where user.UserId == tGC.ApprovedBy
+                                 select user).FirstOrDefault();
 
                         if (u != null)
                         {
@@ -111,7 +112,7 @@ namespace eGC.fo
 
             tran.GCNumber = txtGCNumber.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
-            tran.ApprovedBy = txtApprovedBy.Text;
+            tran.ApprovedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
             tran.AccountNo = txtAccountNo.Text;
             tran.Remarks = txtRemarks.Text;
             tran.Type = ddlGCType.SelectedValue;

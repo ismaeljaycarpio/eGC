@@ -33,27 +33,12 @@ namespace eGC
     partial void InsertDining(Dining instance);
     partial void UpdateDining(Dining instance);
     partial void DeleteDining(Dining instance);
-    partial void InsertMembershipLINQ(MembershipLINQ instance);
-    partial void UpdateMembershipLINQ(MembershipLINQ instance);
-    partial void DeleteMembershipLINQ(MembershipLINQ instance);
-    partial void InsertRole(Role instance);
-    partial void UpdateRole(Role instance);
-    partial void DeleteRole(Role instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertUsersInRole(UsersInRole instance);
-    partial void UpdateUsersInRole(UsersInRole instance);
-    partial void DeleteUsersInRole(UsersInRole instance);
     partial void InsertGuest(Guest instance);
     partial void UpdateGuest(Guest instance);
     partial void DeleteGuest(Guest instance);
     partial void InsertRoom(Room instance);
     partial void UpdateRoom(Room instance);
     partial void DeleteRoom(Room instance);
-    partial void InsertGCTransaction(GCTransaction instance);
-    partial void UpdateGCTransaction(GCTransaction instance);
-    partial void DeleteGCTransaction(GCTransaction instance);
     partial void InsertGCRoom(GCRoom instance);
     partial void UpdateGCRoom(GCRoom instance);
     partial void DeleteGCRoom(GCRoom instance);
@@ -63,6 +48,9 @@ namespace eGC
     partial void InsertStatusSite(StatusSite instance);
     partial void UpdateStatusSite(StatusSite instance);
     partial void DeleteStatusSite(StatusSite instance);
+    partial void InsertGCTransaction(GCTransaction instance);
+    partial void UpdateGCTransaction(GCTransaction instance);
+    partial void DeleteGCTransaction(GCTransaction instance);
     #endregion
 		
 		public GiftCheckDataContext() : 
@@ -103,38 +91,6 @@ namespace eGC
 			}
 		}
 		
-		public System.Data.Linq.Table<MembershipLINQ> MembershipLINQs
-		{
-			get
-			{
-				return this.GetTable<MembershipLINQ>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Role> Roles
-		{
-			get
-			{
-				return this.GetTable<Role>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
-			}
-		}
-		
-		public System.Data.Linq.Table<UsersInRole> UsersInRoles
-		{
-			get
-			{
-				return this.GetTable<UsersInRole>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Guest> Guests
 		{
 			get
@@ -148,14 +104,6 @@ namespace eGC
 			get
 			{
 				return this.GetTable<Room>();
-			}
-		}
-		
-		public System.Data.Linq.Table<GCTransaction> GCTransactions
-		{
-			get
-			{
-				return this.GetTable<GCTransaction>();
 			}
 		}
 		
@@ -180,6 +128,14 @@ namespace eGC
 			get
 			{
 				return this.GetTable<StatusSite>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GCTransaction> GCTransactions
+		{
+			get
+			{
+				return this.GetTable<GCTransaction>();
 			}
 		}
 	}
@@ -295,1020 +251,6 @@ namespace eGC
 		{
 			this.SendPropertyChanging();
 			entity.Dining = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Memberships")]
-	public partial class MembershipLINQ : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _UserId;
-		
-		private System.Guid _ApplicationId;
-		
-		private string _Password;
-		
-		private int _PasswordFormat;
-		
-		private string _PasswordSalt;
-		
-		private string _Email;
-		
-		private string _PasswordQuestion;
-		
-		private string _PasswordAnswer;
-		
-		private bool _IsApproved;
-		
-		private bool _IsLockedOut;
-		
-		private System.DateTime _CreateDate;
-		
-		private System.DateTime _LastLoginDate;
-		
-		private System.DateTime _LastPasswordChangedDate;
-		
-		private System.DateTime _LastLockoutDate;
-		
-		private int _FailedPasswordAttemptCount;
-		
-		private System.DateTime _FailedPasswordAttemptWindowStart;
-		
-		private int _FailedPasswordAnswerAttemptCount;
-		
-		private System.DateTime _FailedPasswordAnswerAttemptWindowsStart;
-		
-		private string _Comment;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIdChanging(System.Guid value);
-    partial void OnUserIdChanged();
-    partial void OnApplicationIdChanging(System.Guid value);
-    partial void OnApplicationIdChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnPasswordFormatChanging(int value);
-    partial void OnPasswordFormatChanged();
-    partial void OnPasswordSaltChanging(string value);
-    partial void OnPasswordSaltChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnPasswordQuestionChanging(string value);
-    partial void OnPasswordQuestionChanged();
-    partial void OnPasswordAnswerChanging(string value);
-    partial void OnPasswordAnswerChanged();
-    partial void OnIsApprovedChanging(bool value);
-    partial void OnIsApprovedChanged();
-    partial void OnIsLockedOutChanging(bool value);
-    partial void OnIsLockedOutChanged();
-    partial void OnCreateDateChanging(System.DateTime value);
-    partial void OnCreateDateChanged();
-    partial void OnLastLoginDateChanging(System.DateTime value);
-    partial void OnLastLoginDateChanged();
-    partial void OnLastPasswordChangedDateChanging(System.DateTime value);
-    partial void OnLastPasswordChangedDateChanged();
-    partial void OnLastLockoutDateChanging(System.DateTime value);
-    partial void OnLastLockoutDateChanged();
-    partial void OnFailedPasswordAttemptCountChanging(int value);
-    partial void OnFailedPasswordAttemptCountChanged();
-    partial void OnFailedPasswordAttemptWindowStartChanging(System.DateTime value);
-    partial void OnFailedPasswordAttemptWindowStartChanged();
-    partial void OnFailedPasswordAnswerAttemptCountChanging(int value);
-    partial void OnFailedPasswordAnswerAttemptCountChanged();
-    partial void OnFailedPasswordAnswerAttemptWindowsStartChanging(System.DateTime value);
-    partial void OnFailedPasswordAnswerAttemptWindowsStartChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public MembershipLINQ()
-		{
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid ApplicationId
-		{
-			get
-			{
-				return this._ApplicationId;
-			}
-			set
-			{
-				if ((this._ApplicationId != value))
-				{
-					this.OnApplicationIdChanging(value);
-					this.SendPropertyChanging();
-					this._ApplicationId = value;
-					this.SendPropertyChanged("ApplicationId");
-					this.OnApplicationIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int NOT NULL")]
-		public int PasswordFormat
-		{
-			get
-			{
-				return this._PasswordFormat;
-			}
-			set
-			{
-				if ((this._PasswordFormat != value))
-				{
-					this.OnPasswordFormatChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordFormat = value;
-					this.SendPropertyChanged("PasswordFormat");
-					this.OnPasswordFormatChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string PasswordSalt
-		{
-			get
-			{
-				return this._PasswordSalt;
-			}
-			set
-			{
-				if ((this._PasswordSalt != value))
-				{
-					this.OnPasswordSaltChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordSalt = value;
-					this.SendPropertyChanged("PasswordSalt");
-					this.OnPasswordSaltChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordQuestion", DbType="NVarChar(256)")]
-		public string PasswordQuestion
-		{
-			get
-			{
-				return this._PasswordQuestion;
-			}
-			set
-			{
-				if ((this._PasswordQuestion != value))
-				{
-					this.OnPasswordQuestionChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordQuestion = value;
-					this.SendPropertyChanged("PasswordQuestion");
-					this.OnPasswordQuestionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordAnswer", DbType="NVarChar(128)")]
-		public string PasswordAnswer
-		{
-			get
-			{
-				return this._PasswordAnswer;
-			}
-			set
-			{
-				if ((this._PasswordAnswer != value))
-				{
-					this.OnPasswordAnswerChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordAnswer = value;
-					this.SendPropertyChanged("PasswordAnswer");
-					this.OnPasswordAnswerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsApproved", DbType="Bit NOT NULL")]
-		public bool IsApproved
-		{
-			get
-			{
-				return this._IsApproved;
-			}
-			set
-			{
-				if ((this._IsApproved != value))
-				{
-					this.OnIsApprovedChanging(value);
-					this.SendPropertyChanging();
-					this._IsApproved = value;
-					this.SendPropertyChanged("IsApproved");
-					this.OnIsApprovedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLockedOut", DbType="Bit NOT NULL")]
-		public bool IsLockedOut
-		{
-			get
-			{
-				return this._IsLockedOut;
-			}
-			set
-			{
-				if ((this._IsLockedOut != value))
-				{
-					this.OnIsLockedOutChanging(value);
-					this.SendPropertyChanging();
-					this._IsLockedOut = value;
-					this.SendPropertyChanged("IsLockedOut");
-					this.OnIsLockedOutChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime NOT NULL")]
-		public System.DateTime CreateDate
-		{
-			get
-			{
-				return this._CreateDate;
-			}
-			set
-			{
-				if ((this._CreateDate != value))
-				{
-					this.OnCreateDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreateDate = value;
-					this.SendPropertyChanged("CreateDate");
-					this.OnCreateDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastLoginDate", DbType="DateTime NOT NULL")]
-		public System.DateTime LastLoginDate
-		{
-			get
-			{
-				return this._LastLoginDate;
-			}
-			set
-			{
-				if ((this._LastLoginDate != value))
-				{
-					this.OnLastLoginDateChanging(value);
-					this.SendPropertyChanging();
-					this._LastLoginDate = value;
-					this.SendPropertyChanged("LastLoginDate");
-					this.OnLastLoginDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastPasswordChangedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime LastPasswordChangedDate
-		{
-			get
-			{
-				return this._LastPasswordChangedDate;
-			}
-			set
-			{
-				if ((this._LastPasswordChangedDate != value))
-				{
-					this.OnLastPasswordChangedDateChanging(value);
-					this.SendPropertyChanging();
-					this._LastPasswordChangedDate = value;
-					this.SendPropertyChanged("LastPasswordChangedDate");
-					this.OnLastPasswordChangedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastLockoutDate", DbType="DateTime NOT NULL")]
-		public System.DateTime LastLockoutDate
-		{
-			get
-			{
-				return this._LastLockoutDate;
-			}
-			set
-			{
-				if ((this._LastLockoutDate != value))
-				{
-					this.OnLastLockoutDateChanging(value);
-					this.SendPropertyChanging();
-					this._LastLockoutDate = value;
-					this.SendPropertyChanged("LastLockoutDate");
-					this.OnLastLockoutDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAttemptCount", DbType="Int NOT NULL")]
-		public int FailedPasswordAttemptCount
-		{
-			get
-			{
-				return this._FailedPasswordAttemptCount;
-			}
-			set
-			{
-				if ((this._FailedPasswordAttemptCount != value))
-				{
-					this.OnFailedPasswordAttemptCountChanging(value);
-					this.SendPropertyChanging();
-					this._FailedPasswordAttemptCount = value;
-					this.SendPropertyChanged("FailedPasswordAttemptCount");
-					this.OnFailedPasswordAttemptCountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAttemptWindowStart", DbType="DateTime NOT NULL")]
-		public System.DateTime FailedPasswordAttemptWindowStart
-		{
-			get
-			{
-				return this._FailedPasswordAttemptWindowStart;
-			}
-			set
-			{
-				if ((this._FailedPasswordAttemptWindowStart != value))
-				{
-					this.OnFailedPasswordAttemptWindowStartChanging(value);
-					this.SendPropertyChanging();
-					this._FailedPasswordAttemptWindowStart = value;
-					this.SendPropertyChanged("FailedPasswordAttemptWindowStart");
-					this.OnFailedPasswordAttemptWindowStartChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAnswerAttemptCount", DbType="Int NOT NULL")]
-		public int FailedPasswordAnswerAttemptCount
-		{
-			get
-			{
-				return this._FailedPasswordAnswerAttemptCount;
-			}
-			set
-			{
-				if ((this._FailedPasswordAnswerAttemptCount != value))
-				{
-					this.OnFailedPasswordAnswerAttemptCountChanging(value);
-					this.SendPropertyChanging();
-					this._FailedPasswordAnswerAttemptCount = value;
-					this.SendPropertyChanged("FailedPasswordAnswerAttemptCount");
-					this.OnFailedPasswordAnswerAttemptCountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAnswerAttemptWindowsStart", DbType="DateTime NOT NULL")]
-		public System.DateTime FailedPasswordAnswerAttemptWindowsStart
-		{
-			get
-			{
-				return this._FailedPasswordAnswerAttemptWindowsStart;
-			}
-			set
-			{
-				if ((this._FailedPasswordAnswerAttemptWindowsStart != value))
-				{
-					this.OnFailedPasswordAnswerAttemptWindowsStartChanging(value);
-					this.SendPropertyChanging();
-					this._FailedPasswordAnswerAttemptWindowsStart = value;
-					this.SendPropertyChanged("FailedPasswordAnswerAttemptWindowsStart");
-					this.OnFailedPasswordAnswerAttemptWindowsStartChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="NVarChar(256)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_MembershipLINQ", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.MembershipLINQ = null;
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.MembershipLINQ = this;
-						this._UserId = value.UserId;
-					}
-					else
-					{
-						this._UserId = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
-	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _RoleId;
-		
-		private System.Guid _ApplicationId;
-		
-		private string _RoleName;
-		
-		private string _Description;
-		
-		private EntitySet<UsersInRole> _UsersInRoles;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoleIdChanging(System.Guid value);
-    partial void OnRoleIdChanged();
-    partial void OnApplicationIdChanging(System.Guid value);
-    partial void OnApplicationIdChanged();
-    partial void OnRoleNameChanging(string value);
-    partial void OnRoleNameChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    #endregion
-		
-		public Role()
-		{
-			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid RoleId
-		{
-			get
-			{
-				return this._RoleId;
-			}
-			set
-			{
-				if ((this._RoleId != value))
-				{
-					this.OnRoleIdChanging(value);
-					this.SendPropertyChanging();
-					this._RoleId = value;
-					this.SendPropertyChanged("RoleId");
-					this.OnRoleIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid ApplicationId
-		{
-			get
-			{
-				return this._ApplicationId;
-			}
-			set
-			{
-				if ((this._ApplicationId != value))
-				{
-					this.OnApplicationIdChanging(value);
-					this.SendPropertyChanging();
-					this._ApplicationId = value;
-					this.SendPropertyChanged("ApplicationId");
-					this.OnApplicationIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this.OnRoleNameChanging(value);
-					this.SendPropertyChanging();
-					this._RoleName = value;
-					this.SendPropertyChanged("RoleName");
-					this.OnRoleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UsersInRole", Storage="_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
-		public EntitySet<UsersInRole> UsersInRoles
-		{
-			get
-			{
-				return this._UsersInRoles;
-			}
-			set
-			{
-				this._UsersInRoles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_UsersInRoles(UsersInRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = this;
-		}
-		
-		private void detach_UsersInRoles(UsersInRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _UserId;
-		
-		private System.Guid _ApplicationId;
-		
-		private string _UserName;
-		
-		private bool _IsAnonymous;
-		
-		private System.DateTime _LastActivityDate;
-		
-		private EntityRef<MembershipLINQ> _MembershipLINQ;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIdChanging(System.Guid value);
-    partial void OnUserIdChanged();
-    partial void OnApplicationIdChanging(System.Guid value);
-    partial void OnApplicationIdChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnIsAnonymousChanging(bool value);
-    partial void OnIsAnonymousChanged();
-    partial void OnLastActivityDateChanging(System.DateTime value);
-    partial void OnLastActivityDateChanged();
-    #endregion
-		
-		public User()
-		{
-			this._MembershipLINQ = default(EntityRef<MembershipLINQ>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid ApplicationId
-		{
-			get
-			{
-				return this._ApplicationId;
-			}
-			set
-			{
-				if ((this._ApplicationId != value))
-				{
-					this.OnApplicationIdChanging(value);
-					this.SendPropertyChanging();
-					this._ApplicationId = value;
-					this.SendPropertyChanged("ApplicationId");
-					this.OnApplicationIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnonymous", DbType="Bit NOT NULL")]
-		public bool IsAnonymous
-		{
-			get
-			{
-				return this._IsAnonymous;
-			}
-			set
-			{
-				if ((this._IsAnonymous != value))
-				{
-					this.OnIsAnonymousChanging(value);
-					this.SendPropertyChanging();
-					this._IsAnonymous = value;
-					this.SendPropertyChanged("IsAnonymous");
-					this.OnIsAnonymousChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastActivityDate", DbType="DateTime NOT NULL")]
-		public System.DateTime LastActivityDate
-		{
-			get
-			{
-				return this._LastActivityDate;
-			}
-			set
-			{
-				if ((this._LastActivityDate != value))
-				{
-					this.OnLastActivityDateChanging(value);
-					this.SendPropertyChanging();
-					this._LastActivityDate = value;
-					this.SendPropertyChanged("LastActivityDate");
-					this.OnLastActivityDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_MembershipLINQ", Storage="_MembershipLINQ", ThisKey="UserId", OtherKey="UserId", IsUnique=true, IsForeignKey=false)]
-		public MembershipLINQ MembershipLINQ
-		{
-			get
-			{
-				return this._MembershipLINQ.Entity;
-			}
-			set
-			{
-				MembershipLINQ previousValue = this._MembershipLINQ.Entity;
-				if (((previousValue != value) 
-							|| (this._MembershipLINQ.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MembershipLINQ.Entity = null;
-						previousValue.User = null;
-					}
-					this._MembershipLINQ.Entity = value;
-					if ((value != null))
-					{
-						value.User = this;
-					}
-					this.SendPropertyChanged("MembershipLINQ");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsersInRoles")]
-	public partial class UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _UserId;
-		
-		private System.Guid _RoleId;
-		
-		private EntityRef<Role> _Role;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIdChanging(System.Guid value);
-    partial void OnUserIdChanged();
-    partial void OnRoleIdChanging(System.Guid value);
-    partial void OnRoleIdChanged();
-    #endregion
-		
-		public UsersInRole()
-		{
-			this._Role = default(EntityRef<Role>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid RoleId
-		{
-			get
-			{
-				return this._RoleId;
-			}
-			set
-			{
-				if ((this._RoleId != value))
-				{
-					if (this._Role.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoleIdChanging(value);
-					this.SendPropertyChanging();
-					this._RoleId = value;
-					this.SendPropertyChanged("RoleId");
-					this.OnRoleIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UsersInRole", Storage="_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
-		public Role Role
-		{
-			get
-			{
-				return this._Role.Entity;
-			}
-			set
-			{
-				Role previousValue = this._Role.Entity;
-				if (((previousValue != value) 
-							|| (this._Role.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Role.Entity = null;
-						previousValue.UsersInRoles.Remove(this);
-					}
-					this._Role.Entity = value;
-					if ((value != null))
-					{
-						value.UsersInRoles.Add(this);
-						this._RoleId = value.RoleId;
-					}
-					else
-					{
-						this._RoleId = default(System.Guid);
-					}
-					this.SendPropertyChanged("Role");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1972,449 +914,6 @@ namespace eGC
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCTransaction")]
-	public partial class GCTransaction : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _GuestId;
-		
-		private string _GCNumber;
-		
-		private string _RecommendingApproval;
-		
-		private string _ApprovedBy;
-		
-		private string _AccountNo;
-		
-		private string _Remarks;
-		
-		private string _Type;
-		
-		private string _ApprovalStatus;
-		
-		private string _StatusGC;
-		
-		private string _CancellationReason;
-		
-		private System.Nullable<System.DateTime> _CancelledDate;
-		
-		private System.Nullable<System.DateTime> _ExpiryDate;
-		
-		private System.Nullable<bool> _IsArchive;
-		
-		private EntitySet<GCRoom> _GCRooms;
-		
-		private EntityRef<Guest> _Guest;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnGuestIdChanging(System.Nullable<int> value);
-    partial void OnGuestIdChanged();
-    partial void OnGCNumberChanging(string value);
-    partial void OnGCNumberChanged();
-    partial void OnRecommendingApprovalChanging(string value);
-    partial void OnRecommendingApprovalChanged();
-    partial void OnApprovedByChanging(string value);
-    partial void OnApprovedByChanged();
-    partial void OnAccountNoChanging(string value);
-    partial void OnAccountNoChanged();
-    partial void OnRemarksChanging(string value);
-    partial void OnRemarksChanged();
-    partial void OnTypeChanging(string value);
-    partial void OnTypeChanged();
-    partial void OnApprovalStatusChanging(string value);
-    partial void OnApprovalStatusChanged();
-    partial void OnStatusGCChanging(string value);
-    partial void OnStatusGCChanged();
-    partial void OnCancellationReasonChanging(string value);
-    partial void OnCancellationReasonChanged();
-    partial void OnCancelledDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCancelledDateChanged();
-    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnExpiryDateChanged();
-    partial void OnIsArchiveChanging(System.Nullable<bool> value);
-    partial void OnIsArchiveChanged();
-    #endregion
-		
-		public GCTransaction()
-		{
-			this._GCRooms = new EntitySet<GCRoom>(new Action<GCRoom>(this.attach_GCRooms), new Action<GCRoom>(this.detach_GCRooms));
-			this._Guest = default(EntityRef<Guest>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="Int")]
-		public System.Nullable<int> GuestId
-		{
-			get
-			{
-				return this._GuestId;
-			}
-			set
-			{
-				if ((this._GuestId != value))
-				{
-					if (this._Guest.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGuestIdChanging(value);
-					this.SendPropertyChanging();
-					this._GuestId = value;
-					this.SendPropertyChanged("GuestId");
-					this.OnGuestIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GCNumber", DbType="VarChar(50)")]
-		public string GCNumber
-		{
-			get
-			{
-				return this._GCNumber;
-			}
-			set
-			{
-				if ((this._GCNumber != value))
-				{
-					this.OnGCNumberChanging(value);
-					this.SendPropertyChanging();
-					this._GCNumber = value;
-					this.SendPropertyChanged("GCNumber");
-					this.OnGCNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecommendingApproval", DbType="VarChar(MAX)")]
-		public string RecommendingApproval
-		{
-			get
-			{
-				return this._RecommendingApproval;
-			}
-			set
-			{
-				if ((this._RecommendingApproval != value))
-				{
-					this.OnRecommendingApprovalChanging(value);
-					this.SendPropertyChanging();
-					this._RecommendingApproval = value;
-					this.SendPropertyChanged("RecommendingApproval");
-					this.OnRecommendingApprovalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovedBy", DbType="VarChar(MAX)")]
-		public string ApprovedBy
-		{
-			get
-			{
-				return this._ApprovedBy;
-			}
-			set
-			{
-				if ((this._ApprovedBy != value))
-				{
-					this.OnApprovedByChanging(value);
-					this.SendPropertyChanging();
-					this._ApprovedBy = value;
-					this.SendPropertyChanged("ApprovedBy");
-					this.OnApprovedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)")]
-		public string AccountNo
-		{
-			get
-			{
-				return this._AccountNo;
-			}
-			set
-			{
-				if ((this._AccountNo != value))
-				{
-					this.OnAccountNoChanging(value);
-					this.SendPropertyChanging();
-					this._AccountNo = value;
-					this.SendPropertyChanged("AccountNo");
-					this.OnAccountNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(MAX)")]
-		public string Remarks
-		{
-			get
-			{
-				return this._Remarks;
-			}
-			set
-			{
-				if ((this._Remarks != value))
-				{
-					this.OnRemarksChanging(value);
-					this.SendPropertyChanging();
-					this._Remarks = value;
-					this.SendPropertyChanged("Remarks");
-					this.OnRemarksChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(50)")]
-		public string Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50)")]
-		public string ApprovalStatus
-		{
-			get
-			{
-				return this._ApprovalStatus;
-			}
-			set
-			{
-				if ((this._ApprovalStatus != value))
-				{
-					this.OnApprovalStatusChanging(value);
-					this.SendPropertyChanging();
-					this._ApprovalStatus = value;
-					this.SendPropertyChanged("ApprovalStatus");
-					this.OnApprovalStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusGC", DbType="VarChar(50)")]
-		public string StatusGC
-		{
-			get
-			{
-				return this._StatusGC;
-			}
-			set
-			{
-				if ((this._StatusGC != value))
-				{
-					this.OnStatusGCChanging(value);
-					this.SendPropertyChanging();
-					this._StatusGC = value;
-					this.SendPropertyChanged("StatusGC");
-					this.OnStatusGCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancellationReason", DbType="VarChar(MAX)")]
-		public string CancellationReason
-		{
-			get
-			{
-				return this._CancellationReason;
-			}
-			set
-			{
-				if ((this._CancellationReason != value))
-				{
-					this.OnCancellationReasonChanging(value);
-					this.SendPropertyChanging();
-					this._CancellationReason = value;
-					this.SendPropertyChanged("CancellationReason");
-					this.OnCancellationReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancelledDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CancelledDate
-		{
-			get
-			{
-				return this._CancelledDate;
-			}
-			set
-			{
-				if ((this._CancelledDate != value))
-				{
-					this.OnCancelledDateChanging(value);
-					this.SendPropertyChanging();
-					this._CancelledDate = value;
-					this.SendPropertyChanged("CancelledDate");
-					this.OnCancelledDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ExpiryDate
-		{
-			get
-			{
-				return this._ExpiryDate;
-			}
-			set
-			{
-				if ((this._ExpiryDate != value))
-				{
-					this.OnExpiryDateChanging(value);
-					this.SendPropertyChanging();
-					this._ExpiryDate = value;
-					this.SendPropertyChanged("ExpiryDate");
-					this.OnExpiryDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsArchive", DbType="Bit")]
-		public System.Nullable<bool> IsArchive
-		{
-			get
-			{
-				return this._IsArchive;
-			}
-			set
-			{
-				if ((this._IsArchive != value))
-				{
-					this.OnIsArchiveChanging(value);
-					this.SendPropertyChanging();
-					this._IsArchive = value;
-					this.SendPropertyChanged("IsArchive");
-					this.OnIsArchiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCRooms", ThisKey="Id", OtherKey="GCTransactionId")]
-		public EntitySet<GCRoom> GCRooms
-		{
-			get
-			{
-				return this._GCRooms;
-			}
-			set
-			{
-				this._GCRooms.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_Guest", ThisKey="GuestId", OtherKey="Id", IsForeignKey=true)]
-		public Guest Guest
-		{
-			get
-			{
-				return this._Guest.Entity;
-			}
-			set
-			{
-				Guest previousValue = this._Guest.Entity;
-				if (((previousValue != value) 
-							|| (this._Guest.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Guest.Entity = null;
-						previousValue.GCTransactions.Remove(this);
-					}
-					this._Guest.Entity = value;
-					if ((value != null))
-					{
-						value.GCTransactions.Add(this);
-						this._GuestId = value.Id;
-					}
-					else
-					{
-						this._GuestId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Guest");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_GCRooms(GCRoom entity)
-		{
-			this.SendPropertyChanging();
-			entity.GCTransaction = this;
-		}
-		
-		private void detach_GCRooms(GCRoom entity)
-		{
-			this.SendPropertyChanging();
-			entity.GCTransaction = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCRoom")]
 	public partial class GCRoom : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2439,9 +938,9 @@ namespace eGC
 		
 		private EntityRef<Dining> _Dining;
 		
-		private EntityRef<GCTransaction> _GCTransaction;
-		
 		private EntityRef<Room> _Room;
+		
+		private EntityRef<GCTransaction> _GCTransaction;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2468,8 +967,8 @@ namespace eGC
 		public GCRoom()
 		{
 			this._Dining = default(EntityRef<Dining>);
-			this._GCTransaction = default(EntityRef<GCTransaction>);
 			this._Room = default(EntityRef<Room>);
+			this._GCTransaction = default(EntityRef<GCTransaction>);
 			OnCreated();
 		}
 		
@@ -2679,40 +1178,6 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCTransaction", ThisKey="GCTransactionId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public GCTransaction GCTransaction
-		{
-			get
-			{
-				return this._GCTransaction.Entity;
-			}
-			set
-			{
-				GCTransaction previousValue = this._GCTransaction.Entity;
-				if (((previousValue != value) 
-							|| (this._GCTransaction.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GCTransaction.Entity = null;
-						previousValue.GCRooms.Remove(this);
-					}
-					this._GCTransaction.Entity = value;
-					if ((value != null))
-					{
-						value.GCRooms.Add(this);
-						this._GCTransactionId = value.Id;
-					}
-					else
-					{
-						this._GCTransactionId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("GCTransaction");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_GCRoom", Storage="_Room", ThisKey="RoomId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Room Room
 		{
@@ -2743,6 +1208,40 @@ namespace eGC
 						this._RoomId = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Room");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCTransaction", ThisKey="GCTransactionId", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public GCTransaction GCTransaction
+		{
+			get
+			{
+				return this._GCTransaction.Entity;
+			}
+			set
+			{
+				GCTransaction previousValue = this._GCTransaction.Entity;
+				if (((previousValue != value) 
+							|| (this._GCTransaction.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GCTransaction.Entity = null;
+						previousValue.GCRooms.Remove(this);
+					}
+					this._GCTransaction.Entity = value;
+					if ((value != null))
+					{
+						value.GCRooms.Add(this);
+						this._GCTransactionId = value.Id;
+					}
+					else
+					{
+						this._GCTransactionId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("GCTransaction");
 				}
 			}
 		}
@@ -3081,6 +1580,449 @@ namespace eGC
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCTransaction")]
+	public partial class GCTransaction : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _GuestId;
+		
+		private string _GCNumber;
+		
+		private string _RecommendingApproval;
+		
+		private System.Nullable<System.Guid> _ApprovedBy;
+		
+		private string _AccountNo;
+		
+		private string _Remarks;
+		
+		private string _Type;
+		
+		private string _ApprovalStatus;
+		
+		private string _StatusGC;
+		
+		private string _CancellationReason;
+		
+		private System.Nullable<System.DateTime> _CancelledDate;
+		
+		private System.Nullable<System.DateTime> _ExpiryDate;
+		
+		private System.Nullable<bool> _IsArchive;
+		
+		private EntitySet<GCRoom> _GCRooms;
+		
+		private EntityRef<Guest> _Guest;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnGuestIdChanging(System.Nullable<int> value);
+    partial void OnGuestIdChanged();
+    partial void OnGCNumberChanging(string value);
+    partial void OnGCNumberChanged();
+    partial void OnRecommendingApprovalChanging(string value);
+    partial void OnRecommendingApprovalChanged();
+    partial void OnApprovedByChanging(System.Nullable<System.Guid> value);
+    partial void OnApprovedByChanged();
+    partial void OnAccountNoChanging(string value);
+    partial void OnAccountNoChanged();
+    partial void OnRemarksChanging(string value);
+    partial void OnRemarksChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
+    partial void OnApprovalStatusChanging(string value);
+    partial void OnApprovalStatusChanged();
+    partial void OnStatusGCChanging(string value);
+    partial void OnStatusGCChanged();
+    partial void OnCancellationReasonChanging(string value);
+    partial void OnCancellationReasonChanged();
+    partial void OnCancelledDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCancelledDateChanged();
+    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpiryDateChanged();
+    partial void OnIsArchiveChanging(System.Nullable<bool> value);
+    partial void OnIsArchiveChanged();
+    #endregion
+		
+		public GCTransaction()
+		{
+			this._GCRooms = new EntitySet<GCRoom>(new Action<GCRoom>(this.attach_GCRooms), new Action<GCRoom>(this.detach_GCRooms));
+			this._Guest = default(EntityRef<Guest>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GuestId", DbType="Int")]
+		public System.Nullable<int> GuestId
+		{
+			get
+			{
+				return this._GuestId;
+			}
+			set
+			{
+				if ((this._GuestId != value))
+				{
+					if (this._Guest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGuestIdChanging(value);
+					this.SendPropertyChanging();
+					this._GuestId = value;
+					this.SendPropertyChanged("GuestId");
+					this.OnGuestIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GCNumber", DbType="VarChar(50)")]
+		public string GCNumber
+		{
+			get
+			{
+				return this._GCNumber;
+			}
+			set
+			{
+				if ((this._GCNumber != value))
+				{
+					this.OnGCNumberChanging(value);
+					this.SendPropertyChanging();
+					this._GCNumber = value;
+					this.SendPropertyChanged("GCNumber");
+					this.OnGCNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecommendingApproval", DbType="VarChar(MAX)")]
+		public string RecommendingApproval
+		{
+			get
+			{
+				return this._RecommendingApproval;
+			}
+			set
+			{
+				if ((this._RecommendingApproval != value))
+				{
+					this.OnRecommendingApprovalChanging(value);
+					this.SendPropertyChanging();
+					this._RecommendingApproval = value;
+					this.SendPropertyChanged("RecommendingApproval");
+					this.OnRecommendingApprovalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> ApprovedBy
+		{
+			get
+			{
+				return this._ApprovedBy;
+			}
+			set
+			{
+				if ((this._ApprovedBy != value))
+				{
+					this.OnApprovedByChanging(value);
+					this.SendPropertyChanging();
+					this._ApprovedBy = value;
+					this.SendPropertyChanged("ApprovedBy");
+					this.OnApprovedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)")]
+		public string AccountNo
+		{
+			get
+			{
+				return this._AccountNo;
+			}
+			set
+			{
+				if ((this._AccountNo != value))
+				{
+					this.OnAccountNoChanging(value);
+					this.SendPropertyChanging();
+					this._AccountNo = value;
+					this.SendPropertyChanged("AccountNo");
+					this.OnAccountNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(MAX)")]
+		public string Remarks
+		{
+			get
+			{
+				return this._Remarks;
+			}
+			set
+			{
+				if ((this._Remarks != value))
+				{
+					this.OnRemarksChanging(value);
+					this.SendPropertyChanging();
+					this._Remarks = value;
+					this.SendPropertyChanged("Remarks");
+					this.OnRemarksChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50)")]
+		public string ApprovalStatus
+		{
+			get
+			{
+				return this._ApprovalStatus;
+			}
+			set
+			{
+				if ((this._ApprovalStatus != value))
+				{
+					this.OnApprovalStatusChanging(value);
+					this.SendPropertyChanging();
+					this._ApprovalStatus = value;
+					this.SendPropertyChanged("ApprovalStatus");
+					this.OnApprovalStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusGC", DbType="VarChar(50)")]
+		public string StatusGC
+		{
+			get
+			{
+				return this._StatusGC;
+			}
+			set
+			{
+				if ((this._StatusGC != value))
+				{
+					this.OnStatusGCChanging(value);
+					this.SendPropertyChanging();
+					this._StatusGC = value;
+					this.SendPropertyChanged("StatusGC");
+					this.OnStatusGCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancellationReason", DbType="VarChar(MAX)")]
+		public string CancellationReason
+		{
+			get
+			{
+				return this._CancellationReason;
+			}
+			set
+			{
+				if ((this._CancellationReason != value))
+				{
+					this.OnCancellationReasonChanging(value);
+					this.SendPropertyChanging();
+					this._CancellationReason = value;
+					this.SendPropertyChanged("CancellationReason");
+					this.OnCancellationReasonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancelledDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CancelledDate
+		{
+			get
+			{
+				return this._CancelledDate;
+			}
+			set
+			{
+				if ((this._CancelledDate != value))
+				{
+					this.OnCancelledDateChanging(value);
+					this.SendPropertyChanging();
+					this._CancelledDate = value;
+					this.SendPropertyChanged("CancelledDate");
+					this.OnCancelledDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ExpiryDate
+		{
+			get
+			{
+				return this._ExpiryDate;
+			}
+			set
+			{
+				if ((this._ExpiryDate != value))
+				{
+					this.OnExpiryDateChanging(value);
+					this.SendPropertyChanging();
+					this._ExpiryDate = value;
+					this.SendPropertyChanged("ExpiryDate");
+					this.OnExpiryDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsArchive", DbType="Bit")]
+		public System.Nullable<bool> IsArchive
+		{
+			get
+			{
+				return this._IsArchive;
+			}
+			set
+			{
+				if ((this._IsArchive != value))
+				{
+					this.OnIsArchiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsArchive = value;
+					this.SendPropertyChanged("IsArchive");
+					this.OnIsArchiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GCTransaction_GCRoom", Storage="_GCRooms", ThisKey="Id", OtherKey="GCTransactionId")]
+		public EntitySet<GCRoom> GCRooms
+		{
+			get
+			{
+				return this._GCRooms;
+			}
+			set
+			{
+				this._GCRooms.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Guest_GCTransaction", Storage="_Guest", ThisKey="GuestId", OtherKey="Id", IsForeignKey=true)]
+		public Guest Guest
+		{
+			get
+			{
+				return this._Guest.Entity;
+			}
+			set
+			{
+				Guest previousValue = this._Guest.Entity;
+				if (((previousValue != value) 
+							|| (this._Guest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Guest.Entity = null;
+						previousValue.GCTransactions.Remove(this);
+					}
+					this._Guest.Entity = value;
+					if ((value != null))
+					{
+						value.GCTransactions.Add(this);
+						this._GuestId = value.Id;
+					}
+					else
+					{
+						this._GuestId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Guest");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GCRooms(GCRoom entity)
+		{
+			this.SendPropertyChanging();
+			entity.GCTransaction = this;
+		}
+		
+		private void detach_GCRooms(GCRoom entity)
+		{
+			this.SendPropertyChanging();
+			entity.GCTransaction = null;
 		}
 	}
 }

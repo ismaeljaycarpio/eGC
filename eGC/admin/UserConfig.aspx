@@ -10,25 +10,22 @@
                     <h5>User Access</h5>
                 </div>
                 <div class="panel-body">
-                    <div class="form-horizontal">
+                    <div class="form-inline">
                         <div class="form-group">
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <asp:TextBox ID="txtSearch"
-                                        runat="server"
-                                        CssClass="form-control" 
-                                        placeholder="Search by Employee ID only"></asp:TextBox>
-                                    <span class="input-group-btn">
-                                        <asp:Button ID="btnSearch"
-                                            runat="server"
-                                            CssClass="btn btn-primary"
-                                            Text="Go"
-                                            OnClick="btnSearch_Click" />
-                                    </span>
-                                </div>
-                            </div>
+                            <asp:TextBox ID="txtSearch"
+                                runat="server"
+                                CssClass="form-control"
+                                placeholder="Search..."></asp:TextBox>
+                            <asp:Button ID="btnSearch"
+                                runat="server"
+                                CssClass="btn btn-primary"
+                                Text="Go"
+                                OnClick="btnSearch_Click" />
                         </div>
                     </div>
+
+                    <br />
+
                     <div class="table-responsive">
                         <asp:UpdatePanel ID="upUsers" runat="server">
                             <ContentTemplate>
@@ -49,7 +46,7 @@
                                     <Columns>
                                         <asp:TemplateField HeaderText="ID" SortExpression="EmpId">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="lblEmpId" runat="server" Text='<%# Eval("EmpId") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                <asp:LinkButton ID="lblUsername" runat="server" Text='<%# Eval("Username") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 

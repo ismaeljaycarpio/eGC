@@ -239,7 +239,7 @@ namespace eGC.gcapproval
                         select gc).FirstOrDefault();
 
             tran.ApprovalStatus = "Approved";
-            tran.ApprovedBy = User.Identity.Name;
+            tran.ApprovedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
 
             if(tran.StatusGC == "Cancelled")
             {

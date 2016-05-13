@@ -39,24 +39,24 @@
                         <div class="col-md-4">
                             <label for="txtName">Recommending Approval</label>
                             <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
                                 ControlToValidate="txtRecommendingApproval"
                                 CssClass="label label-danger"
-                                ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>--%>
                         </div>
                         <div class="col-md-4">
                             <label for="txtAccountNo">Account No</label>
                             <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator13"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
                                 ControlToValidate="txtAccountNo"
                                 CssClass="label label-danger"
-                                ErrorMessage="Account No is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="Account No is required"></asp:RequiredFieldValidator>--%>
                         </div>
                     </div>
                 </div>
@@ -66,13 +66,13 @@
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
                             <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator14"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
                                 ControlToValidate="txtRemarks"
                                 CssClass="label label-danger"
-                                ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>--%>
                         </div>
                         <div class="col-md-4">
                             <label for="ddlGCType">GC Type</label>

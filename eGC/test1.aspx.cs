@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace eGC
 {
@@ -11,7 +12,20 @@ namespace eGC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!Page.IsPostBack)
+            {
+                //create user
+            //    Membership.CreateUser("admin", "pa$$word");
+            //    Roles.CreateRole("Admin");
 
+            //    Roles.AddUserToRole("admin", "Admin");
+            //    Console.Write("created success!");
+
+                //MembershipUser mu = Membership.GetUser("admin");
+                //string userName = mu.UserName;
+
+                //mu.ChangePassword(mu.ResetPassword(), "pa$$word");
+            }
         }
 
         protected void btnClick_Click(object sender, EventArgs e)

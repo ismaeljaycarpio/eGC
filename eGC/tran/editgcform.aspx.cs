@@ -11,7 +11,7 @@ namespace eGC.tran
     public partial class editgcform : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
-        EHRISDataContextDataContext dbEHRIS = new EHRISDataContextDataContext();
+        UserAccountsDataContext dbUser = new UserAccountsDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,9 +52,9 @@ namespace eGC.tran
                     //chk approver
                     if(tGC.ApprovedBy != null)
                     {
-                        var u = (from emp in dbEHRIS.EMPLOYEEs
-                                 where emp.Emp_Id == tGC.ApprovedBy
-                                 select emp).FirstOrDefault();
+                        var u = (from user in dbUser.UserProfiles
+                                 where user.UserId == tGC.ApprovedBy
+                                 select user).FirstOrDefault();
 
                         if(u != null)
                         {

@@ -23,7 +23,7 @@ namespace eGC.DAL
             strSql = "UPDATE Memberships SET IsApproved = 'False' WHERE UserId = @UserId";
 
             conn = new SqlConnection();
-            conn.ConnectionString = WebConfigurationManager.ConnectionStrings["connGC"].ConnectionString;
+            conn.ConnectionString = WebConfigurationManager.ConnectionStrings["connMembership"].ConnectionString;
 
             using (comm = new SqlCommand(strSql, conn))
             {
@@ -42,7 +42,7 @@ namespace eGC.DAL
             strSql = "UPDATE Memberships SET IsApproved = 'True' WHERE UserId = @UserId";
 
             conn = new SqlConnection();
-            conn.ConnectionString = WebConfigurationManager.ConnectionStrings["connGC"].ConnectionString;
+            conn.ConnectionString = WebConfigurationManager.ConnectionStrings["connMembership"].ConnectionString;
 
             using (comm = new SqlCommand(strSql, conn))
             {
@@ -59,9 +59,8 @@ namespace eGC.DAL
         public void ResetPassword(Guid UserId)
         {
             MembershipUser mu = Membership.GetUser(UserId);
-            string userName = mu.UserName;
 
-            mu.ChangePassword(mu.ResetPassword(), userName);
+            mu.ChangePassword(mu.ResetPassword(), "pass123");
         }
 
         public void ChangeRole(Guid UserId, string roleName)
@@ -87,7 +86,7 @@ namespace eGC.DAL
             strSql = "UPDATE Memberships SET IsLockedOut = 'True' WHERE UserId = @UserId";
 
             conn = new SqlConnection();
-            conn.ConnectionString = WebConfigurationManager.ConnectionStrings["connGC"].ConnectionString;
+            conn.ConnectionString = WebConfigurationManager.ConnectionStrings["connMembership"].ConnectionString;
 
             using (comm = new SqlCommand(strSql, conn))
             {

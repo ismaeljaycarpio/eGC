@@ -123,7 +123,6 @@
   <ItemGroup>
     <Content Include="Account\Manage.aspx" />
     <Content Include="ActivityLog.txt" />
-    <Content Include="admin\roles.aspx" />
     <Content Include="admin\UserConfig.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="company\add-company.aspx" />
@@ -257,11 +256,6 @@
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="guest\Web.config" />
     <Content Include="fo\Web.config" />
-    <Content Include="EHRISDataContext.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>EHRISDataContext.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -386,6 +380,11 @@
     <Content Include="tran\GCReport.xss">
       <DependentUpon>GCReport.xsd</DependentUpon>
     </Content>
+    <Content Include="UserAccounts.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>UserAccounts.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -394,13 +393,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="admin\roles.aspx.cs">
-      <DependentUpon>roles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\roles.aspx.designer.cs">
-      <DependentUpon>roles.aspx</DependentUpon>
-    </Compile>
     <Compile Include="admin\UserConfig.aspx.cs">
       <DependentUpon>UserConfig.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -453,11 +445,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="EHRISDataContext.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EHRISDataContext.dbml</DependentUpon>
     </Compile>
     <Compile Include="fo\frontoffice.aspx.cs">
       <DependentUpon>frontoffice.aspx</DependentUpon>
@@ -599,6 +586,11 @@
     <Compile Include="tran\print-form.aspx.designer.cs">
       <DependentUpon>print-form.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserAccounts.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAccounts.dbml</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -624,12 +616,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EHRISDataContext.dbml.layout">
-      <DependentUpon>EHRISDataContext.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="tran\gc-report.rdlc" />
+    <None Include="UserAccounts.dbml.layout">
+      <DependentUpon>UserAccounts.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
