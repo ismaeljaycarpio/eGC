@@ -61,6 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -352,6 +353,7 @@
     <Content Include="test1.aspx" />
     <Content Include="tran\editgcform.aspx" />
     <Content Include="tran\gcform.aspx" />
+    <Content Include="tran\print-form.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.sitemap" />
@@ -361,6 +363,17 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="tran\Web.config" />
+    <Content Include="tran\GCReport.xsc">
+      <DependentUpon>GCReport.xsd</DependentUpon>
+    </Content>
+    <None Include="tran\GCReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GCReport.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="tran\GCReport.xss">
+      <DependentUpon>GCReport.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -562,6 +575,18 @@
     <Compile Include="tran\gcform.aspx.designer.cs">
       <DependentUpon>gcform.aspx</DependentUpon>
     </Compile>
+    <Compile Include="tran\GCReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GCReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="tran\print-form.aspx.cs">
+      <DependentUpon>print-form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tran\print-form.aspx.designer.cs">
+      <DependentUpon>print-form.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -590,6 +615,9 @@
     <None Include="EHRISDataContext.dbml.layout">
       <DependentUpon>EHRISDataContext.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="tran\gc-report.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

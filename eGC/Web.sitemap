@@ -28,12 +28,13 @@
       <siteMapNode url="~/room/dining.aspx" title="Dining"  description="">
       </siteMapNode>
 
-      <siteMapNode url="~/gcapproval/default.aspx" title="GC Approval List"  description="">
+      <siteMapNode url="~/gcapproval/default.aspx" title="Approval"  description="">
         <siteMapNode url="~/tran/editgcform.aspx" title="Update GC"></siteMapNode>
       </siteMapNode>
 
       <siteMapNode url="~/fo/frontoffice.aspx" title="Front Office"  description="">
-        <siteMapNode url="~/fo/viewgcform.aspx" title="View GC"></siteMapNode>
+        <siteMapNode url="~/fo/viewgcform.aspx" title="View GC">
+        </siteMapNode>
       </siteMapNode>
 
       <siteMapNode url="" title="Account"  description="">
@@ -42,6 +43,8 @@
       </siteMapNode>
       
     <siteMapNode url="~/report/report.aspx" title="Reports"  description=""></siteMapNode>
-
+      
+    <siteMapNode url="~/tran/print-form.aspx" title="Print GC"></siteMapNode>
+    
     </siteMapNode>
 </siteMap>

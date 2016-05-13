@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Edit GC Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editgcform.aspx.cs" Inherits="eGC.tran.editgcform" %>
+﻿<%@ Page Title="Update GC Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editgcform.aspx.cs" Inherits="eGC.tran.editgcform" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -7,7 +7,12 @@
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h5>Update GC</h5>
+                    <h5>Update GC
+                        <asp:HyperLink ID="hlPrintForm"                             
+                            runat="server">
+                            <span class="glyphicon glyphicon-print pull-right"></span>
+                        </asp:HyperLink>
+                    </h5>
                 </div>
                 <div class="panel-body">
                     <div role="form">
@@ -419,7 +424,6 @@
         </div>
     </div>
 
-
     <!-- Add Dining Modal -->
     <div id="addDining" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
@@ -573,7 +577,6 @@
     <!-- Delete Modal -->
     <div id="deleteDining" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>

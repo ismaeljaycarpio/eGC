@@ -132,6 +132,7 @@ namespace eGC.tran
                         lblForGuestId.InnerText = "Company ID";
                     }
 
+                    hlPrintForm.NavigateUrl = "~/tran/print-form.aspx?gcId=" + Request.QueryString["gcId"];
                     txtRecommendingApproval.Focus();
                 }
             }

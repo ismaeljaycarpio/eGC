@@ -91,6 +91,8 @@ namespace eGC.fo
                         panelName.Visible = false;
                         lblForGuestId.InnerText = "Company ID";
                     }
+
+                    hlPrintForm.NavigateUrl = "~/tran/print-form.aspx?gcId=" + Request.QueryString["gcId"];
                 }
             }
         }
