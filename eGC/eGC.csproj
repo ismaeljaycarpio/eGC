@@ -158,6 +158,7 @@
     <Content Include="guest\editguest.aspx" />
     <Content Include="guest\guest-gc-records.aspx" />
     <Content Include="IDPic\noImage.png" />
+    <Content Include="Images\azalea-logo.png" />
     <Content Include="jquery.bxslider\images\azalea-baguio-tent-event-venue.jpg" />
     <Content Include="jquery.bxslider\images\azalea.jpg" />
     <Content Include="jquery.bxslider\images\bx_loader.gif" />
@@ -601,7 +602,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />

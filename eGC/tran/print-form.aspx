@@ -6,9 +6,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
-        <div class="col-md-12">
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server" CssClass="col-md-12">
-            </rsweb:ReportViewer>  
+        <div class="col-md-12 col-md-offset-2">
+            <rsweb:ReportViewer ID="ReportViewer1"
+                runat="server"
+                Height="800"
+                SizeToReportContent="true">
+            </rsweb:ReportViewer>
         </div>
     </div>
 </asp:Content>

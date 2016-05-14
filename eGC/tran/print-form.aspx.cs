@@ -74,6 +74,14 @@ namespace eGC.tran
             ReportDataSource rdsRooms = new ReportDataSource("Rooms", dtRooms);
             ReportDataSource rdsDinings = new ReportDataSource("Dinings", dtDinings);
 
+            //fill param
+            ReportParameter[] param = new ReportParameter[14];
+
+            param[0] = new ReportParameter("Id", )
+
+            //put param to report
+            ReportViewer1.LocalReport.SetParameters(param);
+
             //put source to report
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(rdsRooms);
