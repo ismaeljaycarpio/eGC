@@ -1886,7 +1886,7 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancelledDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CancelledDate", DbType="Date")]
 		public System.Nullable<System.DateTime> CancelledDate
 		{
 			get
@@ -1906,7 +1906,7 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="Date")]
 		public System.Nullable<System.DateTime> ExpiryDate
 		{
 			get

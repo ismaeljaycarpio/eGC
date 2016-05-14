@@ -73,7 +73,7 @@
       <Association Name="User_MembershipLINQ" Member="Membership" ThisKey="UserId" OtherKey="UserId" Type="MembershipLINQ" Cardinality="One" />
       <Association Name="User_Profile" Member="Profile" ThisKey="UserId" OtherKey="UserId" Type="Profile" Cardinality="One" />
       <Association Name="User_UsersInRole" Member="UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="UsersInRole" />
-      <Association Name="User_UserProfile" Member="UserProfiles" ThisKey="UserId" OtherKey="UserId" Type="UserProfile" />
+      <Association Name="User_UserProfile" Member="UserProfile" ThisKey="UserId" OtherKey="UserId" Type="UserProfile" Cardinality="One" />
       <Association Name="Application_User" Member="Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="Application" IsForeignKey="true" />
     </Type>
   </Table>
@@ -85,22 +85,22 @@
       <Association Name="User_UsersInRole" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UserProfile" Member="UserProfiles">
-    <Type Name="UserProfile">
-      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="FirstName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="MiddleName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="LastName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="PositionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="User_UserProfile" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Position_UserProfile" Member="Position" ThisKey="PositionId" OtherKey="Id" Type="Position" IsForeignKey="true" DeleteRule="SET DEFAULT" />
-    </Type>
-  </Table>
   <Table Name="dbo.Position" Member="Positions">
     <Type Name="Position">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Position_UserProfile" Member="UserProfiles" ThisKey="Id" OtherKey="PositionId" Type="UserProfile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserProfile" Member="UserProfiles">
+    <Type Name="UserProfile">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PositionId" AutoSync="Never" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" />
+      <Association Name="Position_UserProfile" Member="Position" ThisKey="PositionId" OtherKey="Id" Type="Position" IsForeignKey="true" DeleteRule="SET DEFAULT" />
+      <Association Name="User_UserProfile" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

@@ -71,7 +71,7 @@ namespace eGC.guest
                         txtContactPersonNumber.Text = guest.EmergencyContactNumber;
                         txtContactPersonAddress.Text = guest.EmergencyContactAddress;
 
-                        if(User.IsInRole("CanApprove"))
+                        if (User.IsInRole("can-approve-gc"))
                         {
                             pnlInputForm.Enabled = false;
                             FileUpload1.Enabled = false;

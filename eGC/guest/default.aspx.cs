@@ -22,7 +22,7 @@ namespace eGC.guest
                 this.gvGuests.DataBind();
 
                 //hide from approver
-                if (User.IsInRole("CanApprove"))
+                if (User.IsInRole("can-approve-gc"))
                 {
                     lbtnGuestProfile.Visible = false;
                     gvGuests.Columns[6].Visible = false;

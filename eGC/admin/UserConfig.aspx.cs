@@ -10,7 +10,6 @@ namespace eGC.admin
 {
     public partial class UserConfig : System.Web.UI.Page
     {
-        GiftCheckDataContext dbGc = new GiftCheckDataContext();
         UserAccountsDataContext dbUser = new UserAccountsDataContext();
         DAL.AccountManagement accnt = new DAL.AccountManagement();
 
@@ -20,8 +19,15 @@ namespace eGC.admin
             {
                 this.gvUsers.DataBind();
 
+                checkRoles();
+
                 //load roles
                 var roles = (from r in dbUser.Roles
+                             where
+                             r.RoleName == "can-create-gc" || 
+                             r.RoleName == "can-approve-gc" || 
+                             r.RoleName == "frontoffice" || 
+                             r.RoleName == "Admin"
                              select r).ToList();
 
                 ddlRoles.DataSource = roles;
@@ -30,6 +36,14 @@ namespace eGC.admin
                 ddlRoles.DataBind();
 
                 ddlRoles.Items.Insert(0, new ListItem("-- Select a Role --", "0"));
+
+
+                ddlCreateRoles.DataSource = roles;
+                ddlCreateRoles.DataTextField = "RoleName";
+                ddlCreateRoles.DataValueField = "RoleId";
+                ddlCreateRoles.DataBind();
+
+                ddlCreateRoles.Items.Insert(0, new ListItem("-- Select a Role --", "0"));
 
                 txtSearch.Focus();
             }
@@ -263,6 +277,75 @@ namespace eGC.admin
 
             q = q.OrderByDescending(o => o.RoleName).ToList();
             e.Result = q;
+        }
+
+        protected void openCreateAccount_Click(object sender, EventArgs e)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#createUser').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
+        }
+
+        protected void btnAddUser_Click(object sender, EventArgs e)
+        {
+            //chk if username already exist
+            if(Membership.GetUser(txtCreateUsername.Text) != null)
+            {
+                lblErrorMsg.Text = "Username already exist.";
+            }
+            else
+            {
+                //register user
+                Membership.CreateUser(txtCreateUsername.Text, 
+                    txtCreateUsername.Text.Trim());
+                
+                //add to user profile
+                UserProfile user = new UserProfile();
+                user.UserId = Guid.Parse(Membership.GetUser(txtCreateUsername.Text).ProviderUserKey.ToString());
+                user.FirstName = txtCreateFirstName.Text;
+                user.MiddleName = txtCreateMiddleName.Text;
+                user.LastName = txtCreateLastName.Text;
+                dbUser.UserProfiles.InsertOnSubmit(user);
+                dbUser.SubmitChanges();
+
+                //assign role
+                Roles.AddUserToRole(txtCreateUsername.Text, ddlCreateRoles.SelectedItem.Text);
+
+                //re-load users
+                this.gvUsers.DataBind();
+
+                //hide modal
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#createUser').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
+            }
+        }
+
+        protected void checkRoles()
+        {
+            if(!Roles.RoleExists("can-create-gc"))
+            {
+                Roles.CreateRole("can-create-gc");
+            }
+
+            if (!Roles.RoleExists("can-approve-gc"))
+            {
+                Roles.CreateRole("can-approve-gc");
+            }
+
+            if (!Roles.RoleExists("frontoffice"))
+            {
+                Roles.CreateRole("frontoffice");
+            }
+
+            if (!Roles.RoleExists("Admin"))
+            {
+                Roles.CreateRole("Admin");
+            }
         }
     }
 }

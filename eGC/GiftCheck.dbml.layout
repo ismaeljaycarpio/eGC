@@ -52,24 +52,24 @@
         <elementListCompartment Id="67c87118-657d-4bd4-a0a2-d0f92da3698b" absoluteBounds="1.3900000000000001, 11.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="e2311c02-77a1-49fa-a56b-21dbeabbf708" absoluteBounds="1, 7.125, 2, 3.5016097005208326">
+    <classShape Id="9f3ff3de-19f5-4c79-a2ee-25b531d08124" absoluteBounds="0.75, 6.375, 2, 3.5016097005208326">
       <DataClassMoniker Name="/GiftCheckDataContext/GCTransaction" />
       <nestedChildShapes>
-        <elementListCompartment Id="636514fd-4a5c-44d5-8000-e20a9b23258e" absoluteBounds="1.0150000000000001, 7.585, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="47057804-512d-457d-aee4-aa3cbe09755b" absoluteBounds="0.765, 6.835, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.9375 : 7.125); (1.9375 : 5.59780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.8125 : 6.375); (1.8125 : 5.59780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/GCTransaction/GCTransaction_GCRoom" />
       <nodes>
-        <classShapeMoniker Id="e2311c02-77a1-49fa-a56b-21dbeabbf708" />
+        <classShapeMoniker Id="9f3ff3de-19f5-4c79-a2ee-25b531d08124" />
         <classShapeMoniker Id="4a55a075-1ad4-4922-a980-cbb670381c83" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.625 : 6.249208984375); (2.96875 : 6.249208984375); (2.96875 : 7.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.625 : 6.60655843098958); (2.75 : 6.60655843098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GiftCheckDataContext/Guest/Guest_GCTransaction" />
       <nodes>
         <classShapeMoniker Id="49c09bba-bb80-4fc3-a48b-2e3db444dd06" />
-        <classShapeMoniker Id="e2311c02-77a1-49fa-a56b-21dbeabbf708" />
+        <classShapeMoniker Id="9f3ff3de-19f5-4c79-a2ee-25b531d08124" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

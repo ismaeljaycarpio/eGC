@@ -26,7 +26,8 @@
         $(document).ready(function () {
             $('.bxslider').bxSlider({
                 adaptiveHeight: true,
-                slideWidth: 1100
+                slideWidth: 1100,
+                
             });
         });
     </script>

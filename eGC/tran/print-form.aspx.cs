@@ -13,6 +13,7 @@ namespace eGC.tran
     public partial class print_form : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
+        UserAccountsDataContext dbUser = new UserAccountsDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -67,17 +68,76 @@ namespace eGC.tran
                               HeadCount = gcdining.HowManyDiningPerson
                           }).ToList();
 
-            dtRooms = rooms.ToDataTable().AsEnumerable().CopyToDataTable();
-            dtDinings = dinings.ToDataTable().AsEnumerable().CopyToDataTable();
+            if(rooms.Count > 0)
+            {
+                dtRooms = rooms.ToDataTable().AsEnumerable().CopyToDataTable();
+            }
             
+            if(dinings.Count > 0)
+            {
+                dtDinings = dinings.ToDataTable().AsEnumerable().CopyToDataTable();
+            }
+                   
             //first param: name of the dataset
             ReportDataSource rdsRooms = new ReportDataSource("Rooms", dtRooms);
             ReportDataSource rdsDinings = new ReportDataSource("Dinings", dtDinings);
 
-            //fill param
-            ReportParameter[] param = new ReportParameter[14];
+            //querty tran
+            var tran = (from gctran in db.GCTransactions
+                       join guest in db.Guests
+                       on gctran.GuestId equals guest.Id
+                       where gctran.GCNumber == gcId
+                       select new 
+                       {
+                           GuestId = guest.GuestId,
+                           FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                           CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                           ContactNo = guest.ContactNumber,
+                           Email = guest.Email,
+                           GCNumber = gctran.GCNumber,
+                           ExpirationDate = gctran.ExpiryDate,
+                           Reason = gctran.Type,
+                           AccountNo = gctran.AccountNo,
+                           RecommendingApproval = gctran.RecommendingApproval,
+                           Remarks = gctran.Remarks,
+                           DateCancelled = gctran.CancelledDate,
+                           ReasonForCancellation = gctran.CancellationReason,
+                           GCStatus = gctran.StatusGC,
+                           ApprovedBy = gctran.ApprovedBy
+                       }).FirstOrDefault();
 
-            param[0] = new ReportParameter("Id", )
+            string approvedBy = String.Empty;
+
+            if(tran.ApprovedBy != null)
+            {
+                var approver = (from user in dbUser.UserProfiles
+                               where tran.ApprovedBy == user.UserId
+                               select new
+                               {
+                                   ApproverName = user.FirstName + " " + user.MiddleName + " " + user.LastName
+                               }).FirstOrDefault();
+
+                approvedBy = approver.ApproverName;
+            }
+
+            //fill param
+            ReportParameter[] param = new ReportParameter[15];
+
+            param[0] = new ReportParameter("GuestId", tran.GuestId);
+            param[1] = new ReportParameter("FullName", tran.FullName);
+            param[2] = new ReportParameter("CompanyName", tran.CompanyName);
+            param[3] = new ReportParameter("ContactNo", tran.ContactNo);
+            param[4] = new ReportParameter("Email", tran.Email);
+            param[5] = new ReportParameter("GCNumber", tran.GCNumber);
+            param[6] = new ReportParameter("ExpirationDate", tran.ExpirationDate.ToString());
+            param[7] = new ReportParameter("Reason", tran.Reason);
+            param[8] = new ReportParameter("AccountNo", tran.AccountNo);
+            param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
+            param[10] = new ReportParameter("Remarks", tran.Remarks);
+            param[11] = new ReportParameter("DateCancelled", tran.DateCancelled.ToString());
+            param[12] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
+            param[13] = new ReportParameter("GCStatus", tran.GCStatus);
+            param[14] = new ReportParameter("ApprovedBy", approvedBy);
 
             //put param to report
             ReportViewer1.LocalReport.SetParameters(param);
