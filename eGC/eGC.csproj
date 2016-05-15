@@ -617,7 +617,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="tran\gc-report.rdlc" />
+    <Content Include="tran\gc-report.rdlc" />
     <None Include="UserAccounts.dbml.layout">
       <DependentUpon>UserAccounts.dbml</DependentUpon>
     </None>
