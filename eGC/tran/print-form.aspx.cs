@@ -107,6 +107,9 @@ namespace eGC.tran
                        }).FirstOrDefault();
 
             string approvedBy = String.Empty;
+            string expirationDate = String.Empty;
+            string dateCancelled = String.Empty;
+
 
             if(tran.ApprovedBy != null)
             {
@@ -117,7 +120,20 @@ namespace eGC.tran
                                    ApproverName = user.FirstName + " " + user.MiddleName + " " + user.LastName
                                }).FirstOrDefault();
 
-                approvedBy = approver.ApproverName;
+                if(approver != null)
+                {
+                    approvedBy = approver.ApproverName;
+                }          
+            }
+
+            if(tran.ExpirationDate != null)
+            {
+                expirationDate = tran.ExpirationDate.Value.ToShortDateString();
+            }
+
+            if(tran.DateCancelled != null)
+            {
+                dateCancelled = tran.DateCancelled.Value.ToShortDateString();
             }
 
             //fill param
@@ -129,12 +145,12 @@ namespace eGC.tran
             param[3] = new ReportParameter("ContactNo", tran.ContactNo);
             param[4] = new ReportParameter("Email", tran.Email);
             param[5] = new ReportParameter("GCNumber", tran.GCNumber);
-            param[6] = new ReportParameter("ExpirationDate", tran.ExpirationDate.ToString());
+            param[6] = new ReportParameter("ExpirationDate", expirationDate);
             param[7] = new ReportParameter("Reason", tran.Reason);
             param[8] = new ReportParameter("AccountNo", tran.AccountNo);
             param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
             param[10] = new ReportParameter("Remarks", tran.Remarks);
-            param[11] = new ReportParameter("DateCancelled", tran.DateCancelled.ToString());
+            param[11] = new ReportParameter("DateCancelled", dateCancelled);
             param[12] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
             param[13] = new ReportParameter("GCStatus", tran.GCStatus);
             param[14] = new ReportParameter("ApprovedBy", approvedBy);

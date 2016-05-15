@@ -266,6 +266,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="jquery.bxslider\bower.json" />
     <Content Include="jquery.bxslider\readme.md" />
+    <Content Include="admin\Web.config" />
     <None Include="Properties\PublishProfiles\eeGC.pubxml" />
     <None Include="Properties\PublishProfiles\eGC.pubxml" />
     <Content Include="ProfilePic\noImage.png" />

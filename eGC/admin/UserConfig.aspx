@@ -45,7 +45,7 @@
                                     OnRowCommand="gvUsers_RowCommand"
                                     DataSourceID="UserDataSource">
                                     <Columns>
-                                        <asp:TemplateField HeaderText="ID" SortExpression="EmpId">
+                                        <asp:TemplateField HeaderText="ID" SortExpression="Username">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lblUsername" runat="server" Text='<%# Eval("Username") %>' CommandName="editRole" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                             </ItemTemplate>
@@ -82,6 +82,17 @@
                                                     OnClick="lblReset_Click"
                                                     Text="Reset Password">
                                                 </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Button ID="btnDelete" 
+                                                    runat="server" 
+                                                    Text="Delete"
+                                                    CssClass="btn btn-danger btn-sm"
+                                                    CommandName="deleteUser" 
+                                                    CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:Button>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
@@ -182,12 +193,12 @@
                                 <asp:DropDownList ID="ddlCreateRoles" runat="server" CssClass="form-control"></asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                     runat="server"
-                                    ForeColor="Red"
                                     Display="Dynamic"
+                                    CssClass="label label-danger"
                                     ControlToValidate="ddlCreateRoles"
                                     InitialValue="0"
                                     ValidationGroup="vgAddUser"
-                                    ErrorMessage="*"></asp:RequiredFieldValidator>
+                                    ErrorMessage="Role is required"></asp:RequiredFieldValidator>
                             </div>
 
                             <div class="form-group">
@@ -214,8 +225,6 @@
         </div>
     </div>
 
-
-
     <%--Update Role--%>
     <div id="editRole" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
@@ -224,38 +233,70 @@
                     <ContentTemplate>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Edit Role</h4>
+                            <h4 class="modal-title">Update User</h4>
                         </div>
 
                         <div class="modal-body">
                             <div class="form-group">
                                 <asp:Label ID="lblUserId" runat="server" Visible="false"></asp:Label>
-                                <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
+                                <asp:Label ID="lblUserName" runat="server"></asp:Label>
                             </div>
+
+                            <div class="form-group">
+                                <label for="txtEditFirstName">First Name</label>
+                                <asp:TextBox ID="txtEditFirstName" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                                    runat="server"
+                                    CssClass="label label-danger"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditFirstName"
+                                    ValidationGroup="vgEditUser"                                  
+                                    ErrorMessage="First Name is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditMiddleName">Middle Name</label>
+                                <asp:TextBox ID="txtEditMiddleName" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
+                                    runat="server"
+                                    CssClass="label label-danger"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditMiddleName"
+                                    ValidationGroup="vgEditUser"                                  
+                                    ErrorMessage="Middle Name is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditLastName">Last Name</label>
+                                <asp:TextBox ID="txtEditLastName" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
+                                    runat="server"
+                                    CssClass="label label-danger"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditLastName"
+                                    ValidationGroup="vgEditUser"                                  
+                                    ErrorMessage="Last Name is required"></asp:RequiredFieldValidator>
+                            </div>
+
                             <div class="form-group">
                                 <label for="ddlRoles">Role</label>
                                 <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-control"></asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                     runat="server"
-                                    ForeColor="Red"
+                                    CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="ddlRoles"
                                     InitialValue="0"
-                                    ValidationGroup="gvEditRole"
-                                    ErrorMessage="*"></asp:RequiredFieldValidator>
+                                    ValidationGroup="vgEditUser"
+                                    ErrorMessage="Role is required"></asp:RequiredFieldValidator>
                             </div>
-
-                            <div class="form-group">
-                                <asp:CheckBox ID="chkDelete" runat="server" Text="Remove all access" />
-                            </div>
-
                         </div>
                         <div class="modal-footer">
                             <asp:Button ID="btnUpdate"
                                 runat="server"
                                 CssClass="btn btn-primary"
                                 Text="Update"
-                                ValidationGroup="gvEditRole"
+                                ValidationGroup="vgEditUser"
                                 OnClick="btnUpdate_Click" />
                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
                         </div>
@@ -263,6 +304,38 @@
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="gvUsers" EventName="RowCommand" />
                         <asp:AsyncPostBackTrigger ControlID="btnUpdate" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete User Modal -->
+    <div id="deleteUser" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete User</h4>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Label ID="lblDeleteUserId" runat="server" Visible="false"></asp:Label>
+                            <asp:Label ID="lblDeleteUsername" runat="server" Visible="false"></asp:Label>
+                            <p>Are you sure you want to delete this user?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnConfirmDelete"
+                                runat="server"
+                                CssClass="btn btn-danger"
+                                Text="Delete"
+                                OnClick="btnConfirmDelete_Click" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnConfirmDelete" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>

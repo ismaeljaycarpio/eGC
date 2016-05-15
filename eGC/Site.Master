@@ -114,7 +114,7 @@
                         </LoggedInTemplate>
 
                         <RoleGroups>
-                            <asp:RoleGroup Roles="Admin">
+                            <asp:RoleGroup Roles="Admin-GC">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
                                         <li class="dropdown" runat="server"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File Maintenance<span class="caret"></span></a>
@@ -198,7 +198,7 @@
                                 </ContentTemplate>
                             </asp:RoleGroup>
 
-                            <asp:RoleGroup Roles="CanFO">
+                            <asp:RoleGroup Roles="frontoffice">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
                                         <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>

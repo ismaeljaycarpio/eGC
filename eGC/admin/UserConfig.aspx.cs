@@ -26,8 +26,8 @@ namespace eGC.admin
                              where
                              r.RoleName == "can-create-gc" || 
                              r.RoleName == "can-approve-gc" || 
-                             r.RoleName == "frontoffice" || 
-                             r.RoleName == "Admin"
+                             r.RoleName == "frontoffice" ||
+                             r.RoleName == "Admin-GC"
                              select r).ToList();
 
                 ddlRoles.DataSource = roles;
@@ -62,6 +62,8 @@ namespace eGC.admin
                 LinkButton lnkStatus = (LinkButton)e.Row.FindControl("lblStatus");
                 LinkButton lnkReset = (LinkButton)e.Row.FindControl("lblReset");
                 LinkButton lbtnLockedOut = (LinkButton)e.Row.FindControl("lbtnLockedOut");
+                Button btnDelete = (Button)e.Row.FindControl("btnDelete");
+                string userName = ((LinkButton)e.Row.FindControl("lblUsername") as LinkButton).Text;
 
                 if (lnkStatus.Text == "Active")
                 {
@@ -81,6 +83,12 @@ namespace eGC.admin
                 else
                 {
                     lbtnLockedOut.Attributes.Add("onclick", "return confirm('Do you want to Lock this user ? ');");
+                }
+
+                //cant delete your own account
+                if(userName == Page.User.Identity.Name)
+                {
+                    btnDelete.Visible = false;
                 }
             }
             else if(e.Row.RowType == DataControlRowType.Footer)
@@ -106,22 +114,36 @@ namespace eGC.admin
 
                 
                 //set selected role
-                var ro = (from u in dbUser.Users
+                var ro = (from m in dbUser.MembershipLINQs
+                          join u in dbUser.Users
+                          on m.UserId equals u.UserId
+                          join up in dbUser.UserProfiles
+                          on u.UserId equals up.UserId
+                          join p in dbUser.Positions
+                          on up.PositionId equals p.Id
                           join uir in dbUser.UsersInRoles
-                          on u.UserId equals uir.UserId
+                          on up.UserId equals uir.UserId
                           join r in dbUser.Roles
                           on uir.RoleId equals r.RoleId
                           where
                           u.UserName == lblUserName.Text
-                          select new{
+                          select new
+                          {
+                              FirstName = up.FirstName,
+                              MiddleName = up.MiddleName,
+                              LastName = up.LastName,
                               RoleId = r.RoleId
                           }).ToList();
                 
                 if(ro.Count > 0)
                 {
-                    var userInRole = ro.FirstOrDefault();
+                    var user = ro.FirstOrDefault();
 
-                    ddlRoles.SelectedValue = userInRole.RoleId.ToString();
+                    txtEditFirstName.Text = user.FirstName;
+                    txtEditMiddleName.Text = user.MiddleName;
+                    txtEditLastName.Text = user.LastName;
+                    ddlRoles.SelectedValue = user.RoleId.ToString();
+
                 }
                 else
                 {
@@ -131,6 +153,18 @@ namespace eGC.admin
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
                 sb.Append("$('#editRole').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
+            }
+            else if(e.CommandName.Equals("deleteUser"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                lblDeleteUserId.Text = gvUsers.DataKeys[index].Value.ToString();
+                lblDeleteUsername.Text = (gvUsers.Rows[index].FindControl("lblUsername") as LinkButton).Text;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#deleteUser').modal('show');");
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
@@ -166,30 +200,26 @@ namespace eGC.admin
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            //chk if user is registered already
-            if (Membership.GetUser(lblUserName.Text) != null)
-            {
-                if(chkDelete.Checked == true)
-                {
-                    Membership.DeleteUser(lblUserName.Text, true);
-                }
-                else
-                {
-                    //update roles
-                    Roles.RemoveUserFromRoles(lblUserName.Text, Roles.GetRolesForUser(lblUserName.Text));
+            var user = (from us in dbUser.UserProfiles
+                        where us.UserId == Guid.Parse(lblUserId.Text)
+                        select us).FirstOrDefault();
 
-                    Roles.AddUserToRole(lblUserName.Text, ddlRoles.SelectedItem.Text);
-                }
-            }
-            else
-            {
-                //create user with same password
-                Membership.CreateUser(lblUserName.Text, lblUserName.Text);
-                Roles.AddUserToRole(lblUserName.Text, ddlRoles.SelectedItem.Text);
-            }
+            user.FirstName = txtEditFirstName.Text;
+            user.MiddleName = txtEditMiddleName.Text;
+            user.LastName = txtEditLastName.Text;
 
+            //save to db
+            dbUser.SubmitChanges();
+
+            //update roles
+            Roles.RemoveUserFromRoles(lblUserName.Text, Roles.GetRolesForUser(lblUserName.Text));
+
+            Roles.AddUserToRole(lblUserName.Text, ddlRoles.SelectedItem.Text);
+
+            //re-load gridview
             this.gvUsers.DataBind();
 
+            //close modal
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#editRole').modal('hide');");
@@ -265,6 +295,15 @@ namespace eGC.admin
                      on up.UserId equals uir.UserId
                      join r in dbUser.Roles
                      on uir.RoleId equals r.RoleId
+                     where
+                     (r.RoleName == "can-create-gc" ||
+                             r.RoleName == "can-approve-gc" ||
+                             r.RoleName == "frontoffice" ||
+                             r.RoleName == "Admin-GC") &&
+                     (up.FirstName.Contains(strSearch) ||
+                        up.MiddleName.Contains(strSearch) || 
+                        up.LastName.Contains(strSearch) ||
+                        u.UserName.Contains(strSearch))
                      select new
                      {
                          UserId = m.UserId,
@@ -281,6 +320,8 @@ namespace eGC.admin
 
         protected void openCreateAccount_Click(object sender, EventArgs e)
         {
+            txtCreateUsername.Focus();
+
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#createUser').modal('show');");
@@ -342,10 +383,23 @@ namespace eGC.admin
                 Roles.CreateRole("frontoffice");
             }
 
-            if (!Roles.RoleExists("Admin"))
+            if (!Roles.RoleExists("Admin-GC"))
             {
-                Roles.CreateRole("Admin");
+                Roles.CreateRole("Admin-GC");
             }
+        }
+
+        protected void btnConfirmDelete_Click(object sender, EventArgs e)
+        {
+            Membership.DeleteUser(lblDeleteUsername.Text);
+
+            this.gvUsers.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#deleteUser').modal('hide');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
         }
     }
 }
