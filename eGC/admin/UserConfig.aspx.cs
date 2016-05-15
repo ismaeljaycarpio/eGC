@@ -185,6 +185,15 @@ namespace eGC.admin
                      on up.UserId equals uir.UserId
                      join r in dbUser.Roles
                      on uir.RoleId equals r.RoleId
+                     where
+                     (r.RoleName == "can-create-gc" ||
+                             r.RoleName == "can-approve-gc" ||
+                             r.RoleName == "frontoffice" ||
+                             r.RoleName == "Admin-GC") &&
+                     (up.FirstName.Contains(strSearch) ||
+                        up.MiddleName.Contains(strSearch) ||
+                        up.LastName.Contains(strSearch) ||
+                        u.UserName.Contains(strSearch))
                      select new
                      {
                          UserId = m.UserId,
@@ -195,6 +204,7 @@ namespace eGC.admin
                          IsLockedOut = m.IsLockedOut
                      }).ToList();
 
+            q = q.OrderByDescending(o => o.RoleName).ToList();
             return q.Count;
         }
 
@@ -320,8 +330,6 @@ namespace eGC.admin
 
         protected void openCreateAccount_Click(object sender, EventArgs e)
         {
-            txtCreateUsername.Focus();
-
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#createUser').modal('show');");
