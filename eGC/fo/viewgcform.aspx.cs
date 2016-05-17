@@ -16,14 +16,15 @@ namespace eGC.fo
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {
-                string gcId = Request.QueryString["gcId"];
-                if (gcId == String.Empty)
+            {            
+                if (Request.QueryString["gcId"] == null)
                 {
                     Response.Redirect("~/fo/frontoffice.aspx");
                 }
 
                 //chk gc
+                string gcId = Request.QueryString["gcId"];
+
                 var gc = (from g in db.GCTransactions
                           where g.GCNumber == gcId
                           select g).ToList();

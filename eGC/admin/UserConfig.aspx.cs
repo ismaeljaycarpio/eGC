@@ -311,7 +311,7 @@ namespace eGC.admin
                              r.RoleName == "frontoffice" ||
                              r.RoleName == "Admin-GC") &&
                      (up.FirstName.Contains(strSearch) ||
-                        up.MiddleName.Contains(strSearch) || 
+                        up.MiddleName.Contains(strSearch) ||
                         up.LastName.Contains(strSearch) ||
                         u.UserName.Contains(strSearch))
                      select new
@@ -323,8 +323,8 @@ namespace eGC.admin
                          IsApproved = m.IsApproved,
                          IsLockedOut = m.IsLockedOut
                      }).ToList();
-
             q = q.OrderByDescending(o => o.RoleName).ToList();
+
             e.Result = q;
         }
 
@@ -356,6 +356,7 @@ namespace eGC.admin
                 user.FirstName = txtCreateFirstName.Text;
                 user.MiddleName = txtCreateMiddleName.Text;
                 user.LastName = txtCreateLastName.Text;
+                user.PositionId = 1;
                 dbUser.UserProfiles.InsertOnSubmit(user);
                 dbUser.SubmitChanges();
 

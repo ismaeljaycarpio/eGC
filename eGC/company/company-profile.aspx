@@ -93,7 +93,6 @@
                                 </asp:GridView>
                                 <asp:LinkButton ID="lbtnCreateCompany"
                                     runat="server"
-                                    CssClass="btn btn-default"
                                     PostBackUrl="~/company/add-company.aspx">Create Company Profile</asp:LinkButton>
 
                                 <div class="pull-right">
@@ -101,7 +100,7 @@
                                         runat="server"
                                         Text="Export to Excel"
                                         OnClick="btnExport_Click"
-                                        CssClass="btn btn-default" />
+                                        CssClass="btn btn-default btn-sm" />
                                 </div>
                             </ContentTemplate>
                             <Triggers>

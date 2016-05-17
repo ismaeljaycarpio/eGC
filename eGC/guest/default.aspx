@@ -96,7 +96,9 @@
                                     </Columns>
                                     <PagerStyle CssClass="pagination-ys" />
                                 </asp:GridView>
-                                <asp:LinkButton ID="lbtnGuestProfile" runat="server" CssClass="btn btn-default" PostBackUrl="~/guest/createguest.aspx">Create Invidual Profile</asp:LinkButton>
+                                <asp:LinkButton ID="lbtnGuestProfile" 
+                                    runat="server" 
+                                    PostBackUrl="~/guest/createguest.aspx">Create Invidual Profile</asp:LinkButton>
                                 <div class="pull-right">
                                     <asp:Button ID="btnExport"
                                         runat="server"

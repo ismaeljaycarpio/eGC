@@ -35,43 +35,30 @@ namespace eGC.fo
                 int index = Convert.ToInt32(e.CommandArgument);
                 string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
                 
-                //load guest profile
-                var gu = (from g in db.Guests
-                         join tran in db.GCTransactions
-                         on g.Id equals tran.GuestId
-                         where tran.Id == Convert.ToInt32(rowId)
-                         select new
-                         {
-                             FullName = g.LastName + ", " + g.FirstName + " " + g.MiddleName,
-                             GuestId = g.GuestId,
-                             StatusGC = tran.StatusGC,
-                             ExpirationDate = String.Format("{0:MM/dd/yyyy}", tran.ExpiryDate)
-                         }).FirstOrDefault();
+                //txtName.Text = gu.FullName;
+                //txtGuestId.Text = gu.GuestId;
+                //txtStatus.Text = gu.StatusGC;
+                //txtGCExpirationDate.Text = gu.ExpirationDate;
 
-                txtName.Text = gu.FullName;
-                txtGuestId.Text = gu.GuestId;
-                txtStatus.Text = gu.StatusGC;
-                txtGCExpirationDate.Text = gu.ExpirationDate;
+                ////load pics
+                ////load guest
+                //if (!File.Exists(Server.MapPath("~/ProfilePic/") + gu.GuestId + "_Profile.png"))
+                //{
+                //    imgProfile.ImageUrl = "~/ProfilePic/noImage.png";
+                //}
+                //else
+                //{
+                //    imgProfile.ImageUrl = "~/ProfilePic/" + gu.GuestId + "_Profile.png";
+                //}
 
-                //load pics
-                //load guest
-                if (!File.Exists(Server.MapPath("~/ProfilePic/") + gu.GuestId + "_Profile.png"))
-                {
-                    imgProfile.ImageUrl = "~/ProfilePic/noImage.png";
-                }
-                else
-                {
-                    imgProfile.ImageUrl = "~/ProfilePic/" + gu.GuestId + "_Profile.png";
-                }
-
-                if (!File.Exists(Server.MapPath("~/IDPic/") + gu.GuestId + "_IDPic.png"))
-                {
-                    IDPic.ImageUrl = "~/IDPic/noImage.png";
-                }
-                else
-                {
-                    IDPic.ImageUrl = "~/IDPic/" + gu.GuestId + "_IDPic.png";
-                }
+                //if (!File.Exists(Server.MapPath("~/IDPic/") + gu.GuestId + "_IDPic.png"))
+                //{
+                //    IDPic.ImageUrl = "~/IDPic/noImage.png";
+                //}
+                //else
+                //{
+                //    IDPic.ImageUrl = "~/IDPic/" + gu.GuestId + "_IDPic.png";
+                //}
             }
             else if (e.CommandName.Equals("redirectGC"))
             {

@@ -8,49 +8,8 @@
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h5>Guest/Company Profile</h5>
+                        <h5>GC</h5>
                     </div>
-
-                    <div class="panel-body">
-                        <asp:UpdatePanel ID="gProfile" runat="server">
-                            <ContentTemplate>
-                                <div class="col-sm-5">
-                                    <asp:Image ID="imgProfile"
-                                        runat="server"
-                                        AlternateText="Profile Image"
-                                        Height="180"
-                                        Width="200" />
-                                    <asp:Image ID="IDPic"
-                                        runat="server"
-                                        AlternateText="ID Image"
-                                        Height="180"
-                                        Width="200" />
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <label for="txtName">Name</label>
-                                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                                </div>
-                                <div class="col-xs-4">
-                                    <label for="txtGuestId">Guest/Company ID</label>
-                                    <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                                </div>
-                                <div class="col-xs-3">
-                                    <label for="txtStatus">GC Status</label>
-                                    <asp:TextBox ID="txtStatus" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                                </div>
-                                <div class="col-xs-3">
-                                    <label for="txtGCExpirationDate">GC Expiration Date</label>
-                                    <asp:TextBox ID="txtGCExpirationDate" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                                </div>
-                            </ContentTemplate>
-                            <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="gvGC" EventName="RowCommand" />
-                            </Triggers>
-                        </asp:UpdatePanel>
-                    </div>
-
-                    <hr />
 
                     <div class="panel-body">
                         <asp:UpdatePanel ID="upApproval" runat="server">

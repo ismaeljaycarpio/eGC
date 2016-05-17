@@ -1490,7 +1490,7 @@ namespace eGC
 		
 		private EntitySet<UsersInRole> _UsersInRoles;
 		
-		private EntityRef<UserProfile> _UserProfile;
+		private EntitySet<UserProfile> _UserProfiles;
 		
 		private EntityRef<Application> _Application;
 		
@@ -1515,7 +1515,7 @@ namespace eGC
 			this._Membership = default(EntityRef<MembershipLINQ>);
 			this._Profile = default(EntityRef<Profile>);
 			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
-			this._UserProfile = default(EntityRef<UserProfile>);
+			this._UserProfiles = new EntitySet<UserProfile>(new Action<UserProfile>(this.attach_UserProfiles), new Action<UserProfile>(this.detach_UserProfiles));
 			this._Application = default(EntityRef<Application>);
 			OnCreated();
 		}
@@ -1695,32 +1695,16 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserProfile", Storage="_UserProfile", ThisKey="UserId", OtherKey="UserId", IsUnique=true, IsForeignKey=false)]
-		public UserProfile UserProfile
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserProfile", Storage="_UserProfiles", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<UserProfile> UserProfiles
 		{
 			get
 			{
-				return this._UserProfile.Entity;
+				return this._UserProfiles;
 			}
 			set
 			{
-				UserProfile previousValue = this._UserProfile.Entity;
-				if (((previousValue != value) 
-							|| (this._UserProfile.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserProfile.Entity = null;
-						previousValue.User = null;
-					}
-					this._UserProfile.Entity = value;
-					if ((value != null))
-					{
-						value.User = this;
-					}
-					this.SendPropertyChanged("UserProfile");
-				}
+				this._UserProfiles.Assign(value);
 			}
 		}
 		
@@ -1785,6 +1769,18 @@ namespace eGC
 		}
 		
 		private void detach_UsersInRoles(UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_UserProfiles(UserProfile entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_UserProfiles(UserProfile entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
@@ -2079,7 +2075,7 @@ namespace eGC
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Guid _UserId;
+		private System.Nullable<System.Guid> _UserId;
 		
 		private string _FirstName;
 		
@@ -2089,6 +2085,8 @@ namespace eGC
 		
 		private System.Nullable<int> _PositionId;
 		
+		private int _Id;
+		
 		private EntityRef<Position> _Position;
 		
 		private EntityRef<User> _User;
@@ -2097,7 +2095,7 @@ namespace eGC
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
     partial void OnUserIdChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
@@ -2107,6 +2105,8 @@ namespace eGC
     partial void OnLastNameChanged();
     partial void OnPositionIdChanging(System.Nullable<int> value);
     partial void OnPositionIdChanged();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
     #endregion
 		
 		public UserProfile()
@@ -2116,8 +2116,8 @@ namespace eGC
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid UserId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Nullable<System.Guid> UserId
 		{
 			get
 			{
@@ -2200,7 +2200,7 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PositionId", DbType="Int", IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PositionId", DbType="Int")]
 		public System.Nullable<int> PositionId
 		{
 			get
@@ -2224,7 +2224,27 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Position_UserProfile", Storage="_Position", ThisKey="PositionId", OtherKey="Id", IsForeignKey=true, DeleteRule="SET DEFAULT")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Position_UserProfile", Storage="_Position", ThisKey="PositionId", OtherKey="Id", IsForeignKey=true)]
 		public Position Position
 		{
 			get
@@ -2258,7 +2278,7 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserProfile", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserProfile", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -2275,17 +2295,17 @@ namespace eGC
 					if ((previousValue != null))
 					{
 						this._User.Entity = null;
-						previousValue.UserProfile = null;
+						previousValue.UserProfiles.Remove(this);
 					}
 					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.UserProfile = this;
+						value.UserProfiles.Add(this);
 						this._UserId = value.UserId;
 					}
 					else
 					{
-						this._UserId = default(System.Guid);
+						this._UserId = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("User");
 				}

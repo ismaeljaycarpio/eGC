@@ -116,43 +116,6 @@ namespace eGC.gcapproval
             }
         }
 
-        protected void bindGridview()
-        {
-            string strSearch = txtSearch.Text;
-
-            var q = from guest in db.Guests
-                    join gctran in db.GCTransactions
-                    on guest.Id equals gctran.GuestId
-                    where
-                    (
-                    guest.GuestId.Contains(strSearch) ||
-                    guest.LastName.Contains(strSearch) ||
-                    guest.FirstName.Contains(strSearch) ||
-                    guest.MiddleName.Contains(strSearch) ||
-                    guest.CompanyName.Contains(strSearch) ||
-                    gctran.ApprovalStatus.Contains(strSearch) ||
-                    gctran.GCNumber.Contains(strSearch)
-                    ) &&
-                    (gctran.ApprovalStatus == "Pending") &&
-                    (gctran.IsArchive == false)
-                    select new
-                    {
-                        Id = gctran.Id,
-                        GuestId = guest.GuestId,
-                        FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                        CompanyName = guest.CompanyName,
-                        Number = guest.ContactNumber,
-                        GCNumber = gctran.GCNumber,
-                        Status = gctran.ApprovalStatus,
-                        Type = gctran.Type
-                    };
-
-            gvGC.DataSource = q.ToList();
-            gvGC.DataBind();
-
-            txtSearch.Focus();
-        }
-
         protected void LinqDataSource1_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             string strSearch = txtSearch.Text;
@@ -222,7 +185,8 @@ namespace eGC.gcapproval
                              Status = gctran.StatusGC,
                              Approval = gctran.ApprovalStatus,
                              CancellationReason = gctran.CancellationReason,
-                             CancelledDate = gctran.CancelledDate
+                             CancelledDate = gctran.CancelledDate,
+                             Type = gctran.Type
                          }).ToList();
 
                 e.Result = q;
