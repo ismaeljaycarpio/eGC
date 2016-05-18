@@ -48,6 +48,9 @@ namespace eGC
     partial void InsertStatusSite(StatusSite instance);
     partial void UpdateStatusSite(StatusSite instance);
     partial void DeleteStatusSite(StatusSite instance);
+    partial void InsertDiningType(DiningType instance);
+    partial void UpdateDiningType(DiningType instance);
+    partial void DeleteDiningType(DiningType instance);
     partial void InsertGCTransaction(GCTransaction instance);
     partial void UpdateGCTransaction(GCTransaction instance);
     partial void DeleteGCTransaction(GCTransaction instance);
@@ -128,6 +131,14 @@ namespace eGC
 			get
 			{
 				return this.GetTable<StatusSite>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DiningType> DiningTypes
+		{
+			get
+			{
+				return this.GetTable<DiningType>();
 			}
 		}
 		
@@ -1583,6 +1594,116 @@ namespace eGC
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DiningType")]
+	public partial class DiningType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _DiningType1;
+		
+		private System.Nullable<bool> _Active;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDiningType1Changing(string value);
+    partial void OnDiningType1Changed();
+    partial void OnActiveChanging(System.Nullable<bool> value);
+    partial void OnActiveChanged();
+    #endregion
+		
+		public DiningType()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="DiningType", Storage="_DiningType1", DbType="VarChar(MAX)")]
+		public string DiningType1
+		{
+			get
+			{
+				return this._DiningType1;
+			}
+			set
+			{
+				if ((this._DiningType1 != value))
+				{
+					this.OnDiningType1Changing(value);
+					this.SendPropertyChanging();
+					this._DiningType1 = value;
+					this.SendPropertyChanged("DiningType1");
+					this.OnDiningType1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Active", DbType="Bit")]
+		public System.Nullable<bool> Active
+		{
+			get
+			{
+				return this._Active;
+			}
+			set
+			{
+				if ((this._Active != value))
+				{
+					this.OnActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Active = value;
+					this.SendPropertyChanged("Active");
+					this.OnActiveChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCTransaction")]
 	public partial class GCTransaction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1595,27 +1716,43 @@ namespace eGC
 		
 		private string _GCNumber;
 		
+		private System.Nullable<System.DateTime> _DateIssued;
+		
+		private string _GCType;
+		
+		private System.Nullable<System.DateTime> _ExpirationDate;
+		
+		private string _Reason;
+		
+		private string _RequestedBy;
+		
 		private string _RecommendingApproval;
+		
+		private string _StatusGC;
 		
 		private System.Nullable<System.Guid> _ApprovedBy;
 		
-		private string _AccountNo;
-		
-		private string _Remarks;
-		
-		private string _Type;
-		
 		private string _ApprovalStatus;
-		
-		private string _StatusGC;
 		
 		private string _CancellationReason;
 		
 		private System.Nullable<System.DateTime> _CancelledDate;
 		
-		private System.Nullable<System.DateTime> _ExpiryDate;
-		
 		private System.Nullable<bool> _IsArchive;
+		
+		private System.Nullable<int> _RoomId;
+		
+		private System.Nullable<int> _DiningId;
+		
+		private System.Nullable<int> _DiningTypeId;
+		
+		private System.Nullable<bool> _WithBreakfast;
+		
+		private System.Nullable<int> _HeadCount;
+		
+		private System.Nullable<System.DateTime> _CheckinDate;
+		
+		private System.Nullable<System.DateTime> _CheckoutDate;
 		
 		private EntitySet<GCRoom> _GCRooms;
 		
@@ -1631,28 +1768,44 @@ namespace eGC
     partial void OnGuestIdChanged();
     partial void OnGCNumberChanging(string value);
     partial void OnGCNumberChanged();
+    partial void OnDateIssuedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateIssuedChanged();
+    partial void OnGCTypeChanging(string value);
+    partial void OnGCTypeChanged();
+    partial void OnExpirationDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpirationDateChanged();
+    partial void OnReasonChanging(string value);
+    partial void OnReasonChanged();
+    partial void OnRequestedByChanging(string value);
+    partial void OnRequestedByChanged();
     partial void OnRecommendingApprovalChanging(string value);
     partial void OnRecommendingApprovalChanged();
-    partial void OnApprovedByChanging(System.Nullable<System.Guid> value);
-    partial void OnApprovedByChanged();
-    partial void OnAccountNoChanging(string value);
-    partial void OnAccountNoChanged();
-    partial void OnRemarksChanging(string value);
-    partial void OnRemarksChanged();
-    partial void OnTypeChanging(string value);
-    partial void OnTypeChanged();
-    partial void OnApprovalStatusChanging(string value);
-    partial void OnApprovalStatusChanged();
     partial void OnStatusGCChanging(string value);
     partial void OnStatusGCChanged();
+    partial void OnApprovedByChanging(System.Nullable<System.Guid> value);
+    partial void OnApprovedByChanged();
+    partial void OnApprovalStatusChanging(string value);
+    partial void OnApprovalStatusChanged();
     partial void OnCancellationReasonChanging(string value);
     partial void OnCancellationReasonChanged();
     partial void OnCancelledDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCancelledDateChanged();
-    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnExpiryDateChanged();
     partial void OnIsArchiveChanging(System.Nullable<bool> value);
     partial void OnIsArchiveChanged();
+    partial void OnRoomIdChanging(System.Nullable<int> value);
+    partial void OnRoomIdChanged();
+    partial void OnDiningIdChanging(System.Nullable<int> value);
+    partial void OnDiningIdChanged();
+    partial void OnDiningTypeIdChanging(System.Nullable<int> value);
+    partial void OnDiningTypeIdChanged();
+    partial void OnWithBreakfastChanging(System.Nullable<bool> value);
+    partial void OnWithBreakfastChanged();
+    partial void OnHeadCountChanging(System.Nullable<int> value);
+    partial void OnHeadCountChanged();
+    partial void OnCheckinDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckinDateChanged();
+    partial void OnCheckoutDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckoutDateChanged();
     #endregion
 		
 		public GCTransaction()
@@ -1726,6 +1879,106 @@ namespace eGC
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateIssued", DbType="Date")]
+		public System.Nullable<System.DateTime> DateIssued
+		{
+			get
+			{
+				return this._DateIssued;
+			}
+			set
+			{
+				if ((this._DateIssued != value))
+				{
+					this.OnDateIssuedChanging(value);
+					this.SendPropertyChanging();
+					this._DateIssued = value;
+					this.SendPropertyChanged("DateIssued");
+					this.OnDateIssuedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GCType", DbType="VarChar(50)")]
+		public string GCType
+		{
+			get
+			{
+				return this._GCType;
+			}
+			set
+			{
+				if ((this._GCType != value))
+				{
+					this.OnGCTypeChanging(value);
+					this.SendPropertyChanging();
+					this._GCType = value;
+					this.SendPropertyChanged("GCType");
+					this.OnGCTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpirationDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ExpirationDate
+		{
+			get
+			{
+				return this._ExpirationDate;
+			}
+			set
+			{
+				if ((this._ExpirationDate != value))
+				{
+					this.OnExpirationDateChanging(value);
+					this.SendPropertyChanging();
+					this._ExpirationDate = value;
+					this.SendPropertyChanged("ExpirationDate");
+					this.OnExpirationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reason", DbType="VarChar(MAX)")]
+		public string Reason
+		{
+			get
+			{
+				return this._Reason;
+			}
+			set
+			{
+				if ((this._Reason != value))
+				{
+					this.OnReasonChanging(value);
+					this.SendPropertyChanging();
+					this._Reason = value;
+					this.SendPropertyChanged("Reason");
+					this.OnReasonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestedBy", DbType="VarChar(MAX)")]
+		public string RequestedBy
+		{
+			get
+			{
+				return this._RequestedBy;
+			}
+			set
+			{
+				if ((this._RequestedBy != value))
+				{
+					this.OnRequestedByChanging(value);
+					this.SendPropertyChanging();
+					this._RequestedBy = value;
+					this.SendPropertyChanged("RequestedBy");
+					this.OnRequestedByChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecommendingApproval", DbType="VarChar(MAX)")]
 		public string RecommendingApproval
 		{
@@ -1742,6 +1995,26 @@ namespace eGC
 					this._RecommendingApproval = value;
 					this.SendPropertyChanged("RecommendingApproval");
 					this.OnRecommendingApprovalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusGC", DbType="VarChar(50)")]
+		public string StatusGC
+		{
+			get
+			{
+				return this._StatusGC;
+			}
+			set
+			{
+				if ((this._StatusGC != value))
+				{
+					this.OnStatusGCChanging(value);
+					this.SendPropertyChanging();
+					this._StatusGC = value;
+					this.SendPropertyChanged("StatusGC");
+					this.OnStatusGCChanged();
 				}
 			}
 		}
@@ -1766,66 +2039,6 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)")]
-		public string AccountNo
-		{
-			get
-			{
-				return this._AccountNo;
-			}
-			set
-			{
-				if ((this._AccountNo != value))
-				{
-					this.OnAccountNoChanging(value);
-					this.SendPropertyChanging();
-					this._AccountNo = value;
-					this.SendPropertyChanged("AccountNo");
-					this.OnAccountNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="VarChar(MAX)")]
-		public string Remarks
-		{
-			get
-			{
-				return this._Remarks;
-			}
-			set
-			{
-				if ((this._Remarks != value))
-				{
-					this.OnRemarksChanging(value);
-					this.SendPropertyChanging();
-					this._Remarks = value;
-					this.SendPropertyChanged("Remarks");
-					this.OnRemarksChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(50)")]
-		public string Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50)")]
 		public string ApprovalStatus
 		{
@@ -1842,26 +2055,6 @@ namespace eGC
 					this._ApprovalStatus = value;
 					this.SendPropertyChanged("ApprovalStatus");
 					this.OnApprovalStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusGC", DbType="VarChar(50)")]
-		public string StatusGC
-		{
-			get
-			{
-				return this._StatusGC;
-			}
-			set
-			{
-				if ((this._StatusGC != value))
-				{
-					this.OnStatusGCChanging(value);
-					this.SendPropertyChanging();
-					this._StatusGC = value;
-					this.SendPropertyChanged("StatusGC");
-					this.OnStatusGCChanged();
 				}
 			}
 		}
@@ -1906,26 +2099,6 @@ namespace eGC
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiryDate", DbType="Date")]
-		public System.Nullable<System.DateTime> ExpiryDate
-		{
-			get
-			{
-				return this._ExpiryDate;
-			}
-			set
-			{
-				if ((this._ExpiryDate != value))
-				{
-					this.OnExpiryDateChanging(value);
-					this.SendPropertyChanging();
-					this._ExpiryDate = value;
-					this.SendPropertyChanged("ExpiryDate");
-					this.OnExpiryDateChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsArchive", DbType="Bit")]
 		public System.Nullable<bool> IsArchive
 		{
@@ -1942,6 +2115,146 @@ namespace eGC
 					this._IsArchive = value;
 					this.SendPropertyChanged("IsArchive");
 					this.OnIsArchiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int")]
+		public System.Nullable<int> RoomId
+		{
+			get
+			{
+				return this._RoomId;
+			}
+			set
+			{
+				if ((this._RoomId != value))
+				{
+					this.OnRoomIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoomId = value;
+					this.SendPropertyChanged("RoomId");
+					this.OnRoomIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiningId", DbType="Int")]
+		public System.Nullable<int> DiningId
+		{
+			get
+			{
+				return this._DiningId;
+			}
+			set
+			{
+				if ((this._DiningId != value))
+				{
+					this.OnDiningIdChanging(value);
+					this.SendPropertyChanging();
+					this._DiningId = value;
+					this.SendPropertyChanged("DiningId");
+					this.OnDiningIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiningTypeId", DbType="Int")]
+		public System.Nullable<int> DiningTypeId
+		{
+			get
+			{
+				return this._DiningTypeId;
+			}
+			set
+			{
+				if ((this._DiningTypeId != value))
+				{
+					this.OnDiningTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._DiningTypeId = value;
+					this.SendPropertyChanged("DiningTypeId");
+					this.OnDiningTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithBreakfast", DbType="Bit")]
+		public System.Nullable<bool> WithBreakfast
+		{
+			get
+			{
+				return this._WithBreakfast;
+			}
+			set
+			{
+				if ((this._WithBreakfast != value))
+				{
+					this.OnWithBreakfastChanging(value);
+					this.SendPropertyChanging();
+					this._WithBreakfast = value;
+					this.SendPropertyChanged("WithBreakfast");
+					this.OnWithBreakfastChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HeadCount", DbType="Int")]
+		public System.Nullable<int> HeadCount
+		{
+			get
+			{
+				return this._HeadCount;
+			}
+			set
+			{
+				if ((this._HeadCount != value))
+				{
+					this.OnHeadCountChanging(value);
+					this.SendPropertyChanging();
+					this._HeadCount = value;
+					this.SendPropertyChanged("HeadCount");
+					this.OnHeadCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckinDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CheckinDate
+		{
+			get
+			{
+				return this._CheckinDate;
+			}
+			set
+			{
+				if ((this._CheckinDate != value))
+				{
+					this.OnCheckinDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckinDate = value;
+					this.SendPropertyChanged("CheckinDate");
+					this.OnCheckinDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckoutDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CheckoutDate
+		{
+			get
+			{
+				return this._CheckoutDate;
+			}
+			set
+			{
+				if ((this._CheckoutDate != value))
+				{
+					this.OnCheckoutDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckoutDate = value;
+					this.SendPropertyChanged("CheckoutDate");
+					this.OnCheckoutDateChanged();
 				}
 			}
 		}

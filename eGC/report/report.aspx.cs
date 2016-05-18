@@ -51,7 +51,7 @@ namespace eGC.report
                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
-                        ExpiryDate = gctran.ExpiryDate,
+                        //ExpiryDate = gctran.ExpiryDate,
                         Status = gctran.StatusGC,
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
@@ -62,7 +62,7 @@ namespace eGC.report
             //chk dropdown
             if (ddlCompanyName.SelectedValue != "0")
             {
-                q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue)).ToList();
+                //q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue)).ToList();
             }
 
             DataTable dt = new DataTable();
@@ -141,7 +141,7 @@ namespace eGC.report
                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
-                        ExpiryDate = gctran.ExpiryDate,
+                        //ExpiryDate = gctran.ExpiryDate,
                         Status = gctran.StatusGC,
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
@@ -152,7 +152,7 @@ namespace eGC.report
             //chk dropdown
             if(ddlCompanyName.SelectedValue != "0")
             {
-                q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue));
+                //q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue));
             }
 
             e.Result = q;

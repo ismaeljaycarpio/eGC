@@ -44,10 +44,10 @@ namespace eGC.tran
                     txtGCNumber.Text = tGC.GCNumber;
                     hfGCNumber.Value = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    txtAccountNo.Text = tGC.AccountNo;
-                    txtRemarks.Text = tGC.Remarks;
-                    ddlGCType.SelectedValue = tGC.Type;
-                    txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
+                    //txtAccountNo.Text = tGC.AccountNo;
+                    //txtRemarks.Text = tGC.Remarks;
+                    ddlGCType.SelectedValue = tGC.GCType;
+                    txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpirationDate);
 
                     //chk approver
                     if(tGC.ApprovedBy != null)
@@ -67,7 +67,7 @@ namespace eGC.tran
                     }
 
                     //chk gc type
-                    if(tGC.Type == "Representation")
+                    if(tGC.GCType == "Representation")
                     {
                         txtExpirationDate.Enabled = true;
                     }
@@ -237,17 +237,17 @@ namespace eGC.tran
 
                     tran.GCNumber = txtGCNumber.Text;
                     tran.RecommendingApproval = txtRecommendingApproval.Text;
-                    tran.AccountNo = txtAccountNo.Text;
-                    tran.Remarks = txtRemarks.Text;
-                    tran.Type = ddlGCType.SelectedValue;
+                    //tran.AccountNo = txtAccountNo.Text;
+                    //tran.Remarks = txtRemarks.Text;
+                    tran.GCType = ddlGCType.SelectedValue;
 
                     if (txtExpirationDate.Text != String.Empty)
                     {
-                        tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                        tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
                     }
                     else
                     {
-                        tran.ExpiryDate = null;
+                        tran.ExpirationDate = null;
                     }
 
                     db.SubmitChanges();
@@ -263,17 +263,17 @@ namespace eGC.tran
 
                 //tran.GCNumber = txtGCNumber.Text;
                 tran.RecommendingApproval = txtRecommendingApproval.Text;
-                tran.AccountNo = txtAccountNo.Text;
-                tran.Remarks = txtRemarks.Text;
-                tran.Type = ddlGCType.SelectedValue;
+                //tran.AccountNo = txtAccountNo.Text;
+                //tran.Remarks = txtRemarks.Text;
+                tran.GCType = ddlGCType.SelectedValue;
 
                 if (txtExpirationDate.Text != String.Empty)
                 {
-                    tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                    tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
                 }
                 else
                 {
-                    tran.ExpiryDate = null;
+                    tran.ExpirationDate = null;
                 }
 
                 db.SubmitChanges();

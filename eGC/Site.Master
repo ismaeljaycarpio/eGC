@@ -123,6 +123,7 @@
                                                 <li><a runat="server" href="~/guest/default.aspx">Individual</a></li>
                                                 <li><a runat="server" href="~/room/default.aspx">Room</a></li>
                                                 <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
+                                                <li><a runat="server" href="~/room/dining-type.aspx">Dining Type</a></li>
                                             </ul>
                                         </li>
                                         <li><a runat="server" href="~/gcapproval/default.aspx">Approval</a></li>
@@ -165,6 +166,7 @@
                                                    { %>
                                                 <li><a runat="server" href="~/room/default.aspx">Room</a></li>
                                                 <li><a runat="server" href="~/room/dining.aspx">Dining</a></li>
+                                                <li><a runat="server" href="~/room/dining-type.aspx">Dining Type</a></li>
                                                 <%} %>
                                             </ul>
                                         </li>

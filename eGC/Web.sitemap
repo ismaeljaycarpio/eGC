@@ -28,6 +28,9 @@
       <siteMapNode url="~/room/dining.aspx" title="Dining"  description="">
       </siteMapNode>
 
+      <siteMapNode url="~/room/dining-type.aspx" title="Dining Type"  description="">
+      </siteMapNode>
+      
       <siteMapNode url="~/gcapproval/default.aspx" title="Approval"  description="">
         <siteMapNode url="~/tran/editgcform.aspx" title="Update GC"></siteMapNode>
       </siteMapNode>

@@ -195,15 +195,15 @@ namespace eGC.tran
                 tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
                 tran.GCNumber = txtGCNumber.Text;
                 tran.RecommendingApproval = txtRecommendingApproval.Text;
-                tran.AccountNo = txtAccountNo.Text;
-                tran.Remarks = txtRemarks.Text;
-                tran.Type = ddlGCType.SelectedValue;
+                //tran.AccountNo = txtAccountNo.Text;
+                //tran.Remarks = txtRemarks.Text;
+                tran.GCType = ddlGCType.SelectedValue;
                 tran.ApprovalStatus = "Pending";
                 tran.StatusGC = "Waiting";
 
                 if (txtExpirationDate.Text != String.Empty)
                 {
-                    tran.ExpiryDate = Convert.ToDateTime(txtExpirationDate.Text);
+                    tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
                 }
                 tran.IsArchive = false;
 

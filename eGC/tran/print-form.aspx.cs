@@ -95,11 +95,11 @@ namespace eGC.tran
                            ContactNo = guest.ContactNumber,
                            Email = guest.Email,
                            GCNumber = gctran.GCNumber,
-                           ExpirationDate = gctran.ExpiryDate,
-                           Reason = gctran.Type,
-                           AccountNo = gctran.AccountNo,
+                           ExpirationDate = gctran.ExpirationDate,
+                           Reason = gctran.GCType,
+                           //AccountNo = gctran.AccountNo,
                            RecommendingApproval = gctran.RecommendingApproval,
-                           Remarks = gctran.Remarks,
+                           //Remarks = gctran.Remarks,
                            DateCancelled = gctran.CancelledDate,
                            ReasonForCancellation = gctran.CancellationReason,
                            GCStatus = gctran.StatusGC,
@@ -147,9 +147,9 @@ namespace eGC.tran
             param[5] = new ReportParameter("GCNumber", tran.GCNumber);
             param[6] = new ReportParameter("ExpirationDate", expirationDate);
             param[7] = new ReportParameter("Reason", tran.Reason);
-            param[8] = new ReportParameter("AccountNo", tran.AccountNo);
+            //param[8] = new ReportParameter("AccountNo", tran.AccountNo);
             param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
-            param[10] = new ReportParameter("Remarks", tran.Remarks);
+            //param[10] = new ReportParameter("Remarks", tran.Remarks);
             param[11] = new ReportParameter("DateCancelled", dateCancelled);
             param[12] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
             param[13] = new ReportParameter("GCStatus", tran.GCStatus);

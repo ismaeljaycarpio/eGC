@@ -145,12 +145,12 @@ namespace eGC.gcapproval
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
-                             ExpiryDate = gctran.ExpiryDate,
+                             ExpiryDate = gctran.ExpirationDate,
                              Status = gctran.StatusGC,
                              Approval = gctran.ApprovalStatus,
                              CancellationReason = gctran.CancellationReason,
                              CancelledDate = gctran.CancelledDate,
-                             Type = gctran.Type
+                             Type = gctran.GCType
                          }).ToList();
 
                 e.Result = q;
@@ -181,12 +181,12 @@ namespace eGC.gcapproval
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
-                             ExpiryDate = gctran.ExpiryDate,
+                             ExpiryDate = gctran.ExpirationDate,
                              Status = gctran.StatusGC,
                              Approval = gctran.ApprovalStatus,
                              CancellationReason = gctran.CancellationReason,
                              CancelledDate = gctran.CancelledDate,
-                             Type = gctran.Type
+                             Type = gctran.GCType
                          }).ToList();
 
                 e.Result = q;
@@ -261,7 +261,7 @@ namespace eGC.gcapproval
         {
             var trans = (from tran in db.GCTransactions
                          where 
-                         (DateTime.Today >= tran.ExpiryDate) &&
+                         (DateTime.Today >= tran.ExpirationDate) &&
                          (tran.StatusGC == "Waiting")
                          select tran).ToList();
 

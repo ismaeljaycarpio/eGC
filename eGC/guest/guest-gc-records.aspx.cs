@@ -69,12 +69,12 @@ namespace eGC.guest
                          CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                          Number = guest.ContactNumber,
                          GCNumber = gctran.GCNumber,
-                         ExpiryDate = gctran.ExpiryDate,
+                         ExpiryDate = gctran.ExpirationDate,
                          Status = gctran.StatusGC,
                          Approval = gctran.ApprovalStatus,
                          CancellationReason = gctran.CancellationReason,
                          CancelledDate = gctran.CancelledDate,
-                         Type = gctran.Type
+                         Type = gctran.GCType
                      }).ToList();
 
 
@@ -135,12 +135,12 @@ namespace eGC.guest
                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
-                        ExpiryDate = gctran.ExpiryDate,
+                        ExpiryDate = gctran.ExpirationDate,
                         Status = gctran.StatusGC,
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
                         CancelledDate = gctran.CancelledDate,
-                        Type = gctran.Type
+                        Type = gctran.GCType
                     };
 
 

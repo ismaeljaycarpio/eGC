@@ -44,10 +44,10 @@ namespace eGC.fo
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    txtAccountNo.Text = tGC.AccountNo;
-                    txtRemarks.Text = tGC.Remarks;
-                    ddlGCType.SelectedValue = tGC.Type;
-                    txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpiryDate);
+                    //txtAccountNo.Text = tGC.AccountNo;
+                    //txtRemarks.Text = tGC.Remarks;
+                    ddlGCType.SelectedValue = tGC.GCType;
+                    txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpirationDate);
                     lblCurrentGCStatus.Text = tGC.StatusGC;
 
                     //chk approver
@@ -114,9 +114,9 @@ namespace eGC.fo
             tran.GCNumber = txtGCNumber.Text;
             tran.RecommendingApproval = txtRecommendingApproval.Text;
             tran.ApprovedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
-            tran.AccountNo = txtAccountNo.Text;
-            tran.Remarks = txtRemarks.Text;
-            tran.Type = ddlGCType.SelectedValue;
+            //tran.AccountNo = txtAccountNo.Text;
+            //tran.Remarks = txtRemarks.Text;
+            tran.GCType = ddlGCType.SelectedValue;
 
             db.SubmitChanges();
             Response.Redirect("~/fo/frontoffice.aspx");

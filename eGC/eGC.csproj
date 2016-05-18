@@ -272,6 +272,7 @@
     <Content Include="ProfilePic\noImage.png" />
     <Content Include="report\report.aspx" />
     <Content Include="room\default.aspx" />
+    <Content Include="room\dining-type.aspx" />
     <Content Include="room\dining.aspx" />
     <Content Include="Scripts\ai.0.21.5-build00175.js" />
     <Content Include="Scripts\ai.0.21.5-build00175.min.js" />
@@ -526,6 +527,13 @@
     </Compile>
     <Compile Include="room\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="room\dining-type.aspx.cs">
+      <DependentUpon>dining-type.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="room\dining-type.aspx.designer.cs">
+      <DependentUpon>dining-type.aspx</DependentUpon>
     </Compile>
     <Compile Include="room\dining.aspx.cs">
       <DependentUpon>dining.aspx</DependentUpon>

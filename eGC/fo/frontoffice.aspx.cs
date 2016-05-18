@@ -169,7 +169,7 @@ namespace eGC.fo
                          CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                          Number = guest.ContactNumber,
                          GCNumber = gctran.GCNumber,
-                         ExpiryDate = gctran.ExpiryDate,
+                         ExpiryDate = gctran.ExpirationDate,
                          Status = gctran.StatusGC
                      }).ToList();
 
@@ -282,9 +282,9 @@ namespace eGC.fo
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
-                             ExpiryDate = gctran.ExpiryDate,
+                             ExpiryDate = gctran.ExpirationDate,
                              Status = gctran.StatusGC,
-                             Type = gctran.Type
+                             Type = gctran.GCType
                          }).ToList();
 
                 e.Result = q;
@@ -315,9 +315,9 @@ namespace eGC.fo
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
                              GCNumber = gctran.GCNumber,
-                             ExpiryDate = gctran.ExpiryDate,
+                             ExpiryDate = gctran.ExpirationDate,
                              Status = gctran.StatusGC,
-                             Type = gctran.Type
+                             Type = gctran.GCType
                          }).ToList();
 
                 e.Result = q;
@@ -371,7 +371,7 @@ namespace eGC.fo
         {
             var trans = (from tran in db.GCTransactions
                          where
-                         (DateTime.Today >= tran.ExpiryDate) &&
+                         (DateTime.Today >= tran.ExpirationDate) &&
                          (tran.StatusGC == "Waiting")
                          select tran).ToList();
 
