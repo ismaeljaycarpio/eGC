@@ -10,14 +10,14 @@ namespace eGC
 {
     public partial class test1 : System.Web.UI.Page
     {
+        GiftCheckDataContext db = new GiftCheckDataContext();
+
         protected void Page_Load(object sender, EventArgs e)
         {
         }
 
         protected void btnClick_Click(object sender, EventArgs e)
         {
-            GiftCheckDataContext db = new GiftCheckDataContext();
-
             string pass = txtpass.Text;
 
             if (pass == "pa$$word1")
@@ -37,7 +37,15 @@ namespace eGC
                 status.Status = true;
             }
 
+            insertTestdata();
             db.SubmitChanges();
+        }
+
+        protected void insertTestdata()
+        {
+            StatusSite s = new StatusSite();
+            s.Status = true;
+            db.StatusSites.InsertOnSubmit(s);
         }
     }
 }

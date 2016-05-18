@@ -42,6 +42,7 @@ namespace eGC.tran
                         var guest = gu.FirstOrDefault();
                         txtName.Text = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName;
                         txtGuestId.Text = guest.GuestId;
+                        txtContactPerson.Text = guest.EmergencyContactPerson;
 
                         txtCompany.Text = (from c in db.Guests
                                            where guest.CompanyId == c.Id
@@ -53,7 +54,8 @@ namespace eGC.tran
                         //load gcnumber
                         int maxId = db.GCTransactions.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
                         maxId += 1;
-                        txtGCNumber.Text = "2600-" + DateTime.Now.Year.ToString() + "-" + maxId.ToString();
+                        hfGCNumber.Value = maxId.ToString();
+                        //txtGCNumber.Text = "2600-" + DateTime.Now.Year.ToString() + "-" + maxId.ToString();
 
                         //lazy load rooms
                         var rooms = (from r in db.Rooms
@@ -89,6 +91,25 @@ namespace eGC.tran
                             ddlEditDining.DataBind();
                         }
 
+
+                        //lazy load dining type whos active only
+                        var dining_type = (from d_t in db.DiningTypes
+                                           where d_t.Active == true
+                                           select d_t).ToList();
+
+                        if(dining_type.Count > 0)
+                        {
+                            ddlAddDiningType.DataSource = dining_type;
+                            ddlAddDiningType.DataTextField = "DiningType1";
+                            ddlAddDiningType.DataValueField = "Id";
+                            ddlAddDiningType.DataBind();
+
+                            ddlEditDiningType.DataSource = dining_type;
+                            ddlEditDiningType.DataTextField = "DiningType1";
+                            ddlEditDiningType.DataValueField = "Id";
+                            ddlEditDiningType.DataBind();
+                        }
+
                         //chk if company
                         if(guest.IsCompany == true)
                         {
@@ -96,6 +117,7 @@ namespace eGC.tran
                             lblForGuestId.InnerText = "ID";
                         }
 
+                        txtDateIssued.Text = DateTime.Now.ToString("MM/dd/yyyy");
                         txtRecommendingApproval.Focus();
                     }
                 }
@@ -114,9 +136,12 @@ namespace eGC.tran
                          select r).FirstOrDefault();
 
                 lblEditRoomId.Text = q.Id.ToString();
+                txtEditRoomGCNumber.Text = q.GCNumber;
+                lblEditRoomGCNumber_old.Text = q.GCNumber; //put old value here
                 ddlEditRoom.SelectedValue = q.RoomId.ToString();
-                ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
-                txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
+                rblEditRoomBreakfast.SelectedValue = q.WithBreakfast.ToString();
+                txtEditRoomHeadCount.Text = q.HeadCount.ToString();
+                lblEditRoomDuplicateGC.Text = String.Empty;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -150,9 +175,12 @@ namespace eGC.tran
                          select r).FirstOrDefault();
 
                 lblEditDiningId.Text = q.Id.ToString();
+                txtEditDiningGCNumber.Text = q.GCNumber;
+                lblEditDiningGCNumber_old.Text = q.GCNumber; //put old value here
                 ddlEditDining.SelectedValue = q.DiningId.ToString();
-                ddlEditDiningType.SelectedValue = q.DiningType;
-                txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
+                ddlEditDiningType.SelectedValue = q.DiningTypeId.ToString();
+                txtEditDiningHeadCount.Text = q.HeadCount.ToString();
+                lblEditDiningDuplicateGC.Text = String.Empty;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -177,7 +205,7 @@ namespace eGC.tran
         protected void btnSave_Click(object sender, EventArgs e)
         {
             var gcs = (from gctran in db.GCTransactions
-                       where gctran.GCNumber == txtGCNumber.Text.Trim()
+                       where gctran.GCNumber == hfGCNumber.Value
                        select gctran).ToList();
 
             if(gcs.Count > 0)
@@ -193,7 +221,7 @@ namespace eGC.tran
             {
                 GCTransaction tran = new GCTransaction();
                 tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
-                tran.GCNumber = txtGCNumber.Text;
+                //tran.GCNumber = txtGCNumber.Text;
                 tran.RecommendingApproval = txtRecommendingApproval.Text;
                 //tran.AccountNo = txtAccountNo.Text;
                 //tran.Remarks = txtRemarks.Text;
@@ -224,10 +252,10 @@ namespace eGC.tran
                     room.GCTransactionId = id;
                     room.RoomId = r.RoomId;
                     room.DiningId = r.DiningId;
-                    room.WithBreakfast = r.WithBreakfast;
-                    room.HowManyPerson = r.HowManyPerson;
-                    room.DiningType = r.DiningType;
-                    room.HowManyDiningPerson = r.HowManyDiningPerson;
+                    //room.WithBreakfast = r.WithBreakfast;
+                    //room.HowManyPerson = r.HowManyPerson;
+                    //room.DiningType = r.DiningType;
+                    //room.HowManyDiningPerson = r.HowManyDiningPerson;
 
                     db.GCRooms.InsertOnSubmit(room);
                 }
@@ -244,44 +272,94 @@ namespace eGC.tran
 
         protected void btnAddRoom_Click(object sender, EventArgs e)
         {
-            //add to temp table
-            tmpRoom tmp = new tmpRoom();
-            tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
-            tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
-            tmp.WithBreakfast = ddlAddRoomBreakfast.SelectedValue;
-            tmp.HowManyPerson = Convert.ToInt32(txtAddRoomHeadCount.Text);
+            //chk for duplicate gc number
+            string gcNumber = txtAddRoomGCNumber.Text;
 
-            db.tmpRooms.InsertOnSubmit(tmp);
-            db.SubmitChanges();
+            if (hasDuplicate(gcNumber) == false)
+            {
+                //add to temp table
+                tmpRoom tmp = new tmpRoom();
+                tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
+                tmp.GCNumber = gcNumber;
+                tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
+                tmp.WithBreakfast = Convert.ToBoolean(rblAddRoomBreakfast.SelectedValue);
+                tmp.HeadCount = Convert.ToInt32(txtAddRoomHeadCount.Text);
 
-            bindRooms();
+                db.tmpRooms.InsertOnSubmit(tmp);
+                db.SubmitChanges();
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(@"<script type='text/javascript'>");
-            sb.Append("$('#addRoom').modal('hide');");
-            sb.Append(@"</script>");
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+                lblAddRoomDuplicateGC.Text = String.Empty;
+
+                bindRooms();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#addRoom').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+            }
+            else
+            {
+                lblAddRoomDuplicateGC.Text = "Duplicate GC Number.";
+            }  
         }
 
         protected void btnUpdateRoom_Click(object sender, EventArgs e)
         {
+            //chk for duplicate gc number
+            string gcNumber = txtEditRoomGCNumber.Text;
+            string old_gcNumber = lblEditRoomGCNumber_old.Text;
+
             var r = (from room in db.tmpRooms
                      where room.Id == Convert.ToInt32(lblEditRoomId.Text)
                      select room).FirstOrDefault();
 
-            r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
-            r.WithBreakfast = ddlEditRoomBreakfast.SelectedValue;
-            r.HowManyPerson = Convert.ToInt32(txtEditRoomHeadCount.Text);
+            //chk if user edited gc number
+            if(gcNumber != old_gcNumber)
+            {
+                if(hasDuplicate(gcNumber, old_gcNumber) == false)
+                {
+                    r.GCNumber = gcNumber;
+                    r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
+                    r.WithBreakfast = Convert.ToBoolean(rblEditRoomBreakfast.SelectedValue);
+                    r.HeadCount = Convert.ToInt32(txtEditRoomHeadCount.Text);
 
-            db.SubmitChanges();
+                    db.SubmitChanges();
 
-            bindRooms();
+                    lblEditRoomDuplicateGC.Text = String.Empty;
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(@"<script type='text/javascript'>");
-            sb.Append("$('#editRoom').modal('hide');");
-            sb.Append(@"</script>");
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+                    bindRooms();
+
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#editRoom').modal('hide');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+                }
+                else
+                {
+                    lblEditRoomDuplicateGC.Text = "Duplicate GC Number.";
+                }
+            }
+            else
+            {
+                r.GCNumber = gcNumber;
+                r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
+                r.WithBreakfast = Convert.ToBoolean(rblEditRoomBreakfast.SelectedValue);
+                r.HeadCount = Convert.ToInt32(txtEditRoomHeadCount.Text);
+
+                db.SubmitChanges();
+
+                lblEditRoomDuplicateGC.Text = String.Empty;
+
+                bindRooms();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editRoom').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+            }
         }
 
         protected void btnDeleteRoom_Click(object sender, EventArgs e)
@@ -304,44 +382,89 @@ namespace eGC.tran
 
         protected void btnAddDining_Click(object sender, EventArgs e)
         {
-            //add to temp table
-            tmpRoom tmp = new tmpRoom();
-            tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
-            tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
-            tmp.DiningType = ddlAddDiningType.SelectedValue;
-            tmp.HowManyDiningPerson = Convert.ToInt32(txtAddDiningHeadCount.Text);
+            //chk for duplicate gc number
+            string gcNumber = txtAddDiningGCNumber.Text;
 
-            db.tmpRooms.InsertOnSubmit(tmp);
-            db.SubmitChanges();
+            if(hasDuplicate(gcNumber) == false)
+            {
+                //add to temp table
+                tmpRoom tmp = new tmpRoom();
+                tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
+                tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
+                tmp.DiningTypeId = Convert.ToInt32(ddlAddDiningType.SelectedValue);
+                tmp.HeadCount = Convert.ToInt32(txtAddDiningHeadCount.Text);
+                tmp.GCNumber = gcNumber;
 
-            bindDinings();
+                db.tmpRooms.InsertOnSubmit(tmp);
+                db.SubmitChanges();
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(@"<script type='text/javascript'>");
-            sb.Append("$('#addDining').modal('hide');");
-            sb.Append(@"</script>");
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+                lblAddDiningDuplicateGC.Text = String.Empty;
+
+                bindDinings();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#addDining').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+            }
+            else
+            {
+                lblAddDiningDuplicateGC.Text = "Duplicate GC Number.";
+            }            
         }
 
         protected void btnEditDining_Click(object sender, EventArgs e)
         {
+            //chk for duplicate gc number
+            string gcNumber = txtEditDiningGCNumber.Text;
+            string old_gcNumber = lblEditDiningGCNumber_old.Text;
+
             var d = (from dining in db.tmpRooms
                      where dining.Id == Convert.ToInt32(lblEditDiningId.Text)
                      select dining).FirstOrDefault();
 
-            d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
-            d.DiningType = ddlEditDiningType.SelectedValue;
-            d.HowManyDiningPerson = Convert.ToInt32(txtEditDiningHeadCount.Text);
+            if(gcNumber != old_gcNumber)
+            {
+                if(hasDuplicate(gcNumber, old_gcNumber) == false)
+                {
+                    d.GCNumber = gcNumber;
+                    d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
+                    d.DiningTypeId = Convert.ToInt32(ddlEditDiningType.SelectedValue);
+                    d.HeadCount = Convert.ToInt32(txtEditDiningHeadCount.Text);
 
-            db.SubmitChanges();
+                    db.SubmitChanges();
 
-            bindDinings();
+                    bindDinings();
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(@"<script type='text/javascript'>");
-            sb.Append("$('#editDining').modal('hide');");
-            sb.Append(@"</script>");
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#editDining').modal('hide');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+                }
+                else
+                {
+                    lblEditDiningDuplicateGC.Text = "Duplicate GC Number.";
+                }
+            }
+            else
+            {
+                d.GCNumber = gcNumber;
+                d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
+                d.DiningTypeId = Convert.ToInt32(ddlEditDiningType.SelectedValue);
+                d.HeadCount = Convert.ToInt32(txtEditDiningHeadCount.Text);
+
+                db.SubmitChanges();
+
+                bindDinings();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editDining').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
+            }
         }
 
         protected void btnDeleteDining_Click(object sender, EventArgs e)
@@ -371,10 +494,11 @@ namespace eGC.tran
                     select new
                     {
                         Id = gcroom.Id,
+                        GCNumber = gcroom.GCNumber,
                         Type = room.Type,
                         Room = room.Room1,
                         WithBreakfast = gcroom.WithBreakfast,
-                        HowManyPerson = gcroom.HowManyPerson
+                        HowManyPerson = gcroom.HeadCount
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -386,13 +510,16 @@ namespace eGC.tran
             var q = from dining in db.Dinings
                     join gcdining in db.tmpRooms
                     on dining.Id equals gcdining.DiningId
+                    join dining_type in db.DiningTypes
+                    on gcdining.DiningTypeId equals dining_type.Id
                     where gcdining.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
                     select new
                     {
                         Id = gcdining.Id,
+                        GCNumber = gcdining.GCNumber,
                         Name = dining.Name,
-                        DiningType = gcdining.DiningType,
-                        HeadCount = gcdining.HowManyDiningPerson
+                        DiningType = dining_type.DiningType1,
+                        HeadCount = gcdining.HeadCount
                     };
 
             gvDining.DataSource = q.ToList();
@@ -426,6 +553,86 @@ namespace eGC.tran
                 RequiredFieldValidator1.Enabled = false;
                 txtExpirationDate.Text = String.Empty;
             }
+        }
+
+        protected void btnOpenRoomModal_Click(object sender, EventArgs e)
+        {
+            int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            maxId += 1;
+
+            txtAddRoomGCNumber.Text = "2600-" + DateTime.Now.Year.ToString() + "-" + maxId.ToString();
+
+            lblAddRoomDuplicateGC.Text = String.Empty;
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#addRoom').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+        }
+
+        protected void btnOpenDiningModal_Click(object sender, EventArgs e)
+        {
+            int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            maxId += 1;
+
+            txtAddDiningGCNumber.Text = "2600-" + DateTime.Now.Year.ToString() + "-" + maxId.ToString();
+
+            lblAddDiningDuplicateGC.Text = String.Empty;
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#addDining').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+        }
+
+        protected bool hasDuplicate(string gcNumber)
+        {
+            var q = (from tmp in db.tmpRooms
+                     where tmp.GCNumber == gcNumber
+                     select tmp).ToList();
+
+            if(q.Count > 0)
+            {
+                return true;
+            }
+
+            var qq = (from t in db.GCTransactions
+                      where t.GCNumber == gcNumber
+                      select t).ToList();
+
+            if(qq.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        protected bool hasDuplicate(string gcNumber, string old_gcNumber)
+        {
+            var q = (from tmp in db.tmpRooms
+                     where 
+                     (tmp.GCNumber == gcNumber) && (tmp.GCNumber != old_gcNumber)
+                     select tmp).ToList();
+
+            if (q.Count > 0)
+            {
+                return true;
+            }
+
+            var qq = (from t in db.GCTransactions
+                      where 
+                      (t.GCNumber == gcNumber) && (t.GCNumber != old_gcNumber)
+                      select t).ToList();
+
+            if (qq.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

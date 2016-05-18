@@ -45,7 +45,7 @@
         <script>
             $(function () {
                 $('.modal').on('hidden.bs.modal', function () {
-                    $(this).find('input[type="text"],textarea,input[type="checkbox"]').val('');
+                    $(this).find('input[type="text"],textarea,input[type="checkbox"],input[type="radio"],input[type="number"]').val('');
                     $('.label-danger').hide();
                 });
             });
@@ -127,7 +127,7 @@
                                             </ul>
                                         </li>
                                         <li><a runat="server" href="~/gcapproval/default.aspx">Approval</a></li>
-                                        <li><a runat="server" href="~/fo/frontoffice.aspx">Front Office</a></li>
+                                        <li><a runat="server" href="~/fo/frontoffice.aspx">Front Desk</a></li>
                                         <li><a runat="server" href="~/report/report.aspx">Reports</a></li>
                                         <li><a runat="server" href="~/admin/userconfig.aspx">User Config</a></li>
                                     </ul>

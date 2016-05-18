@@ -42,9 +42,6 @@ namespace eGC
     partial void InsertGCRoom(GCRoom instance);
     partial void UpdateGCRoom(GCRoom instance);
     partial void DeleteGCRoom(GCRoom instance);
-    partial void InserttmpRoom(tmpRoom instance);
-    partial void UpdatetmpRoom(tmpRoom instance);
-    partial void DeletetmpRoom(tmpRoom instance);
     partial void InsertStatusSite(StatusSite instance);
     partial void UpdateStatusSite(StatusSite instance);
     partial void DeleteStatusSite(StatusSite instance);
@@ -54,6 +51,9 @@ namespace eGC
     partial void InsertGCTransaction(GCTransaction instance);
     partial void UpdateGCTransaction(GCTransaction instance);
     partial void DeleteGCTransaction(GCTransaction instance);
+    partial void InserttmpRoom(tmpRoom instance);
+    partial void UpdatetmpRoom(tmpRoom instance);
+    partial void DeletetmpRoom(tmpRoom instance);
     #endregion
 		
 		public GiftCheckDataContext() : 
@@ -118,14 +118,6 @@ namespace eGC
 			}
 		}
 		
-		public System.Data.Linq.Table<tmpRoom> tmpRooms
-		{
-			get
-			{
-				return this.GetTable<tmpRoom>();
-			}
-		}
-		
 		public System.Data.Linq.Table<StatusSite> StatusSites
 		{
 			get
@@ -147,6 +139,14 @@ namespace eGC
 			get
 			{
 				return this.GetTable<GCTransaction>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tmpRoom> tmpRooms
+		{
+			get
+			{
+				return this.GetTable<tmpRoom>();
 			}
 		}
 	}
@@ -1278,236 +1278,6 @@ namespace eGC
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tmpRoom")]
-	public partial class tmpRoom : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<System.Guid> _UserId;
-		
-		private System.Nullable<int> _RoomId;
-		
-		private System.Nullable<int> _DiningId;
-		
-		private string _WithBreakfast;
-		
-		private System.Nullable<int> _HowManyPerson;
-		
-		private string _DiningType;
-		
-		private System.Nullable<int> _HowManyDiningPerson;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
-    partial void OnUserIdChanged();
-    partial void OnRoomIdChanging(System.Nullable<int> value);
-    partial void OnRoomIdChanged();
-    partial void OnDiningIdChanging(System.Nullable<int> value);
-    partial void OnDiningIdChanged();
-    partial void OnWithBreakfastChanging(string value);
-    partial void OnWithBreakfastChanged();
-    partial void OnHowManyPersonChanging(System.Nullable<int> value);
-    partial void OnHowManyPersonChanged();
-    partial void OnDiningTypeChanging(string value);
-    partial void OnDiningTypeChanged();
-    partial void OnHowManyDiningPersonChanging(System.Nullable<int> value);
-    partial void OnHowManyDiningPersonChanged();
-    #endregion
-		
-		public tmpRoom()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int")]
-		public System.Nullable<int> RoomId
-		{
-			get
-			{
-				return this._RoomId;
-			}
-			set
-			{
-				if ((this._RoomId != value))
-				{
-					this.OnRoomIdChanging(value);
-					this.SendPropertyChanging();
-					this._RoomId = value;
-					this.SendPropertyChanged("RoomId");
-					this.OnRoomIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiningId", DbType="Int")]
-		public System.Nullable<int> DiningId
-		{
-			get
-			{
-				return this._DiningId;
-			}
-			set
-			{
-				if ((this._DiningId != value))
-				{
-					this.OnDiningIdChanging(value);
-					this.SendPropertyChanging();
-					this._DiningId = value;
-					this.SendPropertyChanged("DiningId");
-					this.OnDiningIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithBreakfast", DbType="VarChar(50)")]
-		public string WithBreakfast
-		{
-			get
-			{
-				return this._WithBreakfast;
-			}
-			set
-			{
-				if ((this._WithBreakfast != value))
-				{
-					this.OnWithBreakfastChanging(value);
-					this.SendPropertyChanging();
-					this._WithBreakfast = value;
-					this.SendPropertyChanged("WithBreakfast");
-					this.OnWithBreakfastChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HowManyPerson", DbType="Int")]
-		public System.Nullable<int> HowManyPerson
-		{
-			get
-			{
-				return this._HowManyPerson;
-			}
-			set
-			{
-				if ((this._HowManyPerson != value))
-				{
-					this.OnHowManyPersonChanging(value);
-					this.SendPropertyChanging();
-					this._HowManyPerson = value;
-					this.SendPropertyChanged("HowManyPerson");
-					this.OnHowManyPersonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiningType", DbType="VarChar(50)")]
-		public string DiningType
-		{
-			get
-			{
-				return this._DiningType;
-			}
-			set
-			{
-				if ((this._DiningType != value))
-				{
-					this.OnDiningTypeChanging(value);
-					this.SendPropertyChanging();
-					this._DiningType = value;
-					this.SendPropertyChanged("DiningType");
-					this.OnDiningTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HowManyDiningPerson", DbType="Int")]
-		public System.Nullable<int> HowManyDiningPerson
-		{
-			get
-			{
-				return this._HowManyDiningPerson;
-			}
-			set
-			{
-				if ((this._HowManyDiningPerson != value))
-				{
-					this.OnHowManyDiningPersonChanging(value);
-					this.SendPropertyChanging();
-					this._HowManyDiningPerson = value;
-					this.SendPropertyChanged("HowManyDiningPerson");
-					this.OnHowManyDiningPersonChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StatusSite")]
 	public partial class StatusSite : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2336,6 +2106,236 @@ namespace eGC
 		{
 			this.SendPropertyChanging();
 			entity.GCTransaction = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tmpRoom")]
+	public partial class tmpRoom : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+		private System.Nullable<int> _RoomId;
+		
+		private System.Nullable<int> _DiningId;
+		
+		private System.Nullable<bool> _WithBreakfast;
+		
+		private System.Nullable<int> _HeadCount;
+		
+		private System.Nullable<int> _DiningTypeId;
+		
+		private string _GCNumber;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    partial void OnRoomIdChanging(System.Nullable<int> value);
+    partial void OnRoomIdChanged();
+    partial void OnDiningIdChanging(System.Nullable<int> value);
+    partial void OnDiningIdChanged();
+    partial void OnWithBreakfastChanging(System.Nullable<bool> value);
+    partial void OnWithBreakfastChanged();
+    partial void OnHeadCountChanging(System.Nullable<int> value);
+    partial void OnHeadCountChanged();
+    partial void OnDiningTypeIdChanging(System.Nullable<int> value);
+    partial void OnDiningTypeIdChanged();
+    partial void OnGCNumberChanging(string value);
+    partial void OnGCNumberChanged();
+    #endregion
+		
+		public tmpRoom()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomId", DbType="Int")]
+		public System.Nullable<int> RoomId
+		{
+			get
+			{
+				return this._RoomId;
+			}
+			set
+			{
+				if ((this._RoomId != value))
+				{
+					this.OnRoomIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoomId = value;
+					this.SendPropertyChanged("RoomId");
+					this.OnRoomIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiningId", DbType="Int")]
+		public System.Nullable<int> DiningId
+		{
+			get
+			{
+				return this._DiningId;
+			}
+			set
+			{
+				if ((this._DiningId != value))
+				{
+					this.OnDiningIdChanging(value);
+					this.SendPropertyChanging();
+					this._DiningId = value;
+					this.SendPropertyChanged("DiningId");
+					this.OnDiningIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WithBreakfast", DbType="Bit")]
+		public System.Nullable<bool> WithBreakfast
+		{
+			get
+			{
+				return this._WithBreakfast;
+			}
+			set
+			{
+				if ((this._WithBreakfast != value))
+				{
+					this.OnWithBreakfastChanging(value);
+					this.SendPropertyChanging();
+					this._WithBreakfast = value;
+					this.SendPropertyChanged("WithBreakfast");
+					this.OnWithBreakfastChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HeadCount", DbType="Int")]
+		public System.Nullable<int> HeadCount
+		{
+			get
+			{
+				return this._HeadCount;
+			}
+			set
+			{
+				if ((this._HeadCount != value))
+				{
+					this.OnHeadCountChanging(value);
+					this.SendPropertyChanging();
+					this._HeadCount = value;
+					this.SendPropertyChanged("HeadCount");
+					this.OnHeadCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiningTypeId", DbType="Int")]
+		public System.Nullable<int> DiningTypeId
+		{
+			get
+			{
+				return this._DiningTypeId;
+			}
+			set
+			{
+				if ((this._DiningTypeId != value))
+				{
+					this.OnDiningTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._DiningTypeId = value;
+					this.SendPropertyChanged("DiningTypeId");
+					this.OnDiningTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GCNumber", DbType="VarChar(50)")]
+		public string GCNumber
+		{
+			get
+			{
+				return this._GCNumber;
+			}
+			set
+			{
+				if ((this._GCNumber != value))
+				{
+					this.OnGCNumberChanging(value);
+					this.SendPropertyChanging();
+					this._GCNumber = value;
+					this.SendPropertyChanged("GCNumber");
+					this.OnGCNumberChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

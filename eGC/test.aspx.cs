@@ -14,20 +14,20 @@ namespace eGC
         {
             if(!Page.IsPostBack)
             {
-                UserAccountsDataContext dbUser = new UserAccountsDataContext(@"C:\dbUserAccounts.mdf");
+                //UserAccountsDataContext dbUser = new UserAccountsDataContext(@"C:\dbUserAccounts.mdf");
                 GiftCheckDataContext dbGC = new GiftCheckDataContext(@"C:\dbGC.mdf");
 
-                if (dbUser.DatabaseExists())
-                {
-                    dbUser.DeleteDatabase();
-                }
+                //if (dbUser.DatabaseExists())
+                //{
+                //    dbUser.DeleteDatabase();
+                //}
 
                 if(dbGC.DatabaseExists())
                 {
                     dbGC.DeleteDatabase();
                 }
 
-                dbUser.CreateDatabase();
+                //dbUser.CreateDatabase();
                 dbGC.CreateDatabase();
 
                 if(!Roles.RoleExists("Admin-GC"))
@@ -73,7 +73,6 @@ namespace eGC
                     dbGC.StatusSites.InsertOnSubmit(ss);
                     dbGC.SubmitChanges();
                 }
-
             }
         }
     }
