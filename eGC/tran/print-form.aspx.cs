@@ -39,44 +39,44 @@ namespace eGC.tran
             ReportViewer1.ProcessingMode = ProcessingMode.Local;
             ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/tran/gc-report.rdlc");
 
-            var rooms = (from room in db.Rooms
-                        join gcroom in db.GCRooms
-                        on room.Id equals gcroom.RoomId
-                        join tr in db.GCTransactions
-                        on gcroom.GCTransactionId equals tr.Id
-                        where tr.GCNumber == gcId
-                        select new
-                        {
-                            Id = gcroom.Id,
-                            Type = room.Type,
-                            Room = room.Room1,
-                            WithBreakfast = gcroom.WithBreakfast,
-                            HowManyPerson = gcroom.HowManyPerson
-                        }).ToList();
+            //var rooms = (from room in db.Rooms
+            //            join gcroom in db.GCRooms
+            //            on room.Id equals gcroom.RoomId
+            //            join tr in db.GCTransactions
+            //            on gcroom.GCTransactionId equals tr.Id
+            //            where tr.GCNumber == gcId
+            //            select new
+            //            {
+            //                Id = gcroom.Id,
+            //                Type = room.Type,
+            //                Room = room.Room1,
+            //                WithBreakfast = gcroom.WithBreakfast,
+            //                HowManyPerson = gcroom.HowManyPerson
+            //            }).ToList();
 
-            var dinings = (from dining in db.Dinings
-                          join gcdining in db.GCRooms
-                          on dining.Id equals gcdining.DiningId
-                          join tr in db.GCTransactions
-                          on gcdining.GCTransactionId equals tr.Id
-                          where tr.GCNumber == gcId
-                          select new
-                          {
-                              Id = gcdining.Id,
-                              Name = dining.Name,
-                              DiningType = gcdining.DiningType,
-                              HeadCount = gcdining.HowManyDiningPerson
-                          }).ToList();
+            //var dinings = (from dining in db.Dinings
+            //              join gcdining in db.GCRooms
+            //              on dining.Id equals gcdining.DiningId
+            //              join tr in db.GCTransactions
+            //              on gcdining.GCTransactionId equals tr.Id
+            //              where tr.GCNumber == gcId
+            //              select new
+            //              {
+            //                  Id = gcdining.Id,
+            //                  Name = dining.Name,
+            //                  DiningType = gcdining.DiningType,
+            //                  HeadCount = gcdining.HowManyDiningPerson
+            //              }).ToList();
 
-            if(rooms.Count > 0)
-            {
-                dtRooms = rooms.ToDataTable().AsEnumerable().CopyToDataTable();
-            }
+            //if(rooms.Count > 0)
+            //{
+            //    dtRooms = rooms.ToDataTable().AsEnumerable().CopyToDataTable();
+            //}
             
-            if(dinings.Count > 0)
-            {
-                dtDinings = dinings.ToDataTable().AsEnumerable().CopyToDataTable();
-            }
+            //if(dinings.Count > 0)
+            //{
+            //    dtDinings = dinings.ToDataTable().AsEnumerable().CopyToDataTable();
+            //}
                    
             //first param: name of the dataset
             ReportDataSource rdsRooms = new ReportDataSource("Rooms", dtRooms);

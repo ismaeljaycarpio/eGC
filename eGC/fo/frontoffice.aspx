@@ -52,7 +52,11 @@
 
                                             <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="selectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    <asp:LinkButton ID="lbtnGuestId" 
+                                                        runat="server"
+                                                        Text='<%# Eval("GuestId") %>' 
+                                                        CommandName="selectGuest" 
+                                                        CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
@@ -69,7 +73,10 @@
 
                                             <asp:TemplateField HeaderText="Status" SortExpression="Status">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                                                    <asp:Label ID="lblGCStatus" 
+                                                        runat="server"
+                                                        CssClass="badge" 
+                                                        Text='<%# Eval("Status") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 

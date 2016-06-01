@@ -204,65 +204,40 @@ namespace eGC.tran
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var gcs = (from gctran in db.GCTransactions
-                       where gctran.GCNumber == hfGCNumber.Value
-                       select gctran).ToList();
-
-            if(gcs.Count > 0)
-            {
-                //show duplicate gc
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#duplicateGCModal').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);
-            }
-            else
-            {
-                GCTransaction tran = new GCTransaction();
-                tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
-                //tran.GCNumber = txtGCNumber.Text;
-                tran.RecommendingApproval = txtRecommendingApproval.Text;
-                //tran.AccountNo = txtAccountNo.Text;
-                //tran.Remarks = txtRemarks.Text;
-                tran.GCType = ddlGCType.SelectedValue;
-                tran.ApprovalStatus = "Pending";
-                tran.StatusGC = "Waiting";
-
-                if (txtExpirationDate.Text != String.Empty)
-                {
-                    tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
-                }
-                tran.IsArchive = false;
-
-                db.GCTransactions.InsertOnSubmit(tran);
-                db.SubmitChanges();
-
-                int id = tran.Id;
-
-                //insert rooms
-                var tmpRoom = (from tmp in db.tmpRooms
+            //insert rooms
+            var tmpRoom = (from tmp in db.tmpRooms
                                where tmp.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())
                                select tmp).ToList();
 
-                foreach (var r in tmpRoom)
-                {
-                    //insert to tran
-                    GCRoom room = new GCRoom();
-                    room.GCTransactionId = id;
-                    room.RoomId = r.RoomId;
-                    room.DiningId = r.DiningId;
-                    //room.WithBreakfast = r.WithBreakfast;
-                    //room.HowManyPerson = r.HowManyPerson;
-                    //room.DiningType = r.DiningType;
-                    //room.HowManyDiningPerson = r.HowManyDiningPerson;
+            foreach(var t in tmpRoom)
+            {
+                GCTransaction tran = new GCTransaction();
+                tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
+                tran.GCNumber = t.GCNumber;
+                tran.DateIssued = Convert.ToDateTime(txtDateIssued.Text);
+                tran.GCType = ddlGCType.SelectedItem.Text;
 
-                    db.GCRooms.InsertOnSubmit(room);
+                if(txtExpirationDate.Text != String.Empty)
+                {
+                    tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
                 }
 
-                db.SubmitChanges();
-                Response.Redirect("~/guest/default.aspx");
+                tran.Reason = txtReason.Text;
+                tran.RequestedBy = txtRequestedBy.Text;
+                tran.RecommendingApproval = txtRecommendingApproval.Text;
+                tran.StatusGC = "Waiting";
+                tran.ApprovalStatus = "Pending";
+                tran.IsArchive = false;
+                tran.RoomId = t.RoomId;
+                tran.DiningId = t.DiningId;
+                tran.DiningTypeId = t.DiningTypeId;
+                tran.WithBreakfast = t.WithBreakfast;
+                tran.HeadCount = t.HeadCount;
+                
+                db.GCTransactions.InsertOnSubmit(tran);
             }
+            db.SubmitChanges();
+            Response.Redirect("~/guest/default.aspx");
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

@@ -124,43 +124,43 @@ namespace eGC.fo
 
         private void bindRooms()
         {
-            var q = from room in db.Rooms
-                    join gcroom in db.GCRooms
-                    on room.Id equals gcroom.RoomId
-                    join tr in db.GCTransactions
-                    on gcroom.GCTransactionId equals tr.Id
-                    where tr.GCNumber == Request.QueryString["gcId"].ToString()
-                    select new
-                    {
-                        Id = gcroom.Id,
-                        Type = room.Type,
-                        Room = room.Room1,
-                        WithBreakfast = gcroom.WithBreakfast,
-                        HowManyPerson = gcroom.HowManyPerson
-                    };
+            //var q = from room in db.Rooms
+            //        join gcroom in db.GCRooms
+            //        on room.Id equals gcroom.RoomId
+            //        join tr in db.GCTransactions
+            //        on gcroom.GCTransactionId equals tr.Id
+            //        where tr.GCNumber == Request.QueryString["gcId"].ToString()
+            //        select new
+            //        {
+            //            Id = gcroom.Id,
+            //            Type = room.Type,
+            //            Room = room.Room1,
+            //            WithBreakfast = gcroom.WithBreakfast,
+            //            HowManyPerson = gcroom.HowManyPerson
+            //        };
 
-            gvRoom.DataSource = q.ToList();
-            gvRoom.DataBind();
+            //gvRoom.DataSource = q.ToList();
+            //gvRoom.DataBind();
         }
 
         private void bindDinings()
         {
-            var q = from dining in db.Dinings
-                    join gcdining in db.GCRooms
-                    on dining.Id equals gcdining.DiningId
-                    join tr in db.GCTransactions
-                    on gcdining.GCTransactionId equals tr.Id
-                    where tr.GCNumber == Request.QueryString["gcId"].ToString()
-                    select new
-                    {
-                        Id = gcdining.Id,
-                        Name = dining.Name,
-                        DiningType = gcdining.DiningType,
-                        HeadCount = gcdining.HowManyDiningPerson
-                    };
+            //var q = from dining in db.Dinings
+            //        join gcdining in db.GCRooms
+            //        on dining.Id equals gcdining.DiningId
+            //        join tr in db.GCTransactions
+            //        on gcdining.GCTransactionId equals tr.Id
+            //        where tr.GCNumber == Request.QueryString["gcId"].ToString()
+            //        select new
+            //        {
+            //            Id = gcdining.Id,
+            //            Name = dining.Name,
+            //            DiningType = gcdining.DiningType,
+            //            HeadCount = gcdining.HowManyDiningPerson
+            //        };
 
-            gvDining.DataSource = q.ToList();
-            gvDining.DataBind();
+            //gvDining.DataSource = q.ToList();
+            //gvDining.DataBind();
         }
 
         protected void btnUsed_Click(object sender, EventArgs e)

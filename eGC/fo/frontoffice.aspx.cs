@@ -335,8 +335,7 @@ namespace eGC.fo
 
                 if(lblGCStatus.Text == "Used")
                 {
-                    //btnUse.Visible = false;
-                    lblGCStatus.ForeColor = Color.Green;
+                    lblGCStatus.CssClass = "badge btn-info";
                     btnUse.Text = "Complete";
                     btnUse.CssClass = "btn btn-primary";
                 }
@@ -344,8 +343,11 @@ namespace eGC.fo
                 {
                     btnUse.Visible = false;
                     btnCancel.Visible = false;
-                    lblGCStatus.ForeColor = Color.DarkGreen;
-                    lblGCStatus.Font.Bold = true;
+                    lblGCStatus.CssClass = "badge btn-primary";
+                }
+                else if(lblGCStatus.Text == "Cancelled")
+                {
+
                 }
             }
         }

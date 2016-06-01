@@ -145,14 +145,14 @@ namespace eGC.tran
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 //load room
-                var q = (from r in db.GCRooms
-                         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
-                         select r).FirstOrDefault();
+                //var q = (from r in db.GCRooms
+                //         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
+                //         select r).FirstOrDefault();
 
-                lblEditRoomId.Text = q.Id.ToString();
-                ddlEditRoom.SelectedValue = q.RoomId.ToString();
-                ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
-                txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
+                //lblEditRoomId.Text = q.Id.ToString();
+                //ddlEditRoom.SelectedValue = q.RoomId.ToString();
+                //ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
+                //txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -181,14 +181,14 @@ namespace eGC.tran
                 int index = Convert.ToInt32(e.CommandArgument);
 
                 //load dining
-                var q = (from r in db.GCRooms
-                         where r.Id.Equals((int)gvDining.DataKeys[index].Value)
-                         select r).FirstOrDefault();
+                //var q = (from r in db.GCRooms
+                //         where r.Id.Equals((int)gvDining.DataKeys[index].Value)
+                //         select r).FirstOrDefault();
 
-                lblEditDiningId.Text = q.Id.ToString();
-                ddlEditDining.SelectedValue = q.DiningId.ToString();
-                ddlEditDiningType.SelectedValue = q.DiningType;
-                txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
+                //lblEditDiningId.Text = q.Id.ToString();
+                //ddlEditDining.SelectedValue = q.DiningId.ToString();
+                //ddlEditDiningType.SelectedValue = q.DiningType;
+                //txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -284,13 +284,13 @@ namespace eGC.tran
         protected void btnAddRoom_Click(object sender, EventArgs e)
         {
             //add to gcroom table
-            GCRoom tmp = new GCRoom();
-            tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
-            tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
-            tmp.WithBreakfast = ddlAddRoomBreakfast.SelectedValue;
-            tmp.HowManyPerson = Convert.ToInt32(txtAddRoomHeadCount.Text);
+            //GCRoom tmp = new GCRoom();
+            //tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
+            //tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
+            //tmp.WithBreakfast = ddlAddRoomBreakfast.SelectedValue;
+            //tmp.HowManyPerson = Convert.ToInt32(txtAddRoomHeadCount.Text);
 
-            db.GCRooms.InsertOnSubmit(tmp);
+            //db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
 
             bindRooms();
@@ -304,15 +304,15 @@ namespace eGC.tran
 
         protected void btnUpdateRoom_Click(object sender, EventArgs e)
         {
-            var r = (from room in db.GCRooms
-                     where room.Id == Convert.ToInt32(lblEditRoomId.Text)
-                     select room).FirstOrDefault();
+            //var r = (from room in db.GCRooms
+            //         where room.Id == Convert.ToInt32(lblEditRoomId.Text)
+            //         select room).FirstOrDefault();
 
-            r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
-            r.WithBreakfast = ddlEditRoomBreakfast.SelectedValue;
-            r.HowManyPerson = Convert.ToInt32(txtEditRoomHeadCount.Text);
+            //r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
+            //r.WithBreakfast = ddlEditRoomBreakfast.SelectedValue;
+            //r.HowManyPerson = Convert.ToInt32(txtEditRoomHeadCount.Text);
 
-            db.SubmitChanges();
+            //db.SubmitChanges();
 
             bindRooms();
 
@@ -325,12 +325,12 @@ namespace eGC.tran
 
         protected void btnDeleteRoom_Click(object sender, EventArgs e)
         {
-            var q = (from r in db.GCRooms
-                     where r.Id == Convert.ToInt32(hfDeleteRoomId.Value)
-                     select r).FirstOrDefault();
+            //var q = (from r in db.GCRooms
+            //         where r.Id == Convert.ToInt32(hfDeleteRoomId.Value)
+            //         select r).FirstOrDefault();
 
-            db.GCRooms.DeleteOnSubmit(q);
-            db.SubmitChanges();
+            //db.GCRooms.DeleteOnSubmit(q);
+            //db.SubmitChanges();
 
             bindRooms();
 
@@ -344,13 +344,13 @@ namespace eGC.tran
         protected void btnAddDining_Click(object sender, EventArgs e)
         {
             //add to temp table
-            GCRoom tmp = new GCRoom();
-            tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
-            tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
-            tmp.DiningType = ddlAddDiningType.SelectedValue;
-            tmp.HowManyDiningPerson = Convert.ToInt32(txtAddDiningHeadCount.Text);
+            //GCRoom tmp = new GCRoom();
+            //tmp.GCTransactionId = Convert.ToInt32(hfTransactionId.Value);
+            //tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
+            //tmp.DiningType = ddlAddDiningType.SelectedValue;
+            //tmp.HowManyDiningPerson = Convert.ToInt32(txtAddDiningHeadCount.Text);
 
-            db.GCRooms.InsertOnSubmit(tmp);
+            //db.GCRooms.InsertOnSubmit(tmp);
             db.SubmitChanges();
 
             bindDinings();
@@ -364,15 +364,15 @@ namespace eGC.tran
 
         protected void btnEditDining_Click(object sender, EventArgs e)
         {
-            var d = (from dining in db.GCRooms
-                     where dining.Id == Convert.ToInt32(lblEditDiningId.Text)
-                     select dining).FirstOrDefault();
+            //var d = (from dining in db.GCRooms
+            //         where dining.Id == Convert.ToInt32(lblEditDiningId.Text)
+            //         select dining).FirstOrDefault();
 
-            d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
-            d.DiningType = ddlEditDiningType.SelectedValue;
-            d.HowManyDiningPerson = Convert.ToInt32(txtEditDiningHeadCount.Text);
+            //d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
+            //d.DiningType = ddlEditDiningType.SelectedValue;
+            //d.HowManyDiningPerson = Convert.ToInt32(txtEditDiningHeadCount.Text);
 
-            db.SubmitChanges();
+            //db.SubmitChanges();
 
             bindDinings();
 
@@ -385,11 +385,11 @@ namespace eGC.tran
 
         protected void btnDeleteDining_Click(object sender, EventArgs e)
         {
-            var q = (from r in db.GCRooms
-                     where r.Id == Convert.ToInt32(hfDeleteDiningId.Value)
-                     select r).FirstOrDefault();
+            //var q = (from r in db.GCRooms
+            //         where r.Id == Convert.ToInt32(hfDeleteDiningId.Value)
+            //         select r).FirstOrDefault();
 
-            db.GCRooms.DeleteOnSubmit(q);
+            //db.GCRooms.DeleteOnSubmit(q);
             db.SubmitChanges();
 
             bindDinings();
@@ -408,43 +408,43 @@ namespace eGC.tran
 
         private void bindRooms()
         {
-            var q = from room in db.Rooms
-                    join gcroom in db.GCRooms
-                    on room.Id equals gcroom.RoomId
-                    join tr in db.GCTransactions 
-                    on gcroom.GCTransactionId equals tr.Id
-                    where tr.GCNumber == Request.QueryString["gcId"].ToString()
-                    select new
-                    {
-                        Id = gcroom.Id,
-                        Type = room.Type,
-                        Room = room.Room1,
-                        WithBreakfast = gcroom.WithBreakfast,
-                        HowManyPerson = gcroom.HowManyPerson
-                    };
+            //var q = from room in db.Rooms
+            //        join gcroom in db.GCRooms
+            //        on room.Id equals gcroom.RoomId
+            //        join tr in db.GCTransactions 
+            //        on gcroom.GCTransactionId equals tr.Id
+            //        where tr.GCNumber == Request.QueryString["gcId"].ToString()
+            //        select new
+            //        {
+            //            Id = gcroom.Id,
+            //            Type = room.Type,
+            //            Room = room.Room1,
+            //            WithBreakfast = gcroom.WithBreakfast,
+            //            HowManyPerson = gcroom.HowManyPerson
+            //        };
 
-            gvRoom.DataSource = q.ToList();
-            gvRoom.DataBind();
+            //gvRoom.DataSource = q.ToList();
+            //gvRoom.DataBind();
         }
 
         private void bindDinings()
         {
-            var q = from dining in db.Dinings
-                    join gcdining in db.GCRooms
-                    on dining.Id equals gcdining.DiningId
-                    join tr in db.GCTransactions
-                    on gcdining.GCTransactionId equals tr.Id
-                    where tr.GCNumber == Request.QueryString["gcId"].ToString()
-                    select new
-                    {
-                        Id = gcdining.Id,
-                        Name = dining.Name,
-                        DiningType = gcdining.DiningType,
-                        HeadCount = gcdining.HowManyDiningPerson
-                    };
+            //var q = from dining in db.Dinings
+            //        join gcdining in db.GCRooms
+            //        on dining.Id equals gcdining.DiningId
+            //        join tr in db.GCTransactions
+            //        on gcdining.GCTransactionId equals tr.Id
+            //        where tr.GCNumber == Request.QueryString["gcId"].ToString()
+            //        select new
+            //        {
+            //            Id = gcdining.Id,
+            //            Name = dining.Name,
+            //            DiningType = gcdining.DiningType,
+            //            HeadCount = gcdining.HowManyDiningPerson
+            //        };
 
-            gvDining.DataSource = q.ToList();
-            gvDining.DataBind();
+            //gvDining.DataSource = q.ToList();
+            //gvDining.DataBind();
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)
