@@ -506,6 +506,7 @@
     <Compile Include="guest\guest-gc-records.aspx.designer.cs">
       <DependentUpon>guest-gc-records.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Javascript.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
