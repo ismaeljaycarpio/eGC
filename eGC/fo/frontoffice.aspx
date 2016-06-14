@@ -50,6 +50,12 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
+                                            <asp:TemplateField HeaderText="GC Number" SortExpression="GCnumber">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
                                             <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lbtnGuestId" 
@@ -57,12 +63,6 @@
                                                         Text='<%# Eval("GuestId") %>' 
                                                         CommandName="selectGuest" 
                                                         CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField HeaderText="GC Number" SortExpression="GCnumber">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 

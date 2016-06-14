@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Panel ID="Panel1" runat="server" DefaultButton="btnSearch" CssClass="row">
         <div class="col-md-12">
-            <div class="panel panel-danger">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h5>Companies</h5>
                 </div>

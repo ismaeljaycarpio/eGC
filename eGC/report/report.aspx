@@ -6,7 +6,7 @@
     <asp:Panel ID="Panel1" runat="server" DefaultButton="btnSearch">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-danger">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h5>GC Records</h5>
                     </div>

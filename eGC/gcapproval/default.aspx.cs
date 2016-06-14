@@ -39,7 +39,7 @@ namespace eGC.gcapproval
                 if(lblGCStatus.Text == "Cancelled")
                 {
                     lblGCStatus.ForeColor = Color.Red;
-                    btnDisapprove.Visible = false;
+                    //btnDisapprove.Visible = false;
                 }
 
                 if (lblApproval.Text == "Disapproved")

@@ -6,7 +6,7 @@
     <asp:Panel ID="Panel1" runat="server" DefaultButton="btnSearch">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-danger">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h5>GC Approval</h5>
                     </div>
@@ -100,7 +100,7 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField>
+                                            <%--<asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:Button ID="btnApprove"
                                                         runat="server"
@@ -120,7 +120,7 @@
                                                         CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
                                                         CssClass="btn btn-danger btn-sm" />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
 
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />

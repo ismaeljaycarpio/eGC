@@ -69,22 +69,22 @@ namespace eGC
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!Page.IsPostBack)
-            {
-                GiftCheckDataContext db = new GiftCheckDataContext();
-                var status = (from s in db.StatusSites
-                              where s.Id == 1
-                              select s).FirstOrDefault();
+            //if(!Page.IsPostBack)
+            //{
+            //    GiftCheckDataContext db = new GiftCheckDataContext();
+            //    var status = (from s in db.StatusSites
+            //                  where s.Id == 1
+            //                  select s).FirstOrDefault();
 
-                DateTime expDate = new DateTime(2016, 9, 2);
-                //DateTime expDate = new DateTime(2016, 5, 12);
+            //    DateTime expDate = new DateTime(2016, 9, 2);
+            //    //DateTime expDate = new DateTime(2016, 5, 12);
 
-                if (status.Status == true ||
-                    DateTime.Today.Equals(expDate))
-                {
-                    Response.Redirect("~/site.html");
-                }
-            }
+            //    if (status.Status == true ||
+            //        DateTime.Today.Equals(expDate))
+            //    {
+            //        Response.Redirect("~/site.html");
+            //    }
+            //}
         }
     }
 }

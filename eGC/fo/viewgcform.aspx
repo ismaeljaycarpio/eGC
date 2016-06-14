@@ -39,37 +39,45 @@
                             <label for="txtName">Contact No</label>
                             <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
+                        <div class="col-md-4">
+                            <label for="txtContactPerson">Contact Person</label>
+                            <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </div>
                     </div>
                 </div>
 
                 <div class="panel-body">
                     <div role="form">
-                        <asp:Panel Id="pnlApprovedBy" runat="server" CssClass="col-md-4">
+                        <asp:Panel ID="pnlApprovedBy" runat="server" CssClass="col-md-4">
                             <label for="txtApprovedBy">Approved By</label>
                             <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </asp:Panel>
                         <div class="col-md-4">
                             <label for="txtName">Recommending Approval</label>
                             <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
+                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
                                 ControlToValidate="txtRecommendingApproval"
                                 CssClass="label label-danger"
-                                ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>--%>
                         </div>
+
                         <div class="col-md-4">
-                            <label for="txtAccountNo">Account No</label>
-                            <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13"
+                            <label for="txtDateIssued">Date Issued</label>
+                            <asp:TextBox ID="txtDateIssued"
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtAccountNo"
+                                ControlToValidate="txtDateIssued"
                                 CssClass="label label-danger"
-                                ErrorMessage="Account No is required"></asp:RequiredFieldValidator>
+                                ErrorMessage="Date Issued is required"></asp:RequiredFieldValidator>
                         </div>
+
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
                             <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
@@ -80,6 +88,11 @@
                                 ControlToValidate="txtRemarks"
                                 CssClass="label label-danger"
                                 ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="txtRequestedBy">Requested By</label>
+                            <asp:TextBox ID="txtRequestedBy" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
 
                         <div class="col-md-4">
@@ -121,7 +134,7 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtGCNumber">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber" 
+                            <asp:TextBox ID="txtGCNumber"
                                 runat="server"
                                 Enabled="false"
                                 CssClass="form-control"></asp:TextBox>
@@ -136,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="panel-body">
+                <%--<div class="panel-body">
                     <ul class="nav nav-tabs" id="myTab">
                         <li><a href="#roomTab" data-toggle="tab">Room</a></li>
                         <li><a href="#diningTab" data-toggle="tab">Dining</a></li>
@@ -224,7 +237,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
+
                 <div class="panel-footer">
                     <asp:Button ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" CssClass="btn btn-default" />
                 </div>

@@ -36,6 +36,10 @@
                             <label for="txtName">Contact No</label>
                             <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
+                        <div class="col-md-4">
+                            <label for="txtContactPerson">Contact Person</label>
+                            <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        </div>
                     </div>
                 </div>
 
@@ -56,17 +60,26 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Recommending Approval is required"></asp:RequiredFieldValidator>--%>
                         </div>
+
                         <div class="col-md-4">
-                            <label for="txtAccountNo">Account No</label>
-                            <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control"></asp:TextBox>
-                            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator13"
+                            <label for="txtDateIssued">Date Issued</label>
+                            <asp:TextBox ID="txtDateIssued"
+                                runat="server"
+                                CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
                                 runat="server"
                                 Display="Dynamic"
                                 ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtAccountNo"
+                                ControlToValidate="txtDateIssued"
                                 CssClass="label label-danger"
-                                ErrorMessage="Account No is required"></asp:RequiredFieldValidator>--%>
+                                ErrorMessage="Date Issued is required"></asp:RequiredFieldValidator>
                         </div>
+
+                        <div class="col-md-4">
+                            <label for="txtRequestedBy">Requested By</label>
+                            <asp:TextBox ID="txtRequestedBy" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+
                     </div>
                 </div>
 
@@ -127,7 +140,7 @@
                     </div>
                 </div>
 
-                <div class="panel-body">
+                <%--<div class="panel-body">
                     <ul class="nav nav-tabs" id="myTab">
                         <li><a href="#roomTab" data-toggle="tab">Room</a></li>
                         <li><a href="#diningTab" data-toggle="tab">Dining</a></li>
@@ -230,7 +243,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <div class="panel-footer">
                     <asp:Button ID="btnSave" runat="server" Text="Update" OnClick="btnSave_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
@@ -244,7 +257,7 @@
         <asp:HiddenField ID="TabName" runat="server" />
     </div>
 
-    <!-- Add Modal -->
+    <%--<!-- Add Modal -->
     <div id="addRoom" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -626,7 +639,7 @@
                 </asp:UpdatePanel>
             </div>
         </div>
-    </div>
+    </div>--%>
 
     <script type="text/javascript">
         $(function () {

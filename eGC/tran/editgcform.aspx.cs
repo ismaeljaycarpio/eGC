@@ -44,8 +44,9 @@ namespace eGC.tran
                     txtGCNumber.Text = tGC.GCNumber;
                     hfGCNumber.Value = tGC.GCNumber;
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
-                    //txtAccountNo.Text = tGC.AccountNo;
-                    //txtRemarks.Text = tGC.Remarks;
+                    txtDateIssued.Text = tGC.DateIssued.Value.ToString("MM/dd/yyyy");
+                    txtRequestedBy.Text = tGC.RequestedBy;
+                    txtRemarks.Text = tGC.Reason;
                     ddlGCType.SelectedValue = tGC.GCType;
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpirationDate);
 
@@ -90,40 +91,40 @@ namespace eGC.tran
 
                     txtEmail.Text = guest.Email;
                     txtContactNo.Text = guest.ContactNumber;
+                    txtContactPerson.Text = guest.EmergencyContactPerson;
+                    ////lazy load rooms
+                    //var rooms = (from r in db.Rooms
+                    //             select r).ToList();
 
-                    //lazy load rooms
-                    var rooms = (from r in db.Rooms
-                                 select r).ToList();
+                    //if (rooms.Count > 0)
+                    //{
+                    //    ddlAddRoom.DataSource = rooms.ToList();
+                    //    ddlAddRoom.DataTextField = "Room1";
+                    //    ddlAddRoom.DataValueField = "Id";
+                    //    ddlAddRoom.DataBind();
 
-                    if (rooms.Count > 0)
-                    {
-                        ddlAddRoom.DataSource = rooms.ToList();
-                        ddlAddRoom.DataTextField = "Room1";
-                        ddlAddRoom.DataValueField = "Id";
-                        ddlAddRoom.DataBind();
+                    //    ddlEditRoom.DataSource = rooms.ToList();
+                    //    ddlEditRoom.DataTextField = "Room1";
+                    //    ddlEditRoom.DataValueField = "Id";
+                    //    ddlEditRoom.DataBind();
+                    //}
 
-                        ddlEditRoom.DataSource = rooms.ToList();
-                        ddlEditRoom.DataTextField = "Room1";
-                        ddlEditRoom.DataValueField = "Id";
-                        ddlEditRoom.DataBind();
-                    }
+                    ////lazy load dining
+                    //var dining = (from d in db.Dinings
+                    //              select d).ToList();
 
-                    //lazy load dining
-                    var dining = (from d in db.Dinings
-                                  select d).ToList();
+                    //if (dining.Count > 0)
+                    //{
+                    //    ddlAddDining.DataSource = dining;
+                    //    ddlAddDining.DataTextField = "Name";
+                    //    ddlAddDining.DataValueField = "Id";
+                    //    ddlAddDining.DataBind();
 
-                    if (dining.Count > 0)
-                    {
-                        ddlAddDining.DataSource = dining;
-                        ddlAddDining.DataTextField = "Name";
-                        ddlAddDining.DataValueField = "Id";
-                        ddlAddDining.DataBind();
-
-                        ddlEditDining.DataSource = dining;
-                        ddlEditDining.DataTextField = "Name";
-                        ddlEditDining.DataValueField = "Id";
-                        ddlEditDining.DataBind();
-                    }
+                    //    ddlEditDining.DataSource = dining;
+                    //    ddlEditDining.DataTextField = "Name";
+                    //    ddlEditDining.DataValueField = "Id";
+                    //    ddlEditDining.DataBind();
+                    //}
 
                     //chk if company
                     if (guest.IsCompany == true)
@@ -163,8 +164,8 @@ namespace eGC.tran
             else if (e.CommandName.Equals("deleteRoom"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
-                hfDeleteRoomId.Value = rowId;
+                //string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
+                //hfDeleteRoomId.Value = rowId;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -199,8 +200,8 @@ namespace eGC.tran
             else if (e.CommandName.Equals("deleteDining"))
             {
                 int index = Convert.ToInt32(e.CommandArgument);
-                string rowId = ((Label)gvDining.Rows[index].FindControl("lblDiningId")).Text;
-                hfDeleteDiningId.Value = rowId;
+                //string rowId = ((Label)gvDining.Rows[index].FindControl("lblDiningId")).Text;
+                //hfDeleteDiningId.Value = rowId;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");

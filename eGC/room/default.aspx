@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-danger">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right">
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addModal">Add</button>
