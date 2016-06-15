@@ -136,9 +136,48 @@
                         <div class="col-md-4">
                             <label for="txtName">GC Number</label>
                             <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                                runat="server"
+                                Display="Dynamic"
+                                ValidationGroup="vgPrimaryAdd"
+                                ControlToValidate="txtGCNumber"
+                                CssClass="label label-danger"
+                                Enabled="false"
+                                ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                 </div>
+
+                <asp:Panel ID="pnlRoom" runat="server" CssClass="panel-body" Visible="false">
+                    <div class="col-md-4">
+                        <label for="ddlRooms">Room:</label>
+                        <asp:DropDownList ID="ddlRooms" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
+                            runat="server"
+                            Display="Dynamic"
+                            ControlToValidate="ddlRooms"
+                            CssClass="label label-danger"
+                            InitialValue="0"
+                            ErrorMessage="Room is required"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="rblRoomBreakfast">Includes:</label>
+                        <asp:RadioButtonList ID="rblRoomBreakfast" runat="server" RepeatDirection="Horizontal" CssClass="form-control">
+                            <asp:ListItem Value="True">With Breakfast</asp:ListItem>
+                            <asp:ListItem Value="False">Without Breakfast</asp:ListItem>
+                        </asp:RadioButtonList>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="txtRoomHeadCount">Head Count:</label>
+                        <asp:TextBox ID="txtRoomHeadCount" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                            runat="server"
+                            Display="Dynamic"
+                            ControlToValidate="txtRoomHeadCount"
+                            CssClass="label label-danger"
+                            ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                    </div>
+                </asp:Panel>
 
                 <%--<div class="panel-body">
                     <ul class="nav nav-tabs" id="myTab">

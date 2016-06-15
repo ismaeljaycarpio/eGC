@@ -92,29 +92,41 @@ namespace eGC.tran
                     txtEmail.Text = guest.Email;
                     txtContactNo.Text = guest.ContactNumber;
                     txtContactPerson.Text = guest.EmergencyContactPerson;
-                    ////lazy load rooms
-                    //var rooms = (from r in db.Rooms
-                    //             select r).ToList();
 
-                    //if (rooms.Count > 0)
-                    //{
-                    //    ddlAddRoom.DataSource = rooms.ToList();
-                    //    ddlAddRoom.DataTextField = "Room1";
-                    //    ddlAddRoom.DataValueField = "Id";
-                    //    ddlAddRoom.DataBind();
+                    //lazy load rooms
+                    var rooms = (from r in db.Rooms
+                                 select r).ToList();
 
-                    //    ddlEditRoom.DataSource = rooms.ToList();
-                    //    ddlEditRoom.DataTextField = "Room1";
-                    //    ddlEditRoom.DataValueField = "Id";
-                    //    ddlEditRoom.DataBind();
-                    //}
+                    if (rooms.Count > 0)
+                    {
+                        ddlRooms.DataSource = rooms.ToList();
+                        ddlRooms.DataTextField = "Room1";
+                        ddlRooms.DataValueField = "Id";
+                        ddlRooms.DataBind();
+                        ddlRooms.Items.Insert(0, new ListItem("-- Select Room --", "0"));
 
-                    ////lazy load dining
+                        //ddlAddRoom.DataSource = rooms.ToList();
+                        //ddlAddRoom.DataTextField = "Room1";
+                        //ddlAddRoom.DataValueField = "Id";
+                        //ddlAddRoom.DataBind();
+
+                        //ddlEditRoom.DataSource = rooms.ToList();
+                        //ddlEditRoom.DataTextField = "Room1";
+                        //ddlEditRoom.DataValueField = "Id";
+                        //ddlEditRoom.DataBind();
+                    }
+
+                    //lazy load dining
                     //var dining = (from d in db.Dinings
                     //              select d).ToList();
 
                     //if (dining.Count > 0)
                     //{
+                    //    ddlAddDining.DataSource = dining;
+                    //    ddlAddDining.DataTextField = "Name";
+                    //    ddlAddDining.DataValueField = "Id";
+                    //    ddlAddDining.DataBind();
+
                     //    ddlAddDining.DataSource = dining;
                     //    ddlAddDining.DataTextField = "Name";
                     //    ddlAddDining.DataValueField = "Id";
@@ -135,79 +147,16 @@ namespace eGC.tran
 
                     hlPrintForm.NavigateUrl = "~/tran/print-form.aspx?gcId=" + Request.QueryString["gcId"];
                     txtRecommendingApproval.Focus();
+
+                    //chk if rooms
+                    if(tGC.RoomId != null)
+                    {
+                        pnlRoom.Visible = true;
+                        ddlRooms.SelectedValue = tGC.RoomId.ToString();
+                        rblRoomBreakfast.SelectedValue = tGC.WithBreakfast.ToString();
+                        txtRoomHeadCount.Text = tGC.HeadCount.ToString();
+                    }
                 }
-            }
-        }
-
-        protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("editRoom"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                //load room
-                //var q = (from r in db.GCRooms
-                //         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
-                //         select r).FirstOrDefault();
-
-                //lblEditRoomId.Text = q.Id.ToString();
-                //ddlEditRoom.SelectedValue = q.RoomId.ToString();
-                //ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
-                //txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#editRoom').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
-            }
-            else if (e.CommandName.Equals("deleteRoom"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                //string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
-                //hfDeleteRoomId.Value = rowId;
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#deleteRoom').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
-            }
-        }
-
-        protected void gvDining_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("editDining"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                //load dining
-                //var q = (from r in db.GCRooms
-                //         where r.Id.Equals((int)gvDining.DataKeys[index].Value)
-                //         select r).FirstOrDefault();
-
-                //lblEditDiningId.Text = q.Id.ToString();
-                //ddlEditDining.SelectedValue = q.DiningId.ToString();
-                //ddlEditDiningType.SelectedValue = q.DiningType;
-                //txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#editDining').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
-            }
-            else if (e.CommandName.Equals("deleteDining"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                //string rowId = ((Label)gvDining.Rows[index].FindControl("lblDiningId")).Text;
-                //hfDeleteDiningId.Value = rowId;
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#deleteDining').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
         }
 
@@ -503,6 +452,78 @@ namespace eGC.tran
                 txtExpirationDate.Enabled = false;
                 RequiredFieldValidator1.Enabled = false;
                 txtExpirationDate.Text = String.Empty;
+            }
+        }
+
+        protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("editRoom"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                //load room
+                //var q = (from r in db.GCRooms
+                //         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
+                //         select r).FirstOrDefault();
+
+                //lblEditRoomId.Text = q.Id.ToString();
+                //ddlEditRoom.SelectedValue = q.RoomId.ToString();
+                //ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
+                //txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editRoom').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+            }
+            else if (e.CommandName.Equals("deleteRoom"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                //string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
+                //hfDeleteRoomId.Value = rowId;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#deleteRoom').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
+            }
+        }
+
+        protected void gvDining_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("editDining"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                //load dining
+                //var q = (from r in db.GCRooms
+                //         where r.Id.Equals((int)gvDining.DataKeys[index].Value)
+                //         select r).FirstOrDefault();
+
+                //lblEditDiningId.Text = q.Id.ToString();
+                //ddlEditDining.SelectedValue = q.DiningId.ToString();
+                //ddlEditDiningType.SelectedValue = q.DiningType;
+                //txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editDining').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+            }
+            else if (e.CommandName.Equals("deleteDining"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                //string rowId = ((Label)gvDining.Rows[index].FindControl("lblDiningId")).Text;
+                //hfDeleteDiningId.Value = rowId;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#deleteDining').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
         }
     }
