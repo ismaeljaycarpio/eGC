@@ -116,85 +116,6 @@ namespace eGC.gcapproval
             }
         }
 
-        protected void LinqDataSource1_Selecting(object sender, LinqDataSourceSelectEventArgs e)
-        {
-            string strSearch = txtSearch.Text;
-
-            if(ddlCompanyName.SelectedValue == "0")
-            {
-                var q = (from guest in db.Guests
-                         join gctran in db.GCTransactions
-                         on guest.Id equals gctran.GuestId
-                         where
-                         (
-                         guest.GuestId.Contains(strSearch) ||
-                         guest.LastName.Contains(strSearch) ||
-                         guest.FirstName.Contains(strSearch) ||
-                         guest.MiddleName.Contains(strSearch) ||
-                         gctran.ApprovalStatus.Contains(strSearch) ||
-                         gctran.GCNumber.Contains(strSearch)
-                         ) &&
-                         (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
-                         (gctran.IsArchive == false)
-                         select new
-                         {
-                             Id = gctran.Id,
-                             GuestId = guest.Id,
-                             GuestIdName = guest.GuestId,
-                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
-                             Number = guest.ContactNumber,
-                             GCNumber = gctran.GCNumber,
-                             ExpiryDate = gctran.ExpirationDate,
-                             Status = gctran.StatusGC,
-                             Approval = gctran.ApprovalStatus,
-                             CancellationReason = gctran.CancellationReason,
-                             CancelledDate = gctran.CancelledDate,
-                             Type = gctran.GCType
-                         }).ToList();
-
-                e.Result = q;
-            }
-            else
-            {
-                var q = (from guest in db.Guests
-                         join gctran in db.GCTransactions
-                         on guest.Id equals gctran.GuestId
-                         where
-                         (
-                         guest.GuestId.Contains(strSearch) ||
-                         guest.LastName.Contains(strSearch) ||
-                         guest.FirstName.Contains(strSearch) ||
-                         guest.MiddleName.Contains(strSearch) ||
-                         gctran.ApprovalStatus.Contains(strSearch) ||
-                         gctran.GCNumber.Contains(strSearch)
-                         ) &&
-                         (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
-                         (gctran.IsArchive == false) &&
-                         (guest.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue))
-                         select new
-                         {
-                             Id = gctran.Id,
-                             GuestId = guest.Id,
-                             GuestIdName = guest.GuestId,
-                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
-                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
-                             Number = guest.ContactNumber,
-                             GCNumber = gctran.GCNumber,
-                             ExpiryDate = gctran.ExpirationDate,
-                             Status = gctran.StatusGC,
-                             Approval = gctran.ApprovalStatus,
-                             CancellationReason = gctran.CancellationReason,
-                             CancelledDate = gctran.CancelledDate,
-                             Type = gctran.GCType
-                         }).ToList();
-
-                e.Result = q;
-            }
-            
-            txtSearch.Focus();
-        }
-
         protected void btnConfirmApproveGC_Click(object sender, EventArgs e)
         {
             int Id = Convert.ToInt32(hfApproveGCId.Value);
@@ -270,6 +191,101 @@ namespace eGC.gcapproval
                 tr.StatusGC = "Expired";
                 db.SubmitChanges();
             }
+        }
+
+        protected void LinqDataSource1_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        {
+            string strSearch = txtSearch.Text;
+
+            if (ddlCompanyName.SelectedValue == "0")
+            {
+                var q = (from guest in db.Guests
+                         join gctran in db.GCTransactions
+                         on guest.Id equals gctran.GuestId
+                         where
+                         (
+                         guest.GuestId.Contains(strSearch) ||
+                         guest.LastName.Contains(strSearch) ||
+                         guest.FirstName.Contains(strSearch) ||
+                         guest.MiddleName.Contains(strSearch) ||
+                         gctran.GCNumber.Contains(strSearch) ||
+                         gctran.GCType.Contains(strSearch) ||
+                         gctran.RequestedBy.Contains(strSearch) ||
+                         gctran.RecommendingApproval.Contains(strSearch) ||
+                         gctran.StatusGC.Contains(strSearch) ||
+                         gctran.ApprovalStatus.Contains(strSearch) ||
+                         gctran.CancellationReason.Contains(strSearch) ||
+                         gctran.Room.Room1.Contains(strSearch) ||
+                         gctran.Dining.Name.Contains(strSearch) ||
+                         gctran.DiningType.DiningType1.Contains(strSearch)
+                         ) &&
+                         (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
+                         (gctran.IsArchive == false)
+                         select new
+                         {
+                             Id = gctran.Id,
+                             GuestId = guest.Id,
+                             GuestIdName = guest.GuestId,
+                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                             Number = guest.ContactNumber,
+                             GCNumber = gctran.GCNumber,
+                             ExpiryDate = gctran.ExpirationDate,
+                             Status = gctran.StatusGC,
+                             Approval = gctran.ApprovalStatus,
+                             CancellationReason = gctran.CancellationReason,
+                             CancelledDate = gctran.CancelledDate,
+                             Type = gctran.GCType
+                         }).ToList();
+
+                e.Result = q;
+            }
+            else
+            {
+                var q = (from guest in db.Guests
+                         join gctran in db.GCTransactions
+                         on guest.Id equals gctran.GuestId
+                         where
+                         (
+                         guest.GuestId.Contains(strSearch) ||
+                         guest.LastName.Contains(strSearch) ||
+                         guest.FirstName.Contains(strSearch) ||
+                         guest.MiddleName.Contains(strSearch) ||
+                         gctran.GCNumber.Contains(strSearch) ||
+                         gctran.GCType.Contains(strSearch) ||
+                         gctran.RequestedBy.Contains(strSearch) ||
+                         gctran.RecommendingApproval.Contains(strSearch) ||
+                         gctran.StatusGC.Contains(strSearch) ||
+                         gctran.ApprovalStatus.Contains(strSearch) ||
+                         gctran.CancellationReason.Contains(strSearch) ||
+                         gctran.Room.Room1.Contains(strSearch) ||
+                         gctran.Dining.Name.Contains(strSearch) ||
+                         gctran.DiningType.DiningType1.Contains(strSearch)
+                         ) &&
+                         (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
+                         (gctran.IsArchive == false) &&
+                         (guest.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue))
+                         select new
+                         {
+                             Id = gctran.Id,
+                             GuestId = guest.Id,
+                             GuestIdName = guest.GuestId,
+                             FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
+                             CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
+                             Number = guest.ContactNumber,
+                             GCNumber = gctran.GCNumber,
+                             ExpiryDate = gctran.ExpirationDate,
+                             Status = gctran.StatusGC,
+                             Approval = gctran.ApprovalStatus,
+                             CancellationReason = gctran.CancellationReason,
+                             CancelledDate = gctran.CancelledDate,
+                             Type = gctran.GCType
+                         }).ToList();
+
+                e.Result = q;
+            }
+
+            txtSearch.Focus();
         }
     }
 }

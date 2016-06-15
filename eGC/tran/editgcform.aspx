@@ -8,7 +8,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h5>Update GC
-                        <asp:HyperLink ID="hlPrintForm"                             
+                        <asp:HyperLink ID="hlPrintForm"
                             runat="server">
                             <span class="glyphicon glyphicon-print pull-right"></span>
                         </asp:HyperLink>
@@ -45,7 +45,7 @@
 
                 <div class="panel-body">
                     <div role="form">
-                        <asp:Panel Id="pnlApprovedBy" runat="server" CssClass="col-md-4">
+                        <asp:Panel ID="pnlApprovedBy" runat="server" CssClass="col-md-4">
                             <label for="txtApprovedBy">Approved By</label>
                             <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </asp:Panel>
@@ -133,7 +133,7 @@
 
                 <div class="panel-body">
                     <div role="form">
-                        <div class="col-lg-10">
+                        <div class="col-md-4">
                             <label for="txtName">GC Number</label>
                             <asp:TextBox ID="txtGCNumber" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
@@ -245,10 +245,10 @@
                     </div>
                 </div>--%>
 
-                <div class="panel-footer">
+                <div class="panel-footer text-center">
                     <asp:Button ID="btnSave" runat="server" Text="Update" OnClick="btnSave_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
-                    <%--<asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
-                    <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />--%>
+                    <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
+                    <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />
                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-default" />
                 </div>
 

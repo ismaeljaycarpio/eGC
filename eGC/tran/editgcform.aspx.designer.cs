@@ -211,6 +211,24 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
+        /// btnApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnApprove;
+        
+        /// <summary>
+        /// btnDisapprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDisapprove;
+        
+        /// <summary>
         /// btnCancel control.
         /// </summary>
         /// <remarks>

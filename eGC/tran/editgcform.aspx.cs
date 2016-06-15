@@ -484,6 +484,19 @@ namespace eGC.tran
             {
                 txtExpirationDate.Enabled = true;
                 RequiredFieldValidator1.Enabled = true;
+
+                var q = (from gc in db.GCTransactions
+                         where gc.GCNumber == Request.QueryString["gcId"]
+                         select gc).FirstOrDefault().ExpirationDate;
+
+                if(q.HasValue)
+                {
+                    txtExpirationDate.Text = String.Format(q.Value.ToString("MM/dd/yyyy"));
+                }
+                else
+                {
+                    txtExpirationDate.Text = "";
+                }
             }
             else
             {
