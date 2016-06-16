@@ -40,11 +40,12 @@ namespace eGC.guest
                     Bitmap originalBMP = new Bitmap(FileUpload1.FileContent);
 
                     // Calculate the new image dimensions
-                    int origWidth = originalBMP.Width;
-                    int origHeight = originalBMP.Height;
-                    int sngRatio = origWidth / origHeight;
+                    decimal origWidth = originalBMP.Width;
+                    decimal origHeight = originalBMP.Height;
+                    decimal sngRatio = origWidth / origHeight;
                     int newWidth = 200;
-                    int newHeight = newWidth / sngRatio;
+                    decimal newHeight_temp = newWidth / sngRatio;
+                    int newHeight = Convert.ToInt32(newHeight_temp);
 
                     Bitmap newBMP = new Bitmap(originalBMP, newWidth, newHeight);
                     Graphics oGraphics = Graphics.FromImage(newBMP);
@@ -69,11 +70,12 @@ namespace eGC.guest
                     Bitmap originalBMP = new Bitmap(FileUpload2.FileContent);
 
                     // Calculate the new image dimensions
-                    int origWidth = originalBMP.Width;
-                    int origHeight = originalBMP.Height;
-                    int sngRatio = origWidth / origHeight;
+                    decimal origWidth = originalBMP.Width;
+                    decimal origHeight = originalBMP.Height;
+                    decimal sngRatio = origWidth / origHeight;
                     int newWidth = 200;
-                    int newHeight = newWidth / sngRatio;
+                    decimal newHeight_temp = newWidth / sngRatio;
+                    int newHeight = Convert.ToInt32(newHeight_temp);
 
                     Bitmap newBMP = new Bitmap(originalBMP, newWidth, newHeight);
                     Graphics oGraphics = Graphics.FromImage(newBMP);

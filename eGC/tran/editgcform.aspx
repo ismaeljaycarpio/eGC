@@ -157,6 +157,7 @@
                             Display="Dynamic"
                             ControlToValidate="ddlRooms"
                             CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
                             InitialValue="0"
                             ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                     </div>
@@ -175,7 +176,58 @@
                             Display="Dynamic"
                             ControlToValidate="txtRoomHeadCount"
                             CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
                             ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                    </div>
+                </asp:Panel>
+
+                <asp:Panel ID="pnlDining" runat="server" CssClass="panel-body" Visible="false">
+                    <div class="col-md-4">
+                        <label for="ddlDining">Dining:</label>
+                        <asp:DropDownList ID="ddlDining" runat="server" CssClass="form-control">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                            runat="server"
+                            Display="Dynamic"
+                            ControlToValidate="ddlDining"
+                            CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
+                            InitialValue="0"
+                            ErrorMessage="Dining is required"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="ddlDiningType">Dining Type:</label>
+                        <asp:DropDownList ID="ddlDiningType" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
+                            runat="server"
+                            Display="Dynamic"
+                            ControlToValidate="ddlDiningType"
+                            CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
+                            InitialValue="0"
+                            ErrorMessage="Dining Type is required"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="txtDiningHeadCount">Head Count:</label>
+                        <asp:TextBox ID="txtDiningHeadCount" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                            runat="server"
+                            Display="Dynamic"
+                            ControlToValidate="txtDiningHeadCount"
+                            CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
+                            ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                    </div>
+                </asp:Panel>
+
+                <asp:Panel ID="pnlCancellation" runat="server" Visible="false" CssClass="panel-body">
+                    <div class="col-md-4">
+                        <label for="txtDateCancelled">Date Cancelled:</label>
+                        <asp:TextBox ID="txtDateCancelled" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="txtCancellationReason">Reason for Cancellation</label>
+                        <asp:TextBox ID="txtCancellationReason" runat="server" Enabled="false" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                     </div>
                 </asp:Panel>
 
@@ -286,7 +338,7 @@
 
                 <div class="panel-footer text-center">
                     <asp:Button ID="btnSave" runat="server" Text="Update" OnClick="btnSave_Click" CssClass="btn btn-primary" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
-                    <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" />
+                    <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-success" OnClick="btnApprove_Click" CausesValidation="true" ValidationGroup="vgPrimaryAdd" />
                     <asp:Button ID="btnDisapprove" runat="server" Text="Dispprove" CssClass="btn btn-warning" OnClick="btnDisapprove_Click" />
                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-default" />
                 </div>
@@ -693,6 +745,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#<%=txtExpirationDate.ClientID%>').datepicker();
+            $('#<%=txtDateIssued.ClientID%>').datepicker();
         });
     </script>
 

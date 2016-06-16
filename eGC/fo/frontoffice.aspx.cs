@@ -108,6 +108,45 @@ namespace eGC.fo
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
             }
+            else if (e.CommandName.Equals("redirectGuest"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lbtnGuestId")).Text;
+
+                //chk if company
+                var g = (from gu in db.Guests
+                         where gu.Id == Convert.ToInt32(rowId)
+                         select gu).FirstOrDefault();
+
+                if (g.IsCompany == true)
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + rowId);
+                }
+                else
+                {
+                    Response.Redirect("~/guest/editguest.aspx?guestid=" + rowId);
+                }
+            }
+            else if (e.CommandName.Equals("redirectCompany"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lbtnGuestId")).Text;
+
+                //chk if company
+                var g = (from gu in db.Guests
+                         where gu.Id == Convert.ToInt32(rowId)
+                         select gu).FirstOrDefault();
+
+                if(g.IsCompany == true)
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + rowId);
+                }
+                else
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + g.CompanyId.ToString());
+                }
+                    
+            }
         }
 
         protected void bindGridview()
@@ -277,7 +316,8 @@ namespace eGC.fo
                          select new
                          {
                              Id = gctran.Id,
-                             GuestId = guest.GuestId,
+                             GuestId = guest.Id,
+                             GuestIdName = guest.GuestId,
                              FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
@@ -310,7 +350,8 @@ namespace eGC.fo
                          select new
                          {
                              Id = gctran.Id,
-                             GuestId = guest.GuestId,
+                             GuestId = guest.Id,
+                             GuestIdName = guest.GuestId,
                              FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
                              CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                              Number = guest.ContactNumber,
@@ -330,24 +371,24 @@ namespace eGC.fo
             if(e.Row.RowType == DataControlRowType.DataRow)
             {
                 Label lblGCStatus = e.Row.FindControl("lblGCStatus") as Label;
-                Button btnUse = e.Row.FindControl("btnUsed") as Button;
-                Button btnCancel = e.Row.FindControl("btnCancelled") as Button;
+                //Button btnUse = e.Row.FindControl("btnUsed") as Button;
+                //Button btnCancel = e.Row.FindControl("btnCancelled") as Button;
 
                 if(lblGCStatus.Text == "Used")
                 {
                     lblGCStatus.CssClass = "badge btn-info";
-                    btnUse.Text = "Complete";
-                    btnUse.CssClass = "btn btn-primary";
+                    //btnUse.Text = "Complete";
+                    //btnUse.CssClass = "btn btn-primary";
                 }
                 else if(lblGCStatus.Text == "Completed")
                 {
-                    btnUse.Visible = false;
-                    btnCancel.Visible = false;
-                    lblGCStatus.CssClass = "badge btn-primary";
+                    //btnUse.Visible = false;
+                    //btnCancel.Visible = false;
+                    lblGCStatus.CssClass = "badge btn-success";
                 }
                 else if(lblGCStatus.Text == "Cancelled")
                 {
-
+                    lblGCStatus.CssClass = "badge btn-danger";
                 }
             }
         }
@@ -366,7 +407,7 @@ namespace eGC.fo
             ddlCompanyName.DataTextField = "CompanyName";
             ddlCompanyName.DataValueField = "Id";
             ddlCompanyName.DataBind();
-            ddlCompanyName.Items.Insert(0, new ListItem("--Select Company--", "0"));
+            ddlCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
         }
 
         private void checkExpiration()

@@ -42,7 +42,7 @@ namespace eGC.tran
                     int id = tGC.Id;
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
-                    hfGCNumber.Value = tGC.GCNumber;
+                    hfGCNumber.Value = tGC.GCNumber; //store old gc number to server control in case of modification
                     txtRecommendingApproval.Text = tGC.RecommendingApproval;
                     txtDateIssued.Text = tGC.DateIssued.Value.ToString("MM/dd/yyyy");
                     txtRequestedBy.Text = tGC.RequestedBy;
@@ -117,26 +117,42 @@ namespace eGC.tran
                     }
 
                     //lazy load dining
-                    //var dining = (from d in db.Dinings
-                    //              select d).ToList();
+                    var dining = (from d in db.Dinings
+                                  select d).ToList();
 
-                    //if (dining.Count > 0)
-                    //{
-                    //    ddlAddDining.DataSource = dining;
-                    //    ddlAddDining.DataTextField = "Name";
-                    //    ddlAddDining.DataValueField = "Id";
-                    //    ddlAddDining.DataBind();
+                    if (dining.Count > 0)
+                    {
+                        ddlDining.DataSource = dining;
+                        ddlDining.DataTextField = "Name";
+                        ddlDining.DataValueField = "Id";
+                        ddlDining.DataBind();
+                        ddlDining.Items.Insert(0, new ListItem("-- Select Dining --", "0"));
 
-                    //    ddlAddDining.DataSource = dining;
-                    //    ddlAddDining.DataTextField = "Name";
-                    //    ddlAddDining.DataValueField = "Id";
-                    //    ddlAddDining.DataBind();
+                        //ddlAddDining.DataSource = dining;
+                        //ddlAddDining.DataTextField = "Name";
+                        //ddlAddDining.DataValueField = "Id";
+                        //ddlAddDining.DataBind();
 
-                    //    ddlEditDining.DataSource = dining;
-                    //    ddlEditDining.DataTextField = "Name";
-                    //    ddlEditDining.DataValueField = "Id";
-                    //    ddlEditDining.DataBind();
-                    //}
+                        //ddlEditDining.DataSource = dining;
+                        //ddlEditDining.DataTextField = "Name";
+                        //ddlEditDining.DataValueField = "Id";
+                        //ddlEditDining.DataBind();
+                    }
+
+
+                    //lazy load dining type
+                    var diningtype = (from dt in db.DiningTypes
+                                      where dt.Active == true
+                                      select dt).ToList();
+
+                    if(diningtype.Count > 0)
+                    {
+                        ddlDiningType.DataSource = diningtype;
+                        ddlDiningType.DataTextField = "DiningType1";
+                        ddlDiningType.DataValueField = "Id";
+                        ddlDiningType.DataBind();
+                        ddlDiningType.Items.Insert(0, new ListItem("-- Select Dining Type --", "0"));
+                    }
 
                     //chk if company
                     if (guest.IsCompany == true)
@@ -156,12 +172,31 @@ namespace eGC.tran
                         rblRoomBreakfast.SelectedValue = tGC.WithBreakfast.ToString();
                         txtRoomHeadCount.Text = tGC.HeadCount.ToString();
                     }
+                    else if(tGC.DiningId != null)
+                    {
+                        pnlDining.Visible = true;
+                        ddlDining.SelectedValue = tGC.DiningId.ToString();
+                        ddlDiningType.SelectedValue = tGC.DiningTypeId.ToString();
+                        txtDiningHeadCount.Text = tGC.HeadCount.ToString();
+                    }
+
+                    //chk if cancelled
+                    if(tGC.StatusGC == "Cancelled")
+                    {
+                        pnlCancellation.Visible = true;
+                        txtDateCancelled.Text = tGC.CancelledDate.Value.ToString("MM/dd/yyyy");
+                        txtCancellationReason.Text = tGC.CancellationReason;
+                    }
                 }
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            GCTransaction gc = (from tr in db.GCTransactions
+                                    where tr.GCNumber == Request.QueryString["gcId"]
+                                    select tr).FirstOrDefault();
+
             //chk if modified gc number from prev
             if(txtGCNumber.Text != hfGCNumber.Value)
             {
@@ -172,62 +207,181 @@ namespace eGC.tran
                 if (gcs.Count > 0)
                 {
                     //show duplicate gc
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append(@"<script type='text/javascript'>");
-                    sb.Append("$('#duplicateGCModal').modal('show');");
-                    sb.Append(@"</script>");
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "HideShowModalScript", sb.ToString(), false);               
+                    Javascript.ShowModal(this, this, "duplicateGCModal");            
                 }
                 else
                 {
-                    var tran = (from tr in db.GCTransactions
-                                where tr.GCNumber == Request.QueryString["gcId"]
-                                select tr).FirstOrDefault();
+                    gc.GCNumber = txtGCNumber.Text;                    
+                }
+            }
 
+            gc.DateIssued = Convert.ToDateTime(txtDateIssued.Text);
+            gc.GCType = ddlGCType.SelectedItem.Text;
 
-                    tran.GCNumber = txtGCNumber.Text;
-                    tran.RecommendingApproval = txtRecommendingApproval.Text;
-                    //tran.AccountNo = txtAccountNo.Text;
-                    //tran.Remarks = txtRemarks.Text;
-                    tran.GCType = ddlGCType.SelectedValue;
+            if (txtExpirationDate.Text != String.Empty)
+            {
+                gc.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
+            }
+            else
+            {
+                gc.ExpirationDate = null;
+            }
 
-                    if (txtExpirationDate.Text != String.Empty)
-                    {
-                        tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
-                    }
-                    else
-                    {
-                        tran.ExpirationDate = null;
-                    }
+            gc.Reason = txtRemarks.Text;
+            gc.RequestedBy = txtRequestedBy.Text;
+            gc.RecommendingApproval = txtRecommendingApproval.Text;
 
-                    db.SubmitChanges();
-                    Response.Redirect("~/gcapproval/default.aspx");
+            //chk if rooms
+            if (gc.RoomId != null)
+            {
+                gc.RoomId = Convert.ToInt32(ddlRooms.SelectedValue);
+                gc.WithBreakfast = Convert.ToBoolean(rblRoomBreakfast.SelectedValue);
+                gc.HeadCount = Convert.ToInt32(txtRoomHeadCount.Text);
+            }
+            else if (gc.DiningId != null)
+            {
+                gc.DiningId = Convert.ToInt32(ddlDining.SelectedValue);
+                gc.DiningTypeId = Convert.ToInt32(ddlDiningType.SelectedValue);
+                gc.HeadCount = Convert.ToInt32(txtDiningHeadCount.Text);
+            }
+
+            db.SubmitChanges();
+            Response.Redirect("~/gcapproval/default.aspx");
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/gcapproval/default.aspx");
+        }
+
+        protected void btnApprove_Click(object sender, EventArgs e)
+        {
+            //chk gc
+            var gc = (from g in db.GCTransactions
+                      where g.GCNumber == Request.QueryString["gcId"]
+                      select g).FirstOrDefault();
+
+            //check if cancelled
+            if (gc.StatusGC == "Cancelled")
+            {
+                gc.IsArchive = true;
+            }
+
+            gc.ApprovedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
+            gc.ApprovalStatus = "Approved";
+            db.SubmitChanges();
+            Response.Redirect("~/gcapproval/default.aspx");
+        }
+
+        protected void btnDisapprove_Click(object sender, EventArgs e)
+        {
+            //chk gc
+            var gc = (from g in db.GCTransactions
+                      where g.GCNumber == Request.QueryString["gcId"]
+                      select g).FirstOrDefault();
+
+            gc.ApprovalStatus = "Disapproved";
+            db.SubmitChanges();
+            Response.Redirect("~/gcapproval/default.aspx");
+        }
+
+        protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlGCType.SelectedValue == "Representation")
+            {
+                txtExpirationDate.Enabled = true;
+                RequiredFieldValidator1.Enabled = true;
+
+                var q = (from gc in db.GCTransactions
+                         where gc.GCNumber == Request.QueryString["gcId"]
+                         select gc).FirstOrDefault().ExpirationDate;
+
+                if(q.HasValue)
+                {
+                    txtExpirationDate.Text = String.Format(q.Value.ToString("MM/dd/yyyy"));
+                }
+                else
+                {
+                    txtExpirationDate.Text = "";
                 }
             }
             else
             {
-                var tran = (from tr in db.GCTransactions
-                            where tr.GCNumber == Request.QueryString["gcId"]
-                            select tr).FirstOrDefault();
+                txtExpirationDate.Enabled = false;
+                RequiredFieldValidator1.Enabled = false;
+                txtExpirationDate.Text = String.Empty;
+            }
+        }
 
+        protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("editRoom"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
 
-                //tran.GCNumber = txtGCNumber.Text;
-                tran.RecommendingApproval = txtRecommendingApproval.Text;
-                //tran.AccountNo = txtAccountNo.Text;
-                //tran.Remarks = txtRemarks.Text;
-                tran.GCType = ddlGCType.SelectedValue;
+                //load room
+                //var q = (from r in db.GCRooms
+                //         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
+                //         select r).FirstOrDefault();
 
-                if (txtExpirationDate.Text != String.Empty)
-                {
-                    tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
-                }
-                else
-                {
-                    tran.ExpirationDate = null;
-                }
+                //lblEditRoomId.Text = q.Id.ToString();
+                //ddlEditRoom.SelectedValue = q.RoomId.ToString();
+                //ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
+                //txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
 
-                db.SubmitChanges();
-                Response.Redirect("~/gcapproval/default.aspx");
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editRoom').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+            }
+            else if (e.CommandName.Equals("deleteRoom"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                //string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
+                //hfDeleteRoomId.Value = rowId;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#deleteRoom').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
+            }
+        }
+
+        protected void gvDining_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("editDining"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                //load dining
+                //var q = (from r in db.GCRooms
+                //         where r.Id.Equals((int)gvDining.DataKeys[index].Value)
+                //         select r).FirstOrDefault();
+
+                //lblEditDiningId.Text = q.Id.ToString();
+                //ddlEditDining.SelectedValue = q.DiningId.ToString();
+                //ddlEditDiningType.SelectedValue = q.DiningType;
+                //txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#editDining').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+            }
+            else if (e.CommandName.Equals("deleteDining"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                //string rowId = ((Label)gvDining.Rows[index].FindControl("lblDiningId")).Text;
+                //hfDeleteDiningId.Value = rowId;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#deleteDining').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
             }
         }
 
@@ -351,11 +505,6 @@ namespace eGC.tran
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteHideModalScript", sb.ToString(), false);
         }
 
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/gcapproval/default.aspx");
-        }
-
         private void bindRooms()
         {
             //var q = from room in db.Rooms
@@ -395,136 +544,6 @@ namespace eGC.tran
 
             //gvDining.DataSource = q.ToList();
             //gvDining.DataBind();
-        }
-
-        protected void btnApprove_Click(object sender, EventArgs e)
-        {
-            //chk gc
-            var gc = (from g in db.GCTransactions
-                      where g.GCNumber == Request.QueryString["gcId"]
-                      select g).FirstOrDefault();
-
-            //check if cancelled
-            if (gc.StatusGC == "Cancelled")
-            {
-                gc.IsArchive = true;
-            }
-
-            gc.ApprovalStatus = "Approved";
-            db.SubmitChanges();
-            Response.Redirect("~/gcapproval/default.aspx");
-        }
-
-        protected void btnDisapprove_Click(object sender, EventArgs e)
-        {
-            //chk gc
-            var gc = (from g in db.GCTransactions
-                      where g.GCNumber == Request.QueryString["gcId"]
-                      select g).FirstOrDefault();
-
-            gc.ApprovalStatus = "Disapproved";
-            db.SubmitChanges();
-            Response.Redirect("~/gcapproval/default.aspx");
-        }
-
-        protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ddlGCType.SelectedValue == "Representation")
-            {
-                txtExpirationDate.Enabled = true;
-                RequiredFieldValidator1.Enabled = true;
-
-                var q = (from gc in db.GCTransactions
-                         where gc.GCNumber == Request.QueryString["gcId"]
-                         select gc).FirstOrDefault().ExpirationDate;
-
-                if(q.HasValue)
-                {
-                    txtExpirationDate.Text = String.Format(q.Value.ToString("MM/dd/yyyy"));
-                }
-                else
-                {
-                    txtExpirationDate.Text = "";
-                }
-            }
-            else
-            {
-                txtExpirationDate.Enabled = false;
-                RequiredFieldValidator1.Enabled = false;
-                txtExpirationDate.Text = String.Empty;
-            }
-        }
-
-        protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("editRoom"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                //load room
-                //var q = (from r in db.GCRooms
-                //         where r.Id.Equals((int)gvRoom.DataKeys[index].Value)
-                //         select r).FirstOrDefault();
-
-                //lblEditRoomId.Text = q.Id.ToString();
-                //ddlEditRoom.SelectedValue = q.RoomId.ToString();
-                //ddlEditRoomBreakfast.SelectedValue = q.WithBreakfast;
-                //txtEditRoomHeadCount.Text = q.HowManyPerson.ToString();
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#editRoom').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
-            }
-            else if (e.CommandName.Equals("deleteRoom"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                //string rowId = ((Label)gvRoom.Rows[index].FindControl("lblRowId")).Text;
-                //hfDeleteRoomId.Value = rowId;
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#deleteRoom').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
-            }
-        }
-
-        protected void gvDining_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("editDining"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                //load dining
-                //var q = (from r in db.GCRooms
-                //         where r.Id.Equals((int)gvDining.DataKeys[index].Value)
-                //         select r).FirstOrDefault();
-
-                //lblEditDiningId.Text = q.Id.ToString();
-                //ddlEditDining.SelectedValue = q.DiningId.ToString();
-                //ddlEditDiningType.SelectedValue = q.DiningType;
-                //txtEditDiningHeadCount.Text = q.HowManyDiningPerson.ToString();
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#editDining').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
-            }
-            else if (e.CommandName.Equals("deleteDining"))
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                //string rowId = ((Label)gvDining.Rows[index].FindControl("lblDiningId")).Text;
-                //hfDeleteDiningId.Value = rowId;
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(@"<script type='text/javascript'>");
-                sb.Append("$('#deleteDining').modal('show');");
-                sb.Append(@"</script>");
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteShowModalScript", sb.ToString(), false);
-            }
         }
     }
 }

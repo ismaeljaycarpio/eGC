@@ -139,6 +139,33 @@ namespace eGC.gcapproval {
         protected global::System.Web.UI.WebControls.Button btnConfirmDisapproveGC;
         
         /// <summary>
+        /// UpdatePanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        
+        /// <summary>
+        /// hfDeleteGCId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfDeleteGCId;
+        
+        /// <summary>
+        /// btnConfirmDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmDelete;
+        
+        /// <summary>
         /// LinqDataSource1 control.
         /// </summary>
         /// <remarks>

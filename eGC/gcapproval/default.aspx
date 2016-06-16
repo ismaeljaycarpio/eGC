@@ -69,23 +69,28 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestIdName">
+                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestIdName" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lbtnGuestIdName" runat="server" Text='<%# Eval("GuestIdName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
+                                            <asp:TemplateField HeaderText="Name" SortExpression="FullName">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnFullName" runat="server" Text='<%# Eval("FullName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
                                             <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
                                             <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
 
-                                            <asp:TemplateField HeaderText="Approval" SortExpression="Approval">
+                                            <asp:TemplateField HeaderText="Approval" SortExpression="Approval" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblApproval" runat="server" Text='<%# Eval("Approval") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="GC Status" SortExpression="Status">
+                                            <asp:TemplateField HeaderText="Status" SortExpression="Status">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
                                                 </ItemTemplate>
@@ -93,8 +98,8 @@
 
                                             <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
                                             <asp:BoundField DataField="CancelledDate" HeaderText="Date Cancelled" DataFormatString="{0:d}" SortExpression="CancelledDate" />
-                                           
-                                             <asp:TemplateField HeaderText="Cancellation Reason" SortExpression="CancellationReason">
+
+                                            <asp:TemplateField HeaderText="Cancellation Reason" SortExpression="CancellationReason">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCancellationReason" runat="server" Text='<%# Eval("CancellationReason") %>'></asp:Label>
                                                 </ItemTemplate>
@@ -121,6 +126,17 @@
                                                         CssClass="btn btn-danger btn-sm" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>--%>
+
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:Button ID="btnDelete"
+                                                        runat="server"
+                                                        Text="Delete"
+                                                        CommandName="deleteRecord"
+                                                        CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
+                                                        CssClass="btn btn-danger btn-sm" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
@@ -190,6 +206,39 @@
                                 CssClass="btn btn-danger"
                                 Text="Disapprove"
                                 OnClick="btnConfirmDisapproveGC_Click" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnConfirmDisapproveGC" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete GC</h4>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this GC ?
+                            <asp:HiddenField ID="hfDeleteGCId" runat="server" />
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnConfirmDelete"
+                                runat="server"
+                                CssClass="btn btn-danger"
+                                Text="Disapprove"
+                                OnClick="btnConfirmDelete_Click" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                     </ContentTemplate>

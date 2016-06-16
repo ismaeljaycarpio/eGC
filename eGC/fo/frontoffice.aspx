@@ -50,39 +50,50 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
+                                            <asp:TemplateField HeaderText="ID" Visible="false">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestIdName" Visible="false">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnGuestIdName" runat="server" Text='<%# Eval("GuestIdName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
                                             <asp:TemplateField HeaderText="GC Number" SortExpression="GCnumber">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
+                                            <asp:TemplateField HeaderText="Name" SortExpression="FullName">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lbtnGuestId" 
-                                                        runat="server"
-                                                        Text='<%# Eval("GuestId") %>' 
-                                                        CommandName="selectGuest" 
-                                                        CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    <asp:LinkButton ID="lbtnFullName" runat="server" Text='<%# Eval("FullName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
-                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
+                                            <asp:TemplateField HeaderText="Company" SortExpression="CompanyName">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnCompany" runat="server" Text='<%# Eval("CompanyName") %>' CommandName="redirectCompany" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
                                             <asp:BoundField DataField="Number" HeaderText="Contact No" SortExpression="Number" />
                                             <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
+                                            <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
 
                                             <asp:TemplateField HeaderText="Status" SortExpression="Status">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblGCStatus" 
+                                                    <asp:Label ID="lblGCStatus"
                                                         runat="server"
-                                                        CssClass="badge" 
+                                                        CssClass="badge"
                                                         Text='<%# Eval("Status") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
-
-                                            <asp:TemplateField>
+                                            <%--<asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:Button ID="btnUsed"
                                                         runat="server"
@@ -102,7 +113,7 @@
                                                         CommandArgument='<%# ((GridViewRow)Container).RowIndex %>'
                                                         CssClass="btn btn-danger btn-sm" />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
 
                                         </Columns>
                                         <PagerStyle CssClass="pagination-ys" />
@@ -206,6 +217,7 @@
     </div>
 
     <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+
     <asp:LinqDataSource ID="LinqDataSource1"
         runat="server"
         OnSelecting="LinqDataSource1_Selecting">

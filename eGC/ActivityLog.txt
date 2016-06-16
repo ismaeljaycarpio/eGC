@@ -3,8 +3,15 @@
 ====================================================================
 ============================= 2016 JUNE 16 =========================
 ====================================================================
-- saving the room/dining changes in approval
-
+- saving the room/dining changes in approval - ***IN-PROGReSS***/***DONE***
+- add delete button in dashboard of gc approval - ***IN-PROGRESSS***/***DONE***
+- remove ID column in front desk - ***IN-PROGRESS***/***DONE***
+- fix image upload in adding profile - ***IN-PROGRESS***/***DONE***
+- GC Status:
+	- Waiting (was approved by user)
+	- Used
+	- Completed
+	- Cancelled
 
 ====================================================================
 ============================= 2016 JUNE 15 =========================

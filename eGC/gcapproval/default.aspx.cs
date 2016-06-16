@@ -114,6 +114,13 @@ namespace eGC.gcapproval
                 sb.Append(@"</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
             }
+            else if(e.CommandName.Equals("deleteRecord"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((Label)gvGC.Rows[index].FindControl("lblRowId")).Text;
+                hfDeleteGCId.Value = rowId;
+                Javascript.ShowModal(this, this, "deleteModal");
+            }
         }
 
         protected void btnConfirmApproveGC_Click(object sender, EventArgs e)
@@ -159,6 +166,19 @@ namespace eGC.gcapproval
             sb.Append("$('#disapproveModal').modal('hide');");
             sb.Append(@"</script>");
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditShowModalScript", sb.ToString(), false);
+        }
+
+        protected void btnConfirmDelete_Click(object sender, EventArgs e)
+        {
+            int Id = Convert.ToInt32(hfDeleteGCId.Value);
+            var gc = (from g in db.GCTransactions
+                      where g.Id == Id
+                      select g).FirstOrDefault();
+            db.GCTransactions.DeleteOnSubmit(gc);
+            db.SubmitChanges();
+
+            this.gvGC.DataBind();
+            Javascript.HideModal(this, this, "deleteModal");
         }
 
         private void bindDropdown()
