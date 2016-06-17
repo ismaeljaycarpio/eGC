@@ -188,15 +188,22 @@ namespace eGC.report
                         CompanyId = guest.CompanyId
                     };
 
-            //chk dropdown
-            if(ddlCompanyName.SelectedValue != "0")
+            //gc approval
+            if (ddlApproval.SelectedValue != "0")
             {
-                q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue));
+                q = q.Where(x => x.Approval == ddlApproval.SelectedValue);
             }
 
+            //gc status
             if(ddlGCStatus.SelectedValue != "0")
             {
                 q = q.Where(x => x.Status == ddlGCStatus.SelectedValue);
+            }
+
+            //company
+            if (ddlCompanyName.SelectedValue != "0")
+            {
+                q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue));
             }
 
             e.Result = q;

@@ -22,6 +22,14 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <asp:DropDownList ID="ddlApproval" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="0" Text="-- Select Approval --"></asp:ListItem>
+                                            <asp:ListItem Value="Pending" Text="Pending"></asp:ListItem>
+                                            <asp:ListItem Value="Approved" Text="Approved"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+
+                                    <div class="form-group">
                                         <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control">
                                             <asp:ListItem Value="0" Text="-- Select GC Status --"></asp:ListItem>
                                             <asp:ListItem Value="Waiting" Text="Waiting"></asp:ListItem>
