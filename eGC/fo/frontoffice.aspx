@@ -81,7 +81,6 @@
                                             </asp:TemplateField>
 
                                             <asp:BoundField DataField="Number" HeaderText="Contact No" SortExpression="Number" />
-                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
                                             <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
 
                                             <asp:TemplateField HeaderText="Status" SortExpression="Status">
@@ -92,6 +91,8 @@
                                                         Text='<%# Eval("Status") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+
+                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
 
                                             <%--<asp:TemplateField>
                                                 <ItemTemplate>

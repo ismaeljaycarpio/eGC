@@ -144,8 +144,7 @@ namespace eGC.fo
                 else
                 {
                     Response.Redirect("~/company/edit-company.aspx?companyId=" + g.CompanyId.ToString());
-                }
-                    
+                }    
             }
         }
 

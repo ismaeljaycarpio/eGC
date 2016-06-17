@@ -21,26 +21,21 @@
                                             placeholder="Search..."></asp:TextBox>
                                     </div>
 
-                                    <%--<div class="form-group">
-                                        <asp:TextBox ID="txtDateFrom"
-                                            runat="server"
-                                            placeholder="Date From"
-                                            CssClass="form-control"
-                                            data-provide="datepicker"></asp:TextBox>
-                                    </div>
-
                                     <div class="form-group">
-                                        <asp:TextBox ID="txtDateTo"
-                                            runat="server"
-                                            placeholder="Date To"
-                                            CssClass="form-control"
-                                            data-provide="datepicker"></asp:TextBox>
-                                    </div>--%>
+                                        <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="0" Text="-- Select GC Status --"></asp:ListItem>
+                                            <asp:ListItem Value="Waiting" Text="Waiting"></asp:ListItem>
+                                            <asp:ListItem Value="Used" Text="Used"></asp:ListItem>
+                                            <asp:ListItem Value="Completed" Text="Completed"></asp:ListItem>
+                                            <asp:ListItem Value="Cancelled" Text="Cancelled"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
 
                                     <div class="form-group">
                                         <asp:DropDownList ID="ddlCompanyName"
                                             runat="server"
-                                            CssClass="form-control"></asp:DropDownList>
+                                            CssClass="form-control">
+                                        </asp:DropDownList>
                                     </div>
 
                                     <asp:Button ID="btnSearch"
@@ -71,22 +66,36 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
+                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestId" Visible="false">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestIdName" Visible="false">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnGuestIdName" runat="server" Text='<%# Eval("GuestIdName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
                                             <asp:TemplateField HeaderText="GC Number" SortExpression="GCNumber">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lblGCNo" runat="server" Text='<%# Eval("GCNumber") %>' CommandName="redirectGC" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField HeaderText="ID" SortExpression="GuestId">
+                                            <asp:TemplateField HeaderText="Name" SortExpression="FullName">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lbtnGuestId" runat="server" Text='<%# Eval("GuestId") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                    <asp:LinkButton ID="lbtnFullName" runat="server" Text='<%# Eval("FullName") %>' CommandName="redirectGuest" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />
-                                            <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
-                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
-
+                                            <asp:TemplateField HeaderText="Company" SortExpression="CompanyName">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnCompany" runat="server" Text='<%# Eval("CompanyName") %>' CommandName="redirectCompany" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            
                                             <asp:TemplateField HeaderText="Approval" SortExpression="Approval">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblApproval" runat="server" Text='<%# Eval("Approval") %>'></asp:Label>
@@ -99,6 +108,8 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
+                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
+
                                             <asp:BoundField DataField="CancelledDate" HeaderText="Date Cancelled" DataFormatString="{0:d}" SortExpression="CancelledDate" />
                                             <asp:TemplateField HeaderText="Cancellation Reason" SortExpression="CancellationReason">
                                                 <ItemTemplate>
@@ -110,16 +121,19 @@
                                         <PagerStyle CssClass="pagination-ys" />
                                     </asp:GridView>
 
-                                    <asp:Button ID="btnExport"
-                                        runat="server"
-                                        Text="Export to Excel"
-                                        OnClick="btnExport_Click"
-                                        CssClass="btn btn-default btn-sm pull-right" />
+                                    <div class="pull-right">
+                                        <asp:LinkButton ID="lbtnExport"
+                                            OnClick="btnExport_Click"
+                                            CssClass="btn btn-default btn-sm"
+                                            runat="server">
+                                            <span aria-hidden="true" class="glyphicon glyphicon-list"></span>Export to Excel
+                                        </asp:LinkButton>
+                                    </div>
 
                                 </div>
                             </ContentTemplate>
                             <Triggers>
-                                <asp:PostBackTrigger ControlID="btnExport" />
+                                <asp:PostBackTrigger ControlID="lbtnExport" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>

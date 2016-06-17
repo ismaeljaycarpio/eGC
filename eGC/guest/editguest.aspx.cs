@@ -71,12 +71,7 @@ namespace eGC.guest
                         txtContactPersonNumber.Text = guest.EmergencyContactNumber;
                         txtContactPersonAddress.Text = guest.EmergencyContactAddress;
 
-                        if (!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
-                        {
-                            pnlInputForm.Enabled = false;
-                            FileUpload1.Enabled = false;
-                            FileUpload2.Enabled = false;
-                        }
+                        checkAccess();
                     }
                 }
             }
@@ -212,6 +207,27 @@ namespace eGC.guest
         protected void lbtnClose_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/guest/default.aspx");
+        }
+
+        private void checkAccess()
+        {
+            if(!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
+            {
+                FileUpload1.Enabled = false;
+                FileUpload2.Enabled = false;
+                txtGuestId.Enabled = false;
+                txtFirstName.Enabled = false;
+                txtMiddleName.Enabled = false;
+                txtLastName.Enabled = false;
+                ddlCompanyName.Enabled = false;
+                txtContactNo.Enabled = false;
+                txtEmail.Enabled = false;
+                txtIdNumber.Enabled = false;
+                txtContactPerson.Enabled = false;
+                txtContactPersonNumber.Enabled = false;
+                txtContactPersonAddress.Enabled = false;
+                btnUpdate.Enabled = false;
+            }
         }
     }
 }

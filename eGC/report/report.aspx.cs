@@ -104,6 +104,44 @@ namespace eGC.report
                 string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lblGCNo")).Text;
                 Response.Redirect("~/fo/viewgcform.aspx?gcId=" + rowId);
             }
+            else if (e.CommandName.Equals("redirectGuest"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lbtnGuestId")).Text;
+
+                //chk if company
+                var g = (from gu in db.Guests
+                         where gu.Id == Convert.ToInt32(rowId)
+                         select gu).FirstOrDefault();
+
+                if (g.IsCompany == true)
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + rowId);
+                }
+                else
+                {
+                    Response.Redirect("~/guest/editguest.aspx?guestid=" + rowId);
+                }
+            }
+            else if (e.CommandName.Equals("redirectCompany"))
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                string rowId = ((LinkButton)gvGC.Rows[index].FindControl("lbtnGuestId")).Text;
+
+                //chk if company
+                var g = (from gu in db.Guests
+                         where gu.Id == Convert.ToInt32(rowId)
+                         select gu).FirstOrDefault();
+
+                if (g.IsCompany == true)
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + rowId);
+                }
+                else
+                {
+                    Response.Redirect("~/company/edit-company.aspx?companyId=" + g.CompanyId.ToString());
+                }
+            }
         }
 
         protected void gvGC_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -136,7 +174,8 @@ namespace eGC.report
                     select new
                     {
                         Id = gctran.Id,
-                        GuestId = guest.GuestId,
+                        GuestId = guest.Id,
+                        GuestIdName = guest.GuestId,
                         FullName = guest.LastName + ", " + guest.FirstName + " " + guest.MiddleName,
                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = guest.ContactNumber,
@@ -152,7 +191,12 @@ namespace eGC.report
             //chk dropdown
             if(ddlCompanyName.SelectedValue != "0")
             {
-                //q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue));
+                q = q.Where(a => a.CompanyId == Convert.ToInt32(ddlCompanyName.SelectedValue));
+            }
+
+            if(ddlGCStatus.SelectedValue != "0")
+            {
+                q = q.Where(x => x.Status == ddlGCStatus.SelectedValue);
             }
 
             e.Result = q;

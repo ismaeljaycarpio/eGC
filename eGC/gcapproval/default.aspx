@@ -82,8 +82,7 @@
                                             </asp:TemplateField>
 
                                             <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName" />
-                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
-
+                                            
                                             <asp:TemplateField HeaderText="Approval" SortExpression="Approval" Visible="false">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblApproval" runat="server" Text='<%# Eval("Approval") %>'></asp:Label>
@@ -97,6 +96,7 @@
                                             </asp:TemplateField>
 
                                             <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
+                                            <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
                                             <asp:BoundField DataField="CancelledDate" HeaderText="Date Cancelled" DataFormatString="{0:d}" SortExpression="CancelledDate" />
 
                                             <asp:TemplateField HeaderText="Cancellation Reason" SortExpression="CancellationReason">

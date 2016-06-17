@@ -73,10 +73,6 @@ namespace eGC.fo
                         pnlApprovedBy.Visible = false;
                     }
 
-                    //load related table
-                    bindRooms();
-                    bindDinings();
-
                     //load guest
                     var guest = (from gu in db.Guests
                                  where gu.Id == tGC.GuestId
@@ -215,47 +211,6 @@ namespace eGC.fo
         protected void btnClose_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/fo/frontoffice.aspx");
-        }
-
-        private void bindRooms()
-        {
-            //var q = from room in db.Rooms
-            //        join gcroom in db.GCRooms
-            //        on room.Id equals gcroom.RoomId
-            //        join tr in db.GCTransactions
-            //        on gcroom.GCTransactionId equals tr.Id
-            //        where tr.GCNumber == Request.QueryString["gcId"].ToString()
-            //        select new
-            //        {
-            //            Id = gcroom.Id,
-            //            Type = room.Type,
-            //            Room = room.Room1,
-            //            WithBreakfast = gcroom.WithBreakfast,
-            //            HowManyPerson = gcroom.HowManyPerson
-            //        };
-
-            //gvRoom.DataSource = q.ToList();
-            //gvRoom.DataBind();
-        }
-
-        private void bindDinings()
-        {
-            //var q = from dining in db.Dinings
-            //        join gcdining in db.GCRooms
-            //        on dining.Id equals gcdining.DiningId
-            //        join tr in db.GCTransactions
-            //        on gcdining.GCTransactionId equals tr.Id
-            //        where tr.GCNumber == Request.QueryString["gcId"].ToString()
-            //        select new
-            //        {
-            //            Id = gcdining.Id,
-            //            Name = dining.Name,
-            //            DiningType = gcdining.DiningType,
-            //            HeadCount = gcdining.HowManyDiningPerson
-            //        };
-
-            //gvDining.DataSource = q.ToList();
-            //gvDining.DataBind();
         }
 
         protected void btnUsed_Click(object sender, EventArgs e)
