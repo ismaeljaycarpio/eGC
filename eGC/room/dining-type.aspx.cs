@@ -13,7 +13,14 @@ namespace eGC.room
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                if (!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
+                {
+                    gvDiningType.Columns[3].Visible = false;
+                    gvDiningType.Columns[4].Visible = false;
+                }
+            }
         }
 
         protected void gvDiningType_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -1624,21 +1624,6 @@
     <PageHeader>
       <Height>0.92708in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
-      <ReportItems>
-        <Image Name="azalea_logo">
-          <Source>Embedded</Source>
-          <Value>azalealogo</Value>
-          <Sizing>FitProportional</Sizing>
-          <Left>2.27969in</Left>
-          <Height>0.75in</Height>
-          <Width>3.41698in</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

@@ -20,6 +20,12 @@ namespace eGC.gcapproval
             {
                 bindDropdown();
                 checkExpiration();
+
+                //hide gv delete button
+                if(!User.IsInRole("Admin-GC") && !User.IsInRole("can-approve-GC"))
+                {
+                    gvGC.Columns[12].Visible = false;
+                }
             }
         }
 

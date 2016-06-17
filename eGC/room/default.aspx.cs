@@ -13,6 +13,14 @@ namespace eGC.room
         GiftCheckDataContext db = new GiftCheckDataContext();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!Page.IsPostBack)
+            {
+                if(!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
+                {
+                    gvRoom.Columns[3].Visible = false;
+                    gvRoom.Columns[4].Visible = false;
+                }
+            }
         }
 
         protected void gvRoom_RowCommand(object sender, GridViewCommandEventArgs e)

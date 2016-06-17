@@ -47,7 +47,7 @@ namespace eGC.company
                         txtContactPersonAddress.Text = guest.EmergencyContactAddress;
                     }
 
-                    if (User.IsInRole("can-approve-gc"))
+                    if (!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
                     {
                         disableFields();
                     }

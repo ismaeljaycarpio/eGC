@@ -187,6 +187,9 @@ namespace eGC.tran
                         txtDateCancelled.Text = tGC.CancelledDate.Value.ToString("MM/dd/yyyy");
                         txtCancellationReason.Text = tGC.CancellationReason;
                     }
+
+                    //chk user role
+                    disableFields();
                 }
             }
         }
@@ -544,6 +547,26 @@ namespace eGC.tran
 
             //gvDining.DataSource = q.ToList();
             //gvDining.DataBind();
+        }
+
+        protected void disableFields()
+        {
+            if(!User.IsInRole("Admin-GC") && !User.IsInRole("can-approve-gc"))
+            {
+                txtRecommendingApproval.Enabled = false;
+                txtDateIssued.Enabled = false;
+                txtRequestedBy.Enabled = false;
+                txtRemarks.Enabled = false;
+                ddlGCType.Enabled = false;
+                txtExpirationDate.Enabled = false;
+                txtGCNumber.Enabled = false;
+                pnlRoom.Enabled = false;
+                pnlDining.Enabled = false;
+                pnlCancellation.Enabled = false;
+                btnApprove.Visible = false;
+                btnDisapprove.Visible = false;
+                btnSave.Enabled = false;
+            }
         }
     }
 }

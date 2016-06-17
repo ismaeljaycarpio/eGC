@@ -13,7 +13,14 @@ namespace eGC.room
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                if (!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
+                {
+                    gvDining.Columns[2].Visible = false;
+                    gvDining.Columns[3].Visible = false;
+                }
+            }
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)

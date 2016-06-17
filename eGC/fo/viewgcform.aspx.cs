@@ -104,16 +104,6 @@ namespace eGC.fo
                         ddlRooms.DataValueField = "Id";
                         ddlRooms.DataBind();
                         ddlRooms.Items.Insert(0, new ListItem("-- Select Room --", "0"));
-
-                        //ddlAddRoom.DataSource = rooms.ToList();
-                        //ddlAddRoom.DataTextField = "Room1";
-                        //ddlAddRoom.DataValueField = "Id";
-                        //ddlAddRoom.DataBind();
-
-                        //ddlEditRoom.DataSource = rooms.ToList();
-                        //ddlEditRoom.DataTextField = "Room1";
-                        //ddlEditRoom.DataValueField = "Id";
-                        //ddlEditRoom.DataBind();
                     }
 
                     //lazy load dining
@@ -127,18 +117,7 @@ namespace eGC.fo
                         ddlDining.DataValueField = "Id";
                         ddlDining.DataBind();
                         ddlDining.Items.Insert(0, new ListItem("-- Select Dining --", "0"));
-
-                        //ddlAddDining.DataSource = dining;
-                        //ddlAddDining.DataTextField = "Name";
-                        //ddlAddDining.DataValueField = "Id";
-                        //ddlAddDining.DataBind();
-
-                        //ddlEditDining.DataSource = dining;
-                        //ddlEditDining.DataTextField = "Name";
-                        //ddlEditDining.DataValueField = "Id";
-                        //ddlEditDining.DataBind();
                     }
-
 
                     //lazy load dining type
                     var diningtype = (from dt in db.DiningTypes
@@ -178,6 +157,8 @@ namespace eGC.fo
                         ddlDiningType.SelectedValue = tGC.DiningTypeId.ToString();
                         txtDiningHeadCount.Text = tGC.HeadCount.ToString();
                     }
+
+                    checkUserAcces();
                 }
             }
         }
@@ -342,6 +323,17 @@ namespace eGC.fo
 
             db.SubmitChanges();
             Response.Redirect("~/fo/frontoffice.aspx");
+        }
+
+        protected void checkUserAcces()
+        {
+            if(!User.IsInRole("Admin-GC") && !User.IsInRole("frontoffice"))
+            {
+                txtCheckin.Enabled = false;
+                txtCheckout.Enabled = false;
+                ddlGCStatus.Enabled = false;
+                btnUpdate.Enabled = false;
+            }
         }
     }
 }

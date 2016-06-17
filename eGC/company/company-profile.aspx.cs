@@ -19,7 +19,7 @@ namespace eGC.company
         {
             if(!Page.IsPostBack)
             {
-                if(User.IsInRole("can-approve-gc"))
+                if(!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
                 {
                     lbtnCreateCompany.Visible = false;
                     gvCompany.Columns[5].Visible = false;
