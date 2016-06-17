@@ -2,632 +2,6 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
-      <Tablix Name="Tablix1">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>1.8543in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.8543in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.8543in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.8543in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.36458in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox3">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Type</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox5">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Room</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Breakfast</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox9">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Head Count</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.36458in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Type">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Type.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Type</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Room">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Room.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Room</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="WithBreakfast">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!WithBreakfast.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>WithBreakfast</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="HowManyPerson">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!HowManyPerson.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>HowManyPerson</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-            <TablixMember />
-            <TablixMember />
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <KeepWithGroup>After</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <Group Name="Details" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>Rooms</DataSetName>
-        <Top>2.125in</Top>
-        <Left>0.3425in</Left>
-        <Height>0.72916in</Height>
-        <Width>7.4172in</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <TextAlign>Center</TextAlign>
-        </Style>
-      </Tablix>
-      <Tablix Name="Tablix2">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>2.47241in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.47241in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.47241in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.36458in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox4">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Name</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox6">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Type</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox10">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Head Count</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.36458in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Type2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Name.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Type</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Room2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!DiningType.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Room</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="HowManyPerson2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!HeadCount.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>HowManyPerson</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-            <TablixMember />
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <KeepWithGroup>After</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <Group Name="Details2" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>Dinings</DataSetName>
-        <Top>3.19271in</Top>
-        <Left>0.3425in</Left>
-        <Height>0.72916in</Height>
-        <Width>7.41723in</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <TextAlign>Center</TextAlign>
-        </Style>
-      </Tablix>
       <Textbox Name="Textbox1">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -650,7 +24,6 @@
         <Top>0.05084in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -680,10 +53,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.37028in</Top>
+        <Top>0.68973in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -717,7 +90,7 @@
         <Left>4.32167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -751,7 +124,7 @@
         <Left>4.32167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -782,7 +155,7 @@
         <Left>1.01389in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -809,11 +182,11 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>0.37028in</Top>
+        <Top>0.68973in</Top>
         <Left>1.01389in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -845,7 +218,7 @@
         <Left>5.33556in</Left>
         <Height>0.25in</Height>
         <Width>2.42417in</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -877,7 +250,7 @@
         <Left>5.33556in</Left>
         <Height>0.25in</Height>
         <Width>2.42417in</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -907,10 +280,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.68973in</Top>
+        <Top>0.37029in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -937,11 +310,11 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>0.68973in</Top>
+        <Top>0.37029in</Top>
         <Left>1.01389in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -975,7 +348,7 @@
         <Left>4.32167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1007,7 +380,7 @@
         <Left>5.33556in</Left>
         <Height>0.25in</Height>
         <Width>2.42417in</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1040,7 +413,7 @@
         <Top>0.99528in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1072,7 +445,7 @@
         <Left>1.01389in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1106,7 +479,7 @@
         <Left>3.49875in</Left>
         <Height>0.25in</Height>
         <Width>1.82292in</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1138,7 +511,7 @@
         <Left>5.33556in</Left>
         <Height>0.25in</Height>
         <Width>2.42417in</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1171,7 +544,7 @@
         <Top>1.62029in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1203,7 +576,7 @@
         <Left>1.01389in</Left>
         <Height>0.25in</Height>
         <Width>6.74584in</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1236,7 +609,7 @@
         <Top>1.31473in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1268,7 +641,7 @@
         <Left>1.01389in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>21</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1302,7 +675,7 @@
         <Left>3.49875in</Left>
         <Height>0.25in</Height>
         <Width>1.82292in</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1336,7 +709,7 @@
         <Left>5.33556in</Left>
         <Height>0.25in</Height>
         <Width>2.42417in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1366,11 +739,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.10937in</Top>
+        <Top>3.10937in</Top>
         <Left>0.3425in</Left>
         <Height>0.25in</Height>
         <Width>0.79167in</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1398,11 +771,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
-        <Top>4.10937in</Top>
+        <Top>3.10937in</Top>
         <Left>1.14806in</Left>
         <Height>0.25in</Height>
         <Width>6.61166in</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1432,11 +805,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.42882in</Top>
+        <Top>3.42882in</Top>
         <Left>0.3425in</Left>
         <Height>0.25in</Height>
         <Width>1.17709in</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1466,11 +839,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
-        <Top>4.42882in</Top>
+        <Top>3.42882in</Top>
         <Left>1.53348in</Left>
         <Height>0.25in</Height>
         <Width>6.21236in</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1500,11 +873,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.74826in</Top>
+        <Top>3.74826in</Top>
         <Left>0.3425in</Left>
         <Height>0.25in</Height>
         <Width>1.65625in</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1532,11 +905,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
-        <Top>4.74826in</Top>
+        <Top>3.74826in</Top>
         <Left>1.99875in</Left>
         <Height>0.25in</Height>
         <Width>5.76097in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1566,11 +939,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
-        <Top>5.23437in</Top>
+        <Top>4.23437in</Top>
         <Left>0.3425in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1600,11 +973,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox37</rd:DefaultName>
-        <Top>5.52604in</Top>
+        <Top>4.52604in</Top>
         <Left>0.3425in</Left>
         <Height>0.25in</Height>
         <Width>2.11111in</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1616,7 +989,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>5.77604in</Height>
+    <Height>4.77604in</Height>
     <Style />
   </Body>
   <Width>7.75973in</Width>
@@ -1648,76 +1021,6 @@
       <rd:DataSourceID>bbcab11f-07b3-4a67-aa7d-dbfb31020bfa</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="Rooms">
-      <Query>
-        <DataSourceName>GCReport</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Id">
-          <DataField>Id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Type">
-          <DataField>Type</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Room">
-          <DataField>Room</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="WithBreakfast">
-          <DataField>WithBreakfast</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="HowManyPerson">
-          <DataField>HowManyPerson</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>GCReport</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\x0223402\Downloads\eGC\eGC\tran\GCReport.xsd</rd:SchemaPath>
-        <rd:TableName>Rooms</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
-    <DataSet Name="Dinings">
-      <Query>
-        <DataSourceName>GCReport</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="Id">
-          <DataField>Id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Name">
-          <DataField>Name</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DiningType">
-          <DataField>DiningType</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="HeadCount">
-          <DataField>HeadCount</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>GCReport</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\x0223402\Downloads\eGC\eGC\tran\GCReport.xsd</rd:SchemaPath>
-        <rd:TableName>Dinings</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
   <ReportParameters>
     <ReportParameter Name="GuestId">
       <DataType>String</DataType>
@@ -1810,70 +1113,6 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <EmbeddedImages>
-    <EmbeddedImage Name="azalealogo">
-      <MIMEType>image/png</MIMEType>
-      <ImageData>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</ImageData>
-    </EmbeddedImage>
-  </EmbeddedImages>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>e9a151ad-65f5-457f-af66-430e8cf515a1</rd:ReportID>
 </Report>
