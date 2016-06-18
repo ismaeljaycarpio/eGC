@@ -18,9 +18,20 @@
                                     <div class="form-group">
                                         <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
                                     </div>
+
+                                    <div class="form-group">
+                                        <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="0" Text="-- Select GC Status --"></asp:ListItem>
+                                            <asp:ListItem Value="Waiting" Text="Waiting"></asp:ListItem>
+                                            <asp:ListItem Value="Used" Text="Used"></asp:ListItem>
+                                            <asp:ListItem Value="Completed" Text="Completed"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+
                                     <div class="form-group">
                                         <asp:DropDownList ID="ddlCompanyName" runat="server" CssClass="form-control"></asp:DropDownList>
                                     </div>
+
                                     <asp:Button ID="btnSearch"
                                         runat="server"
                                         CssClass="btn btn-primary"
