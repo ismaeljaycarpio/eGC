@@ -11,13 +11,10 @@
         <div class="col-md-12">
             <ul class="bxslider">
                 <li>
-                    <img src="jquery.bxslider/images/azalea.jpg" />
+                    <img src="jquery.bxslider/images/azalea-baguio.jpg" alt="Azalea Boracay" />
                 </li>
                 <li>
-                    <img src="jquery.bxslider/images/tradisyon.jpg" alt="Alternate Text" />
-                </li>
-                <li>
-                    <img src="jquery.bxslider/images/azalea-baguio-tent-event-venue.jpg" alt="Alternate Text" />
+                    <img src="jquery.bxslider/images/azalea-boracay-logo.jpg" alt="Azalea Boracay" />
                 </li>
             </ul>
         </div>
