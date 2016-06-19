@@ -48,21 +48,31 @@ namespace eGC.tran
                            Email = guest.Email,
                            GCNumber = gctran.GCNumber,
                            ExpirationDate = gctran.ExpirationDate,
-                           Reason = gctran.GCType,
-                           //AccountNo = gctran.AccountNo,
+                           GCType = gctran.GCType,
                            RecommendingApproval = gctran.RecommendingApproval,
-                           //Remarks = gctran.Remarks,
+                           Remarks = gctran.Reason,
                            DateCancelled = gctran.CancelledDate,
                            ReasonForCancellation = gctran.CancellationReason,
                            GCStatus = gctran.StatusGC,
-                           ApprovedBy = gctran.ApprovedBy
+                           ApprovedBy = gctran.ApprovedBy,
+                           DateIssued = gctran.DateIssued,
+                           RequestedBy = gctran.RequestedBy,
+                           Room = gctran.Room.Room1,
+                           Includes = gctran.WithBreakfast,
+                           HeadCount = gctran.HeadCount,
+                           Dining = gctran.Dining.Name,
+                           DiningType = gctran.DiningType.DiningType1,
+                           Checkin = gctran.CheckinDate,
+                           Checkout = gctran.CheckoutDate
                        }).FirstOrDefault();
 
             string approvedBy = String.Empty;
             string expirationDate = String.Empty;
             string dateCancelled = String.Empty;
-
-
+            string dateIssued = String.Empty;
+            string checkin = String.Empty;
+            string checkout = String.Empty;
+            
             if(tran.ApprovedBy != null)
             {
                 var approver = (from user in dbUser.UserProfiles
@@ -88,24 +98,47 @@ namespace eGC.tran
                 dateCancelled = tran.DateCancelled.Value.ToShortDateString();
             }
 
+            if(tran.DateIssued != null)
+            {
+                dateIssued = tran.DateIssued.Value.ToShortDateString();
+            }
+
+            if(tran.Checkin != null)
+            {
+                checkin = tran.Checkin.Value.ToShortDateString();
+            }
+
+            if(tran.Checkout != null)
+            {
+                checkout = tran.Checkout.Value.ToShortDateString();
+            }
+
             //fill param
-            ReportParameter[] param = new ReportParameter[15];
+            ReportParameter[] param = new ReportParameter[23];
 
             param[0] = new ReportParameter("GuestId", tran.GuestId);
-            param[1] = new ReportParameter("FullName", tran.FullName);
-            param[2] = new ReportParameter("CompanyName", tran.CompanyName);
+            param[1] = new ReportParameter("CompanyName", tran.CompanyName);
+            param[2] = new ReportParameter("FullName", tran.FullName);
             param[3] = new ReportParameter("ContactNo", tran.ContactNo);
-            param[4] = new ReportParameter("Email", tran.Email);
-            param[5] = new ReportParameter("GCNumber", tran.GCNumber);
-            param[6] = new ReportParameter("ExpirationDate", expirationDate);
-            param[7] = new ReportParameter("Reason", tran.Reason);
-            //param[8] = new ReportParameter("AccountNo", tran.AccountNo);
+            param[4] = new ReportParameter("GCType", tran.GCType);
+            param[5] = new ReportParameter("Remarks", tran.Remarks);
+            param[6] = new ReportParameter("DateIssued", dateIssued);
+            param[7] = new ReportParameter("GCNumber", tran.GCNumber);
+            param[8] = new ReportParameter("Email", tran.Email);
             param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
-            //param[10] = new ReportParameter("Remarks", tran.Remarks);
-            param[11] = new ReportParameter("DateCancelled", dateCancelled);
-            param[12] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
-            param[13] = new ReportParameter("GCStatus", tran.GCStatus);
+            param[10] = new ReportParameter("ExpirationDate", expirationDate);
+            param[11] = new ReportParameter("GCStatus", tran.GCStatus);
+            param[12] = new ReportParameter("DateCancelled", dateCancelled);
+            param[13] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
             param[14] = new ReportParameter("ApprovedBy", approvedBy);
+            param[15] = new ReportParameter("RequestedBy", tran.RequestedBy);
+            param[16] = new ReportParameter("Room", tran.Room);
+            param[17] = new ReportParameter("Includes", tran.Includes.ToString());
+            param[18] = new ReportParameter("HeadCount", tran.HeadCount.ToString());
+            param[19] = new ReportParameter("Dining", tran.Dining);
+            param[20] = new ReportParameter("DiningType", tran.DiningType);
+            param[21] = new ReportParameter("Checkin", checkin);
+            param[22] = new ReportParameter("Checkout", checkout);
 
             //put param to report
             ReportViewer1.LocalReport.SetParameters(param);

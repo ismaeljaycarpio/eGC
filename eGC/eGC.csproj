@@ -159,6 +159,7 @@
     <Content Include="guest\guest-gc-records.aspx" />
     <Content Include="IDPic\noImage.png" />
     <Content Include="Images\azalea-logo.png" />
+    <Content Include="Images\azalearesidences.png" />
     <Content Include="jquery.bxslider\images\azalea-baguio-tent-event-venue.jpg" />
     <Content Include="jquery.bxslider\images\azalea-baguio.jpg" />
     <Content Include="jquery.bxslider\images\azalea-boracay-logo.jpg" />
