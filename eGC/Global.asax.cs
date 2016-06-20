@@ -15,6 +15,7 @@ namespace eGC
             // Code that runs on application startup
             AuthConfig.RegisterOpenAuth();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
         }
 
         void Application_End(object sender, EventArgs e)
