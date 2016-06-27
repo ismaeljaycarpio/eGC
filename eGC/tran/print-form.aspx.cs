@@ -120,7 +120,7 @@ namespace eGC.tran
             }
 
             //fill param
-            ReportParameter[] param = new ReportParameter[23];
+            ReportParameter[] param = new ReportParameter[22];
 
             param[0] = new ReportParameter("GuestId", tran.GuestId);
             param[1] = new ReportParameter("CompanyName", tran.CompanyName);
@@ -131,20 +131,19 @@ namespace eGC.tran
             param[6] = new ReportParameter("DateIssued", dateIssued);
             param[7] = new ReportParameter("GCNumber", tran.GCNumber);
             param[8] = new ReportParameter("Email", tran.Email);
-            //param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
-            param[10] = new ReportParameter("ExpirationDate", expirationDate);
-            param[11] = new ReportParameter("GCStatus", tran.GCStatus);
-            param[12] = new ReportParameter("DateCancelled", dateCancelled);
-            param[13] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
-            param[14] = new ReportParameter("ApprovedBy", approvedBy);
-            param[15] = new ReportParameter("RequestedBy", createdBy); //requested - created by
-            param[16] = new ReportParameter("Room", tran.Room);
-            param[17] = new ReportParameter("Includes", tran.Includes.ToString());
-            param[18] = new ReportParameter("HeadCount", tran.HeadCount.ToString());
-            param[19] = new ReportParameter("Dining", tran.Dining);
-            param[20] = new ReportParameter("DiningType", tran.DiningType);
-            param[21] = new ReportParameter("Checkin", checkin);
-            param[22] = new ReportParameter("Checkout", checkout);
+            param[9] = new ReportParameter("ExpirationDate", expirationDate);
+            param[10] = new ReportParameter("GCStatus", tran.GCStatus);
+            param[11] = new ReportParameter("DateCancelled", dateCancelled);
+            param[12] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
+            param[13] = new ReportParameter("ApprovedBy", approvedBy);
+            param[14] = new ReportParameter("CreatedBy", createdBy); //requested - created by
+            param[15] = new ReportParameter("Room", tran.Room);
+            param[16] = new ReportParameter("Includes", tran.Includes.ToString());
+            param[17] = new ReportParameter("HeadCount", tran.HeadCount.ToString());
+            param[18] = new ReportParameter("Dining", tran.Dining);
+            param[19] = new ReportParameter("DiningType", tran.DiningType);
+            param[20] = new ReportParameter("Checkin", checkin);
+            param[21] = new ReportParameter("Checkout", checkout);
 
             //put param to report
             ReportViewer1.LocalReport.SetParameters(param);

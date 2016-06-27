@@ -77,7 +77,7 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
-                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
+                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
                                 runat="server"
                                 Display="Dynamic"
@@ -89,11 +89,12 @@
 
                         <div class="col-md-4">
                             <label for="ddlGCType">GC Type</label>
-                            <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" Enabled="false">
+                            <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" Enabled="false" OnSelectedIndexChanged="ddlGCType_SelectedIndexChanged" AutoPostBack="true">
                                 <asp:ListItem Selected="True" Value="0">-- Select One --</asp:ListItem>
                                 <asp:ListItem Value="Representation">Representation</asp:ListItem>
                                 <asp:ListItem Value="Sold">Sold</asp:ListItem>
                                 <asp:ListItem Value="Barter">Barter</asp:ListItem>
+                                <asp:ListItem Value="Raffle">Raffle / Prize</asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"

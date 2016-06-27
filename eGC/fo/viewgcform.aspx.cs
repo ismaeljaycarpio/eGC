@@ -54,6 +54,14 @@ namespace eGC.fo
                     txtCheckout.Text = tGC.CheckoutDate.ToString();
                     ddlGCStatus.SelectedValue = tGC.StatusGC;
 
+                    //chk gc type
+                    if(ddlGCType.SelectedItem.Text == "Representation")
+                    {
+                        ddlGCType.Enabled = true;
+                        txtExpirationDate.Enabled = true;
+                        txtRemarks.Enabled = true;
+                    }
+
                     //chk creator
                     if(tGC.CreatedBy != null)
                     {
@@ -178,6 +186,13 @@ namespace eGC.fo
             //tran.Remarks = txtRemarks.Text;
             //tran.GCType = ddlGCType.SelectedValue;
 
+            tran.Remarks = txtRemarks.Text;
+            tran.GCType = ddlGCType.SelectedValue;
+            if(txtExpirationDate.Text != String.Empty)
+            {
+                tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
+            }
+
             if(txtCheckin.Text != String.Empty)
             {
                 tran.CheckinDate = Convert.ToDateTime(txtCheckin.Text);
@@ -293,6 +308,34 @@ namespace eGC.fo
                 txtCheckout.Enabled = false;
                 ddlGCStatus.Enabled = false;
                 btnUpdate.Enabled = false;
+            }
+        }
+
+        protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlGCType.SelectedValue == "Representation")
+            {
+                txtExpirationDate.Enabled = true;
+                RequiredFieldValidator15.Enabled = true;
+
+                var q = (from gc in db.GCTransactions
+                         where gc.GCNumber == Request.QueryString["gcId"]
+                         select gc).FirstOrDefault().ExpirationDate;
+
+                if (q.HasValue)
+                {
+                    txtExpirationDate.Text = String.Format(q.Value.ToString("MM/dd/yyyy"));
+                }
+                else
+                {
+                    txtExpirationDate.Text = "";
+                }
+            }
+            else
+            {
+                txtExpirationDate.Enabled = false;
+                RequiredFieldValidator15.Enabled = false;
+                txtExpirationDate.Text = String.Empty;
             }
         }
     }

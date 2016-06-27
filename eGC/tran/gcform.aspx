@@ -72,6 +72,7 @@
                                 <asp:ListItem Value="Representation">Representation</asp:ListItem>
                                 <asp:ListItem Value="Sold">Sold</asp:ListItem>
                                 <asp:ListItem Value="Barter">Barter</asp:ListItem>
+                                <asp:ListItem Value="Raffle">Raffle / Prize</asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"
