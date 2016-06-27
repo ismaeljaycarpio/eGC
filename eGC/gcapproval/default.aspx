@@ -237,7 +237,7 @@
                             <asp:Button ID="btnConfirmDelete"
                                 runat="server"
                                 CssClass="btn btn-danger"
-                                Text="Disapprove"
+                                Text="Delete"
                                 OnClick="btnConfirmDelete_Click" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>

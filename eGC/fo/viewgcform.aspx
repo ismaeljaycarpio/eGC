@@ -53,10 +53,9 @@
                             <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </asp:Panel>
                         <div class="col-md-4">
-                            <label for="txtName">Recommending Approval</label>
-                            <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            <label for="txtCreatedBy">Created By</label>
+                            <asp:TextBox ID="txtCreatedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
-
                         <div class="col-md-4">
                             <label for="txtDateIssued">Date Issued</label>
                             <asp:TextBox ID="txtDateIssued"
@@ -71,7 +70,11 @@
                                 CssClass="label label-danger"
                                 ErrorMessage="Date Issued is required"></asp:RequiredFieldValidator>
                         </div>
+                    </div>
+                </div>
 
+                <div class="panel-body">
+                    <div role="form">
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
                             <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
@@ -84,15 +87,6 @@
                                 ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
                         </div>
 
-                        <div class="col-md-4">
-                            <label for="txtRequestedBy">Requested By</label>
-                            <asp:TextBox ID="txtRequestedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-body">
-                    <div role="form">
                         <div class="col-md-4">
                             <label for="ddlGCType">GC Type</label>
                             <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" Enabled="false">

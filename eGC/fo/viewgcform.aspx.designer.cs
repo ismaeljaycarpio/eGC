@@ -112,13 +112,13 @@ namespace eGC.fo {
         protected global::System.Web.UI.WebControls.TextBox txtApprovedBy;
         
         /// <summary>
-        /// txtRecommendingApproval control.
+        /// txtCreatedBy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecommendingApproval;
+        protected global::System.Web.UI.WebControls.TextBox txtCreatedBy;
         
         /// <summary>
         /// txtDateIssued control.
@@ -155,15 +155,6 @@ namespace eGC.fo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator14;
-        
-        /// <summary>
-        /// txtRequestedBy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRequestedBy;
         
         /// <summary>
         /// ddlGCType control.

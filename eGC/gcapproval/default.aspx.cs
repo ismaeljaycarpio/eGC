@@ -236,8 +236,7 @@ namespace eGC.gcapproval
                          guest.MiddleName.Contains(strSearch) ||
                          gctran.GCNumber.Contains(strSearch) ||
                          gctran.GCType.Contains(strSearch) ||
-                         gctran.RequestedBy.Contains(strSearch) ||
-                         gctran.RecommendingApproval.Contains(strSearch) ||
+                         //gctran.RequestedBy.Contains(strSearch) ||
                          gctran.StatusGC.Contains(strSearch) ||
                          gctran.ApprovalStatus.Contains(strSearch) ||
                          gctran.CancellationReason.Contains(strSearch) ||
@@ -279,8 +278,7 @@ namespace eGC.gcapproval
                          guest.MiddleName.Contains(strSearch) ||
                          gctran.GCNumber.Contains(strSearch) ||
                          gctran.GCType.Contains(strSearch) ||
-                         gctran.RequestedBy.Contains(strSearch) ||
-                         gctran.RecommendingApproval.Contains(strSearch) ||
+                         //gctran.RequestedBy.Contains(strSearch) ||
                          gctran.StatusGC.Contains(strSearch) ||
                          gctran.ApprovalStatus.Contains(strSearch) ||
                          gctran.CancellationReason.Contains(strSearch) ||

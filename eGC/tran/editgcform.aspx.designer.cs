@@ -112,15 +112,6 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.TextBox txtApprovedBy;
         
         /// <summary>
-        /// txtRecommendingApproval control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecommendingApproval;
-        
-        /// <summary>
         /// txtDateIssued control.
         /// </summary>
         /// <remarks>
@@ -139,13 +130,13 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
         
         /// <summary>
-        /// txtRequestedBy control.
+        /// txtCreatedBy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRequestedBy;
+        protected global::System.Web.UI.WebControls.TextBox txtCreatedBy;
         
         /// <summary>
         /// txtRemarks control.

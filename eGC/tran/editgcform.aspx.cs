@@ -43,12 +43,17 @@ namespace eGC.tran
                     hfTransactionId.Value = id.ToString();
                     txtGCNumber.Text = tGC.GCNumber;
                     hfGCNumber.Value = tGC.GCNumber; //store old gc number to server control in case of modification
-                    txtRecommendingApproval.Text = tGC.RecommendingApproval;
                     txtDateIssued.Text = tGC.DateIssued.Value.ToString("MM/dd/yyyy");
-                    txtRequestedBy.Text = tGC.RequestedBy;
-                    txtRemarks.Text = tGC.Reason;
+                    txtRemarks.Text = tGC.Remarks;
                     ddlGCType.SelectedValue = tGC.GCType;
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpirationDate);
+
+                    //chk creator
+                    if(tGC.CreatedBy != null)
+                    {
+                        var c = dbUser.UserProfiles.Where(n => n.UserId == tGC.CreatedBy).FirstOrDefault();
+                        txtCreatedBy.Text = c.LastName + ", " + c.FirstName + " " + c.MiddleName;
+                    }
 
                     //chk approver
                     if(tGC.ApprovedBy != null)
@@ -138,7 +143,6 @@ namespace eGC.tran
                     }
 
                     hlPrintForm.NavigateUrl = "~/tran/print-form.aspx?gcId=" + Request.QueryString["gcId"];
-                    txtRecommendingApproval.Focus();
 
                     //chk if rooms
                     if(tGC.RoomId != null)
@@ -206,9 +210,8 @@ namespace eGC.tran
                 gc.ExpirationDate = null;
             }
 
-            gc.Reason = txtRemarks.Text;
-            gc.RequestedBy = txtRequestedBy.Text;
-            gc.RecommendingApproval = txtRecommendingApproval.Text;
+            gc.Remarks = txtRemarks.Text;
+            //gc.RequestedBy = txtRequestedBy.Text;
 
             //chk if rooms
             if (gc.RoomId != null)
@@ -336,9 +339,7 @@ namespace eGC.tran
         {
             if(!User.IsInRole("Admin-GC") && !User.IsInRole("can-approve-gc"))
             {
-                txtRecommendingApproval.Enabled = false;
                 txtDateIssued.Enabled = false;
-                txtRequestedBy.Enabled = false;
                 txtRemarks.Enabled = false;
                 ddlGCType.Enabled = false;
                 txtExpirationDate.Enabled = false;

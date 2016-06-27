@@ -46,15 +46,20 @@ namespace eGC.fo
                     txtDateIssued.Text = tGC.DateIssued.Value.ToString("MM/dd/yyyy");
                     ddlGCType.SelectedValue = tGC.GCType;
                     txtExpirationDate.Text = String.Format("{0:MM/dd/yyyy}", tGC.ExpirationDate);
-                    txtRemarks.Text = tGC.Reason;
-                    txtRequestedBy.Text = tGC.RequestedBy;
-                    txtRecommendingApproval.Text = tGC.RecommendingApproval;
+                    txtRemarks.Text = tGC.Remarks;
                     lblCurrentGCStatus.Text = tGC.StatusGC;
 
                     //check-dates
                     txtCheckin.Text = tGC.CheckinDate.ToString();
                     txtCheckout.Text = tGC.CheckoutDate.ToString();
                     ddlGCStatus.SelectedValue = tGC.StatusGC;
+
+                    //chk creator
+                    if(tGC.CreatedBy != null)
+                    {
+                        var c = dbUser.UserProfiles.Where(n => n.UserId == tGC.CreatedBy).FirstOrDefault();
+                        txtCreatedBy.Text = c.LastName + ", " + c.FirstName + " " + c.MiddleName;
+                    }
 
                     //chk approver
                     if (tGC.ApprovedBy != null)

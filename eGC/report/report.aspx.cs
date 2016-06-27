@@ -180,6 +180,7 @@ namespace eGC.report
                         CompanyName = (from gu in db.Guests where guest.CompanyId == gu.Id select gu).FirstOrDefault().CompanyName,
                         Number = guest.ContactNumber,
                         GCNumber = gctran.GCNumber,
+                        DateIssued = gctran.DateIssued,
                         ExpiryDate = gctran.ExpirationDate,
                         Status = gctran.StatusGC,
                         Approval = gctran.ApprovalStatus,

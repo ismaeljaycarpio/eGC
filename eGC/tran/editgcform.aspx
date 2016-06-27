@@ -50,11 +50,6 @@
                             <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </asp:Panel>
                         <div class="col-md-4">
-                            <label for="txtName">Recommending Approval</label>
-                            <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control"></asp:TextBox>
-                        </div>
-
-                        <div class="col-md-4">
                             <label for="txtDateIssued">Date Issued</label>
                             <asp:TextBox ID="txtDateIssued"
                                 runat="server"
@@ -69,8 +64,8 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="txtRequestedBy">Requested By</label>
-                            <asp:TextBox ID="txtRequestedBy" runat="server" CssClass="form-control"></asp:TextBox>
+                            <label for="txtCreatedBy">Created By</label>
+                            <asp:TextBox ID="txtCreatedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                     </div>
                 </div>

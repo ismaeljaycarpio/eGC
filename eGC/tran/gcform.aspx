@@ -43,11 +43,6 @@
                 <div class="panel-body">
                     <div role="form">
                         <div class="col-md-4">
-                            <label for="txtName">Recommending Approval</label>
-                            <asp:TextBox ID="txtRecommendingApproval" runat="server" CssClass="form-control"></asp:TextBox>
-                        </div>
-
-                        <div class="col-md-4">
                             <label for="txtDateIssued">Date Issued</label>
                             <asp:TextBox ID="txtDateIssued"
                                 runat="server"
@@ -62,18 +57,14 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="txtRequestedBy">Requested By</label>
-                            <asp:TextBox ID="txtRequestedBy" runat="server" CssClass="form-control"></asp:TextBox>
+                            <label for="txtCreatedBy">Created By</label>
+                            <asp:TextBox ID="txtCreatedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                     </div>
                 </div>
 
                 <div class="panel-body">
                     <div role="form">
-                        <div class="col-md-4">
-                            <label for="txtReason">Reason</label>
-                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
-                        </div>
                         <div class="col-md-4">
                             <label for="ddlGCType">GC Type</label>
                             <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlGCType_SelectedIndexChanged">
@@ -152,6 +143,7 @@
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
                                                         <asp:BoundField DataField="WithBreakfast" HeaderText="With Breakfast?" />
                                                         <asp:BoundField DataField="HowManyPerson" HeaderText="Head Count" />
+                                                        <asp:BoundField DataField="Remarks" HeaderText="Remarks" />
 
                                                         <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editRoom" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteRoom" />
@@ -204,6 +196,7 @@
                                                         <asp:BoundField DataField="Name" HeaderText="Name" />
                                                         <asp:BoundField DataField="DiningType" HeaderText="Dining Type" />
                                                         <asp:BoundField DataField="HeadCount" HeaderText="Head Count" />
+                                                        <asp:BoundField DataField="Remarks" HeaderText="Remarks" />
 
                                                         <asp:ButtonField HeaderText="Edit" ButtonType="Link" Text="Edit" CommandName="editDining" />
                                                         <asp:ButtonField HeaderText="Delete" ButtonType="Link" Text="Delete" CommandName="deleteDining" />
@@ -310,6 +303,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="txtAddRoomRemarks">Remarks</label>
+                                    <asp:TextBox ID="txtAddRoomRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                                </div>
+
+                                <div class="form-group">
                                     <asp:Label ID="lblAddRoomDuplicateGC" runat="server" CssClass="label label-danger"></asp:Label>
                                 </div>
                             </div>
@@ -403,6 +401,11 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditRoomRemarks">Remarks</label>
+                                <asp:TextBox ID="txtEditRoomRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
                             </div>
 
                             <div class="form-group">
@@ -526,6 +529,12 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="txtAddDiningRemarks">Remarks</label>
+                                    <asp:TextBox ID="txtAddDiningRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                                </div>
+
+
+                                <div class="form-group">
                                     <asp:Label ID="lblAddDiningDuplicateGC" runat="server" CssClass="label label-danger"></asp:Label>
                                 </div>
 
@@ -617,6 +626,11 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditDining"
                                     ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditDiningRemarks">Remarks</label>
+                                <asp:TextBox ID="txtEditDiningRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
                             </div>
 
                             <div class="form-group">

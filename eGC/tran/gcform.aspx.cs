@@ -11,6 +11,8 @@ namespace eGC.tran
     public partial class gcform : System.Web.UI.Page
     {
         GiftCheckDataContext db = new GiftCheckDataContext();
+        UserAccountsDataContext dbUsers = new UserAccountsDataContext();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -118,7 +120,10 @@ namespace eGC.tran
                         }
 
                         txtDateIssued.Text = DateTime.Now.ToString("MM/dd/yyyy");
-                        txtRecommendingApproval.Focus();
+
+                        //get user accnt
+                        var user = dbUsers.UserProfiles.Where(n => n.UserId == Guid.Parse(Membership.GetUser().ProviderUserKey.ToString())).FirstOrDefault();
+                        txtCreatedBy.Text = user.LastName + ", " + user.FirstName + " " + user.MiddleName; 
                     }
                 }
             }
@@ -141,6 +146,7 @@ namespace eGC.tran
                 ddlEditRoom.SelectedValue = q.RoomId.ToString();
                 rblEditRoomBreakfast.SelectedValue = q.WithBreakfast.ToString();
                 txtEditRoomHeadCount.Text = q.HeadCount.ToString();
+                txtEditRoomRemarks.Text = q.Remarks.ToString();
                 lblEditRoomDuplicateGC.Text = String.Empty;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -180,6 +186,7 @@ namespace eGC.tran
                 ddlEditDining.SelectedValue = q.DiningId.ToString();
                 ddlEditDiningType.SelectedValue = q.DiningTypeId.ToString();
                 txtEditDiningHeadCount.Text = q.HeadCount.ToString();
+                txtEditDiningRemarks.Text = q.Remarks.ToString();
                 lblEditDiningDuplicateGC.Text = String.Empty;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -222,9 +229,7 @@ namespace eGC.tran
                     tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
                 }
 
-                tran.Reason = txtReason.Text;
-                tran.RequestedBy = txtRequestedBy.Text;
-                tran.RecommendingApproval = txtRecommendingApproval.Text;
+                tran.CreatedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
                 tran.StatusGC = "Waiting";
                 tran.ApprovalStatus = "Pending";
                 tran.IsArchive = false;
@@ -233,7 +238,8 @@ namespace eGC.tran
                 tran.DiningTypeId = t.DiningTypeId;
                 tran.WithBreakfast = t.WithBreakfast;
                 tran.HeadCount = t.HeadCount;
-                
+                tran.Remarks = t.Remarks;
+
                 db.GCTransactions.InsertOnSubmit(tran);
             }
             db.SubmitChanges();
@@ -259,6 +265,7 @@ namespace eGC.tran
                 tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
                 tmp.WithBreakfast = Convert.ToBoolean(rblAddRoomBreakfast.SelectedValue);
                 tmp.HeadCount = Convert.ToInt32(txtAddRoomHeadCount.Text);
+                tmp.Remarks = txtAddRoomRemarks.Text;
 
                 db.tmpRooms.InsertOnSubmit(tmp);
                 db.SubmitChanges();
@@ -298,6 +305,7 @@ namespace eGC.tran
                     r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
                     r.WithBreakfast = Convert.ToBoolean(rblEditRoomBreakfast.SelectedValue);
                     r.HeadCount = Convert.ToInt32(txtEditRoomHeadCount.Text);
+                    r.Remarks = txtEditRoomRemarks.Text;
 
                     db.SubmitChanges();
 
@@ -322,6 +330,7 @@ namespace eGC.tran
                 r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
                 r.WithBreakfast = Convert.ToBoolean(rblEditRoomBreakfast.SelectedValue);
                 r.HeadCount = Convert.ToInt32(txtEditRoomHeadCount.Text);
+                r.Remarks = txtEditRoomRemarks.Text;
 
                 db.SubmitChanges();
 
@@ -368,6 +377,7 @@ namespace eGC.tran
                 tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
                 tmp.DiningTypeId = Convert.ToInt32(ddlAddDiningType.SelectedValue);
                 tmp.HeadCount = Convert.ToInt32(txtAddDiningHeadCount.Text);
+                tmp.Remarks = txtAddDiningRemarks.Text;
                 tmp.GCNumber = gcNumber;
 
                 db.tmpRooms.InsertOnSubmit(tmp);
@@ -407,6 +417,7 @@ namespace eGC.tran
                     d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
                     d.DiningTypeId = Convert.ToInt32(ddlEditDiningType.SelectedValue);
                     d.HeadCount = Convert.ToInt32(txtEditDiningHeadCount.Text);
+                    d.Remarks = txtEditDiningRemarks.Text;
 
                     db.SubmitChanges();
 
@@ -429,6 +440,7 @@ namespace eGC.tran
                 d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
                 d.DiningTypeId = Convert.ToInt32(ddlEditDiningType.SelectedValue);
                 d.HeadCount = Convert.ToInt32(txtEditDiningHeadCount.Text);
+                d.Remarks = txtEditDiningRemarks.Text;
 
                 db.SubmitChanges();
 
@@ -473,7 +485,8 @@ namespace eGC.tran
                         Type = room.Type,
                         Room = room.Room1,
                         WithBreakfast = gcroom.WithBreakfast,
-                        HowManyPerson = gcroom.HeadCount
+                        HowManyPerson = gcroom.HeadCount,
+                        Remarks = gcroom.Remarks
                     };
 
             gvRoom.DataSource = q.ToList();
@@ -494,7 +507,8 @@ namespace eGC.tran
                         GCNumber = gcdining.GCNumber,
                         Name = dining.Name,
                         DiningType = dining_type.DiningType1,
-                        HeadCount = gcdining.HeadCount
+                        HeadCount = gcdining.HeadCount,
+                        Remarks = gcdining.Remarks
                     };
 
             gvDining.DataSource = q.ToList();

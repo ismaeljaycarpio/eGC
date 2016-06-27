@@ -49,14 +49,13 @@ namespace eGC.tran
                            GCNumber = gctran.GCNumber,
                            ExpirationDate = gctran.ExpirationDate,
                            GCType = gctran.GCType,
-                           RecommendingApproval = gctran.RecommendingApproval,
-                           Remarks = gctran.Reason,
+                           Remarks = gctran.Remarks,
                            DateCancelled = gctran.CancelledDate,
                            ReasonForCancellation = gctran.CancellationReason,
                            GCStatus = gctran.StatusGC,
                            ApprovedBy = gctran.ApprovedBy,
                            DateIssued = gctran.DateIssued,
-                           RequestedBy = gctran.RequestedBy,
+                           CreatedBy = gctran.CreatedBy,
                            Room = gctran.Room.Room1,
                            Includes = gctran.WithBreakfast,
                            HeadCount = gctran.HeadCount,
@@ -72,7 +71,14 @@ namespace eGC.tran
             string dateIssued = String.Empty;
             string checkin = String.Empty;
             string checkout = String.Empty;
-            
+            string createdBy = String.Empty;
+
+            if(tran.CreatedBy != null)
+            {
+                var c = dbUser.UserProfiles.Where(n => n.UserId == tran.CreatedBy).FirstOrDefault();
+                createdBy = c.LastName + ", " + c.FirstName + " " + c.MiddleName;
+            }
+
             if(tran.ApprovedBy != null)
             {
                 var approver = (from user in dbUser.UserProfiles
@@ -125,13 +131,13 @@ namespace eGC.tran
             param[6] = new ReportParameter("DateIssued", dateIssued);
             param[7] = new ReportParameter("GCNumber", tran.GCNumber);
             param[8] = new ReportParameter("Email", tran.Email);
-            param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
+            //param[9] = new ReportParameter("RecommendingApproval", tran.RecommendingApproval);
             param[10] = new ReportParameter("ExpirationDate", expirationDate);
             param[11] = new ReportParameter("GCStatus", tran.GCStatus);
             param[12] = new ReportParameter("DateCancelled", dateCancelled);
             param[13] = new ReportParameter("ReasonForCancellation", tran.ReasonForCancellation);
             param[14] = new ReportParameter("ApprovedBy", approvedBy);
-            param[15] = new ReportParameter("RequestedBy", tran.RequestedBy);
+            param[15] = new ReportParameter("RequestedBy", createdBy); //requested - created by
             param[16] = new ReportParameter("Room", tran.Room);
             param[17] = new ReportParameter("Includes", tran.Includes.ToString());
             param[18] = new ReportParameter("HeadCount", tran.HeadCount.ToString());

@@ -116,6 +116,7 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
+                                            <asp:BoundField DataField="DateIssued" HeaderText="Date Issued" DataFormatString="{0:d}" SortExpression="DateIssued" />
                                             <asp:BoundField DataField="ExpiryDate" HeaderText="Expiration Date" DataFormatString="{0:d}" SortExpression="ExpiryDate" />
 
                                             <asp:BoundField DataField="CancelledDate" HeaderText="Date Cancelled" DataFormatString="{0:d}" SortExpression="CancelledDate" />

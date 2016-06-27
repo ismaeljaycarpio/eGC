@@ -85,15 +85,6 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.TextBox txtContactPerson;
         
         /// <summary>
-        /// txtRecommendingApproval control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecommendingApproval;
-        
-        /// <summary>
         /// txtDateIssued control.
         /// </summary>
         /// <remarks>
@@ -112,22 +103,13 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
         
         /// <summary>
-        /// txtRequestedBy control.
+        /// txtCreatedBy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRequestedBy;
-        
-        /// <summary>
-        /// txtReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReason;
+        protected global::System.Web.UI.WebControls.TextBox txtCreatedBy;
         
         /// <summary>
         /// ddlGCType control.
@@ -328,6 +310,15 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
+        /// txtAddRoomRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAddRoomRemarks;
+        
+        /// <summary>
         /// lblAddRoomDuplicateGC control.
         /// </summary>
         /// <remarks>
@@ -443,6 +434,15 @@ namespace eGC.tran {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
+        
+        /// <summary>
+        /// txtEditRoomRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEditRoomRemarks;
         
         /// <summary>
         /// lblEditRoomDuplicateGC control.
@@ -571,6 +571,15 @@ namespace eGC.tran {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
         
         /// <summary>
+        /// txtAddDiningRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAddDiningRemarks;
+        
+        /// <summary>
         /// lblAddDiningDuplicateGC control.
         /// </summary>
         /// <remarks>
@@ -686,6 +695,15 @@ namespace eGC.tran {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator17;
+        
+        /// <summary>
+        /// txtEditDiningRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEditDiningRemarks;
         
         /// <summary>
         /// lblEditDiningDuplicateGC control.
