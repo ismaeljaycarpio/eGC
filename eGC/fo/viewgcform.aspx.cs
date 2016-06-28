@@ -192,6 +192,10 @@ namespace eGC.fo
             {
                 tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
             }
+            else
+            {
+                tran.ExpirationDate = null;
+            }
 
             if(txtCheckin.Text != String.Empty)
             {
