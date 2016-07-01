@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.room
 {
@@ -26,12 +27,16 @@ namespace eGC.room
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             var q = (from r in db.Dinings
+                     where r.Id == Convert.ToInt32(hfDeleteId.Value)
                      select r).FirstOrDefault();
 
             db.Dinings.DeleteOnSubmit(q);
             db.SubmitChanges();
 
             this.gvDining.DataBind();
+
+            //audit trail
+            DBLogger.Log("Delete", "Deleted Dining ", q.Name);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

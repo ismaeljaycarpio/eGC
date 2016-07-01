@@ -454,7 +454,6 @@
       <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="AuditTrail.cs" />
     <Compile Include="company\add-company.aspx.cs">
       <DependentUpon>add-company.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -484,6 +483,7 @@
       <DependentUpon>edit-company.aspx</DependentUpon>
     </Compile>
     <Compile Include="DAL\AccountManagement.cs" />
+    <Compile Include="DAL\DBLogger.cs" />
     <Compile Include="DAL\GCExtension.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

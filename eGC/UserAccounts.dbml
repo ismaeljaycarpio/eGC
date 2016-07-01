@@ -94,14 +94,14 @@
   </Table>
   <Table Name="dbo.UserProfile" Member="UserProfiles">
     <Type Name="UserProfile">
-      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="MiddleName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="PositionId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="Position_UserProfile" Member="Position" ThisKey="PositionId" OtherKey="Id" Type="Position" IsForeignKey="true" />
-      <Association Name="User_UserProfile" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+      <Association Name="User_UserProfile" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

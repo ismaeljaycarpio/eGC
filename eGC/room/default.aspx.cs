@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.room
 {
@@ -100,12 +101,16 @@ namespace eGC.room
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             var q = (from r in db.Rooms
+                     where r.Id == Convert.ToInt32(hfDeleteId.Value)
                      select r).FirstOrDefault();
 
             db.Rooms.DeleteOnSubmit(q);
             db.SubmitChanges();
 
             this.gvRoom.DataBind();
+
+            //audit trail
+            DBLogger.Log("Delete", "Deleted Room ", q.Room1);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

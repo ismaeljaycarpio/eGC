@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using eGC.DAL;
 
 namespace eGC.gcapproval
 {
@@ -184,6 +185,10 @@ namespace eGC.gcapproval
             db.SubmitChanges();
 
             this.gvGC.DataBind();
+
+            //audit trail
+            DBLogger.Log("Delete", "Deleted for Approval GC", gc.GCNumber);
+
             Javascript.HideModal(this, this, "deleteModal");
         }
 

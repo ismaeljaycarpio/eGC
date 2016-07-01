@@ -39,6 +39,9 @@ namespace eGC.company
 
             this.gvCompany.DataBind();
 
+            //audit trail
+            DBLogger.Log("Delete", "Deleted Company", q.GuestId);
+
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#deleteModal').modal('hide');");

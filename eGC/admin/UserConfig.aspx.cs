@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using eGC.DAL;
 
 namespace eGC.admin
 {
@@ -403,6 +404,9 @@ namespace eGC.admin
             Membership.DeleteUser(lblDeleteUsername.Text);
 
             this.gvUsers.DataBind();
+
+            //audit trail
+            DBLogger.Log("Delete", "Deleted User ", lblDeleteUsername.Text);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

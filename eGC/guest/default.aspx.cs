@@ -82,6 +82,9 @@ namespace eGC.guest
             //bindGridview();
             gvGuests.DataBind();
 
+            //audit trail
+            DBLogger.Log("Delete", "Deleted Individual", q.GuestId);
+
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#deleteModal').modal('hide');");
