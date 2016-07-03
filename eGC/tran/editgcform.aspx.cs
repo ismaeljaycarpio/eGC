@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using eGC.DAL;
 
 namespace eGC.tran
 {
@@ -228,6 +229,10 @@ namespace eGC.tran
             }
 
             db.SubmitChanges();
+
+            //audit trail
+            DBLogger.Log("Update", "Updated GC", gc.GCNumber);
+
             Response.Redirect("~/gcapproval/default.aspx");
         }
 
