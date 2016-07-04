@@ -67,8 +67,10 @@ namespace eGC.room
 
             db.DiningTypes.InsertOnSubmit(dt);
             db.SubmitChanges();
-
             this.gvDiningType.DataBind();
+
+            //audit trail
+            DBLogger.Log("Create", "Create Dining Type ", dt.DiningType1);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -87,8 +89,10 @@ namespace eGC.room
             q.Active = Convert.ToBoolean(rblAddActive.SelectedValue);
 
             db.SubmitChanges();
-
             this.gvDiningType.DataBind();
+
+            //audit trail
+            DBLogger.Log("Update", "Update Dining Type ", q.DiningType1);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

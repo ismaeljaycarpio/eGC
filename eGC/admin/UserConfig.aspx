@@ -87,11 +87,11 @@
 
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:Button ID="btnDelete" 
-                                                    runat="server" 
+                                                <asp:Button ID="btnDelete"
+                                                    runat="server"
                                                     Text="Delete"
                                                     CssClass="btn btn-danger btn-sm"
-                                                    CommandName="deleteUser" 
+                                                    CommandName="deleteUser"
                                                     CommandArgument='<%#((GridViewRow)Container).RowIndex %>'></asp:Button>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -139,15 +139,15 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtCreateUsername"
-                                    ValidationGroup="vgAddUser"                                  
+                                    ValidationGroup="vgAddUser"
                                     ErrorMessage="Username is required"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator 
-                                    Display="Dynamic" 
-                                    ControlToValidate="txtCreateUsername" 
+                                <asp:RegularExpressionValidator
+                                    Display="Dynamic"
+                                    ControlToValidate="txtCreateUsername"
                                     CssClass="label label-danger"
-                                    ID="RegularExpressionValidator3" 
-                                    ValidationExpression="^[\s\S]{6,15}$" 
-                                    runat="server" 
+                                    ID="RegularExpressionValidator3"
+                                    ValidationExpression="^[\s\S]{6,15}$"
+                                    runat="server"
                                     ValidationGroup="vgAddUser"
                                     ErrorMessage="Minimum 6 and Maximum 15 characters required."></asp:RegularExpressionValidator>
                             </div>
@@ -160,7 +160,7 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtCreateFirstName"
-                                    ValidationGroup="vgAddUser"                                  
+                                    ValidationGroup="vgAddUser"
                                     ErrorMessage="First Name is required"></asp:RequiredFieldValidator>
                             </div>
 
@@ -172,7 +172,7 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtCreateMiddleName"
-                                    ValidationGroup="vgAddUser"                                  
+                                    ValidationGroup="vgAddUser"
                                     ErrorMessage="Middle Name is required"></asp:RequiredFieldValidator>
                             </div>
 
@@ -184,7 +184,7 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtCreateLastName"
-                                    ValidationGroup="vgAddUser"                                  
+                                    ValidationGroup="vgAddUser"
                                     ErrorMessage="Last Name is required"></asp:RequiredFieldValidator>
                             </div>
 
@@ -250,7 +250,7 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtEditFirstName"
-                                    ValidationGroup="vgEditUser"                                  
+                                    ValidationGroup="vgEditUser"
                                     ErrorMessage="First Name is required"></asp:RequiredFieldValidator>
                             </div>
 
@@ -262,7 +262,7 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtEditMiddleName"
-                                    ValidationGroup="vgEditUser"                                  
+                                    ValidationGroup="vgEditUser"
                                     ErrorMessage="Middle Name is required"></asp:RequiredFieldValidator>
                             </div>
 
@@ -274,7 +274,7 @@
                                     CssClass="label label-danger"
                                     Display="Dynamic"
                                     ControlToValidate="txtEditLastName"
-                                    ValidationGroup="vgEditUser"                                  
+                                    ValidationGroup="vgEditUser"
                                     ErrorMessage="Last Name is required"></asp:RequiredFieldValidator>
                             </div>
 

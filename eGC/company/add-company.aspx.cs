@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.company
 {
@@ -42,6 +43,9 @@ namespace eGC.company
 
                 g.CompanyId = g.Id;
                 db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Create", "Created Company", g.GuestId);
 
                 Response.Redirect("~/company/company-profile.aspx");
 

@@ -118,6 +118,7 @@
                                                 <% if (Page.User.IsInRole("Admin-GC"))
                                                    { %>
                                                 <li><a runat="server" href="~/admin/userconfig.aspx">Users</a></li>
+                                                <li><a runat="server" href="~/admin/audit-trail.aspx">Audit Trail</a></li>
                                                 <%} %>
                                             </ul>
                                         </li>

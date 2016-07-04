@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using eGC.DAL;
 
 namespace eGC.fo
 {
@@ -222,6 +223,10 @@ namespace eGC.fo
 
             db.SubmitChanges();
 
+            //audit trail
+            DBLogger.Log("Update", "Updated GC Number: \n " +
+                "Set Status: " + tran.StatusGC, tran.GCNumber);
+
             if(ddlGCStatus.SelectedValue == "Cancelled")
             {
                 Javascript.ShowModal(this, this, "cancelledModal");
@@ -247,6 +252,10 @@ namespace eGC.fo
             gc.StatusGC = "Used";
             db.SubmitChanges();
 
+            //audit trail
+            DBLogger.Log("Update", "Updated GC Number: View from Front Office, Set status to " + gc.StatusGC, 
+                gc.GCNumber);
+
             Response.Redirect("~/fo/frontoffice.aspx");
         }
 
@@ -259,6 +268,10 @@ namespace eGC.fo
 
             gc.StatusGC = "Cancelled";
             db.SubmitChanges();
+
+            //audit trail
+            DBLogger.Log("Cancelled", "Cancelled GC Number: View from Front Office, Set status to " + gc.StatusGC,
+                gc.GCNumber);
 
             Response.Redirect("~/fo/frontoffice.aspx");
         }
@@ -286,6 +299,10 @@ namespace eGC.fo
             gc.StatusGC = "Waiting";
             db.SubmitChanges();
 
+            //audit trail
+            DBLogger.Log("Update", "Updated GC Number: View from Front Office, Set status to " + gc.StatusGC,
+                gc.GCNumber);
+
             Response.Redirect("~/fo/frontoffice.aspx");
         }
 
@@ -301,6 +318,11 @@ namespace eGC.fo
             gc.CancelledDate = DateTime.Now;
 
             db.SubmitChanges();
+
+            //audit trail
+            DBLogger.Log("Cancelled", "Cancelled GC Number: View from Front Office, Set status to " + gc.StatusGC,
+                gc.GCNumber);
+
             Response.Redirect("~/fo/frontoffice.aspx");
         }
 

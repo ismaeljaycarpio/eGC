@@ -260,6 +260,10 @@ namespace eGC.tran
             {
                 gc.ApprovalStatus = "Approved";
                 db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Update", "Approved GC", gc.GCNumber);
+
                 Response.Redirect("~/gcapproval/default.aspx"); 
             }
         }
@@ -273,6 +277,10 @@ namespace eGC.tran
 
             gc.ApprovalStatus = "Disapproved";
             db.SubmitChanges();
+
+            //audit trail
+            DBLogger.Log("Update", "Disapproved GC", gc.GCNumber);
+
             Response.Redirect("~/gcapproval/default.aspx");
         }
 
@@ -367,6 +375,10 @@ namespace eGC.tran
             gc.ApprovalStatus = "Approved";
             gc.IsArchive = true;
             db.SubmitChanges();
+
+            //audit trail
+            DBLogger.Log("Update", "Approved Cancellation of GC and moved to History", gc.GCNumber);
+
             Response.Redirect("~/gcapproval/default.aspx"); 
         }
     }

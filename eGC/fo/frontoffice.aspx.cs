@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using eGC.DAL;
 
 namespace eGC.fo
 {
@@ -259,8 +260,10 @@ namespace eGC.fo
             }
             
             db.SubmitChanges();
-
             this.gvGC.DataBind();
+
+            //audit trail
+            DBLogger.Log("Update", "Updated GC Front-office to :" + tran.StatusGC , tran.GCNumber);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -280,9 +283,12 @@ namespace eGC.fo
             tran.StatusGC = "Cancelled";
             tran.CancellationReason = txtCancellationReason.Text;
             tran.CancelledDate = DateTime.Now;
-            db.SubmitChanges();
 
+            db.SubmitChanges();
             this.gvGC.DataBind();
+
+            //audit trail
+            DBLogger.Log("Cancelled", "Cancelled GC - front office", tran.GCNumber);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

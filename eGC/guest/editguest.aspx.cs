@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.guest
 {
@@ -163,6 +164,9 @@ namespace eGC.guest
                 g.CreatedBy = User.Identity.Name;
 
                 db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Update", "Updated Individual Guest", g.GuestId);
 
                 pnlSuccess.Visible = true;
 

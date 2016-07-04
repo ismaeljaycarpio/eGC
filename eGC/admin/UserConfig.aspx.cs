@@ -230,6 +230,9 @@ namespace eGC.admin
             //re-load gridview
             this.gvUsers.DataBind();
 
+            //audit trail
+            DBLogger.Log("Update", "Updated User ", user.User.UserName);
+
             //close modal
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -250,11 +253,17 @@ namespace eGC.admin
             {
                 //unlock
                 getUser.UnlockUser();
+
+                //audit trail
+                DBLogger.Log("Unlock", "Unlock User ", getUser.UserName);
             }
             else
             {
                 //lock
                 accnt.LockUser(UserId);
+
+                //audit trail
+                DBLogger.Log("Lock", "Lock User ", getUser.UserName);
             }
 
             this.gvUsers.DataBind();
@@ -268,8 +277,10 @@ namespace eGC.admin
 
             //pswd resets to own username
             accnt.ResetPassword(UserId);
-            
             this.gvUsers.DataBind();
+
+            //audit trail
+            DBLogger.Log("Reset Password", "Reset Password for User", Membership.GetUser(UserId).UserName);
         }
 
         protected void lblStatus_Click(object sender, EventArgs e)
@@ -281,10 +292,16 @@ namespace eGC.admin
             if (lnkStatus.Text == "Active")
             {
                 accnt.DeactivateUser(UserId);
+
+                //audit trail
+                DBLogger.Log("Deactivate", "Deactivate User ", Membership.GetUser(UserId).UserName);
             }
             else
             {
                 accnt.ActivateUser(UserId);
+
+                //audit trail
+                DBLogger.Log("Activate", "Activate User ", Membership.GetUser(UserId).UserName);
             }
 
             //bindGridview();
@@ -366,6 +383,9 @@ namespace eGC.admin
 
                 //re-load users
                 this.gvUsers.DataBind();
+
+                //audit trail
+                DBLogger.Log("Create", "Created User ", user.User.UserName);
 
                 //hide modal
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();

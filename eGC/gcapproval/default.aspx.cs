@@ -146,8 +146,10 @@ namespace eGC.gcapproval
             }
 
             db.SubmitChanges();
-
             this.gvGC.DataBind();
+
+            //audit trail
+            DBLogger.Log("Approved", "Approved GC", tran.GCNumber);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -164,9 +166,12 @@ namespace eGC.gcapproval
                         select gc).FirstOrDefault();
 
             tran.ApprovalStatus = "Disapproved";
-            db.SubmitChanges();
 
+            db.SubmitChanges();
             this.gvGC.DataBind();
+
+            //audit trail
+            DBLogger.Log("Disapproved", "Disapproved GC", tran.GCNumber);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

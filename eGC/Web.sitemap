@@ -7,6 +7,8 @@
 
       <siteMapNode url="~/admin/userconfig.aspx" title="User Config"  description="">
       </siteMapNode>
+
+      <siteMapNode url="~/admin/audit-trail.aspx" title="Audit Trail"></siteMapNode>
       
       <siteMapNode url="~/guest/default.aspx" title="Individual"  description="">
         <siteMapNode url="~/tran/gcform.aspx" title="Add GC"  description="" />

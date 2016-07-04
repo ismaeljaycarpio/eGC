@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.guest
 {
@@ -114,6 +115,9 @@ namespace eGC.guest
 
                 db.Guests.InsertOnSubmit(g);
                 db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Create", "Created Individual Guest", g.GuestId);
 
                 Response.Redirect("~/guest/default.aspx");
                 //pnlSuccess.Visible = true;

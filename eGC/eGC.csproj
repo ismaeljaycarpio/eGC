@@ -161,6 +161,7 @@
     </Content>
     <Content Include="Account\Manage.aspx" />
     <Content Include="ActivityLog.txt" />
+    <Content Include="admin\audit-trail.aspx" />
     <Content Include="admin\UserConfig.aspx" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="company\add-company.aspx" />
@@ -438,6 +439,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\audit-trail.aspx.cs">
+      <DependentUpon>audit-trail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\audit-trail.aspx.designer.cs">
+      <DependentUpon>audit-trail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\UserConfig.aspx.cs">
       <DependentUpon>UserConfig.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

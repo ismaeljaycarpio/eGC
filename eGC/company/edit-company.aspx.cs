@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using eGC.DAL;
 
 namespace eGC.company
 {
@@ -75,6 +76,9 @@ namespace eGC.company
                 g.CreatedBy = User.Identity.Name;
 
                 db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Update", "Updated Company", g.GuestId);
 
                 Response.Redirect("~/company/company-profile.aspx");
                 //pnlSuccess.Visible = true;

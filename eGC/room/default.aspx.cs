@@ -68,8 +68,10 @@ namespace eGC.room
             db.Rooms.InsertOnSubmit(r);
 
             db.SubmitChanges();
-
             this.gvRoom.DataBind();
+
+            //audit trail
+            DBLogger.Log("Create", "Create Room ", r.Room1);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -88,8 +90,10 @@ namespace eGC.room
             q.Room1 = txtEditRoom.Text;
 
             db.SubmitChanges();
-
             this.gvRoom.DataBind();
+
+            //audit trail
+            DBLogger.Log("Update", "Updated Room ", q.Room1);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");

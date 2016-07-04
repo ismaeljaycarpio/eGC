@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using eGC.DAL;
 
 namespace eGC.tran
 {
@@ -241,8 +242,12 @@ namespace eGC.tran
                 tran.Remarks = t.Remarks;
 
                 db.GCTransactions.InsertOnSubmit(tran);
+                db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Create", "Created GC", tran.GCNumber);
             }
-            db.SubmitChanges();
+            
             Response.Redirect("~/guest/default.aspx");
         }
 

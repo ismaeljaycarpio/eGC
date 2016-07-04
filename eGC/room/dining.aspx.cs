@@ -54,8 +54,10 @@ namespace eGC.room
             q.Name = txtEditDining.Text;
 
             db.SubmitChanges();
-
             this.gvDining.DataBind();
+
+            //audit trail
+            DBLogger.Log("Update", "Update Dining ", q.Name);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
@@ -72,8 +74,10 @@ namespace eGC.room
             db.Dinings.InsertOnSubmit(dining);
             
             db.SubmitChanges();
-
             this.gvDining.DataBind();
+
+            //audit trail
+            DBLogger.Log("Create", "Create Dining ", dining.Name);
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
