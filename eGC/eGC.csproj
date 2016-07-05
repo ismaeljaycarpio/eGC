@@ -309,6 +309,7 @@
     <Content Include="jquery.bxslider\bower.json" />
     <Content Include="jquery.bxslider\readme.md" />
     <Content Include="admin\Web.config" />
+    <Content Include="company\Web.config" />
     <None Include="Properties\PublishProfiles\eeGC.pubxml" />
     <None Include="Properties\PublishProfiles\eGC.pubxml" />
     <Content Include="ProfilePic\noImage.png" />
@@ -324,6 +325,8 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="room\Web.config" />
+    <Content Include="report\Web.config" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
