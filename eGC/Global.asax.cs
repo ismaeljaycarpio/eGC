@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Security;
 using eGC;
+using System.Web.Optimization;
 
 namespace eGC
 {
@@ -14,6 +15,7 @@ namespace eGC
         {
             // Code that runs on application startup
             AuthConfig.RegisterOpenAuth();
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
         }

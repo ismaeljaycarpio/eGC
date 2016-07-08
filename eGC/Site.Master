@@ -6,21 +6,30 @@
     <meta charset="utf-8" />
     <title>eGC - <%: Page.Title %></title>
 
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <%--<link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />--%>
 
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <asp:PlaceHolder runat="server">
-        <script src="<%: ResolveUrl("~/Scripts/jquery-2.1.4.js") %>"></script>
+        <%--<script src="<%: ResolveUrl("~/Scripts/jquery-2.1.4.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/moment.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/bootstrap-datepicker.js") %>"></script>
-        <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/bootstrap-datetimepicker.js") %>"></script>--%>
+
+        <%: System.Web.Optimization.Styles.Render("~/Content/bootstrap/css") %>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/modernizr") %>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/jquery") %>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/bootstrap") %>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/moment") %>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/bootstrap-datepicker") %>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/bootstrap-datetimepicker") %>
+
     </asp:PlaceHolder>
 
     <meta name="viewport" content="width=device-width" />
