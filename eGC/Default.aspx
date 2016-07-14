@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <ul class="bxslider">
                 <li>
-                    <img src="jquery.bxslider/images/azalea-baguio.jpg" alt="Azalea Boracay" />
+                    <img src="jquery.bxslider/images/azalea-baguio.jpg" alt="Azalea Baguio" />
                 </li>
                 <li>
                     <img src="jquery.bxslider/images/azalea-boracay-logo.jpg" alt="Azalea Boracay" />
