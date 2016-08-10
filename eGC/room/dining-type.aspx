@@ -66,7 +66,7 @@
                         <div class="modal-body">
                             <div class="form">
                                 <div class="form-group">
-                                    <label for="txtAddDining">Dining</label>
+                                    <label for="txtAddDining">Dining Type Name</label>
                                     <asp:TextBox ID="txtAddDining" runat="server" CssClass="form-control" placeholder="Dining Type"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
                                         runat="server"
@@ -108,7 +108,7 @@
                                 <asp:Label ID="lblRowId" runat="server" Visible="false"></asp:Label>
                             </div>
                             <div class="form-group">
-                                <label for="txtEditDining">Dining</label>
+                                <label for="txtEditDining">Dining Type Name</label>
                                 <asp:TextBox ID="txtEditDining" runat="server" CssClass="form-control" placeholder="Dining Type"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                                     runat="server"

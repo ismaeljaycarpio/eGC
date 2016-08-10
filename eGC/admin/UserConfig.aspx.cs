@@ -385,7 +385,7 @@ namespace eGC.admin
                 this.gvUsers.DataBind();
 
                 //audit trail
-                DBLogger.Log("Create", "Created User ", user.User.UserName);
+                DBLogger.Log("Create", "Created User: " + user.User.UserName, user.User.UserName);
 
                 //hide modal
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();

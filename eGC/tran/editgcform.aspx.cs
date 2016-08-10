@@ -74,7 +74,8 @@ namespace eGC.tran
                     }
 
                     //chk gc type
-                    if(tGC.GCType == "Representation")
+                    if (tGC.GCType == "Representation" || 
+                        tGC.GCType == "Raffle / Prize")
                     {
                         txtExpirationDate.Enabled = true;
                     }
@@ -286,7 +287,8 @@ namespace eGC.tran
 
         protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlGCType.SelectedValue == "Representation")
+            if (ddlGCType.SelectedValue == "Representation" ||
+                ddlGCType.SelectedValue == "Raffle / Prize")
             {
                 txtExpirationDate.Enabled = true;
                 RequiredFieldValidator1.Enabled = true;

@@ -186,7 +186,8 @@ namespace eGC.report
                         Approval = gctran.ApprovalStatus,
                         CancellationReason = gctran.CancellationReason,
                         CancelledDate = gctran.CancelledDate,
-                        CompanyId = guest.CompanyId
+                        CompanyId = guest.CompanyId,
+                        GCType = gctran.GCType
                     };
 
             //gc approval
@@ -199,6 +200,12 @@ namespace eGC.report
             if(ddlGCStatus.SelectedValue != "0")
             {
                 q = q.Where(x => x.Status == ddlGCStatus.SelectedValue);
+            }
+
+            //gc type
+            if(ddlGCType.SelectedValue != "0")
+            {
+                q = q.Where(x => x.GCType == ddlGCType.SelectedValue);
             }
 
             //company

@@ -72,7 +72,7 @@
                                 <asp:ListItem Value="Representation">Representation</asp:ListItem>
                                 <asp:ListItem Value="Sold">Sold</asp:ListItem>
                                 <asp:ListItem Value="Barter">Barter</asp:ListItem>
-                                <asp:ListItem Value="Raffle">Raffle / Prize</asp:ListItem>
+                                <asp:ListItem Value="Raffle / Prize">Raffle / Prize</asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"
@@ -254,6 +254,14 @@
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAddRoom"
                                         ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtAddRoomGCNumber"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddRoom"
+                                        ValidationExpression="\d+"
+                                        ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                                 </div>
 
                                 <div class="form-group">
@@ -356,6 +364,14 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditRoomGCNumber"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditRoom"
+                                    ValidationExpression="\d+"
+                                    ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                             </div>
 
                             <div class="form-group">
@@ -484,6 +500,14 @@
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAddDining"
                                         ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtAddDiningGCNumber"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddDining"
+                                        ValidationExpression="\d+"
+                                        ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                                 </div>
 
                                 <div class="form-group">
@@ -584,6 +608,14 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditDining"
                                     ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditDiningGCNumber"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditDining"
+                                    ValidationExpression="\d+"
+                                    ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                             </div>
 
                             <div class="form-group">

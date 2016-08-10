@@ -536,7 +536,8 @@ namespace eGC.tran
 
         protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ddlGCType.SelectedValue == "Representation")
+            if(ddlGCType.SelectedValue == "Representation" ||
+                ddlGCType.SelectedValue == "Raffle / Prize")
             {
                 txtExpirationDate.Enabled = true;
                 RequiredFieldValidator1.Enabled = true;
@@ -554,7 +555,7 @@ namespace eGC.tran
             int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
             maxId += 1;
 
-            txtAddRoomGCNumber.Text = "2600-" + DateTime.Now.Year.ToString() + "-" + maxId.ToString();
+            txtAddRoomGCNumber.Text = "2600" + DateTime.Now.Year.ToString() + maxId.ToString();
 
             lblAddRoomDuplicateGC.Text = String.Empty;
 
@@ -570,7 +571,7 @@ namespace eGC.tran
             int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
             maxId += 1;
 
-            txtAddDiningGCNumber.Text = "2600-" + DateTime.Now.Year.ToString() + "-" + maxId.ToString();
+            txtAddDiningGCNumber.Text = "2600" + DateTime.Now.Year.ToString() + maxId.ToString();
 
             lblAddDiningDuplicateGC.Text = String.Empty;
 

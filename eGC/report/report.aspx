@@ -40,6 +40,16 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="0" Text="-- Select GC Type --"></asp:ListItem>
+                                            <asp:ListItem Value="Representation">Representation</asp:ListItem>
+                                            <asp:ListItem Value="Sold">Sold</asp:ListItem>
+                                            <asp:ListItem Value="Barter">Barter</asp:ListItem>
+                                            <asp:ListItem Value="Raffle / Prize">Raffle / Prize</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+
+                                    <div class="form-group">
                                         <asp:DropDownList ID="ddlCompanyName"
                                             runat="server"
                                             CssClass="form-control">
@@ -113,6 +123,12 @@
                                             <asp:TemplateField HeaderText="GC Status" SortExpression="Status">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblGCStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="GC Type" SortExpression="GCType">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblGCType" runat="server" Text='<%# Eval("GCType") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 

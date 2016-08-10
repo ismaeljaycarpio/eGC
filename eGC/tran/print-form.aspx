@@ -5,6 +5,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+    <%--hide export to excel and word in dropdown--%>
+    <script>
+        $(document).ready(function()
+        {
+            $("a[title='Excel']").parent().hide();
+            $("a[title='Word']").parent().hide();
+        });
+    </script>
+
     <div class="row">
         <div class="col-md-12 col-md-offset-2">
             <rsweb:ReportViewer ID="ReportViewer1"

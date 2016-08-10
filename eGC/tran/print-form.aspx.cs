@@ -33,7 +33,7 @@ namespace eGC.tran
         {
             ReportViewer1.ProcessingMode = ProcessingMode.Local;
             ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/tran/gc-report.rdlc");
-
+            
             //querty tran
             var tran = (from gctran in db.GCTransactions
                        join guest in db.Guests

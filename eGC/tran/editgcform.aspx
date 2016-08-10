@@ -83,7 +83,7 @@
                                 <asp:ListItem Value="Representation">Representation</asp:ListItem>
                                 <asp:ListItem Value="Sold">Sold</asp:ListItem>
                                 <asp:ListItem Value="Barter">Barter</asp:ListItem>
-                                <asp:ListItem Value="Raffle">Raffle / Prize</asp:ListItem>
+                                <asp:ListItem Value="Raffle / Prize">Raffle / Prize</asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
                                 runat="server"
@@ -125,6 +125,14 @@
                                 CssClass="label label-danger"
                                 Enabled="false"
                                 ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+                                runat="server"
+                                Display="Dynamic"
+                                ControlToValidate="txtGCNumber"
+                                CssClass="label label-danger"
+                                ValidationGroup="vgPrimaryAdd"
+                                ValidationExpression="\d+"
+                                ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                 </div>

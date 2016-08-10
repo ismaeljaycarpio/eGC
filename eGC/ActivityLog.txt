@@ -1,4 +1,15 @@
-﻿
+﻿====================================================================
+============================= 2016 AUGUST 10 =======================
+====================================================================
+- remove export to excel and word
+- auto-generated of companyId - ONHOLD - descriptive ID of the Company
+- remove promotion and add hotspot and Mongolian - ONHOLD
+- add expiration to raffle / prize - DONE
+- frontoffice can also sell gc - DONE
+- add gc type for report filters - DONE
+- gc number should ne numeric only - DONE
+
+
 ====================================================================
 ============================= 2016 JULY 01 =========================
 ====================================================================
