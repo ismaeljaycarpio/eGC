@@ -144,10 +144,10 @@
                             ErrorMessage="Room is required"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-4">
-                        <label for="rblRoomBreakfast">Includes:</label>
+                        <label for="rblRoomBreakfast">Includes Breakfast?</label>
                         <asp:RadioButtonList ID="rblRoomBreakfast" runat="server" RepeatDirection="Horizontal" CssClass="form-control" Enabled="false">
-                            <asp:ListItem Value="True">With Breakfast</asp:ListItem>
-                            <asp:ListItem Value="False">Without Breakfast</asp:ListItem>
+                            <asp:ListItem Value="True">Yes</asp:ListItem>
+                            <asp:ListItem Value="False" style="margin-left:20px;">No</asp:ListItem>
                         </asp:RadioButtonList>
                     </div>
                     <div class="col-md-4">

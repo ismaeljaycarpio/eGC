@@ -259,6 +259,7 @@ namespace eGC.tran
             }
             else
             {
+                gc.StatusGC = "Waiting";
                 gc.ApprovalStatus = "Approved";
                 db.SubmitChanges();
 

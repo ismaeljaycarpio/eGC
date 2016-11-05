@@ -231,7 +231,7 @@ namespace eGC.tran
                 }
 
                 tran.CreatedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
-                tran.StatusGC = "Waiting";
+                tran.StatusGC = "Pending";
                 tran.ApprovalStatus = "Pending";
                 tran.IsArchive = false;
                 tran.RoomId = t.RoomId;

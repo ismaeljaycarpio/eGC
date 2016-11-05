@@ -142,7 +142,13 @@
                                                         <asp:BoundField DataField="GCNumber" HeaderText="GC Number" />
                                                         <asp:BoundField DataField="Type" HeaderText="Type" />
                                                         <asp:BoundField DataField="Room" HeaderText="Room" />
-                                                        <asp:BoundField DataField="WithBreakfast" HeaderText="With Breakfast?" />
+
+                                                        <asp:TemplateField HeaderText="Breakfast Inclusion?">
+                                                            <ItemTemplate>
+                                                                <%# (Boolean.Parse(Eval("WithBreakfast").ToString())) ? "Yes": "No" %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        
                                                         <asp:BoundField DataField="HowManyPerson" HeaderText="Head Count" />
                                                         <asp:BoundField DataField="Remarks" HeaderText="Remarks" />
 
@@ -280,11 +286,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="rblAddRoomBreakfast">Breakfast</label>
-                                    <asp:RadioButtonList ID="rblAddRoomBreakfast" runat="server" RepeatDirection="Horizontal"
+                                    <label for="rblAddRoomBreakfast">Breakfast Inclusion? </label>
+                                    <asp:RadioButtonList ID="rblAddRoomBreakfast" 
+                                        runat="server" 
+                                        RepeatDirection="Horizontal"
                                         CssClass="form-control">
-                                        <asp:ListItem Value="True">With Breakfast</asp:ListItem>
-                                        <asp:ListItem Value="False">Without Breakfast</asp:ListItem>
+                                        <asp:ListItem Value="True">Yes</asp:ListItem>
+                                        <asp:ListItem Value="False" style="margin-left:20px">No</asp:ListItem>
                                     </asp:RadioButtonList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
                                         runat="server"
@@ -390,11 +398,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="rblAddRoomBreakfast">Breakfast</label>
+                                <label for="rblAddRoomBreakfast">Breakfast Inclusion?</label>
                                 <asp:RadioButtonList ID="rblEditRoomBreakfast" runat="server" RepeatDirection="Horizontal"
                                     CssClass="form-control">
-                                    <asp:ListItem Value="True">With Breakfast</asp:ListItem>
-                                    <asp:ListItem Value="False">Without Breakfast</asp:ListItem>
+                                    <asp:ListItem Value="True">Yes</asp:ListItem>
+                                    <asp:ListItem Value="False" style="margin-left:20px;">No</asp:ListItem>
                                 </asp:RadioButtonList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
                                     runat="server"
