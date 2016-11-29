@@ -127,6 +127,13 @@
                                 Enabled="false"
                                 CssClass="form-control"></asp:TextBox>
                         </div>
+                        <div class="col-md-4">
+                            <label for="txtProperty">Property</label>
+                            <asp:TextBox ID="txtProperty"
+                                runat="server"
+                                Enabled="false"
+                                CssClass="form-control"></asp:TextBox>
+                        </div>
                     </div>
                 </div>
 

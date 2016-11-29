@@ -125,14 +125,10 @@
                                 CssClass="label label-danger"
                                 Enabled="false"
                                 ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
-                                runat="server"
-                                Display="Dynamic"
-                                ControlToValidate="txtGCNumber"
-                                CssClass="label label-danger"
-                                ValidationGroup="vgPrimaryAdd"
-                                ValidationExpression="\d+"
-                                ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtProperty">Property</label>
+                            <asp:TextBox ID="txtProperty" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                         </div>
                     </div>
                 </div>

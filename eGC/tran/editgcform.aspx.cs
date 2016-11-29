@@ -42,6 +42,7 @@ namespace eGC.tran
 
                     int id = tGC.Id;
                     hfTransactionId.Value = id.ToString();
+                    txtProperty.Text = tGC.Property;
                     txtGCNumber.Text = tGC.GCNumber;
                     hfGCNumber.Value = tGC.GCNumber; //store old gc number to server control in case of modification
                     txtDateIssued.Text = tGC.DateIssued.Value.ToString("MM/dd/yyyy");

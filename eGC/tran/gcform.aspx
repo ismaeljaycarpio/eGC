@@ -248,7 +248,28 @@
                             <div class="form">
 
                                 <div class="form-group">
-                                    <label for="txtAddRoomGCNumber">GC Number</label>
+                                    <label for="ddlRoomProperty">Property</label>
+                                    <asp:DropDownList ID="ddlRoomProperty"
+                                        runat="server"
+                                        AutoPostBack="true"
+                                        OnSelectedIndexChanged="ddlRoomProperty_SelectedIndexChanged"
+                                        CssClass="form-control">
+                                        <asp:ListItem Value="0">Select One</asp:ListItem>
+                                        <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
+                                        <asp:ListItem Value="Boracay">Boracay</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator20"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        InitialValue="0"
+                                        ControlToValidate="ddlRoomProperty"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddRoom"
+                                        ErrorMessage="Property is required"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtAddRoomGCNumber">e-GC Request Number</label>
                                     <asp:TextBox ID="txtAddRoomGCNumber"
                                         runat="server"
                                         CssClass="form-control">
@@ -260,14 +281,6 @@
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAddRoom"
                                         ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtAddRoomGCNumber"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgAddRoom"
-                                        ValidationExpression="\d+"
-                                        ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                                 </div>
 
                                 <div class="form-group">
@@ -322,6 +335,13 @@
                                 <div class="form-group">
                                     <label for="txtAddRoomRemarks">Remarks</label>
                                     <asp:TextBox ID="txtAddRoomRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtAddRoomRemarks"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddRoom"
+                                        ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
                                 </div>
 
                                 <div class="form-group">
@@ -360,7 +380,28 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="txtEditRoomGCNumber">GC Number</label>
+                                <label for="ddlEditRoomProperty">Property</label>
+                                <asp:DropDownList ID="ddlEditRoomProperty"
+                                    runat="server"
+                                    AutoPostBack="true"
+                                    OnSelectedIndexChanged="ddlEditRoomProperty_SelectedIndexChanged"
+                                    CssClass="form-control">
+                                    <asp:ListItem Value="0">Select One</asp:ListItem>
+                                    <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
+                                    <asp:ListItem Value="Boracay">Boracay</asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator21"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    InitialValue="0"
+                                    ControlToValidate="ddlEditRoomProperty"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditRoom"
+                                    ErrorMessage="Property is required"></asp:RequiredFieldValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEditRoomGCNumber">e-GC Request Number</label>
                                 <asp:TextBox ID="txtEditRoomGCNumber"
                                     runat="server"
                                     CssClass="form-control">
@@ -372,14 +413,6 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2"
-                                    runat="server"
-                                    Display="Dynamic"
-                                    ControlToValidate="txtEditRoomGCNumber"
-                                    CssClass="label label-danger"
-                                    ValidationGroup="vgEditRoom"
-                                    ValidationExpression="\d+"
-                                    ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                             </div>
 
                             <div class="form-group">
@@ -496,7 +529,26 @@
                             <div class="form">
 
                                 <div class="form-group">
-                                    <label for="txtAddDiningGCNumber">GC Number</label>
+                                    <label for="ddlDiningProperty">Property</label>
+                                    <asp:DropDownList ID="ddlDiningProperty"
+                                        runat="server"
+                                        CssClass="form-control">
+                                        <asp:ListItem Value="0">Select One</asp:ListItem>
+                                        <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
+                                        <asp:ListItem Value="Boracay">Boracay</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        InitialValue="0"
+                                        ControlToValidate="ddlDiningProperty"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddDining"
+                                        ErrorMessage="Property is required"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="txtAddDiningGCNumber">e-GC Request Number</label>
                                     <asp:TextBox ID="txtAddDiningGCNumber"
                                         runat="server"
                                         CssClass="form-control">
@@ -597,6 +649,25 @@
                             <h4 class="modal-title">Edit Dining</h4>
                         </div>
 
+                        <div class="form-group">
+                            <label for="ddlEditDiningProperty">Property</label>
+                            <asp:DropDownList ID="ddlEditDiningProperty"
+                                runat="server"
+                                CssClass="form-control">
+                                <asp:ListItem Value="0">Select One</asp:ListItem>
+                                <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
+                                <asp:ListItem Value="Boracay">Boracay</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator23"
+                                runat="server"
+                                Display="Dynamic"
+                                InitialValue="0"
+                                ControlToValidate="ddlEditDiningProperty"
+                                CssClass="label label-danger"
+                                ValidationGroup="vgEditDining"
+                                ErrorMessage="Property is required"></asp:RequiredFieldValidator>
+                        </div>
+
                         <div class="modal-body">
                             <div class="form-group">
                                 <asp:Label ID="lblEditDiningId" runat="server" Visible="false"></asp:Label>
@@ -604,7 +675,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="txtEditDiningGCNumber">GC Number</label>
+                                <label for="txtEditDiningGCNumber">e-GC Request Number</label>
                                 <asp:TextBox ID="txtEditDiningGCNumber"
                                     runat="server"
                                     CssClass="form-control">

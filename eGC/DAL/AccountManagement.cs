@@ -60,7 +60,7 @@ namespace eGC.DAL
         {
             MembershipUser mu = Membership.GetUser(UserId);
 
-            mu.ChangePassword(mu.ResetPassword(), "pass123");
+            mu.ChangePassword(mu.ResetPassword(), mu.UserName);
         }
 
         public void ChangeRole(Guid UserId, string roleName)

@@ -43,6 +43,7 @@ namespace eGC.fo
 
                     int id = tGC.Id;
                     hfTransactionId.Value = id.ToString();
+                    txtProperty.Text = tGC.Property;
                     txtGCNumber.Text = tGC.GCNumber;
                     txtDateIssued.Text = tGC.DateIssued.Value.ToString("MM/dd/yyyy");
                     ddlGCType.SelectedValue = tGC.GCType;

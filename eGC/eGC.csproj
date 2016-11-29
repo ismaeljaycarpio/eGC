@@ -231,11 +231,6 @@
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="GiftCheck.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>GiftCheck.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="gcapproval\Web.config" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -327,6 +322,11 @@
     <Content Include="jquery.bxslider\readme.md" />
     <Content Include="admin\Web.config" />
     <Content Include="company\Web.config" />
+    <Content Include="GiftCheck.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>GiftCheck.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\eeGC.pubxml" />
     <None Include="Properties\PublishProfiles\eGC.pubxml" />
     <Content Include="ProfilePic\noImage.png" />
@@ -694,14 +694,14 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GiftCheck.dbml.layout">
-      <DependentUpon>GiftCheck.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="tran\gc-report.rdlc" />
     <None Include="UserAccounts.dbml.layout">
       <DependentUpon>UserAccounts.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GiftCheck.dbml.layout">
+      <DependentUpon>GiftCheck.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>

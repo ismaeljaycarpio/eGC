@@ -142,6 +142,7 @@ namespace eGC.tran
                          select r).FirstOrDefault();
 
                 lblEditRoomId.Text = q.Id.ToString();
+                ddlEditRoomProperty.SelectedValue = q.Property;
                 txtEditRoomGCNumber.Text = q.GCNumber;
                 lblEditRoomGCNumber_old.Text = q.GCNumber; //put old value here
                 ddlEditRoom.SelectedValue = q.RoomId.ToString();
@@ -221,6 +222,7 @@ namespace eGC.tran
             {
                 GCTransaction tran = new GCTransaction();
                 tran.GuestId = Convert.ToInt32(Request.QueryString["guestid"]);
+                tran.Property = t.Property;
                 tran.GCNumber = t.GCNumber;
                 tran.DateIssued = Convert.ToDateTime(txtDateIssued.Text);
                 tran.GCType = ddlGCType.SelectedItem.Text;
@@ -267,6 +269,7 @@ namespace eGC.tran
                 tmpRoom tmp = new tmpRoom();
                 tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
                 tmp.GCNumber = gcNumber;
+                tmp.Property = ddlRoomProperty.SelectedValue;
                 tmp.RoomId = Convert.ToInt32(ddlAddRoom.SelectedValue);
                 tmp.WithBreakfast = Convert.ToBoolean(rblAddRoomBreakfast.SelectedValue);
                 tmp.HeadCount = Convert.ToInt32(txtAddRoomHeadCount.Text);
@@ -307,6 +310,7 @@ namespace eGC.tran
                 if(hasDuplicate(gcNumber, old_gcNumber) == false)
                 {
                     r.GCNumber = gcNumber;
+                    r.Property = ddlEditRoomProperty.SelectedValue;
                     r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
                     r.WithBreakfast = Convert.ToBoolean(rblEditRoomBreakfast.SelectedValue);
                     r.HeadCount = Convert.ToInt32(txtEditRoomHeadCount.Text);
@@ -555,8 +559,8 @@ namespace eGC.tran
             int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
             maxId += 1;
 
-            txtAddRoomGCNumber.Text = "2600" + DateTime.Now.Year.ToString() + maxId.ToString();
-
+            //txtAddRoomGCNumber.Text = "2600" + DateTime.Now.Year.ToString() + maxId.ToString();
+            ddlRoomProperty.SelectedValue = "0";
             lblAddRoomDuplicateGC.Text = String.Empty;
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -628,6 +632,60 @@ namespace eGC.tran
             }
 
             return false;
+        }
+
+        protected void ddlEditRoomProperty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tempGCNumber = "";
+            int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            maxId += 1;
+            hfGCNumber.Value = maxId.ToString();
+
+            if (ddlEditRoomProperty.SelectedValue == "Boracay")
+            {
+                tempGCNumber = "ARBO-" + DateTime.Today.Year.ToString() + "-";
+                tempGCNumber += maxId.ToString();
+
+            }
+            else if (ddlEditRoomProperty.SelectedValue == "Baguio")
+            {
+                tempGCNumber = "ARBA-" + DateTime.Today.Year.ToString() + "-";
+                tempGCNumber += maxId.ToString();
+            }
+            else
+            {
+                txtEditRoomGCNumber.Text = "";
+                return;
+            }
+
+            txtEditRoomGCNumber.Text = tempGCNumber;
+        }
+
+        protected void ddlRoomProperty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tempGCNumber = "";
+            int maxId = db.GCTransactions.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            maxId += 1;
+            hfGCNumber.Value = maxId.ToString();
+
+            if(ddlRoomProperty.SelectedValue == "Boracay")
+            {
+                tempGCNumber = "ARBO-" + DateTime.Today.Year.ToString() + "-";
+                tempGCNumber += maxId.ToString();
+
+            }
+            else if(ddlRoomProperty.SelectedValue == "Baguio")
+            {
+                tempGCNumber = "ARBA-" + DateTime.Today.Year.ToString() + "-";
+                tempGCNumber += maxId.ToString();
+            }
+            else
+            {
+                txtAddRoomGCNumber.Text = "";
+                return;
+            }
+
+            txtAddRoomGCNumber.Text = tempGCNumber;
         }
     }
 }
