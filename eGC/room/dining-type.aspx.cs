@@ -16,7 +16,7 @@ namespace eGC.room
         {
             if (!Page.IsPostBack)
             {
-                if (!User.IsInRole("can-create-gc") && !User.IsInRole("Admin-GC"))
+                if (!User.IsInRole("Admin-GC"))
                 {
                     gvDiningType.Columns[3].Visible = false;
                     gvDiningType.Columns[4].Visible = false;
