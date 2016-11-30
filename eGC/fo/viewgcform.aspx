@@ -4,7 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row">
+    <asp:UpdatePanel ID="upGCForm" runat="server">
+        <ContentTemplate>
+            <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -77,7 +79,7 @@
                     <div role="form">
                         <div class="col-md-4">
                             <label for="txtRemarks">Remarks</label>
-                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25"></asp:TextBox>
+                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
                                 runat="server"
                                 Display="Dynamic"
@@ -117,6 +119,7 @@
                                 ValidationGroup="vgPrimaryAdd"
                                 ControlToValidate="txtExpirationDate"
                                 CssClass="label label-danger"
+                                Enabled="false"
                                 ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
                         </div>
 
@@ -154,7 +157,7 @@
                         <label for="rblRoomBreakfast">Includes Breakfast?</label>
                         <asp:RadioButtonList ID="rblRoomBreakfast" runat="server" RepeatDirection="Horizontal" CssClass="form-control" Enabled="false">
                             <asp:ListItem Value="True">Yes</asp:ListItem>
-                            <asp:ListItem Value="False" style="margin-left:20px;">No</asp:ListItem>
+                            <asp:ListItem Value="False" style="margin-left: 20px;">No</asp:ListItem>
                         </asp:RadioButtonList>
                     </div>
                     <div class="col-md-4">
@@ -214,10 +217,26 @@
                     <div class="col-md-4">
                         <label for="txtCheckin">Check-in:</label>
                         <asp:TextBox ID="txtCheckin" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                            runat="server"
+                            Display="Dynamic"
+                            Enabled="false"
+                            ControlToValidate="txtCheckin"
+                            CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
+                            ErrorMessage="Check-in date is required"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-4">
                         <label for="txtCheckout">Check-out:</label>
                         <asp:TextBox ID="txtCheckout" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
+                            runat="server"
+                            Display="Dynamic"
+                            Enabled="false"
+                            ControlToValidate="txtCheckout"
+                            CssClass="label label-danger"
+                            ValidationGroup="vgPrimaryAdd"
+                            ErrorMessage="Check-out date is required"></asp:RequiredFieldValidator>
                     </div>
                 </asp:Panel>
 
@@ -228,7 +247,10 @@
                     </div>
                     <div class="col-md-4">
                         <label for="ddlGCStatus">Set GC Status:</label>
-                        <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control">
+
+                        <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control"
+                            AutoPostBack="true"
+                            OnSelectedIndexChanged="ddlGCStatus_SelectedIndexChanged">
                             <asp:ListItem Value="">-- Select Status --</asp:ListItem>
                             <asp:ListItem Value="Used">Use</asp:ListItem>
                             <asp:ListItem Value="Completed">Complete</asp:ListItem>
@@ -238,13 +260,16 @@
                 </div>
 
                 <div class="panel-footer text-center">
-                    <asp:Button ID="btnUpdate" runat="server" Text="Save" OnClick="btnUpdate_Click" CssClass="btn btn-primary" />
+                    <asp:Button ID="btnUpdate" runat="server" Text="Save" OnClick="btnUpdate_Click" CssClass="btn btn-primary"
+                        ValidationGroup="vgPrimaryAdd" />
                     <asp:Button ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" CssClass="btn btn-default" />
                 </div>
             </div>
         </div>
         <asp:HiddenField ID="TabName" runat="server" />
     </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <!-- Cancelled Modal -->
     <div id="cancelledModal" class="modal fade" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" role="dialog">

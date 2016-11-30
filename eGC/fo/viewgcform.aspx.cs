@@ -170,72 +170,81 @@ namespace eGC.fo
                     }
 
                     checkUserAcces();
+
+                    //chk approval status
+                    if(tGC.ApprovalStatus == "Pending")
+                    {
+                        txtCheckin.Enabled = false;
+                        txtCheckout.Enabled = false;
+                        ddlGCStatus.Enabled = false;
+                        btnUpdate.Enabled = false;
+                        txtRemarks.Enabled = false;
+                    }
                 }
             }
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            var tran = (from tr in db.GCTransactions
-                        where tr.GCNumber == Request.QueryString["gcId"]
-                        select tr).FirstOrDefault();
+            Page.Validate("vgPrimaryAdd");
+            if(Page.IsValid)
+            {
+                var tran = (from tr in db.GCTransactions
+                            where tr.GCNumber == Request.QueryString["gcId"]
+                            select tr).FirstOrDefault();
 
 
-            //tran.GCNumber = txtGCNumber.Text;
-            //tran.RecommendingApproval = txtRecommendingApproval.Text;
-            //tran.ApprovedBy = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
-            //tran.AccountNo = txtAccountNo.Text;
-            //tran.Remarks = txtRemarks.Text;
-            //tran.GCType = ddlGCType.SelectedValue;
+                tran.Remarks = txtRemarks.Text;
+                tran.GCType = ddlGCType.SelectedValue;
+                if (txtExpirationDate.Text != String.Empty)
+                {
+                    tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
+                }
+                else
+                {
+                    tran.ExpirationDate = null;
+                }
 
-            tran.Remarks = txtRemarks.Text;
-            tran.GCType = ddlGCType.SelectedValue;
-            if(txtExpirationDate.Text != String.Empty)
-            {
-                tran.ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text);
-            }
-            else
-            {
-                tran.ExpirationDate = null;
+                if (txtCheckin.Text != String.Empty)
+                {
+                    tran.CheckinDate = Convert.ToDateTime(txtCheckin.Text);
+                }
+                else
+                {
+                    tran.CheckinDate = null;
+                }
+
+                if (txtCheckout.Text != String.Empty)
+                {
+                    tran.CheckoutDate = Convert.ToDateTime(txtCheckout.Text);
+                }
+                else
+                {
+                    tran.CheckoutDate = null;
+                }
+
+                if (ddlGCStatus.SelectedValue != "")
+                {
+                    tran.StatusGC = ddlGCStatus.SelectedValue;
+                }
+
+                db.SubmitChanges();
+
+                //audit trail
+                DBLogger.Log("Update", "Updated GC Number: \n " +
+                    "Set Status: " + tran.StatusGC, tran.GCNumber);
+
+                if (ddlGCStatus.SelectedValue == "Cancelled")
+                {
+                    Javascript.ShowModal(this, this, "cancelledModal");
+                }
+                else
+                {
+                    Response.Redirect("~/fo/frontoffice.aspx");
+                }
             }
 
-            if(txtCheckin.Text != String.Empty)
-            {
-                tran.CheckinDate = Convert.ToDateTime(txtCheckin.Text);
-            }
-            else
-            {
-                tran.CheckinDate = null;
-            }
-
-            if(txtCheckout.Text != String.Empty)
-            {
-                tran.CheckoutDate = Convert.ToDateTime(txtCheckout.Text);
-            }
-            else
-            {
-                tran.CheckoutDate = null;
-            }
-
-            if(ddlGCStatus.SelectedValue != "")
-            {
-                tran.StatusGC = ddlGCStatus.SelectedValue;
-            }
-
-            db.SubmitChanges();
-
-            //audit trail
-            DBLogger.Log("Update", "Updated GC Number: \n " +
-                "Set Status: " + tran.StatusGC, tran.GCNumber);
-
-            if(ddlGCStatus.SelectedValue == "Cancelled")
-            {
-                Javascript.ShowModal(this, this, "cancelledModal");
-            }
-            else
-            {
-                Response.Redirect("~/fo/frontoffice.aspx");
-            }
+            
         }
 
         protected void btnClose_Click(object sender, EventArgs e)
@@ -336,6 +345,11 @@ namespace eGC.fo
                 ddlGCStatus.Enabled = false;
                 btnUpdate.Enabled = false;
             }
+
+            if(User.IsInRole("frontoffice"))
+            {
+                txtRemarks.Enabled = false;
+            }
         }
 
         protected void ddlGCType_SelectedIndexChanged(object sender, EventArgs e)
@@ -363,6 +377,27 @@ namespace eGC.fo
                 txtExpirationDate.Enabled = false;
                 RequiredFieldValidator15.Enabled = false;
                 txtExpirationDate.Text = String.Empty;
+            }
+        }
+
+        protected void ddlGCStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlGCStatus.SelectedValue == "Used")
+            {
+                RequiredFieldValidator3.Enabled = true;
+                RequiredFieldValidator8.Enabled = false;
+                //return;
+            }
+            else if (ddlGCStatus.SelectedValue == "Completed")
+            {
+                RequiredFieldValidator3.Enabled = true;
+                RequiredFieldValidator8.Enabled = true;
+                //return;
+            }
+            else
+            {
+                RequiredFieldValidator3.Enabled = false;
+                RequiredFieldValidator8.Enabled = false;
             }
         }
     }

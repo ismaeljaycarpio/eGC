@@ -13,6 +13,15 @@ namespace eGC.fo {
     public partial class viewgcform {
         
         /// <summary>
+        /// upGCForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upGCForm;
+        
+        /// <summary>
         /// hlPrintForm control.
         /// </summary>
         /// <remarks>
@@ -346,6 +355,15 @@ namespace eGC.fo {
         protected global::System.Web.UI.WebControls.TextBox txtCheckin;
         
         /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        
+        /// <summary>
         /// txtCheckout control.
         /// </summary>
         /// <remarks>
@@ -353,6 +371,15 @@ namespace eGC.fo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCheckout;
+        
+        /// <summary>
+        /// RequiredFieldValidator8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
         
         /// <summary>
         /// lblCurrentGCStatus control.
