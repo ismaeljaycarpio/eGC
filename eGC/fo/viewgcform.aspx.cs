@@ -358,6 +358,7 @@ namespace eGC.fo
             {
                 txtExpirationDate.Enabled = true;
                 RequiredFieldValidator15.Enabled = true;
+                RequiredFieldValidator16.Enabled = true;
 
                 var q = (from gc in db.GCTransactions
                          where gc.GCNumber == Request.QueryString["gcId"]
@@ -375,7 +376,7 @@ namespace eGC.fo
             else
             {
                 txtExpirationDate.Enabled = false;
-                RequiredFieldValidator15.Enabled = false;
+                RequiredFieldValidator16.Enabled = false;
                 txtExpirationDate.Text = String.Empty;
             }
         }

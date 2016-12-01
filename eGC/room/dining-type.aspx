@@ -36,8 +36,12 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField HeaderText="Dining Type" DataField="DiningType1" SortExpression="DiningType1" />
-                                        <asp:BoundField HeaderText="Is Active?" DataField="Active" SortExpression="Active" />
-
+<%--                                        <asp:BoundField HeaderText="Is Active?" DataField="Active" SortExpression="Active" />--%>
+                                        <asp:TemplateField HeaderText="Is Promo Active?" SortExpression="Active">
+                                            <ItemTemplate>
+                                                <%# (Boolean.Parse(Eval("Active").ToString())) ? "Yes" : "No" %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Edit" CommandName="editRecord" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Delete" CommandName="deleteRecord" />
                                     </Columns>

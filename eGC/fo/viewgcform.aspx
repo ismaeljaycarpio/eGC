@@ -4,271 +4,289 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#<%=txtExpirationDate.ClientID%>').datepicker();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#<%=txtCheckin.ClientID%>').datetimepicker();
+            $('#<%=txtCheckout.ClientID%>').datetimepicker();
+        });
+    </script>
+
     <asp:UpdatePanel ID="upGCForm" runat="server">
         <ContentTemplate>
             <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h5>View GC
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h5>View GC
                         <asp:HyperLink ID="hlPrintForm"
                             ToolTip="Print GC Form"
                             ForeColor="Black"
                             runat="server">
                             <span class="glyphicon glyphicon-print pull-right"></span>
                         </asp:HyperLink>
-                    </h5>
-                </div>
-                <div class="panel-body">
-                    <div role="form">
-                        <div class="col-md-4" id="panelName" runat="server">
-                            <label for="txtName">Name</label>
-                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                            </h5>
                         </div>
-                        <div class="col-md-4">
-                            <label for="txtName" id="lblForGuestId" runat="server">Guest ID</label>
-                            <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        <div class="panel-body">
+                            <div role="form">
+                                <div class="col-md-4" id="panelName" runat="server">
+                                    <label for="txtName">Name</label>
+                                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtName" id="lblForGuestId" runat="server">Guest ID</label>
+                                    <asp:TextBox ID="txtGuestId" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtName">Company</label>
+                                    <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtName">Email</label>
+                                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtName">Contact No</label>
+                                    <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtContactPerson">Contact Person</label>
+                                    <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="txtName">Company</label>
-                            <asp:TextBox ID="txtCompany" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtName">Email</label>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtName">Contact No</label>
-                            <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtContactPerson">Contact Person</label>
-                            <asp:TextBox ID="txtContactPerson" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="panel-body">
-                    <div role="form">
-                        <asp:Panel ID="pnlApprovedBy" runat="server" CssClass="col-md-4">
-                            <label for="txtApprovedBy">Approved By</label>
-                            <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        <div class="panel-body">
+                            <div role="form">
+                                <asp:Panel ID="pnlApprovedBy" runat="server" CssClass="col-md-4">
+                                    <label for="txtApprovedBy">Approved By</label>
+                                    <asp:TextBox ID="txtApprovedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </asp:Panel>
+                                <div class="col-md-4">
+                                    <label for="txtCreatedBy">Created By</label>
+                                    <asp:TextBox ID="txtCreatedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtDateIssued">Date Issued</label>
+                                    <asp:TextBox ID="txtDateIssued"
+                                        runat="server"
+                                        Enabled="false"
+                                        CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ValidationGroup="vgPrimaryAdd"
+                                        ControlToValidate="txtDateIssued"
+                                        CssClass="label label-danger"
+                                        ErrorMessage="Date Issued is required"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div role="form">
+                                <div class="col-md-4">
+                                    <label for="txtRemarks">Remarks</label>
+                                    <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ValidationGroup="vgPrimaryAdd"
+                                        ControlToValidate="txtRemarks"
+                                        CssClass="label label-danger"
+                                        ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="ddlGCType">GC Type</label>
+                                    <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" Enabled="false" OnSelectedIndexChanged="ddlGCType_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Selected="True" Value="0">-- Select One --</asp:ListItem>
+                                        <asp:ListItem Value="Representation">Representation</asp:ListItem>
+                                        <asp:ListItem Value="Sold">Sold</asp:ListItem>
+                                        <asp:ListItem Value="Barter">Barter</asp:ListItem>
+                                        <asp:ListItem Value="Raffle">Raffle / Prize</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ValidationGroup="vgPrimaryAdd"
+                                        ControlToValidate="ddlGCType"
+                                        InitialValue="0"
+                                        CssClass="label label-danger"
+                                        ErrorMessage="GC Type is required"></asp:RequiredFieldValidator>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtExpirationDate">Expiration Date</label>
+                                    <asp:TextBox ID="txtExpirationDate"
+                                        runat="server"
+                                        Enabled="false"
+                                        CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ValidationGroup="vgPrimaryAdd"
+                                        ControlToValidate="txtExpirationDate"
+                                        CssClass="label label-danger"
+                                        Enabled="false"
+                                        ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="txtGCNumber">GC Number</label>
+                                    <asp:TextBox ID="txtGCNumber"
+                                        runat="server"
+                                        Enabled="false"
+                                        CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txtProperty">Property</label>
+                                    <asp:TextBox ID="txtProperty"
+                                        runat="server"
+                                        Enabled="false"
+                                        CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <asp:Panel ID="pnlRoom" runat="server" CssClass="panel-body" Visible="false">
+                            <div class="col-md-4">
+                                <label for="ddlRooms">Room:</label>
+                                <asp:DropDownList ID="ddlRooms" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="ddlRooms"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    InitialValue="0"
+                                    ErrorMessage="Room is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="rblRoomBreakfast">Includes Breakfast?</label>
+                                <asp:RadioButtonList ID="rblRoomBreakfast" runat="server" RepeatDirection="Horizontal" CssClass="form-control" Enabled="false">
+                                    <asp:ListItem Value="True">Yes</asp:ListItem>
+                                    <asp:ListItem Value="False" style="margin-left: 20px;">No</asp:ListItem>
+                                </asp:RadioButtonList>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="txtRoomHeadCount">Head Count:</label>
+                                <asp:TextBox ID="txtRoomHeadCount" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtRoomHeadCount"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                            </div>
                         </asp:Panel>
-                        <div class="col-md-4">
-                            <label for="txtCreatedBy">Created By</label>
-                            <asp:TextBox ID="txtCreatedBy" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+
+                        <asp:Panel ID="pnlDining" runat="server" CssClass="panel-body" Visible="false">
+                            <div class="col-md-4">
+                                <label for="ddlDining">Dining:</label>
+                                <asp:DropDownList ID="ddlDining" runat="server" CssClass="form-control" Enabled="false">
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="ddlDining"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    InitialValue="0"
+                                    ErrorMessage="Dining is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ddlDiningType">Dining Type:</label>
+                                <asp:DropDownList ID="ddlDiningType" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="ddlDiningType"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    InitialValue="0"
+                                    ErrorMessage="Dining Type is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="txtDiningHeadCount">Head Count:</label>
+                                <asp:TextBox ID="txtDiningHeadCount" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtDiningHeadCount"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                            </div>
+                        </asp:Panel>
+
+
+                        <asp:Panel ID="pnlCheckDate" runat="server" CssClass="panel-body">
+                            <div class="col-md-4">
+                                <label for="txtCheckin">Check-in:</label>
+                                <asp:TextBox ID="txtCheckin" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    Enabled="false"
+                                    ControlToValidate="txtCheckin"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    ErrorMessage="Check-in date is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="txtCheckout">Check-out:</label>
+                                <asp:TextBox ID="txtCheckout" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    Enabled="false"
+                                    ControlToValidate="txtCheckout"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgPrimaryAdd"
+                                    ErrorMessage="Check-out date is required"></asp:RequiredFieldValidator>
+                            </div>
+                        </asp:Panel>
+
+                        <div class="panel-body">
+                            <div class="col-md-4">
+                                <label for="lblCurrentGCStatus">Current GC Status: </label>
+                                <asp:Label ID="lblCurrentGCStatus" runat="server"></asp:Label>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ddlGCStatus">Set GC Status:</label>
+
+                                <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control"
+                                    AutoPostBack="true"
+                                    OnSelectedIndexChanged="ddlGCStatus_SelectedIndexChanged">
+                                    <asp:ListItem Value="">-- Select Status --</asp:ListItem>
+                                    <asp:ListItem Value="Used">Use</asp:ListItem>
+                                    <asp:ListItem Value="Completed">Complete</asp:ListItem>
+                                    <asp:ListItem Value="Cancelled">Cancel</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="txtDateIssued">Date Issued</label>
-                            <asp:TextBox ID="txtDateIssued"
-                                runat="server"
-                                Enabled="false"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtDateIssued"
-                                CssClass="label label-danger"
-                                ErrorMessage="Date Issued is required"></asp:RequiredFieldValidator>
+
+                        <div class="panel-footer text-center">
+                            <asp:Button ID="btnUpdate" runat="server" Text="Save" OnClick="btnUpdate_Click" CssClass="btn btn-primary"
+                                ValidationGroup="vgPrimaryAdd" />
+                            <asp:Button ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" CssClass="btn btn-default" />
                         </div>
                     </div>
                 </div>
-
-                <div class="panel-body">
-                    <div role="form">
-                        <div class="col-md-4">
-                            <label for="txtRemarks">Remarks</label>
-                            <asp:TextBox ID="txtRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5" Columns="25" Enabled="false"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtRemarks"
-                                CssClass="label label-danger"
-                                ErrorMessage="Remarks is required"></asp:RequiredFieldValidator>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="ddlGCType">GC Type</label>
-                            <asp:DropDownList ID="ddlGCType" runat="server" CssClass="form-control" Enabled="false" OnSelectedIndexChanged="ddlGCType_SelectedIndexChanged" AutoPostBack="true">
-                                <asp:ListItem Selected="True" Value="0">-- Select One --</asp:ListItem>
-                                <asp:ListItem Value="Representation">Representation</asp:ListItem>
-                                <asp:ListItem Value="Sold">Sold</asp:ListItem>
-                                <asp:ListItem Value="Barter">Barter</asp:ListItem>
-                                <asp:ListItem Value="Raffle">Raffle / Prize</asp:ListItem>
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator15"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="ddlGCType"
-                                InitialValue="0"
-                                CssClass="label label-danger"
-                                ErrorMessage="GC Type is required"></asp:RequiredFieldValidator>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtExpirationDate">Expiration Date</label>
-                            <asp:TextBox ID="txtExpirationDate"
-                                runat="server"
-                                Enabled="false"
-                                CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16"
-                                runat="server"
-                                Display="Dynamic"
-                                ValidationGroup="vgPrimaryAdd"
-                                ControlToValidate="txtExpirationDate"
-                                CssClass="label label-danger"
-                                Enabled="false"
-                                ErrorMessage="Expiration Date is required"></asp:RequiredFieldValidator>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="txtGCNumber">GC Number</label>
-                            <asp:TextBox ID="txtGCNumber"
-                                runat="server"
-                                Enabled="false"
-                                CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="txtProperty">Property</label>
-                            <asp:TextBox ID="txtProperty"
-                                runat="server"
-                                Enabled="false"
-                                CssClass="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                </div>
-
-                <asp:Panel ID="pnlRoom" runat="server" CssClass="panel-body" Visible="false">
-                    <div class="col-md-4">
-                        <label for="ddlRooms">Room:</label>
-                        <asp:DropDownList ID="ddlRooms" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-                            runat="server"
-                            Display="Dynamic"
-                            ControlToValidate="ddlRooms"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            InitialValue="0"
-                            ErrorMessage="Room is required"></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="rblRoomBreakfast">Includes Breakfast?</label>
-                        <asp:RadioButtonList ID="rblRoomBreakfast" runat="server" RepeatDirection="Horizontal" CssClass="form-control" Enabled="false">
-                            <asp:ListItem Value="True">Yes</asp:ListItem>
-                            <asp:ListItem Value="False" style="margin-left: 20px;">No</asp:ListItem>
-                        </asp:RadioButtonList>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="txtRoomHeadCount">Head Count:</label>
-                        <asp:TextBox ID="txtRoomHeadCount" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                            runat="server"
-                            Display="Dynamic"
-                            ControlToValidate="txtRoomHeadCount"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
-                    </div>
-                </asp:Panel>
-
-                <asp:Panel ID="pnlDining" runat="server" CssClass="panel-body" Visible="false">
-                    <div class="col-md-4">
-                        <label for="ddlDining">Dining:</label>
-                        <asp:DropDownList ID="ddlDining" runat="server" CssClass="form-control" Enabled="false">
-                        </asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
-                            runat="server"
-                            Display="Dynamic"
-                            ControlToValidate="ddlDining"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            InitialValue="0"
-                            ErrorMessage="Dining is required"></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ddlDiningType">Dining Type:</label>
-                        <asp:DropDownList ID="ddlDiningType" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-                            runat="server"
-                            Display="Dynamic"
-                            ControlToValidate="ddlDiningType"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            InitialValue="0"
-                            ErrorMessage="Dining Type is required"></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="txtDiningHeadCount">Head Count:</label>
-                        <asp:TextBox ID="txtDiningHeadCount" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
-                            runat="server"
-                            Display="Dynamic"
-                            ControlToValidate="txtDiningHeadCount"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
-                    </div>
-                </asp:Panel>
-
-
-                <asp:Panel ID="pnlCheckDate" runat="server" CssClass="panel-body">
-                    <div class="col-md-4">
-                        <label for="txtCheckin">Check-in:</label>
-                        <asp:TextBox ID="txtCheckin" runat="server" CssClass="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-                            runat="server"
-                            Display="Dynamic"
-                            Enabled="false"
-                            ControlToValidate="txtCheckin"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            ErrorMessage="Check-in date is required"></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="txtCheckout">Check-out:</label>
-                        <asp:TextBox ID="txtCheckout" runat="server" CssClass="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
-                            runat="server"
-                            Display="Dynamic"
-                            Enabled="false"
-                            ControlToValidate="txtCheckout"
-                            CssClass="label label-danger"
-                            ValidationGroup="vgPrimaryAdd"
-                            ErrorMessage="Check-out date is required"></asp:RequiredFieldValidator>
-                    </div>
-                </asp:Panel>
-
-                <div class="panel-body">
-                    <div class="col-md-4">
-                        <label for="lblCurrentGCStatus">Current GC Status: </label>
-                        <asp:Label ID="lblCurrentGCStatus" runat="server"></asp:Label>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="ddlGCStatus">Set GC Status:</label>
-
-                        <asp:DropDownList ID="ddlGCStatus" runat="server" CssClass="form-control"
-                            AutoPostBack="true"
-                            OnSelectedIndexChanged="ddlGCStatus_SelectedIndexChanged">
-                            <asp:ListItem Value="">-- Select Status --</asp:ListItem>
-                            <asp:ListItem Value="Used">Use</asp:ListItem>
-                            <asp:ListItem Value="Completed">Complete</asp:ListItem>
-                            <asp:ListItem Value="Cancelled">Cancel</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                </div>
-
-                <div class="panel-footer text-center">
-                    <asp:Button ID="btnUpdate" runat="server" Text="Save" OnClick="btnUpdate_Click" CssClass="btn btn-primary"
-                        ValidationGroup="vgPrimaryAdd" />
-                    <asp:Button ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" CssClass="btn btn-default" />
-                </div>
+                <asp:HiddenField ID="TabName" runat="server" />
             </div>
-        </div>
-        <asp:HiddenField ID="TabName" runat="server" />
-    </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="ddlGCType" EventName="SelectedIndexChanged" />
+            <asp:PostBackTrigger ControlID="ddlGCStatus"/>
+            <asp:AsyncPostBackTrigger ControlID="btnUpdate" EventName="Click" />
+        </Triggers>
     </asp:UpdatePanel>
 
     <!-- Cancelled Modal -->
@@ -329,18 +347,8 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#<%=txtExpirationDate.ClientID%>').datepicker();
-        });
-    </script>
+    
 
-    <script type="text/javascript">
-        $(function () {
-            $('#<%=txtCheckin.ClientID%>').datetimepicker();
-            $('#<%=txtCheckout.ClientID%>').datetimepicker();
-        });
-    </script>
 
     <asp:HiddenField ID="hfTransactionId" runat="server" />
 

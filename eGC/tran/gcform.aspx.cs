@@ -36,7 +36,7 @@ namespace eGC.tran
                     else
                     {
                         //clear content from tmp
-                        flushTemp();
+                        //flushTemp();
 
                         //maintain tab
                         TabName.Value = Request.Form[TabName.UniqueID];
@@ -183,6 +183,7 @@ namespace eGC.tran
                          select r).FirstOrDefault();
 
                 lblEditDiningId.Text = q.Id.ToString();
+                ddlEditDiningProperty.SelectedValue = q.Property;
                 txtEditDiningGCNumber.Text = q.GCNumber;
                 lblEditDiningGCNumber_old.Text = q.GCNumber; //put old value here
                 ddlEditDining.SelectedValue = q.DiningId.ToString();
@@ -336,6 +337,7 @@ namespace eGC.tran
             else
             {
                 r.GCNumber = gcNumber;
+                r.Property = ddlEditRoomProperty.SelectedValue;
                 r.RoomId = Convert.ToInt32(ddlEditRoom.SelectedValue);
                 r.WithBreakfast = Convert.ToBoolean(rblEditRoomBreakfast.SelectedValue);
                 r.HeadCount = Convert.ToInt32(txtEditRoomHeadCount.Text);
@@ -383,6 +385,7 @@ namespace eGC.tran
                 //add to temp table
                 tmpRoom tmp = new tmpRoom();
                 tmp.UserId = Guid.Parse(Membership.GetUser().ProviderUserKey.ToString());
+                tmp.Property = ddlDiningProperty.SelectedValue;
                 tmp.DiningId = Convert.ToInt32(ddlAddDining.SelectedValue);
                 tmp.DiningTypeId = Convert.ToInt32(ddlAddDiningType.SelectedValue);
                 tmp.HeadCount = Convert.ToInt32(txtAddDiningHeadCount.Text);
@@ -423,6 +426,7 @@ namespace eGC.tran
                 if(hasDuplicate(gcNumber, old_gcNumber) == false)
                 {
                     d.GCNumber = gcNumber;
+                    d.Property = ddlEditDiningProperty.SelectedValue;
                     d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
                     d.DiningTypeId = Convert.ToInt32(ddlEditDiningType.SelectedValue);
                     d.HeadCount = Convert.ToInt32(txtEditDiningHeadCount.Text);
@@ -446,6 +450,7 @@ namespace eGC.tran
             else
             {
                 d.GCNumber = gcNumber;
+                d.Property = ddlEditDiningProperty.SelectedValue;
                 d.DiningId = Convert.ToInt32(ddlEditDining.SelectedValue);
                 d.DiningTypeId = Convert.ToInt32(ddlEditDiningType.SelectedValue);
                 d.HeadCount = Convert.ToInt32(txtEditDiningHeadCount.Text);
@@ -575,8 +580,8 @@ namespace eGC.tran
             int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
             maxId += 1;
 
-            txtAddDiningGCNumber.Text = "2600" + DateTime.Now.Year.ToString() + maxId.ToString();
-
+            //txtAddDiningGCNumber.Text = "2600" + DateTime.Now.Year.ToString() + maxId.ToString();
+            ddlDiningProperty.SelectedValue = "0";
             lblAddDiningDuplicateGC.Text = String.Empty;
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -636,35 +641,35 @@ namespace eGC.tran
 
         protected void ddlEditRoomProperty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string tempGCNumber = "";
-            int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
-            maxId += 1;
-            hfGCNumber.Value = maxId.ToString();
+            //string tempGCNumber = "";
+            //int maxId = db.GCTransactions.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            //maxId += 1;
+            //hfGCNumber.Value = maxId.ToString();
 
-            if (ddlEditRoomProperty.SelectedValue == "Boracay")
-            {
-                tempGCNumber = "ARBO-" + DateTime.Today.Year.ToString() + "-";
-                tempGCNumber += maxId.ToString();
+            //if (ddlEditRoomProperty.SelectedValue == "Boracay")
+            //{
+            //    tempGCNumber = "ARBO-" + DateTime.Today.Year.ToString() + "-";
+            //    tempGCNumber += maxId.ToString();
 
-            }
-            else if (ddlEditRoomProperty.SelectedValue == "Baguio")
-            {
-                tempGCNumber = "ARBA-" + DateTime.Today.Year.ToString() + "-";
-                tempGCNumber += maxId.ToString();
-            }
-            else
-            {
-                txtEditRoomGCNumber.Text = "";
-                return;
-            }
+            //}
+            //else if (ddlEditRoomProperty.SelectedValue == "Baguio")
+            //{
+            //    tempGCNumber = "ARBA-" + DateTime.Today.Year.ToString() + "-";
+            //    tempGCNumber += maxId.ToString();
+            //}
+            //else
+            //{
+            //    txtEditRoomGCNumber.Text = "";
+            //    return;
+            //}
 
-            txtEditRoomGCNumber.Text = tempGCNumber;
+            //txtEditRoomGCNumber.Text = tempGCNumber;
         }
 
         protected void ddlRoomProperty_SelectedIndexChanged(object sender, EventArgs e)
         {
             string tempGCNumber = "";
-            int maxId = db.GCTransactions.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
             maxId += 1;
             hfGCNumber.Value = maxId.ToString();
 
@@ -686,6 +691,60 @@ namespace eGC.tran
             }
 
             txtAddRoomGCNumber.Text = tempGCNumber;
+        }
+
+        protected void ddlDiningProperty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tempGCNumber = "";
+            int maxId = db.tmpRooms.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            maxId += 1;
+            hfGCNumber.Value = maxId.ToString();
+
+            if (ddlDiningProperty.SelectedValue == "Boracay")
+            {
+                tempGCNumber = "ARBO-" + DateTime.Today.Year.ToString() + "-";
+                tempGCNumber += maxId.ToString();
+
+            }
+            else if (ddlDiningProperty.SelectedValue == "Baguio")
+            {
+                tempGCNumber = "ARBA-" + DateTime.Today.Year.ToString() + "-";
+                tempGCNumber += maxId.ToString();
+            }
+            else
+            {
+                txtAddDiningGCNumber.Text = "";
+                return;
+            }
+
+            txtAddDiningGCNumber.Text = tempGCNumber;
+        }
+
+        protected void ddlEditDiningProperty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //string tempGCNumber = "";
+            //int maxId = db.GCTransactions.DefaultIfEmpty().Max(r => r == null ? 0 : r.Id);
+            //maxId += 1;
+            //hfGCNumber.Value = maxId.ToString();
+
+            //if (ddlEditDiningProperty.SelectedValue == "Boracay")
+            //{
+            //    tempGCNumber = "ARBO-" + DateTime.Today.Year.ToString() + "-";
+            //    tempGCNumber += maxId.ToString();
+
+            //}
+            //else if (ddlEditDiningProperty.SelectedValue == "Baguio")
+            //{
+            //    tempGCNumber = "ARBA-" + DateTime.Today.Year.ToString() + "-";
+            //    tempGCNumber += maxId.ToString();
+            //}
+            //else
+            //{
+            //    txtEditDiningGCNumber.Text = "";
+            //    return;
+            //}
+
+            //txtEditDiningGCNumber.Text = tempGCNumber;
         }
     }
 }

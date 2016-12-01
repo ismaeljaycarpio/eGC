@@ -532,6 +532,8 @@
                                     <label for="ddlDiningProperty">Property</label>
                                     <asp:DropDownList ID="ddlDiningProperty"
                                         runat="server"
+                                        AutoPostBack="true"
+                                        OnSelectedIndexChanged="ddlDiningProperty_SelectedIndexChanged"
                                         CssClass="form-control">
                                         <asp:ListItem Value="0">Select One</asp:ListItem>
                                         <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
@@ -560,14 +562,6 @@
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAddDining"
                                         ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3"
-                                        runat="server"
-                                        Display="Dynamic"
-                                        ControlToValidate="txtAddDiningGCNumber"
-                                        CssClass="label label-danger"
-                                        ValidationGroup="vgAddDining"
-                                        ValidationExpression="\d+"
-                                        ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                                 </div>
 
                                 <div class="form-group">
@@ -603,7 +597,7 @@
 
                                 <div class="form-group">
                                     <label for="txtAddDiningHeadCount">Head Count</label>
-                                    <asp:TextBox ID="txtAddDiningHeadCount" runat="server" CssClass="form-control" placeholder="Value" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox ID="txtAddDiningHeadCount" runat="server" CssClass="form-control" placeholder="Head Count" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                         runat="server"
                                         Display="Dynamic"
@@ -649,29 +643,31 @@
                             <h4 class="modal-title">Edit Dining</h4>
                         </div>
 
-                        <div class="form-group">
-                            <label for="ddlEditDiningProperty">Property</label>
-                            <asp:DropDownList ID="ddlEditDiningProperty"
-                                runat="server"
-                                CssClass="form-control">
-                                <asp:ListItem Value="0">Select One</asp:ListItem>
-                                <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
-                                <asp:ListItem Value="Boracay">Boracay</asp:ListItem>
-                            </asp:DropDownList>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator23"
-                                runat="server"
-                                Display="Dynamic"
-                                InitialValue="0"
-                                ControlToValidate="ddlEditDiningProperty"
-                                CssClass="label label-danger"
-                                ValidationGroup="vgEditDining"
-                                ErrorMessage="Property is required"></asp:RequiredFieldValidator>
-                        </div>
-
                         <div class="modal-body">
                             <div class="form-group">
                                 <asp:Label ID="lblEditDiningId" runat="server" Visible="false"></asp:Label>
                                 <asp:Label ID="lblEditDiningGCNumber_old" runat="server" Visible="false"></asp:Label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ddlEditDiningProperty">Property</label>
+                                <asp:DropDownList ID="ddlEditDiningProperty"
+                                    runat="server"
+                                    AutoPostBack="true"
+                                    OnSelectedIndexChanged="ddlEditDiningProperty_SelectedIndexChanged"
+                                    CssClass="form-control">
+                                    <asp:ListItem Value="0">Select One</asp:ListItem>
+                                    <asp:ListItem Value="Baguio">Baguio</asp:ListItem>
+                                    <asp:ListItem Value="Boracay">Boracay</asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator23"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    InitialValue="0"
+                                    ControlToValidate="ddlEditDiningProperty"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditDining"
+                                    ErrorMessage="Property is required"></asp:RequiredFieldValidator>
                             </div>
 
                             <div class="form-group">
@@ -687,14 +683,6 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditDining"
                                     ErrorMessage="GC Number is required"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4"
-                                    runat="server"
-                                    Display="Dynamic"
-                                    ControlToValidate="txtEditDiningGCNumber"
-                                    CssClass="label label-danger"
-                                    ValidationGroup="vgEditDining"
-                                    ValidationExpression="\d+"
-                                    ErrorMessage="GC Number should be numeric"></asp:RegularExpressionValidator>
                             </div>
 
                             <div class="form-group">
