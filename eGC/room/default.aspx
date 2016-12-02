@@ -38,6 +38,7 @@
                                         </asp:TemplateField>
                                         <asp:BoundField HeaderText="Type" DataField="Type" SortExpression="Type" />
                                         <asp:BoundField HeaderText="Room" DataField="Room1" SortExpression="Room1" />
+                                        <asp:BoundField HeaderText="Limit" DataField="Limit" SortExpression="Limit" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Edit" CommandName="editRecord" />
                                         <asp:ButtonField HeaderText="" ButtonType="Link" Text="Delete" CommandName="deleteRecord" />
                                     </Columns>
@@ -86,6 +87,17 @@
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAdd"
                                         ErrorMessage="Room is required"></asp:RequiredFieldValidator>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtAddLimit">Limit</label>
+                                    <asp:TextBox ID="txtAddLimit" runat="server" CssClass="form-control" placeholder="Limit" TextMode="Number"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                                        runat="server"
+                                        Display="Dynamic"
+                                        ControlToValidate="txtAddLimit"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAdd"
+                                        ErrorMessage="Limit is required"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -139,6 +151,17 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEdit"
                                     ErrorMessage="Room is required"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtEditLimit">Limit</label>
+                                <asp:TextBox ID="txtEditLimit" runat="server" CssClass="form-control" placeholder="Limit" TextMode="Number"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
+                                    runat="server"
+                                    Display="Dynamic"
+                                    ControlToValidate="txtEditLimit"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEdit"
+                                    ErrorMessage="Limit is required"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="modal-footer">

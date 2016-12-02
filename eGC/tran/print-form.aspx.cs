@@ -120,7 +120,7 @@ namespace eGC.tran
             }
 
             //fill param
-            ReportParameter[] param = new ReportParameter[22];
+            ReportParameter[] param = new ReportParameter[23];
 
             param[0] = new ReportParameter("GuestId", tran.GuestId);
             param[1] = new ReportParameter("CompanyName", tran.CompanyName);
@@ -138,12 +138,37 @@ namespace eGC.tran
             param[13] = new ReportParameter("ApprovedBy", approvedBy);
             param[14] = new ReportParameter("CreatedBy", createdBy); //requested - created by
             param[15] = new ReportParameter("Room", tran.Room);
-            param[16] = new ReportParameter("Includes", tran.Includes.ToString());
+            //param[16] = new ReportParameter("Includes", tran.Includes.ToString());
+            if(tran.Includes.HasValue && tran.Includes == true)
+            {
+                param[16] = new ReportParameter("Includes", "Yes");
+            }
+            else if(tran.Includes.HasValue && tran.Includes == false)
+            {
+                param[16] = new ReportParameter("Includes", "No");
+            }
+            else
+            {
+                param[16] = new ReportParameter("Includes", "");
+            }
+            
             param[17] = new ReportParameter("HeadCount", tran.HeadCount.ToString());
             param[18] = new ReportParameter("Dining", tran.Dining);
             param[19] = new ReportParameter("DiningType", tran.DiningType);
             param[20] = new ReportParameter("Checkin", checkin);
             param[21] = new ReportParameter("Checkout", checkout);
+
+            //check if room gc
+            if(!tran.Includes.HasValue)
+            {
+                param[22] = new ReportParameter("HeadCountDining", tran.HeadCount.ToString());
+                param[17] = new ReportParameter("HeadCount", "");
+            }
+            else
+            {
+                param[22] = new ReportParameter("HeadCountDining", "");
+            }
+
 
             //put param to report
             ReportViewer1.LocalReport.SetParameters(param);

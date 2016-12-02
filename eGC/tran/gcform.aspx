@@ -287,6 +287,8 @@
                                     <label for="ddlAddRoom">Room</label>
                                     <asp:DropDownList ID="ddlAddRoom"
                                         runat="server"
+                                        AutoPostBack="true"
+                                        OnSelectedIndexChanged="ddlAddRoom_SelectedIndexChanged"
                                         CssClass="form-control">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
@@ -317,7 +319,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="txtAddRoomHeadCount">Head Count</label>
+                                    <label for="txtAddRoomHeadCount">Head Count</label> (Limit: #<asp:Label ID="lblAddRoomLimit" runat="server" Font-Bold="true" ForeColor="Red" Text="0"></asp:Label>)
                                     <asp:TextBox ID="txtAddRoomHeadCount"
                                         runat="server"
                                         TextMode="Number"
@@ -330,6 +332,16 @@
                                         CssClass="label label-danger"
                                         ValidationGroup="vgAddRoom"
                                         ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                                    <asp:RangeValidator ID="RangeValidator1" 
+                                        runat="server"
+                                        ControlToValidate="txtAddRoomHeadCount"
+                                        MinimumValue="0"
+                                        Type="Integer"
+                                        MaximumValue="0"
+                                        Display="Dynamic"
+                                        CssClass="label label-danger"
+                                        ValidationGroup="vgAddRoom"
+                                        ErrorMessage="Cannot exceed limit"></asp:RangeValidator>
                                 </div>
 
                                 <div class="form-group">
@@ -419,6 +431,8 @@
                                 <label for="ddlEditRoom">Room</label>
                                 <asp:DropDownList ID="ddlEditRoom"
                                     runat="server"
+                                    AutoPostBack="true"
+                                    OnSelectedIndexChanged="ddlEditRoom_SelectedIndexChanged"
                                     CssClass="form-control">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
@@ -447,7 +461,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="txtEditRoomHeadCount">Head Count</label>
+                                <label for="txtEditRoomHeadCount">Head Count</label> (Limit: #<asp:Label ID="lblEditRoomLimit" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>)
                                 <asp:TextBox ID="txtEditRoomHeadCount"
                                     runat="server"
                                     CssClass="form-control">
@@ -459,6 +473,16 @@
                                     CssClass="label label-danger"
                                     ValidationGroup="vgEditRoom"
                                     ErrorMessage="Head Count is required"></asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="RangeValidator2"
+                                    runat="server"
+                                    ControlToValidate="txtEditRoomHeadCount"
+                                    MinimumValue="0"
+                                    Type="Integer"
+                                    MaximumValue="0"
+                                    Display="Dynamic"
+                                    CssClass="label label-danger"
+                                    ValidationGroup="vgEditRoom"
+                                    ErrorMessage="Cannot exceed limit"></asp:RangeValidator>
                             </div>
 
                             <div class="form-group">

@@ -45,15 +45,15 @@ namespace eGC
     partial void InsertAuditTrail(AuditTrail instance);
     partial void UpdateAuditTrail(AuditTrail instance);
     partial void DeleteAuditTrail(AuditTrail instance);
-    partial void InsertRoom(Room instance);
-    partial void UpdateRoom(Room instance);
-    partial void DeleteRoom(Room instance);
     partial void InsertGCTransaction(GCTransaction instance);
     partial void UpdateGCTransaction(GCTransaction instance);
     partial void DeleteGCTransaction(GCTransaction instance);
     partial void InserttmpRoom(tmpRoom instance);
     partial void UpdatetmpRoom(tmpRoom instance);
     partial void DeletetmpRoom(tmpRoom instance);
+    partial void InsertRoom(Room instance);
+    partial void UpdateRoom(Room instance);
+    partial void DeleteRoom(Room instance);
     #endregion
 		
 		public GiftCheckDataContext() : 
@@ -126,14 +126,6 @@ namespace eGC
 			}
 		}
 		
-		public System.Data.Linq.Table<Room> Rooms
-		{
-			get
-			{
-				return this.GetTable<Room>();
-			}
-		}
-		
 		public System.Data.Linq.Table<GCTransaction> GCTransactions
 		{
 			get
@@ -147,6 +139,14 @@ namespace eGC
 			get
 			{
 				return this.GetTable<tmpRoom>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Room> Rooms
+		{
+			get
+			{
+				return this.GetTable<Room>();
 			}
 		}
 	}
@@ -1193,144 +1193,6 @@ namespace eGC
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Room")]
-	public partial class Room : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Type;
-		
-		private string _Room1;
-		
-		private EntitySet<GCTransaction> _GCTransactions;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnTypeChanging(string value);
-    partial void OnTypeChanged();
-    partial void OnRoom1Changing(string value);
-    partial void OnRoom1Changed();
-    #endregion
-		
-		public Room()
-		{
-			this._GCTransactions = new EntitySet<GCTransaction>(new Action<GCTransaction>(this.attach_GCTransactions), new Action<GCTransaction>(this.detach_GCTransactions));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(MAX)")]
-		public string Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Room", Storage="_Room1", DbType="VarChar(MAX)")]
-		public string Room1
-		{
-			get
-			{
-				return this._Room1;
-			}
-			set
-			{
-				if ((this._Room1 != value))
-				{
-					this.OnRoom1Changing(value);
-					this.SendPropertyChanging();
-					this._Room1 = value;
-					this.SendPropertyChanged("Room1");
-					this.OnRoom1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_GCTransaction", Storage="_GCTransactions", ThisKey="Id", OtherKey="RoomId")]
-		public EntitySet<GCTransaction> GCTransactions
-		{
-			get
-			{
-				return this._GCTransactions;
-			}
-			set
-			{
-				this._GCTransactions.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_GCTransactions(GCTransaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.Room = this;
-		}
-		
-		private void detach_GCTransactions(GCTransaction entity)
-		{
-			this.SendPropertyChanging();
-			entity.Room = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GCTransaction")]
 	public partial class GCTransaction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2336,6 +2198,168 @@ namespace eGC
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Room")]
+	public partial class Room : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Type;
+		
+		private string _Room1;
+		
+		private System.Nullable<int> _Limit;
+		
+		private EntitySet<GCTransaction> _GCTransactions;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
+    partial void OnRoom1Changing(string value);
+    partial void OnRoom1Changed();
+    partial void OnLimitChanging(System.Nullable<int> value);
+    partial void OnLimitChanged();
+    #endregion
+		
+		public Room()
+		{
+			this._GCTransactions = new EntitySet<GCTransaction>(new Action<GCTransaction>(this.attach_GCTransactions), new Action<GCTransaction>(this.detach_GCTransactions));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(MAX)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Room", Storage="_Room1", DbType="VarChar(MAX)")]
+		public string Room1
+		{
+			get
+			{
+				return this._Room1;
+			}
+			set
+			{
+				if ((this._Room1 != value))
+				{
+					this.OnRoom1Changing(value);
+					this.SendPropertyChanging();
+					this._Room1 = value;
+					this.SendPropertyChanged("Room1");
+					this.OnRoom1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Limit", DbType="Int")]
+		public System.Nullable<int> Limit
+		{
+			get
+			{
+				return this._Limit;
+			}
+			set
+			{
+				if ((this._Limit != value))
+				{
+					this.OnLimitChanging(value);
+					this.SendPropertyChanging();
+					this._Limit = value;
+					this.SendPropertyChanged("Limit");
+					this.OnLimitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_GCTransaction", Storage="_GCTransactions", ThisKey="Id", OtherKey="RoomId")]
+		public EntitySet<GCTransaction> GCTransactions
+		{
+			get
+			{
+				return this._GCTransactions;
+			}
+			set
+			{
+				this._GCTransactions.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GCTransactions(GCTransaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room = this;
+		}
+		
+		private void detach_GCTransactions(GCTransaction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Room = null;
 		}
 	}
 }

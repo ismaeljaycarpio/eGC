@@ -151,6 +151,10 @@ namespace eGC.tran
                 txtEditRoomRemarks.Text = q.Remarks.ToString();
                 lblEditRoomDuplicateGC.Text = String.Empty;
 
+                int? limit = db.Rooms.SingleOrDefault(l => l.Room1.Equals(ddlEditRoom.SelectedItem.Text)).Limit;
+                lblEditRoomLimit.Text = limit.ToString();
+                RangeValidator2.MaximumValue = lblEditRoomLimit.Text;
+
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
                 sb.Append("$('#editRoom').modal('show');");
@@ -568,6 +572,11 @@ namespace eGC.tran
             ddlRoomProperty.SelectedValue = "0";
             lblAddRoomDuplicateGC.Text = String.Empty;
 
+            int? limit = db.Rooms.SingleOrDefault(l => l.Room1.Equals(ddlEditRoom.SelectedItem.Text)).Limit;
+            lblAddRoomLimit.Text = limit.ToString();
+
+            RangeValidator1.MaximumValue = lblAddRoomLimit.Text;
+
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(@"<script type='text/javascript'>");
             sb.Append("$('#addRoom').modal('show');");
@@ -745,6 +754,20 @@ namespace eGC.tran
             //}
 
             //txtEditDiningGCNumber.Text = tempGCNumber;
+        }
+
+        protected void ddlAddRoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var q = db.Rooms.SingleOrDefault(r => r.Room1.Equals(ddlAddRoom.SelectedItem.Text));
+            lblAddRoomLimit.Text = q.Limit.ToString();
+            RangeValidator1.MaximumValue = lblAddRoomLimit.Text;
+        }
+
+        protected void ddlEditRoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int? limit = db.Rooms.SingleOrDefault(l => l.Room1.Equals(ddlEditRoom.SelectedItem.Text)).Limit;
+            lblEditRoomLimit.Text = limit.ToString();
+            RangeValidator2.MaximumValue = lblEditRoomLimit.Text;
         }
     }
 }

@@ -18,8 +18,8 @@ namespace eGC.room
             {
                 if(!User.IsInRole("Admin-GC"))
                 {
-                    gvRoom.Columns[3].Visible = false;
                     gvRoom.Columns[4].Visible = false;
+                    gvRoom.Columns[5].Visible = false;
                 }
             }
         }
@@ -38,6 +38,7 @@ namespace eGC.room
                 lblRowId.Text = q.Id.ToString();
                 txtEditType.Text = q.Type;
                 txtEditRoom.Text = q.Room1;
+                txtEditLimit.Text = q.Limit.ToString();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -64,6 +65,7 @@ namespace eGC.room
             Room r = new Room();
             r.Type = txtAddType.Text;
             r.Room1 = txtAddRoom.Text;
+            r.Limit = Convert.ToInt32(txtAddLimit.Text);
 
             db.Rooms.InsertOnSubmit(r);
 
@@ -88,6 +90,7 @@ namespace eGC.room
 
             q.Type = txtEditType.Text;
             q.Room1 = txtEditRoom.Text;
+            q.Limit = Convert.ToInt32(txtEditLimit.Text);
 
             db.SubmitChanges();
             this.gvRoom.DataBind();
@@ -130,7 +133,8 @@ namespace eGC.room
                     {
                         Id = r.Id,
                         Type = r.Type,
-                        Room1 = r.Room1
+                        Room1 = r.Room1,
+                        Limit = r.Limit
                     };
 
             e.Result = q.ToList();

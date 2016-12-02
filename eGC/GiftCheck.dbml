@@ -55,14 +55,6 @@
       <Column Name="ActionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Room" Member="Rooms">
-    <Type Name="Room">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Type" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Room" Member="Room1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Room_GCTransaction" Member="GCTransactions" ThisKey="Id" OtherKey="RoomId" Type="GCTransaction" />
-    </Type>
-  </Table>
   <Table Name="dbo.GCTransaction" Member="GCTransactions">
     <Type Name="GCTransaction">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -105,6 +97,15 @@
       <Column Name="DiningTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="GCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Room" Member="Rooms">
+    <Type Name="Room">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Room" Member="Room1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Limit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Room_GCTransaction" Member="GCTransactions" ThisKey="Id" OtherKey="RoomId" Type="GCTransaction" />
     </Type>
   </Table>
 </Database>
