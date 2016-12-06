@@ -256,6 +256,7 @@ namespace eGC.gcapproval
                          ) &&
                          (gctran.ApprovalStatus == "Pending" || gctran.ApprovalStatus == "Disapproved") &&
                          (gctran.IsArchive == false)
+                         orderby gctran.Id descending
                          select new
                          {
                              Id = gctran.Id,
