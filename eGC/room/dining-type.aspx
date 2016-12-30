@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addModal">Add</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addModal" runat="server" id="btnAddDiningType">Add</button>
                     </div>
                     <h5>Dining Type</h5>
                 </div>

@@ -20,6 +20,7 @@ namespace eGC.room
                 {
                     gvDining.Columns[2].Visible = false;
                     gvDining.Columns[3].Visible = false;
+                    btnAddDining.Visible = false;
                 }
             }
         }

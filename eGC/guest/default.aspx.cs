@@ -28,6 +28,11 @@ namespace eGC.guest
                     gvGuests.Columns[6].Visible = false;
                     gvGuests.Columns[7].Visible = false;
                 }
+
+                if (User.IsInRole("can-create-gc"))
+                {
+                    gvGuests.Columns[7].Visible = false;
+                }
             }
         }
 

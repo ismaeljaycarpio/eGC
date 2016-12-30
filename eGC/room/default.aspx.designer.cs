@@ -13,6 +13,15 @@ namespace eGC.room {
     public partial class _default {
         
         /// <summary>
+        /// btnAddModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAddModal;
+        
+        /// <summary>
         /// upRooms control.
         /// </summary>
         /// <remarks>

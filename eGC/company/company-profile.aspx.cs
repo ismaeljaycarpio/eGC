@@ -19,8 +19,7 @@ namespace eGC.company
         {
             if(!Page.IsPostBack)
             {
-                if(!User.IsInRole("can-create-gc") && 
-                    !User.IsInRole("Admin-GC") &&
+                if(!User.IsInRole("Admin-GC") &&
                     !User.IsInRole("frontoffice"))
                 {
                     lbtnCreateCompany.Visible = false;
@@ -30,6 +29,12 @@ namespace eGC.company
 
                     //delete button
                     gvCompany.Columns[6].Visible = false;
+                }
+
+                if (User.IsInRole("can-create-gc"))
+                {
+                    //add button
+                    gvCompany.Columns[5].Visible = true;
                 }
 
                 if (User.IsInRole("frontoffice"))

@@ -20,6 +20,7 @@ namespace eGC.room
                 {
                     gvRoom.Columns[4].Visible = false;
                     gvRoom.Columns[5].Visible = false;
+                    btnAddModal.Visible = false;
                 }
             }
         }
