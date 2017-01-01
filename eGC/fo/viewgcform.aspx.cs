@@ -180,6 +180,13 @@ namespace eGC.fo
                         btnUpdate.Enabled = false;
                         txtRemarks.Enabled = false;
                     }
+
+                    //gc is newly approved
+                    if(ddlGCStatus.SelectedValue == "")
+                    {
+                        txtCheckin.Enabled = false;
+                        txtCheckout.Enabled = false;
+                    }
                 }
             }
         }
@@ -226,6 +233,15 @@ namespace eGC.fo
                 if (ddlGCStatus.SelectedValue != "")
                 {
                     tran.StatusGC = ddlGCStatus.SelectedValue;
+                }
+
+                //chk expiration
+                if(tran.StatusGC == "Expired")
+                {
+                    if(DateTime.Today <= tran.ExpirationDate)
+                    {
+                        tran.StatusGC = "Waiting";
+                    }
                 }
 
                 db.SubmitChanges();
@@ -399,6 +415,18 @@ namespace eGC.fo
             {
                 RequiredFieldValidator3.Enabled = false;
                 RequiredFieldValidator8.Enabled = false;
+            }
+
+            //gc is newly approved
+            if (ddlGCStatus.SelectedValue == "")
+            {
+                txtCheckin.Enabled = false;
+                txtCheckout.Enabled = false;
+            }
+            else
+            {
+                txtCheckin.Enabled = true;
+                txtCheckout.Enabled = true;
             }
         }
     }

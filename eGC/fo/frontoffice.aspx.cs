@@ -21,6 +21,7 @@ namespace eGC.fo
             {
                 bindDropdown();
                 checkExpiration();
+                CheckOutDate();
             }
         }
 
@@ -403,6 +404,28 @@ namespace eGC.fo
                 tr.StatusGC = "Expired";
                 db.SubmitChanges();
             }
+        }
+
+        private void CheckOutDate()
+        {
+            var trans = (from tran in db.GCTransactions
+                         where
+                         (tran.CheckinDate.HasValue) &&
+                         (tran.CheckoutDate.HasValue)
+                         select tran).ToList();
+
+            foreach (var tr in trans)
+            {
+                if(DateTime.Today > tr.CheckoutDate)
+                {
+                    tr.StatusGC = "Completed";
+                }
+                else if((DateTime.Today < tr.CheckoutDate))
+                {
+                    tr.StatusGC = "Used";
+                } 
+            }
+            db.SubmitChanges();
         }
     }
 }
